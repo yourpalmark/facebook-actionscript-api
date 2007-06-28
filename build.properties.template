@@ -1,0 +1,10 @@
+#######################
+# Project Properties
+#######################
+
+# This file contains variables that must be customized by the individual developer for their environment.
+# This file should be renamed from build.properties.template to build.properties to allow for compilation
+# of the application.
+
+FLEX_HOME=C:/Program Files/Adobe/Flex Builder 2 SDK/Flex SDK 2
+SA_PLAYER=C:/Program Files/Adobe/Flex Builder 2 SDK/Player/debug/SAFlashPlayer.exe

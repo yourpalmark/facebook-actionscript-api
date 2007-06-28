@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (c) 2007 Terralever
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+-->
+
+<!--
+The following is an example application to get you started using
+the Facebook API in AS3.  It does NOT follow best practices 
+(your API_KEY and SECRET should never be compiled into your swf)
+however as a SIMPLE example of how to get communication flowing
+and for LOCAL TESTING it should be OK.  Just paste your API_KEY
+and SECRET below.  The application can be run locally as a 
+desktop application (validation required) or on the facebook
+website with a simple <fb:swf/> tag.  Please post questions and 
+comments to the Facebook Actionscript Developers group or send
+them to me (Jason Crist)
+-->
+<mx:Application 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	layout="absolute"
+	creationComplete="init();">
+	
+	<mx:TraceTarget
+		id="myTraceTarget"
+		filters="terralever.*"
+		fieldSeparator=" | "
+		includeCategory="true"
+		includeLevel="true"
+	/>
+
+	<mx:Script>
+		<![CDATA[
+			import mx.logging.LogEvent;
+			import mx.logging.ILogger;
+			import mx.logging.Log;
+			import com.terralever.facebook.data.photos.FacebookAlbum;
+			import com.terralever.facebook.delegates.photos.GetAlbums_delegate;
+			import com.terralever.facebook.Facebook;
+		
+			[Bindable] private var fBook:Facebook;
+			[Bindable] private var myAlbums:Array;
+			
+			private var logger:ILogger;
+			
+			// PUT YOUR API_KEY AND SECRET HERE FOR TESTING ONLY!
+			private var config_api_key:String = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+			private var config_secret:String = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+
+			/**
+			 * Called when the application is ready
+			 */
+			private function init():void
+			{
+				logger = Log.getLogger("terralever.facebook");
+				logger.addEventListener(LogEvent.LOG, onLog);
+				
+				fBook = new Facebook();
+				fBook.addEventListener("ready", onFacebookReady);
+	
+				/*
+					This is NOT the ideal way to start up a Facebook session!
+					Your api_key and secret should be loaded from a config file
+					locally for testing in a desktop session (and this file should
+					never be on your server).  When in a widget or web app session
+					you should use a REST redirect server to validate communication
+					and to construct the sigs SECURELY on the SERVER.  This is here
+					for TESTING PURPOSES ONLY.  For more information see the wiki.
+				*/
+	
+				if(Application.application.parameters['fb_sig'] != null) 
+				{
+					fBook.startWidgetSession(config_secret);
+				}
+				else
+				{
+					fBook.startDesktopSession(config_api_key, config_secret);
+				}
+			}
+			
+			/**
+			 * Called with the facebook connection is ready.
+			 * Makes the call to get a list of the user's albums
+			 */
+			private function onFacebookReady(event:Event):void
+			{
+				//by passing in a callback function, we save the step of adding
+				//a listener to the GetAlbums_delegate that is returned from the
+				//following function
+				fBook.photos_getAlbums(fBook.user, getAlbumsReply);
+				
+				// the following code would do the same thing
+				/*
+				var delegate:GetAlbums_delegate = fBook.photos_getAlbums(fBook.user);
+				delegate.addEventListener(Event.COMPLETE, getAlbumsReply);
+				*/
+			}
+			
+			/**
+			 * All calls to the Facebook server return a FacebookDelegate in the event.
+			 * The results of the calls are public properties of that specific delegate.
+			 */
+			private function getAlbumsReply(event:Event):void
+			{
+				var delegate:GetAlbums_delegate = event.target as GetAlbums_delegate;
+				
+				//this delegate has just one property: albums
+				//albums is an array of FacebookAlbum objects.
+				//The XML is returned from the REST call and stored
+				//in these object with strictly typed bindable properties
+				//accessing it.
+				
+				//myAlbums = new Array();
+				for each(var newAlbum:FacebookAlbum in delegate.albums)
+				{
+					Log.getLogger("terralever.facebook.example").debug("Got album: " + newAlbum.name + " with " + newAlbum.size + " pictures.");
+					//myAlbums.push(newAlbum);
+				}
+				
+				myAlbums = delegate.albums;
+			}
+
+			/**
+			 * util to show logging on the stage
+			 */
+			private function onLog(le:LogEvent):void
+			{
+				logText.text += le.message + "\n";
+			}
+		]]>
+	</mx:Script>
+	
+	<!--
+		Desktop Validation button.
+		Press this after the Facebook Login page has been launched
+		and you have logged in.
+	-->
+		
+	<mx:Button x="200" y="182" 
+		label="Validate (desktop app)" 
+		click="fBook.validateDesktopSession();"
+		visible="{fBook.sessionType == 'desktop' &amp;&amp; !fBook.isConnected}"/>
+		
+	<!--
+		List of the logged in user's albums
+	-->
+	<mx:List x="200" y="10" labelField="name" dataProvider="{myAlbums}" width="156" height="164"/>
+	
+	
+	<mx:Text x="10" y="10" text="This is a VERY primitive example of how to use the Terralever ActionScript 3 Facebook API.  You must replace the API_KEY and SECRET values in this file with your own to get it to operate correctly.  It loads a list of the albums of the logged-in user.  Running this app locally will put it in &quot;desktop&quot; mode.  After logging in, click the Validate button to continue.  In widget mode validation isn't necessary." width="180"/>
+	<mx:TextArea id="logText" x="10" y="249" width="346" height="99"/>
+	
+</mx:Application>
