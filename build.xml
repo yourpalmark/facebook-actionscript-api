@@ -8,7 +8,7 @@
 	<property file="build.properties"/>
 	
 	<!-- flex properties -->
-	<taskdef resource="flexTasks.tasks" classpath="${basedir}/Production/lib/flexTasks.jar" />
+	<taskdef resource="flexTasks.tasks" classpath="${basedir}/lib/java/flexTasks.jar" />
 	<property name="APP_ROOT" value="${basedir}"/>
 	<property name="FLEX_FRAMEWORKS" value="${FLEX_HOME}/frameworks"/>
 	<property name="FLEX_CONFIG" value="${FLEX_HOME}/frameworks/flex-config.xml" />
@@ -17,6 +17,7 @@
 	<!-- project properties -->
 	<property name="deliverables" value="${basedir}/deliverables" />
 	<property name="doc" value="${basedir}/doc" />
+	<property name="bin" value="${basedir}/bin" />
 	<property name="src" value="${basedir}/src/as3" />
 	<property name="version" value="0.1" />
 
@@ -44,7 +45,7 @@
 		<!-- package documentation -->
 		
 		<zip destfile='${deliverables}/facebook_actionscript_api_documentation_v${version}.zip' excludes='**/.svn/**'>
-			<zipfileset dir='${work}/doc' prefix='facebookapi_documentation_v${version}'/>
+			<zipfileset dir='${doc}' prefix='facebookapi_documentation_v${version}'/>
 		</zip>
 		
 	</target>
@@ -58,7 +59,7 @@
 		<echo message="Building Facebook example"/>
 	
 	    <mxmlc  file="${src}/Facebook_API_example.mxml" 
-	            output="${work}/example/Facebook_API_example.swf"
+	            output="${bin}/Facebook_API_example.swf"
 	    		actionscript-file-encoding="UTF-8">
 	    	
 	            <load-config filename="${FLEX_CONFIG}"/>
@@ -79,7 +80,7 @@
 		<echo message="Building Facebook example debugger"/>
 	
 	    <mxmlc  file="${src}/Facebook_API_example.mxml" 
-	            output="${work}/example/Facebook_API_example-debug.swf"
+	            output="${bin}/Facebook_API_example-debug.swf"
 	    		debug="true"
 	    		actionscript-file-encoding="UTF-8">
 	    	
