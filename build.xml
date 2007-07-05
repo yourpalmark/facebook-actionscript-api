@@ -38,13 +38,13 @@
 		
 		<!-- package API -->
 		
-		<zip destfile='${deliverables}/facebook_actionscript_api_v${version}.zip' excludes='**/.svn/**'>
+		<zip destfile='${deliverables}/facebook_as3_api_v${version}.zip' excludes='**/.svn/**'>
 			<zipfileset dir='${src}/' prefix='facebookapi_v${version}'/>
 		</zip>
 		
 		<!-- package documentation -->
 		
-		<zip destfile='${deliverables}/facebook_actionscript_api_documentation_v${version}.zip' excludes='**/.svn/**'>
+		<zip destfile='${deliverables}/facebook_as3_api_documentation_v${version}.zip' excludes='**/.svn/**'>
 			<zipfileset dir='${doc}' prefix='facebookapi_documentation_v${version}'/>
 		</zip>
 		
