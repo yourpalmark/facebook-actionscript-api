@@ -1,4 +1,4 @@
-<project name='Facebook API' default='document' basedir='.'>
+<project name='Facebook API' default='build' basedir='.'>
 
 	<description>
 		Facebook AS3 API, Documentation and example
@@ -18,8 +18,8 @@
 	<property name="deliverables" value="${basedir}/deliverables" />
 	<property name="doc" value="${basedir}/doc" />
 	<property name="bin" value="${basedir}/bin" />
-	<property name="src" value="${basedir}/src/as3" />
-	<property name="version" value="0.1" />
+	<property name="src" value="${basedir}/src" />
+	<property name="version" value="0.5" />
 
 	<!-- DOCUMENT -->
 	
@@ -27,7 +27,7 @@
 		<echo message="Documenting Facebook API  ${src}" />
 		<exec executable="${ASDOC}" failonerror="true">
 			<arg line="-source-path '${src}'" />
-			<arg line="-doc-sources '${src}/com/terralever/facebook'" />
+			<arg line="-doc-sources '${src}/com/pbking/facebook'" />
 			<arg line="-output '${doc}'" />
 		</exec>
 	</target>
@@ -58,8 +58,8 @@
 		
 		<echo message="Building Facebook example"/>
 	
-	    <mxmlc  file="${src}/Facebook_API_example.mxml" 
-	            output="${bin}/Facebook_API_example.swf"
+	    <mxmlc  file="${src}/FB_API_EXAMPLE.mxml" 
+	            output="${bin}/FB_API_EXAMPLE.swf"
 	    		actionscript-file-encoding="UTF-8">
 	    	
 	            <load-config filename="${FLEX_CONFIG}"/>
@@ -79,8 +79,8 @@
 		
 		<echo message="Building Facebook example debugger"/>
 	
-	    <mxmlc  file="${src}/Facebook_API_example.mxml" 
-	            output="${bin}/Facebook_API_example-debug.swf"
+	    <mxmlc  file="${src}/FB_API_EXAMPLE.mxml" 
+	            output="${bin}/FB_API_EXAMPLE-debug.swf"
 	    		debug="true"
 	    		actionscript-file-encoding="UTF-8">
 	    	
