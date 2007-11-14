@@ -409,7 +409,7 @@ package com.pbking.facebook
 			}
 			
 			//save the information of those props into our class vars for use in the app
-			this._user = fb_sig_values['fb_sig_user'];
+			this._user = new FacebookUser(parseInt(fb_sig_values['fb_sig_user']));
 			this._time = fb_sig_values['fb_sig_time'];
 			this._expires = fb_sig_values['fb_sig_expires'];
 			
