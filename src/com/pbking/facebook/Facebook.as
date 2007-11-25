@@ -49,6 +49,8 @@ package com.pbking.facebook
 	import mx.events.PropertyChangeEvent;
 	import mx.logging.Log;
 	
+	[Event(name="complete", type="flash.events.Event")]
+
 	[Bindable]
 	public class Facebook extends EventDispatcher
 	{	
@@ -286,6 +288,9 @@ package com.pbking.facebook
 			return this._fbProfile; 
 		}
 		
+		private var _connectionErrorMessage:String;
+		public function get connectionErrorMessage():String { return _connectionErrorMessage; }
+		
 		// SESSION FUNCTIONS //////////
 
 		/**
@@ -324,15 +329,21 @@ package com.pbking.facebook
 		private function startWebSessionReply(event:Event):void
 		{
 			var delegate:GetSession_delegate = event.target as GetSession_delegate;
-			
-			this.user.uid = delegate.uid;
-			
-			this._secret = delegate.secret;
-			this._session_key = delegate.session_key;
-			this._expires = delegate.expires;
-			
-			prepareSigValues();
-			onReady();
+			if(delegate.success)
+			{
+				this.user.uid = delegate.uid;
+				
+				this._secret = delegate.secret;
+				this._session_key = delegate.session_key;
+				this._expires = delegate.expires;
+				
+				prepareSigValues();
+				onReady();
+			}
+			else
+			{
+				onConnectionError(delegate.errorMessage);
+			}
 		}
 		
 		/**
@@ -355,14 +366,21 @@ package com.pbking.facebook
 		private function onDesktopTokenCreated(event:Event):void
 		{
 			var delegate:CreateToken_delegate = event.target as CreateToken_delegate;
-			_auth_token = delegate.auth_token;
-			
-			Log.getLogger("pbking.facebook").debug("token created: " + _auth_token);
-
-			//now that we have an auth_token we need the user to login with it
-			var authenticateLoginURL:String = login_url + "?api_key="+api_key+"&v=1.0&auth_token="+_auth_token;
-			Log.getLogger("pbking.facebook").debug("prompting user for login at: " + authenticateLoginURL);
-			navigateToURL(new URLRequest(authenticateLoginURL), "_blank");
+			if(delegate.success)
+			{
+				_auth_token = delegate.auth_token;
+				
+				Log.getLogger("pbking.facebook").debug("token created: " + _auth_token);
+	
+				//now that we have an auth_token we need the user to login with it
+				var authenticateLoginURL:String = login_url + "?api_key="+api_key+"&v=1.0&auth_token="+_auth_token;
+				Log.getLogger("pbking.facebook").debug("prompting user for login at: " + authenticateLoginURL);
+				navigateToURL(new URLRequest(authenticateLoginURL), "_blank");
+			}
+			else
+			{
+				onConnectionError(delegate.errorMessage);
+			}
 		}
 
 		/**
@@ -380,12 +398,19 @@ package com.pbking.facebook
 		{
 			var delegate:GetSession_delegate = event.target as GetSession_delegate;
 			
-			this.user.uid = delegate.uid;
-			this._session_key = delegate.session_key;
-			this._expires = delegate.expires;
+			if(delegate.success)
+			{
+				this.user.uid = delegate.uid;
+				this._session_key = delegate.session_key;
+				this._expires = delegate.expires;
 			
-			prepareSigValues();
-			onReady();
+				prepareSigValues();
+				onReady();
+			}
+			else
+			{
+				onConnectionError(delegate.errorMessage);
+			}
 		}
 		
 		/**
@@ -431,7 +456,10 @@ package com.pbking.facebook
 			if(this._api_key == null)	
 				this._api_key = fb_sig_values['fb_sig_api_key'];
 			
-			onReady();
+			if(session_key)
+				onReady();
+			else
+				onConnectionError("No session key for application session");
 		}
 		
 		/**
@@ -441,7 +469,18 @@ package com.pbking.facebook
 		{
 			_isConnected = true;
 			dispatchEvent(PropertyChangeEvent.createUpdateEvent(this, "isConnected", false, true));
-			dispatchEvent(new Event("ready"));
+			dispatchEvent(new Event(Event.COMPLETE));
+		}
+		
+		/**
+		 * Helper function.  Called with the connection fails to be made.
+		 */
+		private function onConnectionError(errorMessage:String):void
+		{
+			_isConnected = false;
+			_connectionErrorMessage = errorMessage;
+			dispatchEvent(PropertyChangeEvent.createUpdateEvent(this, "isConnected", false, false));
+			dispatchEvent(new Event(Event.COMPLETE));
 		}
 		
 		/**

@@ -1,10 +1,14 @@
-package com.pbking.facebook.delegates
+package test.pbking.facebook.delegates
 {
 	import com.pbking.facebook.Facebook;
 	import com.pbking.facebook.delegates.users.GetLoggedInUser_delegate;
 	
+	import flash.events.Event;
+	
 	import flexunit.framework.TestCase;
 	import flexunit.framework.TestSuite;
+	
+	import test.pbking.facebook.Facebook_test;
 	
 	public class Users_test extends TestCase
 	{
@@ -17,9 +21,9 @@ package com.pbking.facebook.delegates
 			super(methodName);
 		}
 		
-		public static function suite(facebook:Facebook):TestSuite
+		public static function suite(testFacebook:Facebook):TestSuite
 		{
-			this.facebook = facebook;
+			facebook = testFacebook;
 			
 			var ts:TestSuite = new TestSuite();
 			
@@ -32,7 +36,7 @@ package com.pbking.facebook.delegates
 		
 		public function testGetLoggedInUser():void
 		{
-			facebook.users.getLoggedInUser(addAsync(testGetLoggedInUserReply));
+			facebook.users.getLoggedInUser(addAsync(testGetLoggedInUserReply, Facebook_test.timeoutTime));
 		}
 		private function testGetLoggedInUserReply(e:Event):void
 		{

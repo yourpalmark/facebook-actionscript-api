@@ -47,6 +47,7 @@ Actionscript Developers group or send them to me (Jason Crist:jcrist@pbking.com)
 
 	<mx:Script>
 		<![CDATA[
+			import mx.controls.Alert;
 			import mx.collections.ArrayCollection;
 			import com.pbking.facebook.delegates.users.GetUserInfo_delegate;
 			import com.pbking.facebook.data.users.FacebookUser;
@@ -77,7 +78,7 @@ Actionscript Developers group or send them to me (Jason Crist:jcrist@pbking.com)
 				logger.addEventListener(LogEvent.LOG, onLog);
 				
 				fBook = new Facebook();
-				fBook.addEventListener("ready", onFacebookReady);
+				fBook.addEventListener(Event.COMPLETE, onFacebookReady);
 	
 				if(Application.application.parameters['fb_sig'] != null) 
 				{
@@ -95,16 +96,23 @@ Actionscript Developers group or send them to me (Jason Crist:jcrist@pbking.com)
 			 */
 			private function onFacebookReady(event:Event):void
 			{
-				//by passing in a callback function, we save the step of adding
-				//a listener to the GetAlbums_delegate that is returned from the
-				//following function
-				fBook.friends.getFriends(onGetFriendsReply);
-
-				// the following code would do the same thing
-				/*
-				var delegate:GetFriends_delegate = fBook.friends.getFriends();
-				delegate.addEventListener(Event.COMPLETE, onGetFriendsReply);
-				*/
+				if(fBook.isConnected)
+				{
+					//by passing in a callback function, we save the step of adding
+					//a listener to the GetAlbums_delegate that is returned from the
+					//following function
+					fBook.friends.getFriends(onGetFriendsReply);
+	
+					// the following code would do the same thing
+					/*
+					var delegate:GetFriends_delegate = fBook.friends.getFriends();
+					delegate.addEventListener(Event.COMPLETE, onGetFriendsReply);
+					*/
+				}
+				else
+				{
+					Alert.show("Failed to connect to facebook: " + fBook.connectionErrorMessage);
+				}
 			}
 			
 			/**

@@ -17,7 +17,7 @@
 		<![CDATA[
 			import com.pbking.facebook.FacebookSessionType;
 			import com.pbking.facebook.Facebook;
-			import com.pbking.facebook.Facebook_test;
+			import test.pbking.facebook.Facebook_test;
 			import flexunit.framework.TestSuite;
 			
 			private var config_api_key:String = "159d027464e070d541848874f1fed87a";

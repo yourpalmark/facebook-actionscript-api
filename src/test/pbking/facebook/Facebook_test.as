@@ -1,12 +1,14 @@
-package com.pbking.facebook
+package test.pbking.facebook
 {
-	import com.pbking.facebook.delegates.Users_test;
+	import com.pbking.facebook.Facebook;
 	import com.pbking.facebook.delegates.auth.CreateToken_delegate;
 	
 	import flash.events.Event;
 	
 	import flexunit.framework.TestCase;
 	import flexunit.framework.TestSuite;
+	
+	import test.pbking.facebook.delegates.Users_test;
 
 	public class Facebook_test extends TestCase
 	{
@@ -16,7 +18,7 @@ package com.pbking.facebook
 		private static var testApi_key:String;
 		private static var testSecret:String;
 		
-		private const timeoutTime:int = 10000;
+		public static const timeoutTime:int = 10000;
 		
 		// CONSTRUCTION //////////
 		
@@ -36,7 +38,7 @@ package com.pbking.facebook
 			testSuite.addTest(new Facebook_test("testCreateToken"));
 			testSuite.addTest(new Facebook_test("testStartDesktopSession"));
 			
-			testSuite.addTestSuite(Users_test.suite(testFacebook));
+			testSuite.addTest(Users_test.suite(testFacebook));
 			
 			return testSuite;
 		}
@@ -64,13 +66,12 @@ package com.pbking.facebook
 		 */
 		public function testStartDesktopSession():void
 		{
-			testFacebook.addEventListener("ready", addAsync(onFacebookReady, 10000000, null));
+			testFacebook.addEventListener(Event.COMPLETE, addAsync(testStartDesktopSessionReply, 10000000, null));
 			testFacebook.startDesktopSession(testApi_key, testSecret);
 		}
-		private function onFacebookReady(e:Event):void
+		private function testStartDesktopSessionReply(e:Event):void
 		{
-			assertTrue(testFacebook.session_key != "");
-			assertTrue(!isNaN(testFacebook.user.uid));
+			assertTrue("facebook connected", testFacebook.isConnected);
 		}
 				
 	}
