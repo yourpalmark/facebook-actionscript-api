@@ -1,5 +1,6 @@
 package com.pbking.facebook
 {
+	import com.pbking.facebook.delegates.Users_test;
 	import com.pbking.facebook.delegates.auth.CreateToken_delegate;
 	
 	import flash.events.Event;
@@ -34,6 +35,8 @@ package com.pbking.facebook
 					
 			testSuite.addTest(new Facebook_test("testCreateToken"));
 			testSuite.addTest(new Facebook_test("testStartDesktopSession"));
+			
+			testSuite.addTestSuite(Users_test.suite(testFacebook));
 			
 			return testSuite;
 		}
