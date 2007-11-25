@@ -33,39 +33,35 @@ package com.pbking.facebook.delegates.photos
 {
 	import com.pbking.facebook.Facebook;
 	import com.pbking.facebook.FacebookCall;
-	import com.pbking.facebook.data.photos.FacebookPhoto;
-	import com.pbking.facebook.data.photos.FacebookTag;
+	import com.pbking.facebook.data.photos.NewTag;
 	import com.pbking.facebook.delegates.FacebookDelegate;
 	import com.pbking.util.collection.HashableArrayCollection;
 	
 	import flash.events.Event;
 		
-	public class GetTags_delegate extends FacebookDelegate
+	public class AddTags_delegate extends FacebookDelegate
 	{
-		public var photos:Array;
-		public var tags:Array;
-		public var populatePhotosWithTags:Boolean;
+		public var newTags:Array;
+		public var success:Boolean;
 
 		private var photoCollection:HashableArrayCollection = new HashableArrayCollection('pid', false);
 		
-		function GetTags_delegate(fBook:Facebook, photos:Array, populatePhotosWithTags:Boolean = true)
+		function AddTags_delegate(fBook:Facebook,  newTags:Array)
 		{
 			super(fBook);
 			
-			this.photos = photos;
-			this.populatePhotosWithTags = populatePhotosWithTags;
+			this.newTags = newTags;
 			
-			var pids:Array = [];
-			for each(var photo:FacebookPhoto in photos)
-			{
-				pids.push(photo.pid);
-				photoCollection.addItem(photo);
-			}
-				
+			var tagsStrings:Array = [];
+			for each(var newTag:NewTag in newTags)
+				tagsStrings.push(newTag.toString());
+			
+			var  tagsString:String = "[" + tagsStrings.join(",") + "]";
+			
 			var fbCall:FacebookCall = new FacebookCall(fBook);
+			fbCall.setRequestArgument("tags", tagsString);
 			fbCall.addEventListener(Event.COMPLETE, result);
-			fbCall.setRequestArgument("photos", pids.join(","));
-			fbCall.post("facebook.photos.getTags");
+			fbCall.post("facebook.photos.addTag");
 		}
 
 		override protected function result(event:Event):void
@@ -73,35 +69,8 @@ package com.pbking.facebook.delegates.photos
 			var fbCall:FacebookCall = event.target as FacebookCall;
 
 			default xml namespace = fBook.FACEBOOK_NAMESPACE;
-			
-			var xTags:XMLList = fbCall.getResponse()..photo_tag;
-			
-			//create all of the tag objects
-			this.tags = [];
-			for each(var xTag:XML in xTags)
-				this.tags.push(new FacebookTag(xTag));
 
-			if(populatePhotosWithTags)
-			{
-				var tag:FacebookTag;
-				var photo:FacebookPhoto;
-				
-				//first clear all of the tags for the images we got tags for
-				for each(tag in tags)
-				{
-					photo = photoCollection.getItemById(tag.pid) as FacebookPhoto;
-					if(photo)
-						photo.tags.removeAll();
-				}
-				
-				//not (re)populate the tags in the images
-				for each(tag in tags)
-				{
-					photo = photoCollection.getItemById(tag.pid) as FacebookPhoto;
-					if(photo)
-						photo.tags.addItem(tag);
-				} 
-			}
+			this.success = parseInt(fbCall.getResponse().toString()) == 1;
 			
 			this.onComplete();
 		}

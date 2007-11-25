@@ -29,8 +29,6 @@ package com.pbking.facebook.methodGroups
 	import com.pbking.facebook.data.photos.FacebookAlbum;
 	import com.pbking.facebook.delegates.photos.*;
 	
-	import flash.events.Event;
-	
 	public class Photos
 	{
 		private var facebook:Facebook
@@ -42,16 +40,30 @@ package com.pbking.facebook.methodGroups
 		
 		// FACEBOOK FUNCTIONS //////////
 		
-		public function createAlbum(name:String, location:String, description:String, callback:Function = null):void
+		/**
+		 * Creates and returns a new album owned by the current session user. 
+		 * See photo uploads for a description of the upload workflow. 
+		 * The only storable values returned from this call are aid and owner. 
+		 * No relationships between them are storable.
+		 */
+		public function createAlbum(name:String, location:String="", description:String="", callback:Function = null):CreateAlbum_delegate
 		{
-			//TODO: createAlbum
+			var delegate:CreateAlbum_delegate = new CreateAlbum_delegate(facebook, name, location, description);
+			return MethodGroupUtil.addCallback(delegate, callback) as CreateAlbum_delegate;
 		}
 		
-		public function getTags(photos:Array, callback:Function = null):void
+		/**
+		 * Returns the set of user tags on all photos specified.
+		 */
+		public function getTags(photos:Array, populatePhotosWithTags:Boolean = true, callback:Function = null):GetTags_delegate
 		{
-			//TODO: getTags
+			var delegate:GetTags_delegate = new GetTags_delegate(facebook, photos, populatePhotosWithTags);
+			return MethodGroupUtil.addCallback(delegate, callback) as GetTags_delegate;
 		}
 		
+		/**
+		 * Uploads a photo owned by the current session user and returns the new photo. See photo uploads for a description of the upload workflow. The only storable values returned from this call are pid, aid, and owner. All applications can upload photos with a "pending" state, which means that the photos must be approved by the user before they are visible on the site. Photos uploaded by applications with the photo_upload extended permission will be visible immediately.
+		 */
 		public function upload(album:FacebookAlbum, caption:String, data:*, callback:Function = null):void
 		{
 			//TODO: upload
@@ -60,7 +72,7 @@ package com.pbking.facebook.methodGroups
 		/**
 		 * Adds a tag with the given information to a photo.
 		 */
-		public function addTag(pid:int, tag_uid:int, tag_text:String, x:Number, y:Number, callback:Function=null):GetTags_delegate
+		public function addTag(pid:int, tag_uid:int, tag_text:String, x:Number, y:Number, callback:Function=null):AddTags_delegate
 		{
 			return addTags([{pid:int, tag_uid:tag_uid, tag_text:tag_text, x:x, y:y}], callback);
 		}
@@ -68,39 +80,42 @@ package com.pbking.facebook.methodGroups
 		/**
 		 * Add multiple tags.  Each item in the array must have:
 		 * pid, tag_uid OR tag_text, x, y
+		 * 
+		 * Adds a tag with the given information to a photo. See photo uploads for a description of the upload workflow.
+		 * 
+		 * For regular applications, tags can only be added to pending photos owned by the current session user – once a photo has been approved or rejected, it can no longer be tagged with this method. Applications with the photo_upload extended permission can add tags to any photo owned by the user. There is a limit of 20 tags per pending photo. 
+		 * 
+		 * @param tags:Array array of NewTag objects
 		 */
-		public function addTags(tags:Array, callback:Function = null):GetTags_delegate
+		public function addTags(tags:Array, callback:Function = null):AddTags_delegate
 		{
-			var delegate:GetTags_delegate = new GetTags_delegate(facebook, tags);
-			
-			if(callback != null)
-				delegate.addEventListener(Event.COMPLETE, callback);
-				
-			return delegate;
+			var delegate:AddTags_delegate = new AddTags_delegate(facebook, tags);
+			return MethodGroupUtil.addCallback(delegate, callback) as AddTags_delegate;
 		}
 		
+		/**
+		 * Returns metadata about all of the photo albums uploaded by the specified user. The values returned from this call are not storable.
+		 */
 		public function getAlbums(uid:String, callback:Function = null, getCoverPhotos:Boolean = false):GetAlbums_delegate
 		{
 			var delegate:GetAlbums_delegate = new GetAlbums_delegate(facebook, uid, getCoverPhotos);
-			
-			if(callback != null)
-				delegate.addEventListener(Event.COMPLETE, callback);
-				
-			return delegate;
+			return MethodGroupUtil.addCallback(delegate, callback) as GetAlbums_delegate;
 		}
 		
+		/**
+		 * Returns all visible photos according to the filters specified
+		 */
 		public function getPhotos(subj_id:Object, aid:Object, pids:Array, callback:Function = null):GetPhotos_delegate
 		{
 			var delegate:GetPhotos_delegate = new GetPhotos_delegate(facebook, subj_id, aid, pids);
-			
-			if(callback != null)
-				delegate.addEventListener(Event.COMPLETE, callback);
-				
-			return delegate;
+			return MethodGroupUtil.addCallback(delegate, callback) as GetPhotos_delegate;
 		}
 		
 		// HELPER FUNCTIONS //////////
 
+		/**
+		 * Get all of the pictures for an album
+		 */
 		public function getPhotosForAlbum(album:FacebookAlbum, callback:Function = null):GetPhotos_delegate
 		{
 			return getPhotos(null, album.aid, null, callback);

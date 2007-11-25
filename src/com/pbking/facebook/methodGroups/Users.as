@@ -26,7 +26,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 package com.pbking.facebook.methodGroups
 {
 	import com.pbking.facebook.Facebook;
-	import com.pbking.facebook.delegates.users.GetUserInfo_delegate;
+	import com.pbking.facebook.delegates.users.*;
 	
 	import flash.events.Event;
 	
@@ -45,34 +45,54 @@ package com.pbking.facebook.methodGroups
 		
 		// FACEBOOK FUNCTION CALLS //////////
 		
+		/**
+		 * Returns a wide array of user-specific information for each user identifier passed, limited by the view of the current user. The current user is determined from the session_key parameter. The only storable values returned from this call are the those under the affiliations element, the notes_count value, and the contents of the profile_update_time element.
+		 */
 		public function getInfo(users:Array, fields:Array, callback:Function=null):GetUserInfo_delegate
 		{
 			var delegate:GetUserInfo_delegate = new GetUserInfo_delegate(facebook, users, fields);
-
-			if(callback != null)
-				delegate.addEventListener(Event.COMPLETE, callback);
-			
-			return delegate;
+			return MethodGroupUtil.addCallback(delegate, callback) as GetUserInfo_delegate;
 		}
 		
-		public function getLoggedInUser():void
+		/**
+		 * Gets the user id (uid) associated with the current session. This value should be stored for the duration of the session, to avoid unnecessary subsequent calls to this method.
+		 */
+		public function getLoggedInUser(callback:Function=null):GetLoggedInUser_delegate
 		{
-			//TODO: getLoggedInUser
+			var delegate:GetLoggedInUser_delegate = new GetLoggedInUser_delegate(facebook);
+			return MethodGroupUtil.addCallback(delegate, callback) as GetLoggedInUser_delegate;
 		}
 		
-		public function hasAppPermission():void
+		/**
+		 * Checks whether the user has opted in to an extended application permission.
+		 * See: http://wiki.developers.facebook.com/index.php/Extended_application_permission for more info.
+		 * 
+		 * @param extendedPermission:String String identifier for the extended permission that is being checked for. 
+		 * Must be one of status_update, create_listing, or photo_upload.
+		 */
+		public function hasAppPermission(extendedPermission:String, callback:Function=null):HasAppPermission_delegate
 		{
-			//TODO: hasAppPermission
+			var delegate:HasAppPermission_delegate = new HasAppPermission_delegate(facebook, extendedPermission);
+			return MethodGroupUtil.addCallback(delegate, callback) as HasAppPermission_delegate;
 		}
 		
-		public function isAppAdded():void
+		/**
+		 * Checks whether the page has added the application.
+		 * @param pageId:int the page id to check
+		 */
+		public function isAppAdded(pageId:int, callback:Function=null):IsAppAdded_delegate
 		{
-			//TODO: isAppAdded
+			var delegate:IsAppAdded_delegate = new IsAppAdded_delegate(facebook, pageId);
+			return MethodGroupUtil.addCallback(delegate, callback) as IsAppAdded_delegate;
 		}
 		
-		public function setStatus():void
+		/**
+		 * Updates a user's Facebook status. This method requires the extended permission status_update, which the user must opt into via the Extended Permissions system. 
+		 */
+		public function setStatus(status:String, clear:Boolean=false, callback:Function=null):SetStatus_delegate
 		{
-			//TODO: setStatus
+			var delegate:SetStatus_delegate = new SetStatus_delegate(facebook, status, clear);
+			return MethodGroupUtil.addCallback(delegate, callback) as SetStatus_delegate;
 		}
 		
 	}

@@ -35,8 +35,8 @@ Actionscript Developers group or send them to me (Jason Crist:jcrist@pbking.com)
 <mx:Application 
 	xmlns:mx="http://www.adobe.com/2006/mxml" 
 	layout="absolute"
-	creationComplete="init();">
-	
+	creationComplete="init();">	
+
 	<mx:TraceTarget
 		id="myTraceTarget"
 		filters="pbking.*"

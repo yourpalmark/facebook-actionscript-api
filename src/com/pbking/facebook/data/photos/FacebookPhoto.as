@@ -31,9 +31,9 @@ OTHER DEALINGS IN THE SOFTWARE.
  */
 package com.pbking.facebook.data.photos
 {
-	import com.pbking.facebook.Facebook;
-	import mx.logging.Log;
 	import com.pbking.facebook.data.FacebookAsset;
+	
+	import mx.collections.ArrayCollection;
 	
 	/*
 	 <photo>
@@ -114,6 +114,13 @@ package com.pbking.facebook.data.photos
 		public function get created():Number
 		{
 			return getXMLPropertyNum("created");
+		}
+		
+		private var _tags:ArrayCollection = new ArrayCollection();
+		public function set tags(a:ArrayCollection):void { /*for binding*/ }
+		public function get tags():ArrayCollection
+		{
+			return _tags;
 		}
 		
 	}
