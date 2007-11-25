@@ -39,6 +39,11 @@ package com.pbking.facebook.data.users
 		public static const quotations:String = "quotes";
 		
 		public static const minimal_collection:Array = [name, pic];
+		public static const entire_collection:Array = [ about_me, activities, affiliations, birthday, books, current_location, education_history, 
+														first_name, has_added_app, hometown_location, interests, is_app_user, last_name, meeting_for, 
+														meeting_sex, movies, music, name, notes_count, pic, pic_big, pic_small, pic_square, political, 
+														profile_update_time, quotes, relationship_status, religion, sex, significant_other_id,
+														timezone, tv, wall_count, work_history, quotations ];
 	}
 }
 /*

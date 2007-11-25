@@ -20,7 +20,7 @@ package com.pbking.facebook.delegates.users
 			else
 				fbCall.setRequestArgument("status", status);
 
-			fbCall.post("facebook.friends.get");
+			fbCall.post("facebook.users.setStatus");
 		}
 		
 		override protected function handleResult(resultXML:XML):void

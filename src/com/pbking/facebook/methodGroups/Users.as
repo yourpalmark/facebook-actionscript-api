@@ -77,12 +77,11 @@ package com.pbking.facebook.methodGroups
 		}
 		
 		/**
-		 * Checks whether the page has added the application.
-		 * @param pageId:int the page id to check
+		 * Returns whether the logged-in user has added the calling application.
 		 */
-		public function isAppAdded(pageId:int, callback:Function=null):IsAppAdded_delegate
+		public function isAppAdded(callback:Function=null):IsAppAdded_delegate
 		{
-			var delegate:IsAppAdded_delegate = new IsAppAdded_delegate(facebook, pageId);
+			var delegate:IsAppAdded_delegate = new IsAppAdded_delegate(facebook);
 			return MethodGroupUtil.addCallback(delegate, callback) as IsAppAdded_delegate;
 		}
 		
