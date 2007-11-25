@@ -43,23 +43,15 @@ package com.pbking.facebook.delegates.auth
 		function CreateToken_delegate(fBook:Facebook)
 		{
 			super(fBook);
-			var fbCall:FacebookCall = new FacebookCall(fBook);
-			fbCall.addEventListener(Event.COMPLETE, result);
 			//ONLY the default REST url can be used here (redirection doesn't work)
 			//we also have to make sure the sig is generated (which it doesn't if we're redirecting)
 			fbCall.post("facebook.auth.createToken", fBook.default_rest_url, true);
 		}
 		
-		override protected function result(event:Event):void
+		override protected function handleResult(resultXML:XML):void
 		{
-			var fbCall:FacebookCall = event.target as FacebookCall;
-
 			default xml namespace = fBook.FACEBOOK_NAMESPACE;
-			
-			//there should be just a single value in the XML, the auth_token
-			auth_token = fbCall.getResponse().toString();
-			
-			onComplete();
+			auth_token = resultXML.toString();
 		}
 	}
 }

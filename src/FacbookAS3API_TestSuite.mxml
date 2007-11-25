@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	layout="absolute" 
+	xmlns:flexui="flexunit.flexui.*"
+	creationComplete="onCreationComplete();">
+
+	<mx:TraceTarget
+		id="myTraceTarget"
+		filters="pbking.*"
+		fieldSeparator=" | "
+		includeCategory="true"
+		includeLevel="true"
+	/>
+
+	<mx:Script>
+		<![CDATA[
+			import com.pbking.facebook.FacebookSessionType;
+			import com.pbking.facebook.Facebook;
+			import com.pbking.facebook.Facebook_test;
+			import flexunit.framework.TestSuite;
+			
+			private var config_api_key:String = "159d027464e070d541848874f1fed87a";
+			private var config_secret:String = "b4e5cdfef09aca70fee26b87f2df1280";
+			[Bindable] private var facebook:Facebook = new Facebook();
+						
+			private function onCreationComplete():void
+			{
+				testRunner.test = createSuite();
+ 				testRunner.startTest();				
+			}
+			
+			private function createSuite():TestSuite
+			{
+				var ts:TestSuite = new TestSuite();
+ 				
+ 				ts.addTest( Facebook_test.suite(facebook, config_api_key, config_secret) ); 				
+
+ 				return ts;
+			}
+		]]>
+	</mx:Script>
+
+	<mx:VBox width="100%" height="100%">
+		<mx:HBox width="100%" height="50" verticalAlign="middle" horizontalAlign="center">
+			<mx:Button label="Click once logged in . . . "
+				visible="{facebook.sessionType == FacebookSessionType.DESKTOP_APP &amp;&amp; !facebook.isConnected}" 
+				click="facebook.validateDesktopSession();"/>
+		</mx:HBox>
+		<flexui:TestRunnerBase id="testRunner" width="100%" height="100%" />
+	</mx:VBox>
+
+</mx:Application>

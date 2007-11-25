@@ -24,21 +24,15 @@ package com.pbking.facebook.delegates.users
 			
 			this.extendedPermission = extendedPermission;
 			
-			var fbCall:FacebookCall = new FacebookCall(fBook);
 			fbCall.setRequestArgument("ext_perm", extendedPermission);
-			fbCall.addEventListener(Event.COMPLETE, result);
 			fbCall.post("facebook.users.hasAppPermission");
 		}
 		
-		override protected function result(event:Event):void
+		override protected function handleResult(resultXML:XML):void
 		{
-			var fbCall:FacebookCall = event.target as FacebookCall;
-
 			default xml namespace = fBook.FACEBOOK_NAMESPACE;
 				
-			hasPermission = parseInt(fbCall.getResponse().toString()) == 1;
-			
-			onComplete();
+			hasPermission = parseInt(resultXML.toString()) == 1;
 		}
 		
 	}

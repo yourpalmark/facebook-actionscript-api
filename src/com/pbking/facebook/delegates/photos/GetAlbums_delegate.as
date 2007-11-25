@@ -32,12 +32,13 @@ OTHER DEALINGS IN THE SOFTWARE.
 package com.pbking.facebook.delegates.photos
 {
 	import com.pbking.facebook.Facebook;
-	import com.pbking.facebook.FacebookCall;
-	import flash.events.Event;
-	import mx.logging.Log;
-	import com.pbking.facebook.delegates.FacebookDelegate;
 	import com.pbking.facebook.data.photos.FacebookAlbum;
 	import com.pbking.facebook.data.photos.FacebookPhoto;
+	import com.pbking.facebook.delegates.FacebookDelegate;
+	
+	import flash.events.Event;
+	
+	import mx.logging.Log;
 
 	public class GetAlbums_delegate extends FacebookDelegate
 	{
@@ -60,36 +61,50 @@ package com.pbking.facebook.delegates.photos
 			this.doGetCovers = doGetCovers;
 			this.doGetImages = doGetImages;
 			
-			var fbCall:FacebookCall = new FacebookCall(fBook);
-			fbCall.addEventListener(Event.COMPLETE, result);
 			fbCall.setRequestArgument("uid", uid);
 			fbCall.post("facebook.photos.getAlbums");
 		}
 		
-		override protected function result(event:Event):void
+		override protected function result(e:Event):void
 		{
-			var fbCall:FacebookCall = event.target as FacebookCall;
+			//since we're handling the result ourselves, we must
+			//do all the things the super did like event removal
+			//and error handling
+			
+			fbCall.removeEventListener(Event.COMPLETE, result);
 
 			default xml namespace = fBook.FACEBOOK_NAMESPACE;
 			
-			albums = [];
-			
-			var xAlbums:XMLList = fbCall.getResponse()..album;
-			for each(var xAlbum:XML in xAlbums)
+			//look for an error
+			if(fbCall.getResponse().error_code != undefined)
 			{
-				var album:FacebookAlbum = new FacebookAlbum(xAlbum);
-				albums.push(album);
-			} 
+				//dang.  handle the error
+				this.errorCode = fbCall.getResponse().error_code;
+				this.errorMessage = fbCall.getResponse().error_msg;
+				onError();
+			}
 			
-			//first we get the covers then the images
-			if(doGetCovers)
-				this.getCovers();
-
-			else if(doGetImages)
-				this.getImages();
-
 			else
-				this.onComplete();
+			{
+				albums = [];
+				
+				var xAlbums:XMLList = fbCall.getResponse()..album;
+				for each(var xAlbum:XML in xAlbums)
+				{
+					var album:FacebookAlbum = new FacebookAlbum(xAlbum);
+					albums.push(album);
+				} 
+				
+				//first we get the covers then the images
+				if(doGetCovers)
+					this.getCovers();
+	
+				else if(doGetImages)
+					this.getImages();
+	
+				else
+					this.onComplete();
+			}
 		}
 		
 		private function getCovers():void
@@ -105,26 +120,28 @@ package com.pbking.facebook.delegates.photos
 		
 		private function onGotCovers(event:Event):void
 		{
-			var coverPhotos:Array = event.target.photos;
+			var d:GetPhotos_delegate = event.target as GetPhotos_delegate;
 			
-			for each(var photo:FacebookPhoto in coverPhotos)
+			if(d.success)
 			{
-				for each(var album:FacebookAlbum in albums)
+				for each(var photo:FacebookPhoto in d.photos)
 				{
-					if(album.cover_pid == photo.pid)
+					for each(var album:FacebookAlbum in albums)
 					{
-						album.cover = photo;
-						break;
+						if(album.cover_pid == photo.pid)
+						{
+							album.cover = photo;
+							break;
+						}
 					}
 				}
 			}
-			
+
 			if(doGetImages)
 				this.getImages();
 
 			else
 				this.onComplete();
-		
 		}
 		
 		private function getImages():void
@@ -151,6 +168,7 @@ package com.pbking.facebook.delegates.photos
 					return;
 				}
 			}
+
 			this.onComplete();
 		}
 	}

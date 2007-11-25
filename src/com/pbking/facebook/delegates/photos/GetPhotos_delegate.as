@@ -59,9 +59,6 @@ package com.pbking.facebook.delegates.photos
 				while(pids.indexOf("0") != -1)
 					pids.splice(pids.indexOf("0"), 1);
 
-			var fbCall:FacebookCall = new FacebookCall(fBook);
-			fbCall.addEventListener(Event.COMPLETE, result);
-			//set optional arguments
 			if(subj_id){ fbCall.setRequestArgument("subj_id", subj_id.toString()); }
 			if(aid){ fbCall.setRequestArgument("aid", aid.toString()); }
 			if(pids){ fbCall.setRequestArgument("pids", pids.toString()); }
@@ -69,21 +66,17 @@ package com.pbking.facebook.delegates.photos
 			fbCall.post("facebook.photos.get");
 		}
 		
-		override protected function result(event:Event):void
+		override protected function handleResult(resultXML:XML):void
 		{
-			var fbCall:FacebookCall = event.target as FacebookCall;
-
 			default xml namespace = fBook.FACEBOOK_NAMESPACE;
 			
 			photos = [];
 			
-			var xPhotos:XMLList = fbCall.getResponse()..photo;
+			var xPhotos:XMLList = resultXML..photo;
 			for each(var xPhoto:XML in xPhotos)
 			{
 				photos.push(new FacebookPhoto(xPhoto));
 			} 
-			
-			this.onComplete();
 		}
 		
 		

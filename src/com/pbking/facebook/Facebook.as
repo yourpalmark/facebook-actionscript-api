@@ -289,6 +289,15 @@ package com.pbking.facebook
 		// SESSION FUNCTIONS //////////
 
 		/**
+		 * For testing purposes
+		 */
+		public function startNoSession(api_key:String, secret:String):void
+		{
+			this._api_key = api_key;
+			this._secret = secret;
+		}
+
+		/**
 		 * Start a session for a web-based application.
 		 * You can choose not to pass in your secret if you plan on using a proxy server
 		 * for your facebook calls.  If your api_key is set here and is also passed in via 

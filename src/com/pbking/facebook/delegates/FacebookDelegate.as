@@ -31,40 +31,69 @@ OTHER DEALINGS IN THE SOFTWARE.
  */
 package com.pbking.facebook.delegates
 {
-	import flash.events.EventDispatcher;
-	import flash.events.Event;
-	import com.pbking.facebook.FacebookCall;
 	import com.pbking.facebook.Facebook;
+	import com.pbking.facebook.FacebookCall;
+	
 	import flash.events.ErrorEvent;
+	import flash.events.Event;
+	import flash.events.EventDispatcher;
 
 	//dispatched when the delegate has completed the transaction
 	[Event(name="complete", type="flash.events.Event")]
 	
-	//dispatched when the delegate has an error
-	[Event(name="error", type="flash.events.ErrorEvent")]
-
 	public class FacebookDelegate extends EventDispatcher
 	{
 		protected var fBook:Facebook;
+		protected var fbCall:FacebookCall;
+		
+		public var success:Boolean = false;
+		public var errorCode:int = 0;
+		public var errorMessage:String = "";
 		
 		function FacebookDelegate(fBook:Facebook)
 		{
 			this.fBook = fBook;
+			fbCall = new FacebookCall(fBook);
+			fbCall.addEventListener(Event.COMPLETE, result);
 		}
 		
 		protected function result(event:Event):void
 		{
-			//this method should be overridden
+			fbCall.removeEventListener(Event.COMPLETE, result);
+
+			default xml namespace = fBook.FACEBOOK_NAMESPACE;
+			
+			//look for an error
+			if(fbCall.getResponse().error_code != undefined)
+			{
+				//dang.  handle the error
+				this.errorCode = fbCall.getResponse().error_code;
+				this.errorMessage = fbCall.getResponse().error_msg;
+				onError();
+			}
+			else
+			{
+				//send the results to the children
+				handleResult(fbCall.getResponse());
+				onComplete();
+			}
+		}
+		
+		protected function handleResult(resultXML:XML):void
+		{
+			//Children should override this methid
 		}
 		
 		protected function onComplete():void
 		{
+			this.success = true;
 			dispatchEvent(new Event(Event.COMPLETE));
 		}
 
 		protected function onError():void
 		{
-			dispatchEvent(new ErrorEvent(ErrorEvent.ERROR));
+			this.success = false;
+			dispatchEvent(new Event(Event.COMPLETE));
 		}
 	}
 }

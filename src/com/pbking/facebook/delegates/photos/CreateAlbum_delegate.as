@@ -15,10 +15,6 @@ package com.pbking.facebook.delegates.photos
 		{
 			super(fBook);
 
-			var fbCall:FacebookCall = new FacebookCall(fBook);
-
-			fbCall.addEventListener(Event.COMPLETE, result);
-
 			fbCall.setRequestArgument("name", name);
 
 			if(location != "")
@@ -30,15 +26,11 @@ package com.pbking.facebook.delegates.photos
 			fbCall.post("facebook.photos.createAlbum");
 		}
 		
-		override protected function result(event:Event):void
+		override protected function handleResult(resultXML:XML):void
 		{
-			var fbCall:FacebookCall = event.target as FacebookCall;
-
 			default xml namespace = fBook.FACEBOOK_NAMESPACE;
 
-			newAlbum = new FacebookAlbum(fbCall.getResponse());
-			
-			this.onComplete();
+			newAlbum = new FacebookAlbum(resultXML.toString());
 		}
 	}
 }

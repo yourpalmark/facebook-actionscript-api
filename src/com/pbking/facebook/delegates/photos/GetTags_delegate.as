@@ -62,19 +62,15 @@ package com.pbking.facebook.delegates.photos
 				photoCollection.addItem(photo);
 			}
 				
-			var fbCall:FacebookCall = new FacebookCall(fBook);
-			fbCall.addEventListener(Event.COMPLETE, result);
 			fbCall.setRequestArgument("photos", pids.join(","));
 			fbCall.post("facebook.photos.getTags");
 		}
 
-		override protected function result(event:Event):void
+		override protected function handleResult(resultXML:XML):void
 		{
-			var fbCall:FacebookCall = event.target as FacebookCall;
-
 			default xml namespace = fBook.FACEBOOK_NAMESPACE;
 			
-			var xTags:XMLList = fbCall.getResponse()..photo_tag;
+			var xTags:XMLList = resultXML..photo_tag;
 			
 			//create all of the tag objects
 			this.tags = [];
@@ -101,9 +97,7 @@ package com.pbking.facebook.delegates.photos
 					if(photo)
 						photo.tags.addItem(tag);
 				} 
-			}
-			
-			this.onComplete();
+			}			
 		}
 	}
 }

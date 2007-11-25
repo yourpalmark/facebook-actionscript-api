@@ -42,7 +42,6 @@ package com.pbking.facebook.delegates.photos
 	public class AddTags_delegate extends FacebookDelegate
 	{
 		public var newTags:Array;
-		public var success:Boolean;
 
 		private var photoCollection:HashableArrayCollection = new HashableArrayCollection('pid', false);
 		
@@ -58,21 +57,15 @@ package com.pbking.facebook.delegates.photos
 			
 			var  tagsString:String = "[" + tagsStrings.join(",") + "]";
 			
-			var fbCall:FacebookCall = new FacebookCall(fBook);
 			fbCall.setRequestArgument("tags", tagsString);
-			fbCall.addEventListener(Event.COMPLETE, result);
 			fbCall.post("facebook.photos.addTag");
 		}
 
-		override protected function result(event:Event):void
+		override protected function handleResult(resultXML:XML):void
 		{
-			var fbCall:FacebookCall = event.target as FacebookCall;
-
 			default xml namespace = fBook.FACEBOOK_NAMESPACE;
-
-			this.success = parseInt(fbCall.getResponse().toString()) == 1;
 			
-			this.onComplete();
+			this.success = parseInt(fbCall.getResponse().toString()) == 1;
 		}
 	}
 }

@@ -18,21 +18,15 @@ package com.pbking.facebook.delegates.users
 			super(fBook);
 			Log.getLogger("pbking.facebook").debug("checking if page is added to app");
 			
-			var fbCall:FacebookCall = new FacebookCall(fBook);
 			fbCall.setRequestArgument("page_id", pageId.toString());
-			fbCall.addEventListener(Event.COMPLETE, result);
 			fbCall.post("facebook.pages.isAppAdded");
 		}
 		
-		override protected function result(event:Event):void
+		override protected function handleResult(resultXML:XML):void
 		{
-			var fbCall:FacebookCall = event.target as FacebookCall;
-
 			default xml namespace = fBook.FACEBOOK_NAMESPACE;
 
-			isAdded	= parseInt(fbCall.getResponse().toString()) == 1;
-			
-			onComplete();
+			isAdded	= parseInt(resultXML.toString()) == 1;
 		}
 		
 	}

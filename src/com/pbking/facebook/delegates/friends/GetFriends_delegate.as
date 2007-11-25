@@ -18,26 +18,20 @@ package com.pbking.facebook.delegates.friends
 			super(fBook);
 			Log.getLogger("pbking.facebook").debug("getting friends");
 			
-			var fbCall:FacebookCall = new FacebookCall(fBook);
-			fbCall.addEventListener(Event.COMPLETE, result);
 			fbCall.post("facebook.friends.get");
 		}
 		
-		override protected function result(event:Event):void
+		override protected function handleResult(resultXML:XML):void
 		{
-			var fbCall:FacebookCall = event.target as FacebookCall;
-
 			default xml namespace = fBook.FACEBOOK_NAMESPACE;
 			
 			friends = [];
 			
-			var xFriendsList:XMLList = fbCall.getResponse()..uid;
+			var xFriendsList:XMLList = resultXML..uid;
 			for each(var xUID:XML in xFriendsList)
 			{
 				friends.push(new FacebookUser(int(xUID)));
 			} 
-			
-			onComplete();
 		}
 		
 	}

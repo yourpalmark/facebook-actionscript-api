@@ -59,26 +59,20 @@ package com.pbking.facebook.delegates.auth
 
 			Log.getLogger("pbking.facebook").debug("starting facebook session with auth_token: " + auth_token);
 
-			var fbCall:FacebookCall = new FacebookCall(fBook);
 			fbCall.setRequestArgument("auth_token", auth_token);
-			fbCall.addEventListener(Event.COMPLETE, result);
 			fbCall.post("facebook.auth.getSession", fBook.default_rest_url, true);
 		}
 		
 		// FUNCTIONS //////////
 		
-		override protected function result(event:Event):void
+		override protected function handleResult(resultXML:XML):void
 		{
-			var fbCall:FacebookCall = event.target as FacebookCall;
-
 			default xml namespace = fBook.FACEBOOK_NAMESPACE;
 			
-			session_key = fbCall.getResponse()..session_key;
-			uid = fbCall.getResponse()..uid;
-			secret = fbCall.getResponse()..secret;
-			expires = fbCall.getResponse()..expires;
-			
-			onComplete();
+			session_key = resultXML..session_key;
+			uid = resultXML..uid;
+			secret = resultXML..secret;
+			expires = resultXML..expires;
 		} 
 		
 

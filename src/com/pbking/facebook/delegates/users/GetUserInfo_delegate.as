@@ -31,21 +31,17 @@ package com.pbking.facebook.delegates.users
 				uids.push(user.uid);
 			}
 				
-			var fbCall:FacebookCall = new FacebookCall(fBook);
-			fbCall.addEventListener(Event.COMPLETE, result);
 			fbCall.setRequestArgument("uids", uids.join(","));
 			fbCall.setRequestArgument("fields", fields.join(","));
 			fbCall.post("facebook.users.getInfo");
 			
 		}
 		
-		override protected function result(event:Event):void
+		override protected function handleResult(resultXML:XML):void
 		{
-			var fbCall:FacebookCall = event.target as FacebookCall;
-
 			default xml namespace = fBook.FACEBOOK_NAMESPACE;
 			
-			var xUserList:XMLList = fbCall.getResponse()..user;
+			var xUserList:XMLList = resultXML..user;
 			for each(var xUser:XML in xUserList)
 			{
 				var modUser:FacebookUser = _userCollection.getItemById(parseInt(xUser.uid)) as FacebookUser;
@@ -281,7 +277,6 @@ package com.pbking.facebook.delegates.users
 			
 			users = _userCollection;
 			
-			onComplete();
 		}
 		
 	}
