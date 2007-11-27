@@ -39,10 +39,12 @@ package com.pbking.facebook.data
 			
 			_errorCodes[110] = "Invalid user ID.";
 			_errorCodes[121] = "Invalid photo ID.";
+			_errorCodes[240] = "The uid cannot be specified from a desktop application.";
 			_errorCodes[260] = "Modifying existing photos requires the extended permission photo_upload. ";
 			_errorCodes[322] = "Invalid photo tag subject.";
 			_errorCodes[323] = "Cannot tag photo already visible on Facebook.";
 			_errorCodes[326] = "Too many photo tags pending.";
+			_errorCodes[330] = "The markup was invalid";
 		}
 	}
 }

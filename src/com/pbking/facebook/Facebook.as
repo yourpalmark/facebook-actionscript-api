@@ -135,13 +135,13 @@ package com.pbking.facebook
 		 * The user whos page is being viewed.
 		 * If no profile is set, the logged in user is returned
 		 */
-		private var _profile:FacebookUser;
-		public function get profile():FacebookUser
+		private var _currentProfile:FacebookUser;
+		public function get currentProfile():FacebookUser
 		{
-			if(!profile)
+			if(!_currentProfile)
 				return user;
 			else
-				return _profile;
+				return _currentProfile;
 		}
 		
 		/** 
@@ -149,7 +149,7 @@ package com.pbking.facebook
 		 */ 
 		public function get isUsersProfile():Boolean 
 		{ 
-			return this.profile.uid == this.user.uid; 
+			return this.currentProfile.uid == this.user.uid; 
 		}
 		
 		/**
@@ -280,12 +280,12 @@ package com.pbking.facebook
 			return this._pages; 
 		}
 		
-		private var _fbProfile:Profile;
-		public function get fbProfile():Profile 
+		private var _profile:Profile;
+		public function get profile():Profile 
 		{ 
-			if(!_fbProfile)
-				_fbProfile = new Profile(this)
-			return this._fbProfile; 
+			if(!_profile)
+				_profile = new Profile(this)
+			return this._profile; 
 		}
 		
 		private var _connectionErrorMessage:String;
@@ -448,7 +448,7 @@ package com.pbking.facebook
 			this._expires = fb_sig_values['fb_sig_expires'];
 			
 			if(_user.uid != parseInt(fb_sig_values['fb_sig_profile']))
-				this._profile = new FacebookUser(parseInt(fb_sig_values['fb_sig_profile']));
+				this._currentProfile = new FacebookUser(parseInt(fb_sig_values['fb_sig_profile']));
 			
 			if(this._session_key == null)
 				this._session_key = fb_sig_values['fb_sig_session_key'];

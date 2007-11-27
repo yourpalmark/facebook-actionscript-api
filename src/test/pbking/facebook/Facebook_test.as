@@ -8,6 +8,7 @@ package test.pbking.facebook
 	import flexunit.framework.TestCase;
 	import flexunit.framework.TestSuite;
 	
+	import test.pbking.facebook.delegates.Profile_test;
 	import test.pbking.facebook.delegates.Users_test;
 
 	public class Facebook_test extends TestCase
@@ -39,6 +40,7 @@ package test.pbking.facebook
 			testSuite.addTest(new Facebook_test("testStartDesktopSession"));
 			
 			testSuite.addTest(Users_test.suite(testFacebook));
+			testSuite.addTest(Profile_test.suite(testFacebook));
 			
 			return testSuite;
 		}

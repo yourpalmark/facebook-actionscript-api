@@ -26,6 +26,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 package com.pbking.facebook.methodGroups
 {
 	import com.pbking.facebook.Facebook;
+	import com.pbking.facebook.data.users.FacebookUser;
+	import com.pbking.facebook.delegates.profile.GetFBML_delegate;
+	import com.pbking.facebook.delegates.profile.SetFBML_delegate;
 	
 	public class Profile
 	{
@@ -42,14 +45,32 @@ package com.pbking.facebook.methodGroups
 		
 		// FACEBOOK FUNCTION CALLS //////////
 		
-		public function setFBML():void
+		/**
+		 * Sets the FBML for a user's profile, including the content for both the profile box and the profile actions. 
+		 * See the FBML documentation for a description of the markup and its role in various contexts. 
+		 * Note that this method can also be used to set fb:profile-actions for users.
+		 * 
+		 * @param markup:String - The FBML that will be posted to the user's profile
+		 * @param [user:FacebookUser] - The user whose profile is to be updated. 
+		 * If not specified, defaults to the logged-in user. 
+		 * Not allowed for desktop applications (since the application secret is essentially public).
+		 */
+		public function setFBML(markup:String, user:FacebookUser=null, callback:Function=null):SetFBML_delegate
 		{
-			//TODO: setFBML
+			var delegate:SetFBML_delegate = new SetFBML_delegate(facebook, markup, user);
+			return MethodGroupUtil.addCallback(delegate, callback) as SetFBML_delegate;		
 		}
 
-		public function getFBML():void
+		/**
+		 * 
+		 * @param [user:FacebookUser] - The user whose profile FBML is to be fetched. 
+		 * If not specified, defaults to the logged-in user. 
+		 * Not allowed for desktop applications (since the application secret is essentially public).
+		 */
+		public function getFBML(user:FacebookUser=null, callback:Function=null):GetFBML_delegate
 		{
-			//TODO: getFBML
+			var delegate:GetFBML_delegate = new GetFBML_delegate(facebook, user);
+			return MethodGroupUtil.addCallback(delegate, callback) as GetFBML_delegate;		
 		}
 
 	}
