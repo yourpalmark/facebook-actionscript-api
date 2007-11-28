@@ -36,9 +36,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 package com.pbking.facebook
 {
 	import com.gsolo.encryption.MD5;
+	import com.pbking.facebook.data.groups.FacebookGroup;
 	import com.pbking.facebook.data.users.FacebookUser;
 	import com.pbking.facebook.delegates.auth.*;
 	import com.pbking.facebook.methodGroups.*;
+	import com.pbking.util.collection.HashableArrayCollection;
 	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
@@ -55,6 +57,9 @@ package com.pbking.facebook
 	public class Facebook extends EventDispatcher
 	{	
 		// VARIABLES //////////
+		
+		private var _userCollection:HashableArrayCollection = new HashableArrayCollection('uid', false);
+		private var _groupCollection:HashableArrayCollection = new HashableArrayCollection('gid', false);
 		
 		public var fb_sig_values:Object;
 		
@@ -149,7 +154,7 @@ package com.pbking.facebook
 		 */ 
 		public function get isUsersProfile():Boolean 
 		{ 
-			return this.currentProfile.uid == this.user.uid; 
+			return this.currentProfile == this.user;
 		}
 		
 		/**
@@ -443,12 +448,15 @@ package com.pbking.facebook
 			}
 			
 			//save the information of those props into our class vars for use in the app
-			this._user = new FacebookUser(parseInt(fb_sig_values['fb_sig_user']));
+			this._user = getUser(parseInt(fb_sig_values['fb_sig_user']));
+			this._user.isLoggedInUser = true;
+			
 			this._time = fb_sig_values['fb_sig_time'];
+			
 			this._expires = fb_sig_values['fb_sig_expires'];
 			
 			if(_user.uid != parseInt(fb_sig_values['fb_sig_profile']))
-				this._currentProfile = new FacebookUser(parseInt(fb_sig_values['fb_sig_profile']));
+				this._currentProfile = getUser(parseInt(fb_sig_values['fb_sig_profile']));
 			
 			if(this._session_key == null)
 				this._session_key = fb_sig_values['fb_sig_session_key'];
@@ -530,5 +538,42 @@ package com.pbking.facebook
 				this.fb_sig_values['fb_sig_' + j] = temp_sig_values[j];
 			}
 		}
+
+		// COLLECTION FUNCTIONS //////////
+		
+		/**
+		 * This keeps a common collection of users so that all information gathered
+		 * on users is stored here and updated.  Each user should have only one instance.
+		 * 
+		 * Creating a user should happen from this method.
+		 */
+		public function getUser(uid:int):FacebookUser
+		{
+			var user:FacebookUser = _userCollection.getItemById(uid) as FacebookUser;
+			if(!user)
+			{
+				user = new FacebookUser(uid);
+				_userCollection.addItem(user);
+			}
+			return user;
+		}
+		
+		/**
+		 * This keeps a common collection of groups so that all information gathered
+		 * on groups is stored here and updated.  Each group should have only one instance.
+		 * 
+		 * Creating a group should happen from this method.
+		 */
+		public function getGroup(gid:Number):FacebookGroup
+		{
+			var group:FacebookGroup = _groupCollection.getItemById(gid) as FacebookGroup;
+			if(!group)
+			{
+				group = new FacebookGroup(gid);
+				_groupCollection.addItem(group);
+			}
+			return group;
+		}
+		
 	}
 }

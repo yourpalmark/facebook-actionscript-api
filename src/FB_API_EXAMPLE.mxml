@@ -129,7 +129,7 @@ Actionscript Developers group or send them to me (Jason Crist:jcrist@pbking.com)
 			private function onGetInfoReply(event:Event):void
 			{
 				var delegate:GetUserInfo_delegate = event.target as GetUserInfo_delegate;
-				this.myFriends = delegate.users;
+				this.myFriends = new ArrayCollection(delegate.users);
 			}
 
 			/**

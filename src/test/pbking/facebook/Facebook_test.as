@@ -9,6 +9,7 @@ package test.pbking.facebook
 	import flexunit.framework.TestSuite;
 	
 	import test.pbking.facebook.delegates.Friends_test;
+	import test.pbking.facebook.delegates.Groups_test;
 	import test.pbking.facebook.delegates.Notification_test;
 	import test.pbking.facebook.delegates.Profile_test;
 	import test.pbking.facebook.delegates.Users_test;
@@ -21,7 +22,7 @@ package test.pbking.facebook
 		private static var testApi_key:String;
 		private static var testSecret:String;
 		
-		public static const timeoutTime:int = 10000;
+		public static const timeoutTime:int = 20000;
 		
 		// CONSTRUCTION //////////
 		
@@ -45,6 +46,7 @@ package test.pbking.facebook
 			testSuite.addTest(Profile_test.suite(testFacebook));
 			testSuite.addTest(Notification_test.suite(testFacebook));
 			testSuite.addTest(Friends_test.suite(testFacebook));
+			testSuite.addTest(Groups_test.suite(testFacebook));
 			
 			return testSuite;
 		}

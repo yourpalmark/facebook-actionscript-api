@@ -30,7 +30,7 @@ package com.pbking.facebook.delegates.friends
 			var xFriendsList:XMLList = resultXML..uid;
 			for each(var xUID:XML in xFriendsList)
 			{
-				friends.push(new FacebookUser(int(xUID)));
+				friends.push(fBook.getUser(parseInt(xUID)));
 			} 
 		}
 		

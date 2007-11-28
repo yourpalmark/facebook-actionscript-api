@@ -26,6 +26,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 package com.pbking.facebook.methodGroups
 {
 	import com.pbking.facebook.Facebook;
+	import com.pbking.facebook.data.groups.FacebookGroup;
+	import com.pbking.facebook.data.users.FacebookUser;
+	import com.pbking.facebook.delegates.groups.GetGroupMembers_delegate;
+	import com.pbking.facebook.delegates.groups.GetGroups_delegate;
 	
 	public class Groups
 	{
@@ -42,14 +46,30 @@ package com.pbking.facebook.methodGroups
 		
 		// FACEBOOK FUNCTION CALLS //////////
 		
-		public function getGroups():void
+		/**
+		 * Returns all visible groups according to the filters specified. 
+		 * You can use this method to return all groups associated with a user, 
+		 * or query a specific set of groups by a list of GIDs.
+		 * If both the uid and gids parameters are provided, the method returns all 
+		 * groups in the set of gids with which the user is associated. If the gids 
+		 * parameter is omitted, the method returns all groups associated with the 
+		 * provided user.
+		 * However, if the uid parameter is omitted, the method returns all groups 
+		 * associated with the provided gids, regardless of any user relationship.
+		 * If both parameters are omitted, the method returns all groups of the session user. 
+		 */
+		public function getGroups(user:FacebookUser=null, groupsFilter:Array=null, callback:Function=null):GetGroups_delegate
 		{
-			//TODO: getGroups
+			var d:GetGroups_delegate = new GetGroups_delegate(facebook, user, groupsFilter);
+			MethodGroupUtil.addCallback(d, callback);
+			return d;
 		}
 
-		public function getMembers():void
+		public function getMembers(group:FacebookGroup, callback:Function=null):GetGroupMembers_delegate
 		{
-			//TODO: getMembers
+			var d:GetGroupMembers_delegate = new GetGroupMembers_delegate(facebook, group);
+			MethodGroupUtil.addCallback(d, callback);
+			return d;
 		}
 
 	}

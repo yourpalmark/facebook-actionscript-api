@@ -26,7 +26,8 @@ package com.pbking.facebook.delegates.users
 			default xml namespace = fBook.FACEBOOK_NAMESPACE;
 			
 			var newUserId:int = parseInt(resultXML.toString());			
-			user = new FacebookUser(newUserId);
+			user = fBook.getUser(newUserId);
+			user.isLoggedInUser = true;
 		}
 		
 	}
