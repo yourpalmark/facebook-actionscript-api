@@ -8,6 +8,7 @@ package test.pbking.facebook
 	import flexunit.framework.TestCase;
 	import flexunit.framework.TestSuite;
 	
+	import test.pbking.facebook.delegates.Friends_test;
 	import test.pbking.facebook.delegates.Notification_test;
 	import test.pbking.facebook.delegates.Profile_test;
 	import test.pbking.facebook.delegates.Users_test;
@@ -43,6 +44,7 @@ package test.pbking.facebook
 			testSuite.addTest(Users_test.suite(testFacebook));
 			testSuite.addTest(Profile_test.suite(testFacebook));
 			testSuite.addTest(Notification_test.suite(testFacebook));
+			testSuite.addTest(Friends_test.suite(testFacebook));
 			
 			return testSuite;
 		}

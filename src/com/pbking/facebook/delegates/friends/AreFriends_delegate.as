@@ -36,7 +36,7 @@ package com.pbking.facebook.delegates.friends
 			
 			for each(user in list2)
 			{
-				uids1.push(user.uid);
+				uids2.push(user.uid);
 				if(!totalUserCollection.contains(user))
 					totalUserCollection.addItem(user);
 			}
@@ -59,7 +59,7 @@ package com.pbking.facebook.delegates.friends
 			{
 				list1.push(totalUserCollection.getItemById(int(xFriendInfo.uid1)));
 				list2.push(totalUserCollection.getItemById(int(xFriendInfo.uid2)));
-				resultList.push(xFriendInfo.friends == 1);
+				resultList.push(xFriendInfo.are_friends == 1);
 			} 
 		}
 		

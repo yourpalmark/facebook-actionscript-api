@@ -28,9 +28,8 @@ package com.pbking.facebook.methodGroups
 	import com.pbking.facebook.Facebook;
 	import com.pbking.facebook.data.users.FacebookUser;
 	import com.pbking.facebook.delegates.friends.AreFriends_delegate;
+	import com.pbking.facebook.delegates.friends.GetAppUsers_delegate;
 	import com.pbking.facebook.delegates.friends.GetFriends_delegate;
-	
-	import flash.events.Event;
 	
 	public class Friends
 	{
@@ -50,11 +49,7 @@ package com.pbking.facebook.methodGroups
 		public function areFriends(list1:Array, list2:Array, callback:Function=null):AreFriends_delegate
 		{
 			var delegate:AreFriends_delegate = new AreFriends_delegate(facebook, list1, list2);
-
-			if(callback != null)
-				delegate.addEventListener(Event.COMPLETE, callback);
-			
-			return delegate;
+			return MethodGroupUtil.addCallback(delegate, callback) as AreFriends_delegate;		
 		}
 		
 		public function areFriends2(user:FacebookUser, list:Array, callback:Function=null):AreFriends_delegate
@@ -69,21 +64,13 @@ package com.pbking.facebook.methodGroups
 		public function getFriends(callback:Function=null):GetFriends_delegate
 		{
 			var delegate:GetFriends_delegate = new GetFriends_delegate(facebook);
-
-			if(callback != null)
-				delegate.addEventListener(Event.COMPLETE, callback);
-				
-			return delegate;
+			return MethodGroupUtil.addCallback(delegate, callback) as GetFriends_delegate;		
 		}
 		
-		public function getAppUsers(callback:Function=null):GetFriends_delegate
+		public function getAppUsers(callback:Function=null):GetAppUsers_delegate
 		{
-			var delegate:GetFriends_delegate = new GetFriends_delegate(facebook);
-
-			if(callback != null)
-				delegate.addEventListener(Event.COMPLETE, callback);
-				
-			return delegate;
+			var delegate:GetAppUsers_delegate = new GetAppUsers_delegate(facebook);
+			return MethodGroupUtil.addCallback(delegate, callback) as GetAppUsers_delegate;		
 		}
 	}
 }
