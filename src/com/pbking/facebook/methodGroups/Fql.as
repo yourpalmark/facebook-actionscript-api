@@ -26,6 +26,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 package com.pbking.facebook.methodGroups
 {
 	import com.pbking.facebook.Facebook;
+	import com.pbking.facebook.delegates.fql.FqlQuery_delegate;
 	
 	public class Fql
 	{
@@ -42,9 +43,11 @@ package com.pbking.facebook.methodGroups
 		
 		// FACEBOOK FUNCTION CALLS //////////
 		
-		public function query():void
+		public function query(query:String, callback:Function=null):FqlQuery_delegate
 		{
-			//TODO: query
+			var d:FqlQuery_delegate = new FqlQuery_delegate(facebook, query);
+			MethodGroupUtil.addCallback(d, callback);
+			return d;
 		}
 
 	}
