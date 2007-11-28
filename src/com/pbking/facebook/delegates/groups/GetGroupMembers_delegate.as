@@ -29,21 +29,21 @@ package com.pbking.facebook.delegates.groups
 
 			var uid:XML;
 
-			group.members = [];
+			group.members.removeAll();
 			for each(uid in resultXML.members.children())
-				group.members.push(fBook.getUser(parseInt(uid)));
+				group.members.addUser(fBook.getUser(parseInt(uid)));
 			
-			group.admins = [];
+			group.admins.removeAll();
 			for each(uid in resultXML.admins.children())
-				group.admins.push(fBook.getUser(parseInt(uid)));
+				group.admins.addUser(fBook.getUser(parseInt(uid)));
 			
-			group.officers = [];
+			group.officers.removeAll();
 			for each(uid in resultXML.officers.children())
-				group.officers.push(fBook.getUser(parseInt(uid)));
+				group.officers.addUser(fBook.getUser(parseInt(uid)));
 			
-			group.not_replied = [];
+			group.not_replied.removeAll();
 			for each(uid in resultXML.not_replied.children())
-				group.not_replied.push(fBook.getUser(parseInt(uid)));
+				group.not_replied.addUser(fBook.getUser(parseInt(uid)));
 			
 		}
 		

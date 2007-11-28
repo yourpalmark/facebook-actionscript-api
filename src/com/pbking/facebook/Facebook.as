@@ -36,6 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 package com.pbking.facebook
 {
 	import com.gsolo.encryption.MD5;
+	import com.pbking.facebook.data.events.FacebookEvent;
 	import com.pbking.facebook.data.groups.FacebookGroup;
 	import com.pbking.facebook.data.users.FacebookUser;
 	import com.pbking.facebook.delegates.auth.*;
@@ -60,6 +61,7 @@ package com.pbking.facebook
 		
 		private var _userCollection:HashableArrayCollection = new HashableArrayCollection('uid', false);
 		private var _groupCollection:HashableArrayCollection = new HashableArrayCollection('gid', false);
+		private var _eventCollection:HashableArrayCollection = new HashableArrayCollection('eid', false);
 		
 		public var fb_sig_values:Object;
 		
@@ -573,6 +575,23 @@ package com.pbking.facebook
 				_groupCollection.addItem(group);
 			}
 			return group;
+		}
+		
+		/**
+		 * This keeps a common collection of events so that all information gathered
+		 * on events is stored here and updated.  Each event should have only one instance.
+		 * 
+		 * Creating an event should happen from this method.
+		 */
+		public function getEvent(eid:Number):FacebookEvent
+		{
+			var event:FacebookEvent = _eventCollection.getItemById(eid) as FacebookEvent;
+			if(!event)
+			{
+				event = new FacebookEvent(eid);
+				_eventCollection.addItem(event);
+			}
+			return event;
 		}
 		
 	}

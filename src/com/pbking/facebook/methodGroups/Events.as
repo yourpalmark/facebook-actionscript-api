@@ -26,6 +26,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 package com.pbking.facebook.methodGroups
 {
 	import com.pbking.facebook.Facebook;
+	import com.pbking.facebook.data.events.FacebookEvent;
+	import com.pbking.facebook.data.users.FacebookUser;
+	import com.pbking.facebook.delegates.events.GetEventMembers_delegate;
+	import com.pbking.facebook.delegates.events.GetEvents_delegate;
 	
 	public class Events
 	{
@@ -42,14 +46,38 @@ package com.pbking.facebook.methodGroups
 		
 		// FACEBOOK FUNCTION CALLS //////////
 		
-		public function getEvents():void
+		/**
+		 * Returns all visible events according to the filters specified. 
+		 * You can use this method to find all events for a user, or to query a 
+		 * specific set of events by a list of event IDs (eids).
+		 * 
+		 * If both the uid and eids parameters are provided, the method returns all 
+		 * events in the set of eids that are associated with the user. If no eids 
+		 * parameter are specified, the method returns all events associated with the 
+		 * specified user.
+		 * 
+		 * If the uid parameter is omitted, the method returns all events associated 
+		 * with the provided eids, regardless of any user relationship.
+		 * 
+		 * If both parameters are omitted, the method returns all events associated with 
+		 * the session user.
+		 * 
+		 * start_time and end_time parameters specify a (possibly open-ended) window in 
+		 * which all events returned overlap. Note that if start_time is greater than or 
+		 * equal to end_time, an empty top-level element is returned. 
+		 */
+		public function getEvents(user:FacebookUser=null, eventsFilter:Array=null, start_time:Date=null, end_time:Date=null, rsvp_status_filter:String="", callback:Function=null):GetEvents_delegate
 		{
-			//TODO: getEvents
+			var d:GetEvents_delegate = new GetEvents_delegate(facebook, user, eventsFilter, start_time, end_time, rsvp_status_filter);
+			MethodGroupUtil.addCallback(d, callback);
+			return d;
 		}
 		
-		public function getMembers():void
+		public function getEventMembers(event:FacebookEvent, callback:Function=null):GetEventMembers_delegate
 		{
-			//TODO: getMembers
+			var d:GetEventMembers_delegate = new GetEventMembers_delegate(facebook, event);
+			MethodGroupUtil.addCallback(d, callback);
+			return d;
 		}
 	}
 }
