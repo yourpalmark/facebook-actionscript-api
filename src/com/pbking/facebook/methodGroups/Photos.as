@@ -62,7 +62,11 @@ package com.pbking.facebook.methodGroups
 		}
 		
 		/**
-		 * Uploads a photo owned by the current session user and returns the new photo. See photo uploads for a description of the upload workflow. The only storable values returned from this call are pid, aid, and owner. All applications can upload photos with a "pending" state, which means that the photos must be approved by the user before they are visible on the site. Photos uploaded by applications with the photo_upload extended permission will be visible immediately.
+		 * Uploads a photo owned by the current session user and returns the new photo. See photo uploads for a description 
+		 * of the upload workflow. The only storable values returned from this call are pid, aid, and owner. All applications 
+		 * can upload photos with a "pending" state, which means that the photos must be approved by the user before they are 
+		 * visible on the site. Photos uploaded by applications with the photo_upload extended permission will be visible 
+		 * immediately.
 		 */
 		public function upload(album:FacebookAlbum, caption:String, data:*, callback:Function = null):void
 		{
@@ -83,7 +87,10 @@ package com.pbking.facebook.methodGroups
 		 * 
 		 * Adds a tag with the given information to a photo. See photo uploads for a description of the upload workflow.
 		 * 
-		 * For regular applications, tags can only be added to pending photos owned by the current session user – once a photo has been approved or rejected, it can no longer be tagged with this method. Applications with the photo_upload extended permission can add tags to any photo owned by the user. There is a limit of 20 tags per pending photo. 
+		 * For regular applications, tags can only be added to pending photos owned by the current session user – once a 
+		 * photo has been approved or rejected, it can no longer be tagged with this method. Applications with the 
+		 * photo_upload extended permission can add tags to any photo owned by the user. There is a limit of 20 tags 
+		 * per pending photo. 
 		 * 
 		 * @param tags:Array array of NewTag objects
 		 */
@@ -94,7 +101,8 @@ package com.pbking.facebook.methodGroups
 		}
 		
 		/**
-		 * Returns metadata about all of the photo albums uploaded by the specified user. The values returned from this call are not storable.
+		 * Returns metadata about all of the photo albums uploaded by the specified user. 
+		 * The values returned from this call are not storable.
 		 */
 		public function getAlbums(uid:String, callback:Function = null, getCoverPhotos:Boolean = false):GetAlbums_delegate
 		{
