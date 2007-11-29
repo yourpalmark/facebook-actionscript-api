@@ -60,15 +60,20 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#getFBML()">getFBML</a>():void</div>
-<div class="summaryTableDescription"></div>
+<a class="signatureLink" href="#getFBML()">getFBML</a>(user:<a href="../data/users/FacebookUser.html">FacebookUser</a> = null, callback:Function = null):<a href="../delegates/profile/GetFBML_delegate.html">GetFBML_delegate</a>
+</div>
+<div class="summaryTableDescription">
+   
+   </div>
 </td><td class="summaryTableOwnerCol">Profile</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#setFBML()">setFBML</a>():void</div>
-<div class="summaryTableDescription"></div>
+<a class="signatureLink" href="#setFBML()">setFBML</a>(markup:String, user:<a href="../data/users/FacebookUser.html">FacebookUser</a> = null, callback:Function = null):<a href="../delegates/profile/SetFBML_delegate.html">SetFBML_delegate</a>
+</div>
+<div class="summaryTableDescription">
+   Sets the FBML for a user's profile, including the content for both the profile box and the profile actions.</div>
 </td><td class="summaryTableOwnerCol">Profile</td>
 </tr>
 </table>
@@ -103,7 +108,30 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function getFBML():void</code>
+<code>public function getFBML(user:<a href="../data/users/FacebookUser.html">FacebookUser</a> = null, callback:Function = null):<a href="../delegates/profile/GetFBML_delegate.html">GetFBML_delegate</a></code><p>
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">user</span>:<a href="../data/users/FacebookUser.html">FacebookUser</a></code> (default = <code>null</code>)<code></code> &mdash; - The user whose profile FBML is to be fetched. 
+   If not specified, defaults to the logged-in user. 
+   Not allowed for desktop applications (since the application secret is essentially public).
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">callback</span>:Function</code> (default = <code>null</code>)<code></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../delegates/profile/GetFBML_delegate.html">GetFBML_delegate</a></code></td>
+</tr>
+</table>
 </div>
 <a name="setFBML()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -112,7 +140,40 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function setFBML():void</code>
+<code>public function setFBML(markup:String, user:<a href="../data/users/FacebookUser.html">FacebookUser</a> = null, callback:Function = null):<a href="../delegates/profile/SetFBML_delegate.html">SetFBML_delegate</a></code><p>
+   Sets the FBML for a user's profile, including the content for both the profile box and the profile actions. 
+   See the FBML documentation for a description of the markup and its role in various contexts. 
+   Note that this method can also be used to set fb:profile-actions for users.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">markup</span>:String</code> &mdash; - The FBML that will be posted to the user's profile
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">user</span>:<a href="../data/users/FacebookUser.html">FacebookUser</a></code> (default = <code>null</code>)<code></code> &mdash; - The user whose profile is to be updated. 
+   If not specified, defaults to the logged-in user. 
+   Not allowed for desktop applications (since the application secret is essentially public).
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">callback</span>:Function</code> (default = <code>null</code>)<code></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../delegates/profile/SetFBML_delegate.html">SetFBML_delegate</a></code></td>
+</tr>
+</table>
 </div>
 <br>
 <br>

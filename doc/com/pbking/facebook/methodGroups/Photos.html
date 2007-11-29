@@ -60,7 +60,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#addTag()">addTag</a>(pid:int, tag_uid:int, tag_text:String, x:Number, y:Number, callback:Function = null):<a href="../delegates/photos/GetTags_delegate.html">GetTags_delegate</a>
+<a class="signatureLink" href="#addTag()">addTag</a>(pid:int, tag_uid:int, tag_text:String, x:Number, y:Number, callback:Function = null):<a href="../delegates/photos/AddTags_delegate.html">AddTags_delegate</a>
 </div>
 <div class="summaryTableDescription">
    Adds a tag with the given information to a photo.</div>
@@ -69,7 +69,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#addTags()">addTags</a>(tags:Array, callback:Function = null):<a href="../delegates/photos/GetTags_delegate.html">GetTags_delegate</a>
+<a class="signatureLink" href="#addTags()">addTags</a>(tags:Array, callback:Function = null):<a href="../delegates/photos/AddTags_delegate.html">AddTags_delegate</a>
 </div>
 <div class="summaryTableDescription">
    Add multiple tags.</div>
@@ -78,8 +78,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#createAlbum()">createAlbum</a>(name:String, location:String, description:String, callback:Function = null):void</div>
-<div class="summaryTableDescription"></div>
+<a class="signatureLink" href="#createAlbum()">createAlbum</a>(name:String, location:String = "", description:String = "", callback:Function = null):<a href="../delegates/photos/CreateAlbum_delegate.html">CreateAlbum_delegate</a>
+</div>
+<div class="summaryTableDescription">
+   Creates and returns a new album owned by the current session user.</div>
 </td><td class="summaryTableOwnerCol">Photos</td>
 </tr>
 <tr class="">
@@ -87,7 +89,8 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#getAlbums()">getAlbums</a>(uid:String, callback:Function = null, getCoverPhotos:Boolean = false):<a href="../delegates/photos/GetAlbums_delegate.html">GetAlbums_delegate</a>
 </div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+   Returns metadata about all of the photo albums uploaded by the specified user.</div>
 </td><td class="summaryTableOwnerCol">Photos</td>
 </tr>
 <tr class="">
@@ -95,7 +98,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#getPhotos()">getPhotos</a>(subj_id:Object, aid:Object, pids:Array, callback:Function = null):<a href="../delegates/photos/GetPhotos_delegate.html">GetPhotos_delegate</a>
 </div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+   Returns all visible photos according to the filters specified
+   </div>
 </td><td class="summaryTableOwnerCol">Photos</td>
 </tr>
 <tr class="">
@@ -103,21 +108,26 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#getPhotosForAlbum()">getPhotosForAlbum</a>(album:<a href="../data/photos/FacebookAlbum.html">FacebookAlbum</a>, callback:Function = null):<a href="../delegates/photos/GetPhotos_delegate.html">GetPhotos_delegate</a>
 </div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+   Get all of the pictures for an album
+   </div>
 </td><td class="summaryTableOwnerCol">Photos</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#getTags()">getTags</a>(photos:Array, callback:Function = null):void</div>
-<div class="summaryTableDescription"></div>
+<a class="signatureLink" href="#getTags()">getTags</a>(photos:Array, populatePhotosWithTags:Boolean = true, callback:Function = null):<a href="../delegates/photos/GetTags_delegate.html">GetTags_delegate</a>
+</div>
+<div class="summaryTableDescription">
+   Returns the set of user tags on all photos specified.</div>
 </td><td class="summaryTableOwnerCol">Photos</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#upload()">upload</a>(album:<a href="../data/photos/FacebookAlbum.html">FacebookAlbum</a>, caption:String, data:*, callback:Function = null):void</div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+   Uploads a photo owned by the current session user and returns the new photo.</div>
 </td><td class="summaryTableOwnerCol">Photos</td>
 </tr>
 </table>
@@ -152,7 +162,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function addTag(pid:int, tag_uid:int, tag_text:String, x:Number, y:Number, callback:Function = null):<a href="../delegates/photos/GetTags_delegate.html">GetTags_delegate</a></code><p>
+<code>public function addTag(pid:int, tag_uid:int, tag_text:String, x:Number, y:Number, callback:Function = null):<a href="../delegates/photos/AddTags_delegate.html">AddTags_delegate</a></code><p>
    Adds a tag with the given information to a photo.
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
@@ -194,7 +204,7 @@ showHideInherited();
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code><a href="../delegates/photos/GetTags_delegate.html">GetTags_delegate</a></code></td>
+<td width="20"></td><td><code><a href="../delegates/photos/AddTags_delegate.html">AddTags_delegate</a></code></td>
 </tr>
 </table>
 </div>
@@ -205,13 +215,22 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function addTags(tags:Array, callback:Function = null):<a href="../delegates/photos/GetTags_delegate.html">GetTags_delegate</a></code><p>
+<code>public function addTags(tags:Array, callback:Function = null):<a href="../delegates/photos/AddTags_delegate.html">AddTags_delegate</a></code><p>
    Add multiple tags.  Each item in the array must have:
    pid, tag_uid OR tag_text, x, y
+   
+   Adds a tag with the given information to a photo. See photo uploads for a description of the upload workflow.
+   
+   For regular applications, tags can only be added to pending photos owned by the current session user – once a 
+   photo has been approved or rejected, it can no longer be tagged with this method. Applications with the 
+   photo_upload extended permission can add tags to any photo owned by the user. There is a limit of 20 tags 
+   per pending photo. 
+   
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">tags</span>:Array</code></td>
+<td width="20px"></td><td><code><span class="label">tags</span>:Array</code> &mdash; array of NewTag objects
+   </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
@@ -224,7 +243,7 @@ showHideInherited();
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code><a href="../delegates/photos/GetTags_delegate.html">GetTags_delegate</a></code></td>
+<td width="20"></td><td><code><a href="../delegates/photos/AddTags_delegate.html">AddTags_delegate</a></code></td>
 </tr>
 </table>
 </div>
@@ -235,7 +254,12 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function createAlbum(name:String, location:String, description:String, callback:Function = null):void</code><span class="label">Parameters</span>
+<code>public function createAlbum(name:String, location:String = "", description:String = "", callback:Function = null):<a href="../delegates/photos/CreateAlbum_delegate.html">CreateAlbum_delegate</a></code><p>
+   Creates and returns a new album owned by the current session user. 
+   See photo uploads for a description of the upload workflow. 
+   The only storable values returned from this call are aid and owner. 
+   No relationships between them are storable.
+   </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">name</span>:String</code></td>
@@ -244,19 +268,26 @@ showHideInherited();
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">location</span>:String</code></td>
+<td width="20px"></td><td><code><span class="label">location</span>:String</code> (default = "<code></code>")<code></code></td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">description</span>:String</code></td>
+<td width="20px"></td><td><code><span class="label">description</span>:String</code> (default = "<code></code>")<code></code></td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
 <td width="20px"></td><td><code><span class="label">callback</span>:Function</code> (default = <code>null</code>)<code></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../delegates/photos/CreateAlbum_delegate.html">CreateAlbum_delegate</a></code></td>
 </tr>
 </table>
 </div>
@@ -267,7 +298,10 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function getAlbums(uid:String, callback:Function = null, getCoverPhotos:Boolean = false):<a href="../delegates/photos/GetAlbums_delegate.html">GetAlbums_delegate</a></code><span class="label">Parameters</span>
+<code>public function getAlbums(uid:String, callback:Function = null, getCoverPhotos:Boolean = false):<a href="../delegates/photos/GetAlbums_delegate.html">GetAlbums_delegate</a></code><p>
+   Returns metadata about all of the photo albums uploaded by the specified user. 
+   The values returned from this call are not storable.
+   </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">uid</span>:String</code></td>
@@ -300,7 +334,9 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function getPhotos(subj_id:Object, aid:Object, pids:Array, callback:Function = null):<a href="../delegates/photos/GetPhotos_delegate.html">GetPhotos_delegate</a></code><span class="label">Parameters</span>
+<code>public function getPhotos(subj_id:Object, aid:Object, pids:Array, callback:Function = null):<a href="../delegates/photos/GetPhotos_delegate.html">GetPhotos_delegate</a></code><p>
+   Returns all visible photos according to the filters specified
+   </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">subj_id</span>:Object</code></td>
@@ -339,7 +375,9 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function getPhotosForAlbum(album:<a href="../data/photos/FacebookAlbum.html">FacebookAlbum</a>, callback:Function = null):<a href="../delegates/photos/GetPhotos_delegate.html">GetPhotos_delegate</a></code><span class="label">Parameters</span>
+<code>public function getPhotosForAlbum(album:<a href="../data/photos/FacebookAlbum.html">FacebookAlbum</a>, callback:Function = null):<a href="../delegates/photos/GetPhotos_delegate.html">GetPhotos_delegate</a></code><p>
+   Get all of the pictures for an album
+   </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">album</span>:<a href="../data/photos/FacebookAlbum.html">FacebookAlbum</a></code></td>
@@ -366,7 +404,9 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function getTags(photos:Array, callback:Function = null):void</code><span class="label">Parameters</span>
+<code>public function getTags(photos:Array, populatePhotosWithTags:Boolean = true, callback:Function = null):<a href="../delegates/photos/GetTags_delegate.html">GetTags_delegate</a></code><p>
+   Returns the set of user tags on all photos specified.
+   </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">photos</span>:Array</code></td>
@@ -375,7 +415,20 @@ showHideInherited();
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
+<td width="20px"></td><td><code><span class="label">populatePhotosWithTags</span>:Boolean</code> (default = <code>true</code>)<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
 <td width="20px"></td><td><code><span class="label">callback</span>:Function</code> (default = <code>null</code>)<code></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../delegates/photos/GetTags_delegate.html">GetTags_delegate</a></code></td>
 </tr>
 </table>
 </div>
@@ -386,7 +439,13 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function upload(album:<a href="../data/photos/FacebookAlbum.html">FacebookAlbum</a>, caption:String, data:*, callback:Function = null):void</code><span class="label">Parameters</span>
+<code>public function upload(album:<a href="../data/photos/FacebookAlbum.html">FacebookAlbum</a>, caption:String, data:*, callback:Function = null):void</code><p>
+   Uploads a photo owned by the current session user and returns the new photo. See photo uploads for a description 
+   of the upload workflow. The only storable values returned from this call are pid, aid, and owner. All applications 
+   can upload photos with a "pending" state, which means that the photos must be approved by the user before they are 
+   visible on the site. Photos uploaded by applications with the photo_upload extended permission will be visible 
+   immediately.
+   </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">album</span>:<a href="../data/photos/FacebookAlbum.html">FacebookAlbum</a></code></td>

@@ -62,35 +62,44 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#getInfo()">getInfo</a>(users:Array, fields:Array, callback:Function = null):<a href="../delegates/users/GetUserInfo_delegate.html">GetUserInfo_delegate</a>
 </div>
-<div class="summaryTableDescription"></div>
+<div class="summaryTableDescription">
+   Returns a wide array of user-specific information for each user identifier passed, limited by the view of the current user.</div>
 </td><td class="summaryTableOwnerCol">Users</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#getLoggedInUser()">getLoggedInUser</a>():void</div>
-<div class="summaryTableDescription"></div>
+<a class="signatureLink" href="#getLoggedInUser()">getLoggedInUser</a>(callback:Function = null):<a href="../delegates/users/GetLoggedInUser_delegate.html">GetLoggedInUser_delegate</a>
+</div>
+<div class="summaryTableDescription">
+   Gets the user id (uid) associated with the current session.</div>
 </td><td class="summaryTableOwnerCol">Users</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#hasAppPermission()">hasAppPermission</a>():void</div>
-<div class="summaryTableDescription"></div>
+<a class="signatureLink" href="#hasAppPermission()">hasAppPermission</a>(extendedPermission:String, callback:Function = null):<a href="../delegates/users/HasAppPermission_delegate.html">HasAppPermission_delegate</a>
+</div>
+<div class="summaryTableDescription">
+   Checks whether the user has opted in to an extended application permission.</div>
 </td><td class="summaryTableOwnerCol">Users</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#isAppAdded()">isAppAdded</a>():void</div>
-<div class="summaryTableDescription"></div>
+<a class="signatureLink" href="#isAppAdded()">isAppAdded</a>(callback:Function = null):<a href="../delegates/users/IsAppAdded_delegate.html">IsAppAdded_delegate</a>
+</div>
+<div class="summaryTableDescription">
+   Returns whether the logged-in user has added the calling application.</div>
 </td><td class="summaryTableOwnerCol">Users</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#setStatus()">setStatus</a>():void</div>
-<div class="summaryTableDescription"></div>
+<a class="signatureLink" href="#setStatus()">setStatus</a>(status:String, clear:Boolean = false, callback:Function = null):<a href="../delegates/users/SetStatus_delegate.html">SetStatus_delegate</a>
+</div>
+<div class="summaryTableDescription">
+   Updates a user's Facebook status.</div>
 </td><td class="summaryTableOwnerCol">Users</td>
 </tr>
 </table>
@@ -125,7 +134,9 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function getInfo(users:Array, fields:Array, callback:Function = null):<a href="../delegates/users/GetUserInfo_delegate.html">GetUserInfo_delegate</a></code><span class="label">Parameters</span>
+<code>public function getInfo(users:Array, fields:Array, callback:Function = null):<a href="../delegates/users/GetUserInfo_delegate.html">GetUserInfo_delegate</a></code><p>
+   Returns a wide array of user-specific information for each user identifier passed, limited by the view of the current user. The current user is determined from the session_key parameter. The only storable values returned from this call are the those under the affiliations element, the notes_count value, and the contents of the profile_update_time element.
+   </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">users</span>:Array</code></td>
@@ -158,7 +169,21 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function getLoggedInUser():void</code>
+<code>public function getLoggedInUser(callback:Function = null):<a href="../delegates/users/GetLoggedInUser_delegate.html">GetLoggedInUser_delegate</a></code><p>
+   Gets the user id (uid) associated with the current session. This value should be stored for the duration of the session, to avoid unnecessary subsequent calls to this method.
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">callback</span>:Function</code> (default = <code>null</code>)<code></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../delegates/users/GetLoggedInUser_delegate.html">GetLoggedInUser_delegate</a></code></td>
+</tr>
+</table>
 </div>
 <a name="hasAppPermission()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -167,7 +192,31 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function hasAppPermission():void</code>
+<code>public function hasAppPermission(extendedPermission:String, callback:Function = null):<a href="../delegates/users/HasAppPermission_delegate.html">HasAppPermission_delegate</a></code><p>
+   Checks whether the user has opted in to an extended application permission.
+   See: http://wiki.developers.facebook.com/index.php/Extended_application_permission for more info.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">extendedPermission</span>:String</code> &mdash; String identifier for the extended permission that is being checked for. 
+   Must be one of status_update, create_listing, or photo_upload.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">callback</span>:Function</code> (default = <code>null</code>)<code></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../delegates/users/HasAppPermission_delegate.html">HasAppPermission_delegate</a></code></td>
+</tr>
+</table>
 </div>
 <a name="isAppAdded()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -176,7 +225,21 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function isAppAdded():void</code>
+<code>public function isAppAdded(callback:Function = null):<a href="../delegates/users/IsAppAdded_delegate.html">IsAppAdded_delegate</a></code><p>
+   Returns whether the logged-in user has added the calling application.
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">callback</span>:Function</code> (default = <code>null</code>)<code></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../delegates/users/IsAppAdded_delegate.html">IsAppAdded_delegate</a></code></td>
+</tr>
+</table>
 </div>
 <a name="setStatus()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -185,7 +248,33 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function setStatus():void</code>
+<code>public function setStatus(status:String, clear:Boolean = false, callback:Function = null):<a href="../delegates/users/SetStatus_delegate.html">SetStatus_delegate</a></code><p>
+   Updates a user's Facebook status. This method requires the extended permission status_update, which the user must opt into via the Extended Permissions system. 
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">status</span>:String</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">clear</span>:Boolean</code> (default = <code>false</code>)<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">callback</span>:Function</code> (default = <code>null</code>)<code></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../delegates/users/SetStatus_delegate.html">SetStatus_delegate</a></code></td>
+</tr>
+</table>
 </div>
 <br>
 <br>

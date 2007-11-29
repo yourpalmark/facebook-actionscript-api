@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="Notifications,com.pbking.facebook.methodGroups.Notifications,getNotifications,send,sendRequest" name="keywords">
+<meta content="Notifications,com.pbking.facebook.methodGroups.Notifications,getNotifications,send" name="keywords">
 <title>com.pbking.facebook.methodGroups.Notifications</title>
 </head>
 <body>
@@ -60,22 +60,19 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#getNotifications()">getNotifications</a>():void</div>
-<div class="summaryTableDescription"></div>
+<a class="signatureLink" href="#getNotifications()">getNotifications</a>(callback:Function = null):<a href="../delegates/notifications/GetNotifications_delegate.html">GetNotifications_delegate</a>
+</div>
+<div class="summaryTableDescription">
+   Returns information on outstanding Facebook notifications for current session user.</div>
 </td><td class="summaryTableOwnerCol">Notifications</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#send()">send</a>():void</div>
-<div class="summaryTableDescription"></div>
-</td><td class="summaryTableOwnerCol">Notifications</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#sendRequest()">sendRequest</a>():void</div>
-<div class="summaryTableDescription"></div>
+<a class="signatureLink" href="#send()">send</a>(notification:String, users:Array = null, callback:Function = null):<a href="../delegates/notifications/SendNotification_delegate.html">SendNotification_delegate</a>
+</div>
+<div class="summaryTableDescription">
+   Send a notification to a set of users.</div>
 </td><td class="summaryTableOwnerCol">Notifications</td>
 </tr>
 </table>
@@ -110,7 +107,21 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function getNotifications():void</code>
+<code>public function getNotifications(callback:Function = null):<a href="../delegates/notifications/GetNotifications_delegate.html">GetNotifications_delegate</a></code><p>
+   Returns information on outstanding Facebook notifications for current session user.
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">callback</span>:Function</code> (default = <code>null</code>)<code></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../delegates/notifications/GetNotifications_delegate.html">GetNotifications_delegate</a></code></td>
+</tr>
+</table>
 </div>
 <a name="send()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -119,16 +130,45 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function send():void</code>
-</div>
-<a name="sendRequest()"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
+<code>public function send(notification:String, users:Array = null, callback:Function = null):<a href="../delegates/notifications/SendNotification_delegate.html">SendNotification_delegate</a></code><p>
+   Send a notification to a set of users. You can also send messages to the logged-in 
+   user's notification page. Your application can send up to 40 notifications to the 
+   notifications page per user per day. Notifications sent to the notifications page 
+   for non-application users are subject to spam control. Read more information about 
+   how spamminess is measured. Additionally, any notification that you send on behalf 
+   of a user appears on that user's notifications page as a "sent notification."
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td class="detailHeaderName">sendRequest</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+<td width="20px"></td><td><code><span class="label">notification</span>:String</code> &mdash; FBML for the notifications page. Uses a stripped down 
+   version allowing only text and links.
+   
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">users</span>:Array</code> (default = <code>null</code>)<code></code> &mdash; Array of users. These must be either friends of the logged-in user 
+   or people who have added your application. To send a notification to the current 
+   logged-in user without a name prepended to the message, set users to null.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">callback</span>:Function</code> (default = <code>null</code>)<code></code></td>
 </tr>
 </table>
-<div class="detailBody">
-<code>public function sendRequest():void</code>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../delegates/notifications/SendNotification_delegate.html">SendNotification_delegate</a></code></td>
+</tr>
+</table>
 </div>
 <br>
 <br>

@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../print.css" type="text/css" media="print">
-<meta content="Facebook,com.pbking.facebook.Facebook,fb_sig_values,rest_url,default_rest_url,login_url,api_key,secret,FACEBOOK_NAMESPACE,session_key,user,profile,isUsersProfile,time,expires,sessionType,useRedirectServer,isConnected,photos,friends,users,events,feed,fql,groups,marketplace,notifications,pages,fbProfile,startWebSession,startDesktopSession,validateDesktopSession,startWidgetSession" name="keywords">
+<meta content="Facebook,com.pbking.facebook.Facebook,fb_sig_values,rest_url,default_rest_url,login_url,api_key,secret,FACEBOOK_NAMESPACE,session_key,user,currentProfile,isUsersProfile,time,expires,sessionType,useRedirectServer,isConnected,photos,friends,users,events,feed,fql,groups,marketplace,notifications,pages,profile,connectionErrorMessage,startNoSession,startWebSession,startDesktopSession,validateDesktopSession,startWidgetSession,getUser,getGroup,getEvent" name="keywords">
 <title>com.pbking.facebook.Facebook</title>
 </head>
 <body>
@@ -19,7 +19,7 @@
 <td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../index-list.html')" href="../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../index.html?com/pbking/facebook/Facebook.html&amp;com/pbking/facebook/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../images/logo.jpg"></td>
 </tr>
 <tr class="titleTableRow2">
-<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;Facebook</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;Facebook</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#eventSummary">Events</a></td>
 </tr>
 <tr class="titleTableRow3">
 <td colspan="2">&nbsp;</td>
@@ -27,7 +27,7 @@
 </table>
 <script type="text/javascript" language="javascript">
 <!--
-if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class Facebook"); titleBar_setSubNav(false,true,false,false,false,false,true,false,false,false,false,false,false,false);}
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class Facebook"); titleBar_setSubNav(false,true,false,false,true,false,true,false,false,false,false,false,false,false);}
 --></script>
 <div class="MainContent">
 <table cellspacing="0" cellpadding="0" class="classHeaderTable">
@@ -58,6 +58,15 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">Facebook</td>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#connectionErrorMessage">connectionErrorMessage</a> : String<div class="summaryTableDescription">[read-only]</div>
+</td><td class="summaryTableOwnerCol">Facebook</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#currentProfile">currentProfile</a> : <a href="data/users/FacebookUser.html">FacebookUser</a>
+<div class="summaryTableDescription">[read-only]</div>
+</td><td class="summaryTableOwnerCol">Facebook</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#default_rest_url">default_rest_url</a> : String = "http://api.facebook.com/restserver.php"<div class="summaryTableDescription">
    This ACTUAL FACEBOOK rest URL.</div>
 </td><td class="summaryTableOwnerCol">Facebook</td>
@@ -73,11 +82,6 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#FACEBOOK_NAMESPACE">FACEBOOK_NAMESPACE</a> : Namespace<div class="summaryTableDescription">[read-only]</div>
-</td><td class="summaryTableOwnerCol">Facebook</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#fbProfile">fbProfile</a> : <a href="methodGroups/Profile.html">Profile</a>
-<div class="summaryTableDescription">[read-only]</div>
 </td><td class="summaryTableOwnerCol">Facebook</td>
 </tr>
 <tr class="">
@@ -141,7 +145,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">Facebook</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#profile">profile</a> : <a href="data/users/FacebookUser.html">FacebookUser</a>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#profile">profile</a> : <a href="methodGroups/Profile.html">Profile</a>
 <div class="summaryTableDescription">[read-only]</div>
 </td><td class="summaryTableOwnerCol">Facebook</td>
 </tr>
@@ -199,9 +203,48 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
+<a class="signatureLink" href="#getEvent()">getEvent</a>(eid:Number):<a href="data/events/FacebookEvent.html">FacebookEvent</a>
+</div>
+<div class="summaryTableDescription">
+   This keeps a common collection of events so that all information gathered
+   on events is stored here and updated.</div>
+</td><td class="summaryTableOwnerCol">Facebook</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#getGroup()">getGroup</a>(gid:Number):<a href="data/groups/FacebookGroup.html">FacebookGroup</a>
+</div>
+<div class="summaryTableDescription">
+   This keeps a common collection of groups so that all information gathered
+   on groups is stored here and updated.</div>
+</td><td class="summaryTableOwnerCol">Facebook</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#getUser()">getUser</a>(uid:int):<a href="data/users/FacebookUser.html">FacebookUser</a>
+</div>
+<div class="summaryTableDescription">
+   This keeps a common collection of users so that all information gathered
+   on users is stored here and updated.</div>
+</td><td class="summaryTableOwnerCol">Facebook</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
 <a class="signatureLink" href="#startDesktopSession()">startDesktopSession</a>(api_key:String, secret:String):void</div>
 <div class="summaryTableDescription">
    Start a session for a desktop based application.</div>
+</td><td class="summaryTableOwnerCol">Facebook</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#startNoSession()">startNoSession</a>(api_key:String, secret:String):void</div>
+<div class="summaryTableDescription">
+   For testing purposes
+   </div>
 </td><td class="summaryTableOwnerCol">Facebook</td>
 </tr>
 <tr class="">
@@ -231,6 +274,22 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 </table>
 </div>
+<a name="eventSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Events</div>
+<table id="summaryTableEvent" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Event</th><th>Summary</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#event:complete">complete</a>
+</div>
+</td><td class="summaryTableDescription summaryTableCol">&nbsp;</td><td class="summaryTableOwnerCol">Facebook</td>
+</tr>
+</table>
+</div>
 <script type="text/javascript" language="javascript">
 <!--
 showHideInherited();
@@ -249,6 +308,32 @@ showHideInherited();
 <span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get api_key():String</code>
+<br>
+</div>
+<a name="connectionErrorMessage"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">connectionErrorMessage</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>connectionErrorMessage:String</code>&nbsp;&nbsp;[read-only]<p>This property can be used as the source for data binding.</p>
+<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get connectionErrorMessage():String</code>
+<br>
+</div>
+<a name="currentProfile"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">currentProfile</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>currentProfile:<a href="data/users/FacebookUser.html">FacebookUser</a></code>&nbsp;&nbsp;[read-only]<p>This property can be used as the source for data binding.</p>
+<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get currentProfile():<a href="data/users/FacebookUser.html">FacebookUser</a></code>
 <br>
 </div>
 <a name="default_rest_url"></a>
@@ -298,19 +383,6 @@ showHideInherited();
 <span class="label">Implementation</span>
 <br>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;public function get FACEBOOK_NAMESPACE():Namespace</code>
-<br>
-</div>
-<a name="fbProfile"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">fbProfile</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>fbProfile:<a href="methodGroups/Profile.html">Profile</a></code>&nbsp;&nbsp;[read-only]<p>This property can be used as the source for data binding.</p>
-<span class="label">Implementation</span>
-<br>
-<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get fbProfile():<a href="methodGroups/Profile.html">Profile</a></code>
 <br>
 </div>
 <a name="fb_sig_values"></a>
@@ -474,10 +546,10 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>profile:<a href="data/users/FacebookUser.html">FacebookUser</a></code>&nbsp;&nbsp;[read-only]<p>This property can be used as the source for data binding.</p>
+<code>profile:<a href="methodGroups/Profile.html">Profile</a></code>&nbsp;&nbsp;[read-only]<p>This property can be used as the source for data binding.</p>
 <span class="label">Implementation</span>
 <br>
-<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get profile():<a href="data/users/FacebookUser.html">FacebookUser</a></code>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get profile():<a href="methodGroups/Profile.html">Profile</a></code>
 <br>
 </div>
 <a name="rest_url"></a>
@@ -599,10 +671,88 @@ showHideInherited();
 </div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
+<a name="getEvent()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">getEvent</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function getEvent(eid:Number):<a href="data/events/FacebookEvent.html">FacebookEvent</a></code><p>
+   This keeps a common collection of events so that all information gathered
+   on events is stored here and updated.  Each event should have only one instance.
+   
+   Creating an event should happen from this method.
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">eid</span>:Number</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="data/events/FacebookEvent.html">FacebookEvent</a></code></td>
+</tr>
+</table>
+</div>
+<a name="getGroup()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">getGroup</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function getGroup(gid:Number):<a href="data/groups/FacebookGroup.html">FacebookGroup</a></code><p>
+   This keeps a common collection of groups so that all information gathered
+   on groups is stored here and updated.  Each group should have only one instance.
+   
+   Creating a group should happen from this method.
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">gid</span>:Number</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="data/groups/FacebookGroup.html">FacebookGroup</a></code></td>
+</tr>
+</table>
+</div>
+<a name="getUser()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">getUser</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function getUser(uid:int):<a href="data/users/FacebookUser.html">FacebookUser</a></code><p>
+   This keeps a common collection of users so that all information gathered
+   on users is stored here and updated.  Each user should have only one instance.
+   
+   Creating a user should happen from this method.
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">uid</span>:int</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="data/users/FacebookUser.html">FacebookUser</a></code></td>
+</tr>
+</table>
+</div>
 <a name="startDesktopSession()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">startDesktopSession</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+<td class="detailHeaderName">startDesktopSession</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
@@ -611,6 +761,28 @@ showHideInherited();
    For this you need to know and pass the application api_key and secret.
    The user will be prompted to login to their Facebook page after which you should call
    validateDesktopSession()
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">api_key</span>:String</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">secret</span>:String</code></td>
+</tr>
+</table>
+</div>
+<a name="startNoSession()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">startNoSession</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function startNoSession(api_key:String, secret:String):void</code><p>
+   For testing purposes
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
@@ -685,6 +857,18 @@ showHideInherited();
    Once a token has been created and a user has logged in we must manually validate this session
    with a call to this method.  Once this has been sucessfully called, the Facebook session is ready
    </p></div>
+<div class="detailSectionHeader">Event detail</div>
+<a name="event:complete"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">complete</td><td class="detailHeaderType">event&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<span class="label">Event object type: </span><a href=""><code>flash.events.Event</code></a>
+<br>
+<p></p>
+</div>
 <br>
 <br>
 <hr>

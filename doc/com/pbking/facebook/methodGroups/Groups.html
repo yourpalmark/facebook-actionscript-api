@@ -60,14 +60,17 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#getGroups()">getGroups</a>():void</div>
-<div class="summaryTableDescription"></div>
+<a class="signatureLink" href="#getGroups()">getGroups</a>(user:<a href="../data/users/FacebookUser.html">FacebookUser</a> = null, groupsFilter:Array = null, callback:Function = null):<a href="../delegates/groups/GetGroups_delegate.html">GetGroups_delegate</a>
+</div>
+<div class="summaryTableDescription">
+   Returns all visible groups according to the filters specified.</div>
 </td><td class="summaryTableOwnerCol">Groups</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#getMembers()">getMembers</a>():void</div>
+<a class="signatureLink" href="#getMembers()">getMembers</a>(group:<a href="../data/groups/FacebookGroup.html">FacebookGroup</a>, callback:Function = null):<a href="../delegates/groups/GetGroupMembers_delegate.html">GetGroupMembers_delegate</a>
+</div>
 <div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">Groups</td>
 </tr>
@@ -103,7 +106,42 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function getGroups():void</code>
+<code>public function getGroups(user:<a href="../data/users/FacebookUser.html">FacebookUser</a> = null, groupsFilter:Array = null, callback:Function = null):<a href="../delegates/groups/GetGroups_delegate.html">GetGroups_delegate</a></code><p>
+   Returns all visible groups according to the filters specified. 
+   You can use this method to return all groups associated with a user, 
+   or query a specific set of groups by a list of GIDs.
+   If both the uid and gids parameters are provided, the method returns all 
+   groups in the set of gids with which the user is associated. If the gids 
+   parameter is omitted, the method returns all groups associated with the 
+   provided user.
+   However, if the uid parameter is omitted, the method returns all groups 
+   associated with the provided gids, regardless of any user relationship.
+   If both parameters are omitted, the method returns all groups of the session user. 
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">user</span>:<a href="../data/users/FacebookUser.html">FacebookUser</a></code> (default = <code>null</code>)<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">groupsFilter</span>:Array</code> (default = <code>null</code>)<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">callback</span>:Function</code> (default = <code>null</code>)<code></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../delegates/groups/GetGroups_delegate.html">GetGroups_delegate</a></code></td>
+</tr>
+</table>
 </div>
 <a name="getMembers()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -112,7 +150,25 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function getMembers():void</code>
+<code>public function getMembers(group:<a href="../data/groups/FacebookGroup.html">FacebookGroup</a>, callback:Function = null):<a href="../delegates/groups/GetGroupMembers_delegate.html">GetGroupMembers_delegate</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">group</span>:<a href="../data/groups/FacebookGroup.html">FacebookGroup</a></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">callback</span>:Function</code> (default = <code>null</code>)<code></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../delegates/groups/GetGroupMembers_delegate.html">GetGroupMembers_delegate</a></code></td>
+</tr>
+</table>
 </div>
 <br>
 <br>

@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../../print.css" type="text/css" media="print">
-<meta content="GetTags_delegate,com.pbking.facebook.delegates.photos.GetTags_delegate" name="keywords">
+<meta content="GetTags_delegate,com.pbking.facebook.delegates.photos.GetTags_delegate,photos,tags,populatePhotosWithTags,handleResult" name="keywords">
 <title>com.pbking.facebook.delegates.photos.GetTags_delegate</title>
 </head>
 <body>
@@ -46,7 +46,48 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <br>
 <hr>
 </div>
-<a name="propertySummary"></a><a name="protectedPropertySummary"></a>
+<a name="propertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Properties</div>
+<div class="showHideLinks">
+<div class="hideInheritedProperty" id="hideInheritedProperty">
+<a onclick="javascript:setInheritedVisible(false,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Public Properties</a>
+</div>
+<div class="showInheritedProperty" id="showInheritedProperty">
+<a onclick="javascript:setInheritedVisible(true,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Public Properties</a>
+</div>
+</div>
+<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../FacebookDelegate.html#errorCode">errorCode</a> : int = 0<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol"><a href="../FacebookDelegate.html">FacebookDelegate</a></td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../FacebookDelegate.html#errorMessage">errorMessage</a> : String = ""<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol"><a href="../FacebookDelegate.html">FacebookDelegate</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#photos">photos</a> : Array<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">GetTags_delegate</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#populatePhotosWithTags">populatePhotosWithTags</a> : Boolean<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">GetTags_delegate</td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../FacebookDelegate.html#success">success</a> : Boolean = false<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol"><a href="../FacebookDelegate.html">FacebookDelegate</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#tags">tags</a> : Array<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">GetTags_delegate</td>
+</tr>
+</table>
+</div>
+<a name="protectedPropertySummary"></a>
 <div class="summarySection">
 <div class="summaryTableTitle">Protected Properties</div>
 <div class="showHideLinks">
@@ -60,6 +101,11 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <table id="summaryTableProtectedProperty" class="summaryTable hideInheritedProtectedProperty" cellpadding="3" cellspacing="0">
 <tr>
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="hideInheritedProtectedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../FacebookDelegate.html#fbCall">fbCall</a> : <a href="../../../facebook/FacebookCall.html">FacebookCall</a>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol"><a href="../FacebookDelegate.html">FacebookDelegate</a></td>
 </tr>
 <tr class="hideInheritedProtectedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../FacebookDelegate.html#fBook">fBook</a> : <a href="../../../facebook/Facebook.html">Facebook</a>
@@ -78,7 +124,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#GetTags_delegate()">GetTags_delegate</a>(fBook:<a href="../../Facebook.html">Facebook</a>, tags:Array)</div>
+<a class="signatureLink" href="#GetTags_delegate()">GetTags_delegate</a>(fBook:<a href="../../Facebook.html">Facebook</a>, photos:Array, populatePhotosWithTags:Boolean = true)</div>
 <div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">GetTags_delegate</td>
 </tr>
@@ -95,9 +141,16 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a onclick="javascript:setInheritedVisible(true,'ProtectedMethod');" href="#protectedMethodSummary" class="showHideLink"><img src="../../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Protected Methods</a>
 </div>
 </div>
-<table id="summaryTableProtectedMethod" class="summaryTable hideInheritedProtectedMethod" cellpadding="3" cellspacing="0">
+<table id="summaryTableProtectedMethod" class="summaryTable " cellpadding="3" cellspacing="0">
 <tr>
 <th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#handleResult()">handleResult</a>(resultXML:XML):void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">GetTags_delegate</td>
 </tr>
 <tr class="hideInheritedProtectedMethod">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
@@ -144,13 +197,6 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </div>
 </td><td class="summaryTableDescription summaryTableCol">&nbsp;</td><td class="summaryTableOwnerCol"><a href="../FacebookDelegate.html">FacebookDelegate</a></td>
 </tr>
-<tr class="hideInheritedEvent">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="../FacebookDelegate.html#event:error">error</a>
-</div>
-</td><td class="summaryTableDescription summaryTableCol">&nbsp;</td><td class="summaryTableOwnerCol"><a href="../FacebookDelegate.html">FacebookDelegate</a></td>
-</tr>
 </table>
 </div>
 <script type="text/javascript" language="javascript">
@@ -158,6 +204,35 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 showHideInherited();
 --></script>
 <div class="MainContent">
+<a name="propertyDetail"></a>
+<div class="detailSectionHeader">Property detail</div>
+<a name="photos"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">photos</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var photos:Array</code>
+</div>
+<a name="populatePhotosWithTags"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">populatePhotosWithTags</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var populatePhotosWithTags:Boolean</code>
+</div>
+<a name="tags"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">tags</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var tags:Array</code>
+</div>
 <a name="constructorDetail"></a>
 <div class="detailSectionHeader">Constructor detail</div>
 <a name="GetTags_delegate()"></a>
@@ -167,7 +242,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function GetTags_delegate(fBook:<a href="../../Facebook.html">Facebook</a>, tags:Array)</code><span class="label">Parameters</span>
+<code>public function GetTags_delegate(fBook:<a href="../../Facebook.html">Facebook</a>, photos:Array, populatePhotosWithTags:Boolean = true)</code><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">fBook</span>:<a href="../../Facebook.html">Facebook</a></code></td>
@@ -176,7 +251,29 @@ showHideInherited();
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">tags</span>:Array</code></td>
+<td width="20px"></td><td><code><span class="label">photos</span>:Array</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">populatePhotosWithTags</span>:Boolean</code> (default = <code>true</code>)<code></code></td>
+</tr>
+</table>
+</div>
+<a name="methodDetail"></a>
+<div class="detailSectionHeader">Method detail</div>
+<a name="handleResult()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">handleResult</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected override function handleResult(resultXML:XML):void</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">resultXML</span>:XML</code></td>
 </tr>
 </table>
 </div>

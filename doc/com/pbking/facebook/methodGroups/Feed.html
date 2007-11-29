@@ -60,22 +60,28 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#publishActionOfUser()">publishActionOfUser</a>():void</div>
-<div class="summaryTableDescription"></div>
+<a class="signatureLink" href="#publishActionOfUser()">publishActionOfUser</a>(titleMarkup:String, bodyMarkup:String = "", image_1:String = "", image_1_link:String = "", image_2:String = "", image_2_link:String = "", image_3:String = "", image_3_link:String = "", image_4:String = "", image_4_link:String = "", callback:Function = null):<a href="../delegates/feed/PublishActionOfUser_delegate.html">PublishActionOfUser_delegate</a>
+</div>
+<div class="summaryTableDescription">
+   Publishes a Mini-Feed story to the user corresponding to the session_key parameter, and publishes News Feed stories to the friends of that user.</div>
 </td><td class="summaryTableOwnerCol">Feed</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#publishStoryToUser()">publishStoryToUser</a>():void</div>
-<div class="summaryTableDescription"></div>
+<a class="signatureLink" href="#publishStoryToUser()">publishStoryToUser</a>(titleMarkup:String, bodyMarkup:String = "", image_1:String = "", image_1_link:String = "", image_2:String = "", image_2_link:String = "", image_3:String = "", image_3_link:String = "", image_4:String = "", image_4_link:String = "", priority:String = "", callback:Function = null):<a href="../delegates/feed/PublishStoryToUser_delegate.html">PublishStoryToUser_delegate</a>
+</div>
+<div class="summaryTableDescription">
+   Publishes a News Feed story to the user corresponding to the session_key parameter.</div>
 </td><td class="summaryTableOwnerCol">Feed</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#publishTemplatizedAction()">publishTemplatizedAction</a>():void</div>
-<div class="summaryTableDescription"></div>
+<a class="signatureLink" href="#publishTemplatizedAction()">publishTemplatizedAction</a>(actor:<a href="../data/users/FacebookUser.html">FacebookUser</a>, title_template:String = "", title_data:String = "", body_template:String = "", body_data:String = "", body_general:String = "", targetUsers:Array = null, image_1:String = "", image_1_link:String = "", image_2:String = "", image_2_link:String = "", image_3:String = "", image_3_link:String = "", image_4:String = "", image_4_link:String = "", callback:Function = null):<a href="../delegates/feed/PublishTemplatizedAction_delegate.html">PublishTemplatizedAction_delegate</a>
+</div>
+<div class="summaryTableDescription">
+   Publishes a Mini-Feed story to the user or Page corresponding to the actor_id parameter.</div>
 </td><td class="summaryTableOwnerCol">Feed</td>
 </tr>
 </table>
@@ -110,7 +116,93 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function publishActionOfUser():void</code>
+<code>public function publishActionOfUser(titleMarkup:String, bodyMarkup:String = "", image_1:String = "", image_1_link:String = "", image_2:String = "", image_2_link:String = "", image_3:String = "", image_3_link:String = "", image_4:String = "", image_4_link:String = "", callback:Function = null):<a href="../delegates/feed/PublishActionOfUser_delegate.html">PublishActionOfUser_delegate</a></code><p>
+   Publishes a Mini-Feed story to the user corresponding to the session_key parameter, and publishes News Feed stories to the friends of that user.
+   
+   Publishing to Feeds requires you to understand the rules of their operation.
+      The title is required, and is limited to 60 displayed characters (excluding tags).
+            o One <a> tag is allowed.
+              o One fb:userlink tag is allowed, and the uid parameter must be populated with the user ID on whose behalf the action is being published. If there is no such fb:userlink tag found, then one is automatically prepended to the title.
+           o The fb:name tag is allowed, and there may be multiple instances of this tag.
+             o No other tags are allowed. 
+      The body is optional, is limited to 200 display characters (excluding tags), and can include the tags fb:userlink, fb:name, <a>, <b>, and <i>.
+      Up to 4 images can be displayed, which will be shrunk to fit within 75x75, cached, and formatted by Facebook. Images can either be a URL, or a facebook PID. (RobRoy: PID doesn't work for me, anyone else verify?) If it is a URL, you must own the image and grant Facebook the permission to cache it. Each image must have a link associated with it, which must start with http://
+      Applications are limited to calling this function 10 times for each user in a rolling 48-hour window.
+      The story may or may not show up in the user's friends' News Feeds, depending on the number and quality of competing stories.
+      Developer Note: Since this method affects all Facebook friends of the developer, testing this method does abide by the limited-calling rule (unlike feed.publishStoryToUser). 
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">titleMarkup</span>:String</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">bodyMarkup</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">image_1</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">image_1_link</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">image_2</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">image_2_link</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">image_3</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">image_3_link</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">image_4</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">image_4_link</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">callback</span>:Function</code> (default = <code>null</code>)<code></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../delegates/feed/PublishActionOfUser_delegate.html">PublishActionOfUser_delegate</a></code></td>
+</tr>
+</table>
 </div>
 <a name="publishStoryToUser()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -119,7 +211,97 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function publishStoryToUser():void</code>
+<code>public function publishStoryToUser(titleMarkup:String, bodyMarkup:String = "", image_1:String = "", image_1_link:String = "", image_2:String = "", image_2_link:String = "", image_3:String = "", image_3_link:String = "", image_4:String = "", image_4_link:String = "", priority:String = "", callback:Function = null):<a href="../delegates/feed/PublishStoryToUser_delegate.html">PublishStoryToUser_delegate</a></code><p>
+   Publishes a News Feed story to the user corresponding to the session_key parameter.
+   
+   Publishing to News Feed requires you to understand the rules of its operation.
+      The title is required, and is limited to 60 displayed characters (excluding tags).
+            o The <a> tag is allowed, and there can only be zero or one instance of it in the title.
+            o No other tags are allowed. 
+      The body is optional, is limited to 200 displayed characters (excluding tags), and can include the tags <a>, <b>, and <i>.
+      Up to 4 images can be displayed, which are shrunk to fit within 75x75 pixels, cached, and formatted by Facebook. Images can either be a URL, or a facebook PID. If it is a URL, you must own the image and grant Facebook the permission to cache it. Each image must have a link associated with it, which must start with http://
+      Applications are limited to calling this function once every 12 hours for each user.
+      The story may or may not show up in the user's News Feed, depending on the number and quality of competing stories.
+      Developer Note: If an application developer calls feed.publishStoryToUser for his own user ID, the story is always published. This allows for testing and display tweaks. 
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">titleMarkup</span>:String</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">bodyMarkup</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">image_1</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">image_1_link</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">image_2</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">image_2_link</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">image_3</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">image_3_link</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">image_4</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">image_4_link</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">priority</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">callback</span>:Function</code> (default = <code>null</code>)<code></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../delegates/feed/PublishStoryToUser_delegate.html">PublishStoryToUser_delegate</a></code></td>
+</tr>
+</table>
 </div>
 <a name="publishTemplatizedAction()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -128,7 +310,113 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function publishTemplatizedAction():void</code>
+<code>public function publishTemplatizedAction(actor:<a href="../data/users/FacebookUser.html">FacebookUser</a>, title_template:String = "", title_data:String = "", body_template:String = "", body_data:String = "", body_general:String = "", targetUsers:Array = null, image_1:String = "", image_1_link:String = "", image_2:String = "", image_2_link:String = "", image_3:String = "", image_3_link:String = "", image_4:String = "", image_4_link:String = "", callback:Function = null):<a href="../delegates/feed/PublishTemplatizedAction_delegate.html">PublishTemplatizedAction_delegate</a></code><p>
+   Publishes a Mini-Feed story to the user or Page corresponding to the actor_id parameter. 
+   For user stories, this function publishes News Feed stories to the friends of that user.
+   See http://wiki.developers.facebook.com/index.php/Feed.publishTemplatizedAction for more info.
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">actor</span>:<a href="../data/users/FacebookUser.html">FacebookUser</a></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">title_template</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">title_data</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">body_template</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">body_data</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">body_general</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">targetUsers</span>:Array</code> (default = <code>null</code>)<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">image_1</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">image_1_link</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">image_2</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">image_2_link</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">image_3</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">image_3_link</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">image_4</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">image_4_link</span>:String</code> (default = "<code></code>")<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">callback</span>:Function</code> (default = <code>null</code>)<code></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../delegates/feed/PublishTemplatizedAction_delegate.html">PublishTemplatizedAction_delegate</a></code></td>
+</tr>
+</table>
 </div>
 <br>
 <br>

@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="FacebookDelegate,com.pbking.facebook.delegates.FacebookDelegate,fBook,result,onComplete,onError" name="keywords">
+<meta content="FacebookDelegate,com.pbking.facebook.delegates.FacebookDelegate,fBook,fbCall,success,errorCode,errorMessage,result,handleResult,onComplete,onError" name="keywords">
 <title>com.pbking.facebook.delegates.FacebookDelegate</title>
 </head>
 <body>
@@ -41,7 +41,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">FacebookDelegate <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../../images/inherit-arrow.gif"> flash.events.EventDispatcher</td>
 </tr>
 <tr>
-<td class="classHeaderTableLabel">Subclasses</td><td><a href="friends/AreFriends_delegate.html">AreFriends_delegate</a>, <a href="auth/CreateToken_delegate.html">CreateToken_delegate</a>, <a href="photos/GetAlbums_delegate.html">GetAlbums_delegate</a>, <a href="friends/GetAppUsers_delegate.html">GetAppUsers_delegate</a>, <a href="friends/GetFriends_delegate.html">GetFriends_delegate</a>, <a href="photos/GetPhotos_delegate.html">GetPhotos_delegate</a>, <a href="auth/GetSession_delegate.html">GetSession_delegate</a>, <a href="photos/GetTags_delegate.html">GetTags_delegate</a>, <a href="users/GetUserInfo_delegate.html">GetUserInfo_delegate</a></td>
+<td class="classHeaderTableLabel">Subclasses</td><td><a href="photos/AddTags_delegate.html">AddTags_delegate</a>, <a href="friends/AreFriends_delegate.html">AreFriends_delegate</a>, <a href="photos/CreateAlbum_delegate.html">CreateAlbum_delegate</a>, <a href="auth/CreateToken_delegate.html">CreateToken_delegate</a>, <a href="fql/FqlQuery_delegate.html">FqlQuery_delegate</a>, <a href="photos/GetAlbums_delegate.html">GetAlbums_delegate</a>, <a href="friends/GetAppUsers_delegate.html">GetAppUsers_delegate</a>, <a href="events/GetEventMembers_delegate.html">GetEventMembers_delegate</a>, <a href="events/GetEvents_delegate.html">GetEvents_delegate</a>, <a href="profile/GetFBML_delegate.html">GetFBML_delegate</a>, <a href="friends/GetFriends_delegate.html">GetFriends_delegate</a>, <a href="groups/GetGroupMembers_delegate.html">GetGroupMembers_delegate</a>, <a href="groups/GetGroups_delegate.html">GetGroups_delegate</a>, <a href="users/GetLoggedInUser_delegate.html">GetLoggedInUser_delegate</a>, <a href="notifications/GetNotifications_delegate.html">GetNotifications_delegate</a>, <a href="photos/GetPhotos_delegate.html">GetPhotos_delegate</a>, <a href="auth/GetSession_delegate.html">GetSession_delegate</a>, <a href="photos/GetTags_delegate.html">GetTags_delegate</a>, <a href="users/GetUserInfo_delegate.html">GetUserInfo_delegate</a>, <a href="users/HasAppPermission_delegate.html">HasAppPermission_delegate</a>, <a href="users/IsAppAdded_delegate.html">IsAppAdded_delegate</a>, <a href="feed/PublishActionOfUser_delegate.html">PublishActionOfUser_delegate</a>, <a href="feed/PublishStoryToUser_delegate.html">PublishStoryToUser_delegate</a>, <a href="feed/PublishTemplatizedAction_delegate.html">PublishTemplatizedAction_delegate</a>, <a href="notifications/SendNotification_delegate.html">SendNotification_delegate</a>, <a href="profile/SetFBML_delegate.html">SetFBML_delegate</a>, <a href="users/SetStatus_delegate.html">SetStatus_delegate</a></td>
 </tr>
 </table>
 <p></p>
@@ -49,12 +49,38 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <br>
 <hr>
 </div>
-<a name="propertySummary"></a><a name="protectedPropertySummary"></a>
+<a name="propertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Properties</div>
+<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#errorCode">errorCode</a> : int = 0<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">FacebookDelegate</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#errorMessage">errorMessage</a> : String = ""<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">FacebookDelegate</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#success">success</a> : Boolean = false<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">FacebookDelegate</td>
+</tr>
+</table>
+</div>
+<a name="protectedPropertySummary"></a>
 <div class="summarySection">
 <div class="summaryTableTitle">Protected Properties</div>
 <table id="summaryTableProtectedProperty" class="summaryTable " cellpadding="3" cellspacing="0">
 <tr>
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#fbCall">fbCall</a> : <a href="../../facebook/FacebookCall.html">FacebookCall</a>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">FacebookDelegate</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#fBook">fBook</a> : <a href="../../facebook/Facebook.html">Facebook</a>
@@ -85,6 +111,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <table id="summaryTableProtectedMethod" class="summaryTable " cellpadding="3" cellspacing="0">
 <tr>
 <th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#handleResult()">handleResult</a>(resultXML:XML):void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">FacebookDelegate</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
@@ -123,13 +156,6 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </div>
 </td><td class="summaryTableDescription summaryTableCol">&nbsp;</td><td class="summaryTableOwnerCol">FacebookDelegate</td>
 </tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#event:error">error</a>
-</div>
-</td><td class="summaryTableDescription summaryTableCol">&nbsp;</td><td class="summaryTableOwnerCol">FacebookDelegate</td>
-</tr>
 </table>
 </div>
 <script type="text/javascript" language="javascript">
@@ -139,14 +165,50 @@ showHideInherited();
 <div class="MainContent">
 <a name="propertyDetail"></a>
 <div class="detailSectionHeader">Property detail</div>
+<a name="errorCode"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">errorCode</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var errorCode:int = 0</code>
+</div>
+<a name="errorMessage"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">errorMessage</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var errorMessage:String = ""</code>
+</div>
+<a name="fbCall"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">fbCall</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var fbCall:<a href="../../facebook/FacebookCall.html">FacebookCall</a></code>
+</div>
 <a name="fBook"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">fBook</td><td class="detailHeaderType">property</td>
+<td class="detailHeaderName">fBook</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
 <code>protected var fBook:<a href="../../facebook/Facebook.html">Facebook</a></code>
+</div>
+<a name="success"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">success</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var success:Boolean = false</code>
 </div>
 <a name="constructorDetail"></a>
 <div class="detailSectionHeader">Constructor detail</div>
@@ -166,10 +228,24 @@ showHideInherited();
 </div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
+<a name="handleResult()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">handleResult</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function handleResult(resultXML:XML):void</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">resultXML</span>:XML</code></td>
+</tr>
+</table>
+</div>
 <a name="onComplete()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">onComplete</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+<td class="detailHeaderName">onComplete</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
@@ -207,17 +283,6 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <span class="label">Event object type: </span><a href=""><code>flash.events.Event</code></a>
-<br>
-<p></p>
-</div>
-<a name="event:error"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">error</td><td class="detailHeaderType">event&nbsp;</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<span class="label">Event object type: </span><a href=""><code>flash.events.ErrorEvent</code></a>
 <br>
 <p></p>
 </div>
