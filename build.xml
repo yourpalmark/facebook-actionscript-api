@@ -48,6 +48,11 @@
 			<zipfileset dir='${doc}' prefix='facebookapi_documentation_v${version}'/>
 		</zip>
 		
+		<!-- package .swc -->
+		<zip destfile='${deliverables}/facebook_as3_api_swc_v${version}.zip' excludes='**/.svn/**'>
+			<zipfileset file="${bin}/facebook_as3_api.swc" prefix='facebook_as3_api_swc_v${version}'/>
+		</zip>
+
 	</target>
 
 	<!-- BUILD -->
