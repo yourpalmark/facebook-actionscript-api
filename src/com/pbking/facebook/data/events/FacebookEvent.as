@@ -4,6 +4,7 @@ package com.pbking.facebook.data.events
 	import com.pbking.facebook.data.users.FacebookUser;
 	import com.pbking.facebook.data.users.FacebookUserCollection;
 	
+	[Bindable]
 	public class FacebookEvent
 	{
 		public var eid:Number;
@@ -37,6 +38,9 @@ package com.pbking.facebook.data.events
 		function FacebookEvent(eid:Number):void
 		{
 			this.eid = eid;
+			
+			//making sure it's imported
+			RSVP_Status;
 		}
 	}
 }

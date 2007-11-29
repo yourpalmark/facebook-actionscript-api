@@ -1,6 +1,6 @@
 package com.pbking.facebook.data.misc
-{
-	
+{	
+	[Bindable]
 	public class FacebookWorkInfo
 	{
 		public var location:FacebookLocation;

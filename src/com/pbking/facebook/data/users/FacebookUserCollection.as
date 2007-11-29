@@ -2,6 +2,7 @@ package com.pbking.facebook.data.users
 {
 	import com.pbking.util.collection.HashableArrayCollection;
 
+	[Bindable]
 	public class FacebookUserCollection extends HashableArrayCollection
 	{
 		function FacebookUserCollection()

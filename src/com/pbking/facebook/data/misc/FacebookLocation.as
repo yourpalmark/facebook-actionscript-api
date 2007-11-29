@@ -1,5 +1,6 @@
 package com.pbking.facebook.data.misc
 {
+	[Bindable]
 	public class FacebookLocation
 	{
 		public var street:String;

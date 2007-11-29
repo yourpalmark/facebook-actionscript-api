@@ -19,7 +19,7 @@
 	<property name="doc" value="${basedir}/doc" />
 	<property name="bin" value="${basedir}/bin" />
 	<property name="src" value="${basedir}/src" />
-	<property name="version" value="0.5.1" />
+	<property name="version" value="0.7" />
 
 	<!-- DOCUMENT -->
 	
@@ -90,6 +90,43 @@
 		</mxmlc>
 	
 		<echo message="Finished building Facebook example debugger"/>
+
+	</target>
+
+	<!-- TEST -->
+	
+	<target name='unit_test'>
+
+		<!-- build unit test -->
+		
+		<echo message="Building Facebook unit test"/>
+	
+	    <mxmlc  file="${src}/FB_API_TEST.mxml" 
+	            output="${bin}/FB_API_TEST.swf"
+	    		debug="false"
+	    		actionscript-file-encoding="UTF-8">
+	    	
+	            <load-config filename="${FLEX_CONFIG}"/>
+	        	<source-path path-element="${FLEX_FRAMEWORKS}"/>
+	            <default-size width="800" height="600" />
+		</mxmlc>
+	
+		<echo message="Finished building Facebook unit test"/>
+
+	</target>
+	
+	<!-- BUILD SWC -->
+	
+	<target name='build_swc'>
+
+		<echo message="Building Facebook API swc"/>
+	
+		<compc output="${bin}/facebook_as3_api.swc"
+			include-classes="com.pbking.facebook.Facebook">
+			<source-path path-element="${src}"/>   
+		</compc>
+		
+		<echo message="Finished building Facebook swc"/>
 
 	</target>
 	

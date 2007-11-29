@@ -122,12 +122,14 @@ package com.pbking.facebook
 		 * session key 
 		 */
 		private var _session_key:String;
+		public function set session_key(newVal:String):void { /*for binding*/ }
 		public function get session_key():String { return _session_key; }
 		
 		/** 
 		 * logged in user
 		 */
 		private var _user:FacebookUser;
+		public function set user(newVal:FacebookUser):void { /*for binding*/ }
 		public function get user():FacebookUser 
 		{ 
 			if(!_user)
@@ -143,6 +145,7 @@ package com.pbking.facebook
 		 * If no profile is set, the logged in user is returned
 		 */
 		private var _currentProfile:FacebookUser;
+		public function set currentProfile(newVal:FacebookUser):void { /*for binding*/ }
 		public function get currentProfile():FacebookUser
 		{
 			if(!_currentProfile)
@@ -154,6 +157,7 @@ package com.pbking.facebook
 		/** 
 		 * Returns true if user is viewing their own profile
 		 */ 
+		public function set isUsersProfile(newVal:Boolean):void { /*for binding*/ }
 		public function get isUsersProfile():Boolean 
 		{ 
 			return this.currentProfile == this.user;
@@ -163,6 +167,7 @@ package com.pbking.facebook
 		 * connection time
 		 */
 		private var _time:Number = 0;
+		public function set time(newVal:Number):void { /*for binding*/ }
 		public function get time():Number 
 		{
 			if(_time == 0)
@@ -177,6 +182,7 @@ package com.pbking.facebook
 		 * 0 if it doesn't expire
 		 */
 		private var _expires:Number = 0;
+		public function set expires(newVal:Number):void { /*for binding*/ }
 		public function get expires():Number { return _expires; }
 		
 		/**

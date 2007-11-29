@@ -1,5 +1,6 @@
 package com.pbking.facebook.data.photos
 {
+	[Bindable]
 	public class NewTag
 	{
 		public var x:Number = 0;

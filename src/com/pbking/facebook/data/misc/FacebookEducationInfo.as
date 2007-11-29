@@ -1,5 +1,6 @@
 package com.pbking.facebook.data.misc
 {
+	[Bindable]
 	public class FacebookEducationInfo
 	{
 		public var name:String;

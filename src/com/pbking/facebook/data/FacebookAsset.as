@@ -33,6 +33,7 @@ package com.pbking.facebook.data
 {
 	import flash.events.EventDispatcher;
 
+	[Bindable]
 	public class FacebookAsset extends EventDispatcher
 	{
 		

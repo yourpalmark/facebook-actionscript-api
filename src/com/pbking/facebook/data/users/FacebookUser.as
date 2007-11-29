@@ -2,16 +2,18 @@ package com.pbking.facebook.data.users
 {
 	import com.pbking.facebook.data.misc.FacebookLocation;
 	
+	import flash.events.EventDispatcher;
+	
 	[Bindable]
-	public class FacebookUser
+	public class FacebookUser extends EventDispatcher
 	{
 		public var uid:int;
 		
 		public var isLoggedInUser:Boolean;
 		
-		public var name:String;
-		public var first_name:String;
-		public var last_name:String;
+		public var name:String = "";
+		public var first_name:String = "";
+		public var last_name:String = "";
 		
 		public var pic:String;
 		public var pic_big:String;
@@ -69,6 +71,9 @@ package com.pbking.facebook.data.users
  		function FacebookUser(uid:int):void
 		{
 			this.uid = uid;
+			
+			//just making sure the UserFields is imported
+			UserFields;
 		}
 	}
 }
