@@ -344,7 +344,8 @@ package com.pbking.facebook
 			var delegate:GetSession_delegate = event.target as GetSession_delegate;
 			if(delegate.success)
 			{
-				this.user.uid = delegate.uid;
+				this._user = getUser(delegate.uid);
+				this._user.isLoggedInUser = true;
 				
 				this._secret = delegate.secret;
 				this._session_key = delegate.session_key;
@@ -365,15 +366,34 @@ package com.pbking.facebook
 		 * The user will be prompted to login to their Facebook page after which you should call
 		 * validateDesktopSession()
 		 */
-		public function startDesktopSession(api_key:String, secret:String):void
+		public function startDesktopSession(api_key:String, secret:String, infinite_session_key:String=""):void
 		{
 			this._api_key = api_key;
 			this._secret = secret;
 			
 			sessionType = FacebookSessionType.DESKTOP_APP;
-			//first we need to construct a token
-			var delegate:CreateToken_delegate = new CreateToken_delegate(this);
-			delegate.addEventListener(Event.COMPLETE, onDesktopTokenCreated);
+			
+			if(infinite_session_key != "")
+			{
+				//TODO: we need to do some error checking on the infinite_session_key
+
+				this._session_key = infinite_session_key;
+
+				// The user id is everything after the hyphen in the session key
+				var i:Number = infinite_session_key.indexOf("-");
+				var userid:int = parseInt(infinite_session_key.substring(i+1));
+				this._user = getUser(userid);
+				this._user.isLoggedInUser = true;
+
+				prepareSigValues();
+				onReady();
+			}
+			else
+			{
+				//construct a token and get ready for the user to enter user/pass
+				var delegate:CreateToken_delegate = new CreateToken_delegate(this);
+				delegate.addEventListener(Event.COMPLETE, onDesktopTokenCreated);
+			}
 		}
 		
 		private function onDesktopTokenCreated(event:Event):void
@@ -395,7 +415,7 @@ package com.pbking.facebook
 				onConnectionError(delegate.errorMessage);
 			}
 		}
-
+		
 		/**
 		 * Once a token has been created and a user has logged in we must manually validate this session
 		 * with a call to this method.  Once this has been sucessfully called, the Facebook session is ready
@@ -413,7 +433,9 @@ package com.pbking.facebook
 			
 			if(delegate.success)
 			{
-				this.user.uid = delegate.uid;
+				this._user = getUser(delegate.uid);
+				this._user.isLoggedInUser = true;
+
 				this._session_key = delegate.session_key;
 				this._expires = delegate.expires;
 			
