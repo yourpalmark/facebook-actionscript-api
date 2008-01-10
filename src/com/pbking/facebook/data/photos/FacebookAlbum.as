@@ -32,7 +32,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 package com.pbking.facebook.data.photos
 {
 	import com.pbking.facebook.Facebook;
-	import com.pbking.facebook.data.FacebookAsset;
+	import com.pbking.facebook.data.users.FacebookUser;
+	import com.pbking.facebook.data.util.FacebookDataParser;
 	import com.pbking.facebook.delegates.photos.GetPhotos_delegate;
 	
 	import flash.events.Event;
@@ -41,112 +42,113 @@ package com.pbking.facebook.data.photos
 	import mx.events.PropertyChangeEvent;
 	
 	[Bindable]
-	public class FacebookAlbum extends FacebookAsset
+	public class FacebookAlbum
 	{
 		// VARIABLES //////////
 		
+		//new props
 		private var _cover:FacebookPhoto;
 		private var _populated:Boolean = false;
 		private var _populating:Boolean = false;
-		private var _photos:ArrayCollection;
+		private var _photos:Array = [];
+		
+		//facebook props
+		private var _aid:Number;
+		private var _cover_pid:Number;
+		private var _owner:FacebookUser;
+		private var _name:String;
+		private var _created:Date;
+		private var _modified:Date;
+		private var _description:String;
+		private var _location:String;
+		private var _link:String;
+		private var _size:int;
 		
 		// CONSTRUCTION //////////
 		
 		function FacebookAlbum(xml:XML)
 		{
-			super(xml);
+			parseXML(xml);
 			
 			if(this.size == 0)
-			{
-				this._photos = new ArrayCollection();
 				this._populated = true;
-			}
-			
-			default xml namespace = new Namespace("http://api.facebook.com/1.0/");
-
-			if(xml.cover != undefined)
-			{
-				this._cover = new FacebookPhoto(xml.cover.photo[0]);
-				delete xml.cover;
-			}
-			
-			if(xml.photos != undefined)
-			{
-				var myPhotos:Array = [];
-				var photosX:XMLList = xml.photos..photo;
-				for each(var photoX:XML in photosX)
-				{
-					myPhotos.push(new FacebookPhoto(photoX));
-				}
-				this._photos = new ArrayCollection(myPhotos);
-				this._populated = true;
-				delete xml.photos;
-			}
-			
 		}
+		
+		private function parseXML(xml:XML):void
+		{
+			default xml namespace = Facebook.instance.FACEBOOK_NAMESPACE;
+
+			this._aid = Number(xml.aid);
+			
+			if(xml.cover_pid != undefined)
+			{
+				this._cover_pid = Number(xml.cover_pid);
+			}
+				
+			this._owner = Facebook.instance.getUser(parseInt(xml.owner));
+			
+			this._name = xml.name;
+			this._description = xml.description;
+			this._location = xml.location;
+			this._link = xml.link;
+			
+			this._created = FacebookDataParser.formatDate(xml.created);
+			this._modified = FacebookDataParser.formatDate(xml.modified);
+			
+			this._size = Number(xml.size);
+		}
+		
 		
 		// GETTERS and SETTERS //////////
 		
-		public function set aid(s:String):void { /*for binding*/ }
-		public function get aid():String
+		public function get aid():Number
 		{
-			//return getXMLProperty("aid");
-			default xml namespace = new Namespace("http://api.facebook.com/1.0/");
-			return _xml.aid;
+			return this._aid;
 		}
 		
-		public function set cover_pid(s:String):void { /*for binding*/ }
-		public function get cover_pid():String
+		public function get cover_pid():Number
 		{
-			return getXMLProperty("cover_pid");
+			return _cover_pid;
 		}
 		
-		public function set owner(s:String):void { /*for binding*/ }
-		public function get owner():String
+		public function get owner():FacebookUser
 		{
-			return getXMLProperty("owner");;
+			return _owner;
 		}
 		
-		public function set name(s:String):void { /*for binding*/ }
 		public function get name():String
 		{
-			return getXMLProperty("name");
+			return _name;
 		}
 		
-		public function set created(s:String):void { /*for binding*/ }
-		public function get created():String
+		public function get created():Date
 		{
-			return getXMLProperty("created");
+			return _created;
 		}
 		
-		public function set modified(s:String):void { /*for binding*/ }
-		public function get modified():String
+		public function get modified():Date
 		{
-			return getXMLProperty("modified");
+			return _modified;
 		}
 		
-		public function set description(s:String):void { /*for binding*/ }
 		public function get description():String
 		{
-			return getXMLProperty("description");
+			return _description;
 		}
 		
-		public function set location(s:String):void { /*for binding*/ }
 		public function get location():String
 		{
-			return getXMLProperty("location");
+			return _location;
 		}
 		
-		public function set link(s:String):void { /*for binding*/ }
 		public function get link():String
 		{
-			return getXMLProperty("link");
+			return _link;
 		}
 		
-		public function set size(s:Number):void { /*for binding*/ }
-		public function get size():Number
+		public function get size():int
 		{
-			return getXMLPropertyNum("size");
+			return _size;
 		}
 		
 		public function get cover():FacebookPhoto { return _cover; }
@@ -156,17 +158,11 @@ package com.pbking.facebook.data.photos
 				_cover = newVal;
 		}
 		
-		public function set populated(newVal:Boolean):void { /*for binding*/}
-		public function get populated():Boolean 
-		{ 
-			return _populated; 
-		}
+		public function set populated(newVal:Boolean):void { this._populated = newVal; }
+		public function get populated():Boolean { return _populated; }
 		
-		public function set photos(newVal:ArrayCollection):void { /*for binding*/}
-		public function get photos():ArrayCollection 
-		{ 
-			return _photos; 
-		}
+		public function set photos(newVal:Array):void { this._photos = newVal;}
+		public function get photos():Array { return _photos; }
 		
 		// PUBLIC FUNCTIONS //////////
 		
@@ -174,7 +170,6 @@ package com.pbking.facebook.data.photos
 		{
 			if(!_populating && !_populated)
 			{
-				trace("populating: " + this.aid);
 				_populating = true;
 				facebookReference.photos.getPhotos(undefined, this.aid, undefined, onPopulationComplete);
 			}
@@ -183,40 +178,14 @@ package com.pbking.facebook.data.photos
 				dispatchEvent(new Event("populationComplete"));
 			}
 		}
-		
-		override public function serialize():XML
-		{
-			var myX:XML = _xml.copy();
-			
-			if(cover)
-			{
-				var coverx:XML = <cover/>;
-				coverx.appendChild(cover.serialize());
-				myX.appendChild(coverx);
-			}
-			
-			if(populated)
-			{
-				var photosx:XML = <photos/>;
-				for each(var photo:FacebookPhoto in photos)
-				{
-					photosx.appendChild(photo.serialize());
-				}
-				myX.appendChild(photosx);
-			}
-			
-			return myX;
-		}
-		
-		// PRIVATE FUNCTIONS //////////
-		
 		private function onPopulationComplete(event:Event):void
 		{
 			var delegate:GetPhotos_delegate = event.target as GetPhotos_delegate;
-			this._photos = new ArrayCollection(delegate.photos);
+			this._photos = delegate.photos;
 			
 			_populating = false;
 			_populated = true;
+			
 			dispatchEvent(PropertyChangeEvent.createUpdateEvent(this, "populated", false, true));
 			dispatchEvent(new Event("populationComplete"));
 		}

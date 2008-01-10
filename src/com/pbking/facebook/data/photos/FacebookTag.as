@@ -31,47 +31,65 @@ OTHER DEALINGS IN THE SOFTWARE.
  */
 package com.pbking.facebook.data.photos
 {
-	import com.pbking.facebook.data.FacebookAsset;
+	import com.pbking.facebook.Facebook;
+	import com.pbking.facebook.data.users.FacebookUser;
 	
-	/*
-	  <photo_tag>
-	    <pid>34995991612795</pid>
-	    <subject>1240078</subject>
-	    <xcoord>51.4901</xcoord>
-	    <ycoord>23.6203</ycoord>
-	  </photo_tag>
-	*/	
-
+	
+	
 	[Bindable]
-	public class FacebookTag extends FacebookAsset
+	public class FacebookTag
 	{
+		// VARIABLES //////////
+		
+		private var _pid:int;
+		private var _subject:FacebookUser;
+		private var _xcoord:Number;
+		private var _ycoord:Number;
+		
 		// CONSTRUCTION //////////
 		
 		function FacebookTag(xml:XML)
 		{
-			super(xml);
+			if(xml) parseXML(xml);
+		}
+		
+		private function parseXML(xml:XML):void
+		{
+			/*
+			  <photo_tag>
+			    <pid>34995991612795</pid>
+			    <subject>1240078</subject>
+			    <xcoord>51.4901</xcoord>
+			    <ycoord>23.6203</ycoord>
+			  </photo_tag>
+			*/	
+			
+			this._pid = parseInt(xml.pid);
+			this._subject = Facebook.instance.getUser(parseInt(xml.subject));
+			this._xcoord = Number(xml.xcoord);
+			this._ycoord = Number(xml.ycoord);
 		}
 		
 		// GETTERS //////////
 		
 		public function get pid():int
 		{
-			return int(this.getXMLPropertyNum("pid"));
+			return this._pid
 		}
 		
-		public function get subject():int
+		public function get subject():FacebookUser
 		{
-			return int(this.getXMLPropertyNum("subject"));
+			return this._subject;
 		}
 		
 		public function get xcoord():Number
 		{
-			return this.getXMLPropertyNum("xcoord");
+			return this._xcoord;
 		}
 
 		public function get ycoord():Number
 		{
-			return this.getXMLPropertyNum("ycoord");
+			return this._ycoord;
 		}
 
 	}
