@@ -14,6 +14,7 @@ package test.pbking.facebook
 	import test.pbking.facebook.delegates.Friends_test;
 	import test.pbking.facebook.delegates.Groups_test;
 	import test.pbking.facebook.delegates.Notification_test;
+	import test.pbking.facebook.delegates.Photos_test;
 	import test.pbking.facebook.delegates.Profile_test;
 	import test.pbking.facebook.delegates.Users_test;
 
@@ -53,6 +54,7 @@ package test.pbking.facebook
 			testSuite.addTest(Fql_test.suite(testFacebook));
 			testSuite.addTest(Events_test.suite(testFacebook));
 			testSuite.addTest(Feed_test.suite(testFacebook));
+			testSuite.addTest(Photos_test.suite(testFacebook));
 			
 			return testSuite;
 		}
@@ -65,7 +67,7 @@ package test.pbking.facebook
 		public function testCreateToken():void
 		{
 			testFacebook.startNoSession(testApi_key, testSecret);
-			var d:CreateToken_delegate = new CreateToken_delegate(testFacebook);
+			var d:CreateToken_delegate = new CreateToken_delegate();
 			d.addEventListener(Event.COMPLETE, addAsync(onTestCreateTokenReply, timeoutTime));
 		}
 		private function onTestCreateTokenReply(e:Event):void
