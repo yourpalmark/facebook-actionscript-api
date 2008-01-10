@@ -17,10 +17,8 @@ package com.pbking.facebook.delegates.users
 	{
 		public var users:Array;
 		
-		function GetUserInfo_delegate(facebook:Facebook, users:Array, fields:Array)
+		function GetUserInfo_delegate(users:Array, fields:Array)
 		{
-			super(facebook);
-
 			this.users = users;
 			var uids:Array = [];
 

@@ -14,10 +14,8 @@ package com.pbking.facebook.delegates.groups
 		
 		public var groups:Array;
 		
-		public function GetGroups_delegate(fBook:Facebook, user:FacebookUser=null, groupsFilter:Array=null)
+		public function GetGroups_delegate(user:FacebookUser=null, groupsFilter:Array=null)
 		{
-			super(fBook);
-			
 			this.user = user;
 			this.groups = groups;
 			

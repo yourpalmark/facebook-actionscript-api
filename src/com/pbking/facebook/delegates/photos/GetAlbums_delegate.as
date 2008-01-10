@@ -31,9 +31,9 @@ OTHER DEALINGS IN THE SOFTWARE.
  */
 package com.pbking.facebook.delegates.photos
 {
-	import com.pbking.facebook.Facebook;
 	import com.pbking.facebook.data.photos.FacebookAlbum;
 	import com.pbking.facebook.data.photos.FacebookPhoto;
+	import com.pbking.facebook.data.users.FacebookUser;
 	import com.pbking.facebook.delegates.FacebookDelegate;
 	
 	import flash.events.Event;
@@ -53,15 +53,14 @@ package com.pbking.facebook.delegates.photos
 		
 		// CONSTRUCTION //////////
 		
-		public function GetAlbums_delegate(fBook:Facebook, uid:String, doGetCovers:Boolean = false, doGetImages:Boolean = false)
+		public function GetAlbums_delegate(user:FacebookUser, doGetCovers:Boolean = false, doGetImages:Boolean = false)
 		{
-			super(fBook);
-			Log.getLogger("pbking.facebook").debug("getting all albums for user: " + uid);
+			Log.getLogger("pbking.facebook").debug("getting all albums for user: " + user.uid);
 			
 			this.doGetCovers = doGetCovers;
 			this.doGetImages = doGetImages;
 			
-			fbCall.setRequestArgument("uid", uid);
+			fbCall.setRequestArgument("uid", user.uid.toString());
 			fbCall.post("facebook.photos.getAlbums");
 		}
 		

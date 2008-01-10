@@ -10,9 +10,8 @@ package com.pbking.facebook.delegates.users
 
 	public class SetStatus_delegate extends FacebookDelegate
 	{
-		public function SetStatus_delegate(fBook:Facebook, status:String, clear:Boolean=false)
+		public function SetStatus_delegate(status:String, clear:Boolean=false)
 		{
-			super(fBook);
 			Log.getLogger("pbking.facebook").debug("setting status");
 			
 			if(clear)

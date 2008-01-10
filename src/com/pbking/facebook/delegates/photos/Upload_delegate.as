@@ -24,62 +24,50 @@ OTHER DEALINGS IN THE SOFTWARE.
 */
 
 /**
- *  Delegates call to facebook.photo.get
+ *  Delegates the call to facebook.photo.upload
  * 
  * @author Jason Crist 
- * @author Chris Hill
  */
 package com.pbking.facebook.delegates.photos
 {
 	import com.pbking.facebook.Facebook;
-	import com.pbking.facebook.data.*;
+	import com.pbking.facebook.data.photos.FacebookAlbum;
 	import com.pbking.facebook.data.photos.FacebookPhoto;
 	import com.pbking.facebook.delegates.FacebookDelegate;
 	
 	import mx.logging.Log;
 
-	public class GetPhotos_delegate extends FacebookDelegate
+	public class Upload_delegate extends FacebookDelegate
 	{
 		// VARIABLES //////////
 		
-		//results
-		
-		public var photos:Array;
+		public var uploadedPhoto:FacebookPhoto;
 		
 		// CONSTRUCTION //////////
 		
-		public function GetPhotos_delegate(subj_id:Object=null, aid:Object=null, pids:Array=null)
+		public function Upload_delegate(data:String, album:FacebookAlbum=null, caption:String="")
 		{
-			if(subj_id==null && aid==null && pids==null)
-				throw new Error('GetPhotos must have at least one of the values subj_id, aid, or pids set');
+			Log.getLogger("pbking.facebook").debug("uploading an image");
 			
-			Log.getLogger("pbking.facebook").debug("getting photos based on query: subj_id: " + subj_id + " aid: " + aid + " pids: " + pids);
+			fbCall.setRequestArgument("data", data);
+			if(album != null)
+				fbCall.setRequestArgument("aid", album.aid.toString());
+			if(caption != "")
+				fbCall.setRequestArgument("caption", caption);
 
-			//strip out any 0's from our pids.  We can't get 0's.
-			if(pids)
-				while(pids.indexOf("0") != -1)
-					pids.splice(pids.indexOf("0"), 1);
+			//var header:URLRequestHeader = new URLRequestHeader("Content-type", "multipart/form-data");
+			//jpgURLRequest.requestHeaders.push(header);
 
-			if(subj_id){ fbCall.setRequestArgument("subj_id", subj_id.toString()); }
-			if(aid){ fbCall.setRequestArgument("aid", aid.toString()); }
-			if(pids){ fbCall.setRequestArgument("pids", pids.toString()); }
-			
-			fbCall.post("facebook.photos.get");
+			fbCall.post("facebook.photos.upload");
 		}
-		
+
+		// RESULT //////////
+
 		override protected function handleResult(resultXML:XML):void
 		{
 			default xml namespace = fBook.FACEBOOK_NAMESPACE;
 			
-			photos = [];
-			
-			var xPhotos:XMLList = resultXML..photo;
-			for each(var xPhoto:XML in xPhotos)
-			{
-				photos.push(new FacebookPhoto(xPhoto));
-			} 
+			uploadedPhoto = new FacebookPhoto(resultXML);
 		}
-		
-		
 	}
 }

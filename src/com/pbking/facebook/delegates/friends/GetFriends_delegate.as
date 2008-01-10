@@ -13,9 +13,8 @@ package com.pbking.facebook.delegates.friends
 	{
 		public var friends:Array;
 		
-		public function GetFriends_delegate(fBook:Facebook)
+		public function GetFriends_delegate()
 		{
-			super(fBook);
 			Log.getLogger("pbking.facebook").debug("getting friends");
 			
 			fbCall.post("facebook.friends.get");

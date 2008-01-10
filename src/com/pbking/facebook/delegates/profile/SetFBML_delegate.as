@@ -11,9 +11,8 @@ package com.pbking.facebook.delegates.profile
 		public var markup:String;
 		public var user:FacebookUser;
 		
-		public function SetFBML_delegate(fBook:Facebook, markup:String, user:FacebookUser=null)
+		public function SetFBML_delegate(markup:String, user:FacebookUser=null)
 		{
-			super(fBook);
 			Log.getLogger("pbking.facebook").debug("setting fbml");
 			
 			this.markup = markup;

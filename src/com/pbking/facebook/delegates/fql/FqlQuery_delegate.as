@@ -7,10 +7,8 @@ package com.pbking.facebook.delegates.fql
 	{
 		public var queryResult:XML;
 		
-		public function FqlQuery_delegate(fBook:Facebook, query:String)
+		public function FqlQuery_delegate(query:String)
 		{
-			super(fBook);
-			
 			fbCall.setRequestArgument("query", query);
 			fbCall.post("facebook.fql.query");
 		}

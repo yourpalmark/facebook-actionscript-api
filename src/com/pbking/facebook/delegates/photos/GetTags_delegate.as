@@ -48,10 +48,8 @@ package com.pbking.facebook.delegates.photos
 
 		private var photoCollection:HashableArrayCollection = new HashableArrayCollection('pid', false);
 		
-		function GetTags_delegate(fBook:Facebook, photos:Array, populatePhotosWithTags:Boolean = true)
+		function GetTags_delegate(photos:Array, populatePhotosWithTags:Boolean = true)
 		{
-			super(fBook);
-			
 			this.photos = photos;
 			this.populatePhotosWithTags = populatePhotosWithTags;
 			

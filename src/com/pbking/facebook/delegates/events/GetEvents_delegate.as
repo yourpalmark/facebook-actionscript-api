@@ -17,10 +17,8 @@ package com.pbking.facebook.delegates.events
 		
 		public var events:Array;
 		
-		public function GetEvents_delegate(fBook:Facebook, user:FacebookUser=null, eventsFilter:Array=null, start_time:Date=null, end_time:Date=null, rsvp_status_filter:String="")
+		public function GetEvents_delegate(user:FacebookUser=null, eventsFilter:Array=null, start_time:Date=null, end_time:Date=null, rsvp_status_filter:String="")
 		{
-			super(fBook);
-			
 			this.user = user;
 			this.eventsFilter = eventsFilter;
 			this.start_time = start_time;

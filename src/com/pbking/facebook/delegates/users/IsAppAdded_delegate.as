@@ -13,9 +13,8 @@ package com.pbking.facebook.delegates.users
 		public var pageId:int;
 		public var isAdded:Boolean;
 		
-		public function IsAppAdded_delegate(fBook:Facebook)
+		public function IsAppAdded_delegate()
 		{
-			super(fBook);
 			Log.getLogger("pbking.facebook").debug("checking if user has added app");
 			
 			fbCall.setRequestArgument("page_id", pageId.toString());

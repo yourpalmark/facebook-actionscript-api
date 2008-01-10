@@ -40,9 +40,8 @@ package com.pbking.facebook.delegates.auth
 	{
 		public var auth_token:String;
 		
-		function CreateToken_delegate(fBook:Facebook)
+		function CreateToken_delegate()
 		{
-			super(fBook);
 			//ONLY the default REST url can be used here (redirection doesn't work)
 			//we also have to make sure the sig is generated (which it doesn't if we're redirecting)
 			fbCall.post("facebook.auth.createToken", fBook.default_rest_url, true);

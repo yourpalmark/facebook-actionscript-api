@@ -8,9 +8,8 @@ package com.pbking.facebook.delegates.notifications
 
 	public class SendNotification_delegate extends FacebookDelegate
 	{
-		public function SendNotification_delegate(fBook:Facebook, notification:String, users:Array=null)
+		public function SendNotification_delegate(notification:String, users:Array=null)
 		{
-			super(fBook);
 			Log.getLogger("pbking.facebook").debug("sending notification");
 			
 			fbCall.setRequestArgument("notification", notification);

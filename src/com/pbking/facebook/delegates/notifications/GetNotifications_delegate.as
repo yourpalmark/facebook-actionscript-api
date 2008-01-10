@@ -13,10 +13,8 @@ package com.pbking.facebook.delegates.notifications
 		public var notifications:Object = new Object();
 		public var notificationLists:Object = new Object();
 		
-		public function GetNotifications_delegate(fBook:Facebook)
+		public function GetNotifications_delegate()
 		{
-			super(fBook);
-
 			Log.getLogger("pbking.facebook").debug("getting notifications");
 			
 			fbCall.post("facebook.notifications.get");

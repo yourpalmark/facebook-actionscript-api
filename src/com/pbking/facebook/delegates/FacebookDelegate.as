@@ -34,7 +34,6 @@ package com.pbking.facebook.delegates
 	import com.pbking.facebook.Facebook;
 	import com.pbking.facebook.FacebookCall;
 	
-	import flash.events.ErrorEvent;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 
@@ -50,9 +49,9 @@ package com.pbking.facebook.delegates
 		public var errorCode:int = 0;
 		public var errorMessage:String = "";
 		
-		function FacebookDelegate(fBook:Facebook)
+		function FacebookDelegate()
 		{
-			this.fBook = fBook;
+			this.fBook = Facebook.instance;
 			fbCall = new FacebookCall(fBook);
 			fbCall.addEventListener(Event.COMPLETE, result);
 		}

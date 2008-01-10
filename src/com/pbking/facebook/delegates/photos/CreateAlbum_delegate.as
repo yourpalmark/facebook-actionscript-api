@@ -11,10 +11,8 @@ package com.pbking.facebook.delegates.photos
 	{
 		public var newAlbum:FacebookAlbum;
 		
-		public function CreateAlbum_delegate(fBook:Facebook, name:String, location:String="", description:String="")
+		public function CreateAlbum_delegate(name:String, location:String="", description:String="")
 		{
-			super(fBook);
-
 			fbCall.setRequestArgument("name", name);
 
 			if(location != "")

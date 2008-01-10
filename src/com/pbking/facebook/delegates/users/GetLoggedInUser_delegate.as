@@ -13,9 +13,8 @@ package com.pbking.facebook.delegates.users
 	{
 		public var user:FacebookUser;
 		
-		public function GetLoggedInUser_delegate(fBook:Facebook)
+		public function GetLoggedInUser_delegate()
 		{
-			super(fBook);
 			Log.getLogger("pbking.facebook").debug("getting logged in user");
 			
 			fbCall.post("facebook.users.getLoggedInUser");

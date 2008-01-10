@@ -52,9 +52,8 @@ package com.pbking.facebook.delegates.auth
 		
 		// CONSTRUCTION //////////
 		
-		function GetSession_delegate(fBook:Facebook, auth_token:String)
+		function GetSession_delegate(auth_token:String)
 		{
-			super(fBook);
 			this.auth_token = auth_token;
 
 			Log.getLogger("pbking.facebook").debug("starting facebook session with auth_token: " + auth_token);

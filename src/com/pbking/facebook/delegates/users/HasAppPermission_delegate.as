@@ -17,9 +17,8 @@ package com.pbking.facebook.delegates.users
 		public var extendedPermission:String;
 		public var hasPermission:Boolean;
 		
-		public function HasAppPermission_delegate(fBook:Facebook, extendedPermission:String)
+		public function HasAppPermission_delegate(extendedPermission:String)
 		{
-			super(fBook);
 			Log.getLogger("pbking.facebook").debug("getting extended permission for: " + extendedPermission);
 			
 			this.extendedPermission = extendedPermission;

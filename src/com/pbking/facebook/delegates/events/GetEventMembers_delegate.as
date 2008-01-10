@@ -8,10 +8,8 @@ package com.pbking.facebook.delegates.events
 	{
 		public var event:FacebookEvent;
 
-		public function GetEventMembers_delegate(fBook:Facebook, event:FacebookEvent)
+		public function GetEventMembers_delegate(event:FacebookEvent)
 		{
-			super(fBook);
-			
 			this.event = event;
 			
 			fbCall.setRequestArgument("eid", event.eid.toString());

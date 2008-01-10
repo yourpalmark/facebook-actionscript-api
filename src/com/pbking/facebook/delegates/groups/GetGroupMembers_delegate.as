@@ -11,10 +11,8 @@ package com.pbking.facebook.delegates.groups
 	{
 		public var group:FacebookGroup;
 		
-		public function GetGroupMembers_delegate(fBook:Facebook, group:FacebookGroup)
+		public function GetGroupMembers_delegate(group:FacebookGroup)
 		{
-			super(fBook);
-			
 			this.group = group;
 			
 			fbCall.setRequestArgument("gid", group.gid.toString());

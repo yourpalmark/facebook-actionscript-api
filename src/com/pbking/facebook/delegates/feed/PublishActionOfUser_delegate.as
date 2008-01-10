@@ -5,15 +5,12 @@ package com.pbking.facebook.delegates.feed
 
 	public class PublishActionOfUser_delegate extends FacebookDelegate
 	{
-		public function PublishActionOfUser_delegate(fBook:Facebook, titleMarkup:String, 
-													bodyMarkup:String="", 
+		public function PublishActionOfUser_delegate(titleMarkup:String, bodyMarkup:String="", 
 													image_1:String="", image_1_link:String="",
 													image_2:String="", image_2_link:String="",
 													image_3:String="", image_3_link:String="",
 													image_4:String="", image_4_link:String="")
 		{
-			super(fBook);
-			
 			fbCall.setRequestArgument("title", titleMarkup);
 			
 			if(bodyMarkup != "") fbCall.setRequestArgument("body", bodyMarkup);

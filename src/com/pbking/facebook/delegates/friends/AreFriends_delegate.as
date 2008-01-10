@@ -18,9 +18,8 @@ package com.pbking.facebook.delegates.friends
 		
 		private var totalUserCollection:HashableArrayCollection = new HashableArrayCollection("uid", false);
 		
-		public function AreFriends_delegate(fBook:Facebook, list1:Array, list2:Array)
+		public function AreFriends_delegate(list1:Array, list2:Array)
 		{
-			super(fBook);
 			Log.getLogger("pbking.facebook").debug("getting areFriends");
 			
 			var user:FacebookUser;
