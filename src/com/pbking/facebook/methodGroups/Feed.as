@@ -35,13 +35,11 @@ package com.pbking.facebook.methodGroups
 	{
 		// VARIABLES //////////
 		
-		private var facebook:Facebook
-		
 		// CONSTRUCTION //////////
 		
-		function Feed(facebook:Facebook):void
+		function Feed():void
 		{
-			this.facebook = facebook;
+			//nothing here
 		}
 		
 		// FACEBOOK FUNCTION CALLS //////////
@@ -66,7 +64,7 @@ package com.pbking.facebook.methodGroups
 											image_4:String="", image_4_link:String="",
 											priority:String="", callback:Function=null):PublishStoryToUser_delegate
 		{
-			var d:PublishStoryToUser_delegate = new PublishStoryToUser_delegate(facebook, titleMarkup, bodyMarkup,
+			var d:PublishStoryToUser_delegate = new PublishStoryToUser_delegate(titleMarkup, bodyMarkup,
 																				image_1, image_1_link, image_2, image_2_link,
 																				image_3, image_3_link, image_4, image_4_link, priority);
 			MethodGroupUtil.addCallback(d, callback);
@@ -95,7 +93,7 @@ package com.pbking.facebook.methodGroups
 											image_4:String="", image_4_link:String="",
 											callback:Function=null):PublishActionOfUser_delegate
 		{
-			var d:PublishActionOfUser_delegate = new PublishActionOfUser_delegate(facebook, titleMarkup, bodyMarkup,
+			var d:PublishActionOfUser_delegate = new PublishActionOfUser_delegate(titleMarkup, bodyMarkup,
 																				image_1, image_1_link, image_2, image_2_link,
 																				image_3, image_3_link, image_4, image_4_link);
 			MethodGroupUtil.addCallback(d, callback);
@@ -116,7 +114,7 @@ package com.pbking.facebook.methodGroups
 													image_4:String="", image_4_link:String="",
 													callback:Function=null):PublishTemplatizedAction_delegate
 		{
-			var d:PublishTemplatizedAction_delegate = new PublishTemplatizedAction_delegate(facebook, actor, title_template, title_data,
+			var d:PublishTemplatizedAction_delegate = new PublishTemplatizedAction_delegate(actor, title_template, title_data,
 																							body_template, body_data, body_general, targetUsers,
 																							image_1, image_1_link, image_2, image_2_link,
 																							image_3, image_3_link, image_4, image_4_link);

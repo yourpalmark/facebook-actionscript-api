@@ -34,13 +34,11 @@ package com.pbking.facebook.methodGroups
 	{
 		// VARIABLES //////////
 		
-		private var facebook:Facebook
-		
 		// CONSTRUCTION //////////
 		
-		function Users(facebook:Facebook):void
+		function Users():void
 		{
-			this.facebook = facebook;
+			//nothing here
 		}
 		
 		// FACEBOOK FUNCTION CALLS //////////
@@ -50,7 +48,7 @@ package com.pbking.facebook.methodGroups
 		 */
 		public function getInfo(users:Array, fields:Array, callback:Function=null):GetUserInfo_delegate
 		{
-			var delegate:GetUserInfo_delegate = new GetUserInfo_delegate(facebook, users, fields);
+			var delegate:GetUserInfo_delegate = new GetUserInfo_delegate(users, fields);
 			return MethodGroupUtil.addCallback(delegate, callback) as GetUserInfo_delegate;
 		}
 		
@@ -59,7 +57,7 @@ package com.pbking.facebook.methodGroups
 		 */
 		public function getLoggedInUser(callback:Function=null):GetLoggedInUser_delegate
 		{
-			var delegate:GetLoggedInUser_delegate = new GetLoggedInUser_delegate(facebook);
+			var delegate:GetLoggedInUser_delegate = new GetLoggedInUser_delegate();
 			return MethodGroupUtil.addCallback(delegate, callback) as GetLoggedInUser_delegate;
 		}
 		
@@ -72,7 +70,7 @@ package com.pbking.facebook.methodGroups
 		 */
 		public function hasAppPermission(extendedPermission:String, callback:Function=null):HasAppPermission_delegate
 		{
-			var delegate:HasAppPermission_delegate = new HasAppPermission_delegate(facebook, extendedPermission);
+			var delegate:HasAppPermission_delegate = new HasAppPermission_delegate(extendedPermission);
 			return MethodGroupUtil.addCallback(delegate, callback) as HasAppPermission_delegate;
 		}
 		
@@ -81,7 +79,7 @@ package com.pbking.facebook.methodGroups
 		 */
 		public function isAppAdded(callback:Function=null):IsAppAdded_delegate
 		{
-			var delegate:IsAppAdded_delegate = new IsAppAdded_delegate(facebook);
+			var delegate:IsAppAdded_delegate = new IsAppAdded_delegate();
 			return MethodGroupUtil.addCallback(delegate, callback) as IsAppAdded_delegate;
 		}
 		
@@ -90,7 +88,7 @@ package com.pbking.facebook.methodGroups
 		 */
 		public function setStatus(status:String, clear:Boolean=false, callback:Function=null):SetStatus_delegate
 		{
-			var delegate:SetStatus_delegate = new SetStatus_delegate(facebook, status, clear);
+			var delegate:SetStatus_delegate = new SetStatus_delegate(status, clear);
 			return MethodGroupUtil.addCallback(delegate, callback) as SetStatus_delegate;
 		}
 		

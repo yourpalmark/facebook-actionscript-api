@@ -25,17 +25,22 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 package com.pbking.facebook.methodGroups
 {
+	import com.dynamicflash.util.Base64;
 	import com.pbking.facebook.Facebook;
 	import com.pbking.facebook.data.photos.FacebookAlbum;
+	import com.pbking.facebook.data.users.FacebookUser;
 	import com.pbking.facebook.delegates.photos.*;
+	
+	import flash.display.BitmapData;
+	import flash.utils.ByteArray;
+	
+	import mx.graphics.codec.JPEGEncoder;
 	
 	public class Photos
 	{
-		private var facebook:Facebook
-		
-		function Photos(facebook:Facebook):void
+		function Photos():void
 		{
-			this.facebook = facebook;
+			//nothing here
 		}
 		
 		// FACEBOOK FUNCTIONS //////////
@@ -48,7 +53,7 @@ package com.pbking.facebook.methodGroups
 		 */
 		public function createAlbum(name:String, location:String="", description:String="", callback:Function = null):CreateAlbum_delegate
 		{
-			var delegate:CreateAlbum_delegate = new CreateAlbum_delegate(facebook, name, location, description);
+			var delegate:CreateAlbum_delegate = new CreateAlbum_delegate(name, location, description);
 			return MethodGroupUtil.addCallback(delegate, callback) as CreateAlbum_delegate;
 		}
 		
@@ -57,7 +62,7 @@ package com.pbking.facebook.methodGroups
 		 */
 		public function getTags(photos:Array, populatePhotosWithTags:Boolean = true, callback:Function = null):GetTags_delegate
 		{
-			var delegate:GetTags_delegate = new GetTags_delegate(facebook, photos, populatePhotosWithTags);
+			var delegate:GetTags_delegate = new GetTags_delegate(photos, populatePhotosWithTags);
 			return MethodGroupUtil.addCallback(delegate, callback) as GetTags_delegate;
 		}
 		
@@ -68,9 +73,21 @@ package com.pbking.facebook.methodGroups
 		 * visible on the site. Photos uploaded by applications with the photo_upload extended permission will be visible 
 		 * immediately.
 		 */
-		public function upload(album:FacebookAlbum, caption:String, data:*, callback:Function = null):void
+		public function upload(data:String, album:FacebookAlbum=null, caption:String="", callback:Function=null):Upload_delegate
 		{
-			//TODO: upload
+			var delegate:Upload_delegate = new Upload_delegate(data, album, caption) 
+			return MethodGroupUtil.addCallback(delegate, callback) as Upload_delegate;		
+		}
+		
+		/**
+		 * Works the same as the upload method but will handle the image jpeg conversion for you.
+		 */
+		public function encodeAndUpload(bitmap:BitmapData, quality:int=85, album:FacebookAlbum=null, caption:String="", callback:Function=null):Upload_delegate
+		{
+			var jpgEncoder:JPEGEncoder = new JPEGEncoder(quality);
+			var jpgStream:ByteArray = jpgEncoder.encode(bitmap);
+			var encoded:String = Base64.encodeByteArray(jpgStream);	
+			return upload(encoded, album, caption, callback);
 		}
 		
 		/**
@@ -96,7 +113,7 @@ package com.pbking.facebook.methodGroups
 		 */
 		public function addTags(tags:Array, callback:Function = null):AddTags_delegate
 		{
-			var delegate:AddTags_delegate = new AddTags_delegate(facebook, tags);
+			var delegate:AddTags_delegate = new AddTags_delegate(tags);
 			return MethodGroupUtil.addCallback(delegate, callback) as AddTags_delegate;
 		}
 		
@@ -104,18 +121,18 @@ package com.pbking.facebook.methodGroups
 		 * Returns metadata about all of the photo albums uploaded by the specified user. 
 		 * The values returned from this call are not storable.
 		 */
-		public function getAlbums(uid:String, callback:Function = null, getCoverPhotos:Boolean = false):GetAlbums_delegate
+		public function getAlbums(user:FacebookUser, getCoverPhotos:Boolean = false, callback:Function = null):GetAlbums_delegate
 		{
-			var delegate:GetAlbums_delegate = new GetAlbums_delegate(facebook, uid, getCoverPhotos);
+			var delegate:GetAlbums_delegate = new GetAlbums_delegate(user, getCoverPhotos);
 			return MethodGroupUtil.addCallback(delegate, callback) as GetAlbums_delegate;
 		}
 		
 		/**
 		 * Returns all visible photos according to the filters specified
 		 */
-		public function getPhotos(subj_id:Object, aid:Object, pids:Array, callback:Function = null):GetPhotos_delegate
+		public function getPhotos(subj_id:Object=null, aid:Object=null, pids:Array=null, callback:Function = null):GetPhotos_delegate
 		{
-			var delegate:GetPhotos_delegate = new GetPhotos_delegate(facebook, subj_id, aid, pids);
+			var delegate:GetPhotos_delegate = new GetPhotos_delegate(subj_id, aid, pids);
 			return MethodGroupUtil.addCallback(delegate, callback) as GetPhotos_delegate;
 		}
 		

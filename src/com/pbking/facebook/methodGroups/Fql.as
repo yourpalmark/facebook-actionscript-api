@@ -32,20 +32,18 @@ package com.pbking.facebook.methodGroups
 	{
 		// VARIABLES //////////
 		
-		private var facebook:Facebook
-		
 		// CONSTRUCTION //////////
 		
-		function Fql(facebook:Facebook):void
+		function Fql():void
 		{
-			this.facebook = facebook;
+			//nothing here
 		}
 		
 		// FACEBOOK FUNCTION CALLS //////////
 		
 		public function query(query:String, callback:Function=null):FqlQuery_delegate
 		{
-			var d:FqlQuery_delegate = new FqlQuery_delegate(facebook, query);
+			var d:FqlQuery_delegate = new FqlQuery_delegate(query);
 			MethodGroupUtil.addCallback(d, callback);
 			return d;
 		}

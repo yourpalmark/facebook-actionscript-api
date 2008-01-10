@@ -86,9 +86,21 @@ package com.pbking.facebook
 
 		// CONSTRUCTION //////////
 		
+		private static var _instance:Facebook;
+		public static function get instance():Facebook
+		{
+			if(!_instance)
+				_instance = new Facebook();
+			return _instance;
+		}
+		
 		function Facebook():void
 		{
-			super();
+			if(Facebook._instance)
+			{
+				throw new Error("Only once instance of the Facebook object should be created!  The preferred way to access the Facebook object is by Facebook.instance");
+			}
+			_instance = this;
 		}
 		
 		// GETTERS and SETTERS //////////
@@ -217,7 +229,7 @@ package com.pbking.facebook
 		public function get photos():Photos 
 		{ 
 			if(!_photos)
-				_photos = new Photos(this)
+				_photos = new Photos()
 			return this._photos; 
 		}
 		
@@ -225,7 +237,7 @@ package com.pbking.facebook
 		public function get friends():Friends 
 		{ 
 			if(!_friends)
-				_friends = new Friends(this)
+				_friends = new Friends()
 			return this._friends; 
 		}
 		
@@ -233,7 +245,7 @@ package com.pbking.facebook
 		public function get users():Users 
 		{ 
 			if(!_users)
-				_users = new Users(this)
+				_users = new Users()
 			return this._users; 
 		}
 		
@@ -241,7 +253,7 @@ package com.pbking.facebook
 		public function get events():Events 
 		{ 
 			if(!_events)
-				_events = new Events(this)
+				_events = new Events()
 			return this._events; 
 		}
 		
@@ -249,7 +261,7 @@ package com.pbking.facebook
 		public function get feed():Feed 
 		{ 
 			if(!_feed)
-				_feed = new Feed(this)
+				_feed = new Feed()
 			return this._feed; 
 		}
 		
@@ -257,7 +269,7 @@ package com.pbking.facebook
 		public function get fql():Fql 
 		{ 
 			if(!_fql)
-				_fql = new Fql(this)
+				_fql = new Fql()
 			return this._fql; 
 		}
 		
@@ -265,7 +277,7 @@ package com.pbking.facebook
 		public function get groups():Groups 
 		{ 
 			if(!_groups)
-				_groups = new Groups(this)
+				_groups = new Groups()
 			return this._groups; 
 		}
 		
@@ -273,7 +285,7 @@ package com.pbking.facebook
 		public function get marketplace():Marketplace 
 		{ 
 			if(!_marketplace)
-				_marketplace = new Marketplace(this)
+				_marketplace = new Marketplace()
 			return this._marketplace; 
 		}
 		
@@ -281,7 +293,7 @@ package com.pbking.facebook
 		public function get notifications():Notifications 
 		{ 
 			if(!_notifications)
-				_notifications = new Notifications(this)
+				_notifications = new Notifications()
 			return this._notifications; 
 		}
 		
@@ -289,7 +301,7 @@ package com.pbking.facebook
 		public function get pages():Pages 
 		{ 
 			if(!_pages)
-				_pages = new Pages(this)
+				_pages = new Pages()
 			return this._pages; 
 		}
 		
@@ -297,7 +309,7 @@ package com.pbking.facebook
 		public function get profile():Profile 
 		{ 
 			if(!_profile)
-				_profile = new Profile(this)
+				_profile = new Profile()
 			return this._profile; 
 		}
 		
@@ -335,7 +347,7 @@ package com.pbking.facebook
 			_auth_token = Application.application.parameters["auth_token"];
 			
 			//validate the session
-			var delegate:GetSession_delegate = new GetSession_delegate(this, _auth_token);
+			var delegate:GetSession_delegate = new GetSession_delegate(_auth_token);
 			delegate.addEventListener(Event.COMPLETE, startWebSessionReply);
 		}
 
@@ -364,7 +376,8 @@ package com.pbking.facebook
 		 * Start a session for a desktop based application.
 		 * For this you need to know and pass the application api_key and secret.
 		 * The user will be prompted to login to their Facebook page after which you should call
-		 * validateDesktopSession()
+		 * validateDesktopSession().  Alternately you could pass in an infinite_session_key which
+		 * will authenticate immediately (without navigating to the user login page).
 		 */
 		public function startDesktopSession(api_key:String, secret:String, infinite_session_key:String=""):void
 		{
@@ -391,7 +404,7 @@ package com.pbking.facebook
 			else
 			{
 				//construct a token and get ready for the user to enter user/pass
-				var delegate:CreateToken_delegate = new CreateToken_delegate(this);
+				var delegate:CreateToken_delegate = new CreateToken_delegate();
 				delegate.addEventListener(Event.COMPLETE, onDesktopTokenCreated);
 			}
 		}
@@ -423,7 +436,7 @@ package com.pbking.facebook
 		public function validateDesktopSession():void
 		{
 			//validate the session
-			var delegate:GetSession_delegate = new GetSession_delegate(this, _auth_token);
+			var delegate:GetSession_delegate = new GetSession_delegate(_auth_token);
 			delegate.addEventListener(Event.COMPLETE, validateDesktopSessionReply);
 		}
 		
@@ -501,7 +514,7 @@ package com.pbking.facebook
 		}
 		
 		/**
-		 * Helper function.  Called with the connection is ready.
+		 * Helper function.  Called when the connection is ready.
 		 */
 		private function onReady():void
 		{
@@ -511,7 +524,7 @@ package com.pbking.facebook
 		}
 		
 		/**
-		 * Helper function.  Called with the connection fails to be made.
+		 * Helper function.  Called when the connection fails to be made.
 		 */
 		private function onConnectionError(errorMessage:String):void
 		{

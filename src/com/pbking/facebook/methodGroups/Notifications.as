@@ -33,13 +33,11 @@ package com.pbking.facebook.methodGroups
 	{
 		// VARIABLES //////////
 		
-		private var facebook:Facebook
-		
 		// CONSTRUCTION //////////
 		
-		function Notifications(facebook:Facebook):void
+		function Notifications():void
 		{
-			this.facebook = facebook;
+			//nothing here
 		}
 		
 		// FACEBOOK FUNCTION CALLS //////////
@@ -49,7 +47,7 @@ package com.pbking.facebook.methodGroups
 		 */
 		public function getNotifications(callback:Function=null):GetNotifications_delegate
 		{
-			var delegate:GetNotifications_delegate = new GetNotifications_delegate(facebook);
+			var delegate:GetNotifications_delegate = new GetNotifications_delegate();
 			return MethodGroupUtil.addCallback(delegate, callback) as GetNotifications_delegate;
 		}
 
@@ -70,7 +68,7 @@ package com.pbking.facebook.methodGroups
 		 */
 		public function send(notification:String, users:Array=null, callback:Function=null):SendNotification_delegate
 		{
-			var delegate:SendNotification_delegate = new SendNotification_delegate(facebook, notification, users);
+			var delegate:SendNotification_delegate = new SendNotification_delegate(notification, users);
 			return MethodGroupUtil.addCallback(delegate, callback) as SendNotification_delegate;
 		}
 

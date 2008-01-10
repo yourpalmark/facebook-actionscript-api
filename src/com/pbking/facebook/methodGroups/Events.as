@@ -33,15 +33,11 @@ package com.pbking.facebook.methodGroups
 	
 	public class Events
 	{
-		// VARIABLES //////////
-		
-		private var facebook:Facebook
-		
 		// CONSTRUCTION //////////
 		
-		function Events(facebook:Facebook):void
+		function Events():void
 		{
-			this.facebook = facebook;
+			//nothing here
 		}
 		
 		// FACEBOOK FUNCTION CALLS //////////
@@ -68,14 +64,14 @@ package com.pbking.facebook.methodGroups
 		 */
 		public function getEvents(user:FacebookUser=null, eventsFilter:Array=null, start_time:Date=null, end_time:Date=null, rsvp_status_filter:String="", callback:Function=null):GetEvents_delegate
 		{
-			var d:GetEvents_delegate = new GetEvents_delegate(facebook, user, eventsFilter, start_time, end_time, rsvp_status_filter);
+			var d:GetEvents_delegate = new GetEvents_delegate(user, eventsFilter, start_time, end_time, rsvp_status_filter);
 			MethodGroupUtil.addCallback(d, callback);
 			return d;
 		}
 		
 		public function getEventMembers(event:FacebookEvent, callback:Function=null):GetEventMembers_delegate
 		{
-			var d:GetEventMembers_delegate = new GetEventMembers_delegate(facebook, event);
+			var d:GetEventMembers_delegate = new GetEventMembers_delegate(event);
 			MethodGroupUtil.addCallback(d, callback);
 			return d;
 		}

@@ -35,13 +35,11 @@ package com.pbking.facebook.methodGroups
 	{
 		// VARIABLES //////////
 		
-		private var facebook:Facebook
-		
 		// CONSTRUCTION //////////
 		
-		function Groups(facebook:Facebook):void
+		function Groups():void
 		{
-			this.facebook = facebook;
+			//nothing here
 		}
 		
 		// FACEBOOK FUNCTION CALLS //////////
@@ -60,14 +58,14 @@ package com.pbking.facebook.methodGroups
 		 */
 		public function getGroups(user:FacebookUser=null, groupsFilter:Array=null, callback:Function=null):GetGroups_delegate
 		{
-			var d:GetGroups_delegate = new GetGroups_delegate(facebook, user, groupsFilter);
+			var d:GetGroups_delegate = new GetGroups_delegate(user, groupsFilter);
 			MethodGroupUtil.addCallback(d, callback);
 			return d;
 		}
 
 		public function getMembers(group:FacebookGroup, callback:Function=null):GetGroupMembers_delegate
 		{
-			var d:GetGroupMembers_delegate = new GetGroupMembers_delegate(facebook, group);
+			var d:GetGroupMembers_delegate = new GetGroupMembers_delegate(group);
 			MethodGroupUtil.addCallback(d, callback);
 			return d;
 		}
