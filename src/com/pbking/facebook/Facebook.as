@@ -325,7 +325,7 @@ package com.pbking.facebook
 		 * for your facebook calls.  If your api_key is set here and is also passed in via 
 		 * flashvars then that that value will be ignored.
 		 */
-		public function startWebSession(loaderInfo:LoaderInfo, api_key:String=null, secret:String=null):void
+		public function startWebSession(flashVars:Object, api_key:String=null, secret:String=null):void
 		{
 			if(secret)
 				this._secret = secret;
@@ -336,7 +336,7 @@ package com.pbking.facebook
 			sessionType = FacebookSessionType.WEB_APP;
 			
 			//pull the auth_token (which should have been sent in as a flashvar)
-			_auth_token = loaderInfo.parameters["auth_token"];
+			_auth_token = flashVars["auth_token"];
 			
 			//validate the session
 			var delegate:GetSession_delegate = new GetSession_delegate(_auth_token);
@@ -456,8 +456,10 @@ package com.pbking.facebook
 		 * for your facebook calls.  If your api_key is set here and is also passed in via 
 		 * flashvars then that that value will be ignored.
 		 */
-		public function startWidgetSession(loaderInfo:LoaderInfo, api_key:String=null, secret:String=null):void
+		public function startWidgetSession(flashVars:Object, api_key:String=null, secret:String=null):void
 		{
+			logHack("starting facebook widget session");
+			
 			sessionType = FacebookSessionType.WIDGET_APP;
 			
 			if(secret)
@@ -470,12 +472,14 @@ package com.pbking.facebook
 			//these properties will be used to verify communication
 			this.fb_sig_values = new Object();
 			
+			logHack("- - - flashVars - - -");
 			var prefix:String = "fb_sig";
-			for(var prop:String in loaderInfo.parameters)
+			for(var prop:String in flashVars)
 			{
 				if(prop.substring(0,prefix.length) == prefix)
 				{
-					this.fb_sig_values[prop] = loaderInfo.parameters[prop]; 
+					logHack(prop + ":" + flashVars[prop]);
+					this.fb_sig_values[prop] = flashVars[prop]; 
 				}
 			}
 			
@@ -492,6 +496,8 @@ package com.pbking.facebook
 			
 			if(this._session_key == null)
 				this._session_key = fb_sig_values['fb_sig_session_key'];
+			
+			logHack("session key: " + this._session_key);
 			
 			if(this._api_key == null)	
 				this._api_key = fb_sig_values['fb_sig_api_key'];
