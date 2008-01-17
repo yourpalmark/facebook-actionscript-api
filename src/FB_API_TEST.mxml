@@ -15,6 +15,7 @@
 
 	<mx:Script>
 		<![CDATA[
+			import com.pbking.util.logging.PBLogEvent;
 			import mx.logging.Log;
 			import mx.logging.LogEvent;
 			import com.pbking.facebook.FacebookSessionType;
@@ -29,6 +30,7 @@
 			private function onCreationComplete():void
 			{
 				Log.getLogger("pbking.facebook").addEventListener(LogEvent.LOG, onLog);
+				facebook.addEventListener("PBLogEvent", onLogHack);
 				testRunner.test = createSuite();
  				testRunner.startTest();				
 			}
@@ -43,6 +45,11 @@
 			}
 
 			private function onLog(le:LogEvent):void
+			{
+				logText.text += le.message + "\n";
+			}
+			
+			private function onLogHack(le:PBLogEvent):void
 			{
 				logText.text += le.message + "\n";
 			}

@@ -373,6 +373,8 @@ package com.pbking.facebook
 		 */
 		public function startDesktopSession(api_key:String, secret:String, infinite_session_key:String=""):void
 		{
+			logHack("starting desktop session");
+			
 			this._api_key = api_key;
 			this._secret = secret;
 			

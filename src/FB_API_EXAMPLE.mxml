@@ -47,6 +47,7 @@ Actionscript Developers group or send them to me (Jason Crist:jcrist@pbking.com)
 
 	<mx:Script>
 		<![CDATA[
+			import com.pbking.util.logging.PBLogEvent;
 			import mx.controls.Alert;
 			import mx.collections.ArrayCollection;
 			import com.pbking.facebook.delegates.users.GetUserInfo_delegate;
@@ -66,8 +67,8 @@ Actionscript Developers group or send them to me (Jason Crist:jcrist@pbking.com)
 			
 			private var logger:ILogger;
 			
-			private var config_api_key:String = "159d027464e070d541848874f1fed87a";
-			private var config_secret:String = "b4e5cdfef09aca70fee26b87f2df1280";
+			private var config_api_key:String = "xxxxxx";
+			private var config_secret:String = "xxxxxx";
 
 			/**
 			 * Called when the application is ready
@@ -79,10 +80,14 @@ Actionscript Developers group or send them to me (Jason Crist:jcrist@pbking.com)
 				
 				fBook = new Facebook();
 				fBook.addEventListener(Event.COMPLETE, onFacebookReady);
+				
+				fBook.addEventListener("PBLogEvent", onLogHack);
 	
-				if(Application.application.parameters['fb_sig'] != null) 
+				var flashVars:Object = Application.application.parameters;
+
+				if(flashVars['fb_sig'] != null) 
 				{
-					fBook.startWidgetSession(LoaderInfo(root.loaderInfo), config_api_key, config_secret);
+					fBook.startWidgetSession(flashVars, config_api_key, config_secret);
 				}
 				else
 				{
@@ -136,6 +141,11 @@ Actionscript Developers group or send them to me (Jason Crist:jcrist@pbking.com)
 			 * util to show logging on the stage
 			 */
 			private function onLog(le:LogEvent):void
+			{
+				logText.text += le.message + "\n";
+			}
+			
+			private function onLogHack(le:PBLogEvent):void
 			{
 				logText.text += le.message + "\n";
 			}
