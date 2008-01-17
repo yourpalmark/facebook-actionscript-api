@@ -22,14 +22,13 @@
 			import test.pbking.facebook.Facebook_test;
 			import flexunit.framework.TestSuite;
 			
-			private var config_api_key:String = "159d027464e070d541848874f1fed87a";
-			private var config_secret:String = "b4e5cdfef09aca70fee26b87f2df1280";
+			private var config_api_key:String = "xxxxxx";
+			private var config_secret:String = "xxxxxx";
 			[Bindable] private var facebook:Facebook = new Facebook();
 						
 			private function onCreationComplete():void
 			{
 				Log.getLogger("pbking.facebook").addEventListener(LogEvent.LOG, onLog);
-
 				testRunner.test = createSuite();
  				testRunner.startTest();				
 			}

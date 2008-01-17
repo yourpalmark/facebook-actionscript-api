@@ -66,8 +66,8 @@ Actionscript Developers group or send them to me (Jason Crist:jcrist@pbking.com)
 			
 			private var logger:ILogger;
 			
-			private var config_api_key:String = "xxxxxxxxxxx";
-			private var config_secret:String = "xxxxxxxxxxx";
+			private var config_api_key:String = "159d027464e070d541848874f1fed87a";
+			private var config_secret:String = "b4e5cdfef09aca70fee26b87f2df1280";
 
 			/**
 			 * Called when the application is ready
@@ -82,7 +82,7 @@ Actionscript Developers group or send them to me (Jason Crist:jcrist@pbking.com)
 	
 				if(Application.application.parameters['fb_sig'] != null) 
 				{
-					fBook.startWidgetSession(config_api_key, config_secret);
+					fBook.startWidgetSession(LoaderInfo(root.loaderInfo), config_api_key, config_secret);
 				}
 				else
 				{
