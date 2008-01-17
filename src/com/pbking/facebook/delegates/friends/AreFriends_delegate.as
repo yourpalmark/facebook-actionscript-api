@@ -1,26 +1,21 @@
 package com.pbking.facebook.delegates.friends
 {
 	import com.pbking.facebook.Facebook;
-	import com.pbking.facebook.FacebookCall;
 	import com.pbking.facebook.data.users.FacebookUser;
 	import com.pbking.facebook.delegates.FacebookDelegate;
-	import com.pbking.util.collection.HashableArrayCollection;
+	import com.pbking.util.collection.HashableArray;
 	
-	import flash.events.Event;
-	
-	import mx.logging.Log;
-
 	public class AreFriends_delegate extends FacebookDelegate
 	{
 		public var list1:Array;
 		public var list2:Array;
 		public var resultList:Array;
 		
-		private var totalUserCollection:HashableArrayCollection = new HashableArrayCollection("uid", false);
+		private var totalUserCollection:HashableArray = new HashableArray("uid", false);
 		
 		public function AreFriends_delegate(list1:Array, list2:Array)
 		{
-			Log.getLogger("pbking.facebook").debug("getting areFriends");
+			Facebook.instance.logHack("getting areFriends");
 			
 			var user:FacebookUser;
 			var uids1:Array = [];

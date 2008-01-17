@@ -5,8 +5,6 @@ package com.pbking.facebook.delegates.notifications
 	import com.pbking.facebook.data.notifications.NotificationList;
 	import com.pbking.facebook.delegates.FacebookDelegate;
 	
-	import mx.logging.Log;
-
 	public class GetNotifications_delegate extends FacebookDelegate
 	{
 		
@@ -15,7 +13,7 @@ package com.pbking.facebook.delegates.notifications
 		
 		public function GetNotifications_delegate()
 		{
-			Log.getLogger("pbking.facebook").debug("getting notifications");
+			Facebook.instance.logHack("getting notifications");
 			
 			fbCall.post("facebook.notifications.get");
 		}
@@ -31,7 +29,7 @@ package com.pbking.facebook.delegates.notifications
 					var newList:NotificationList = new NotificationList();
 					for each(var listItem:XML in noteData.children)
 					{
-						newList.addItem(listItem);
+						newList.push(listItem);
 					}
 					notificationLists[noteData.name().localName] = newList;
 				}

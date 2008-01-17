@@ -7,15 +7,13 @@ package com.pbking.facebook.delegates.friends
 	
 	import flash.events.Event;
 	
-	import mx.logging.Log;
-
 	public class GetFriends_delegate extends FacebookDelegate
 	{
 		public var friends:Array;
 		
 		public function GetFriends_delegate()
 		{
-			Log.getLogger("pbking.facebook").debug("getting friends");
+			Facebook.instance.logHack("getting friends");
 			
 			fbCall.post("facebook.friends.get");
 		}

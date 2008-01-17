@@ -4,8 +4,6 @@ package com.pbking.facebook.delegates.profile
 	import com.pbking.facebook.data.users.FacebookUser;
 	import com.pbking.facebook.delegates.FacebookDelegate;
 	
-	import mx.logging.Log;
-
 	public class SetFBML_delegate extends FacebookDelegate
 	{
 		public var markup:String;
@@ -13,7 +11,7 @@ package com.pbking.facebook.delegates.profile
 		
 		public function SetFBML_delegate(markup:String, user:FacebookUser=null)
 		{
-			Log.getLogger("pbking.facebook").debug("setting fbml");
+			Facebook.instance.logHack("setting fbml");
 			
 			this.markup = markup;
 			this.user = user;

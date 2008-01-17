@@ -31,19 +31,15 @@ OTHER DEALINGS IN THE SOFTWARE.
  */
 package com.pbking.facebook.delegates.photos
 {
-	import com.pbking.facebook.Facebook;
-	import com.pbking.facebook.FacebookCall;
 	import com.pbking.facebook.data.photos.NewTag;
 	import com.pbking.facebook.delegates.FacebookDelegate;
-	import com.pbking.util.collection.HashableArrayCollection;
-	
-	import flash.events.Event;
+	import com.pbking.util.collection.HashableArray;
 		
 	public class AddTags_delegate extends FacebookDelegate
 	{
 		public var newTags:Array;
 
-		private var photoCollection:HashableArrayCollection = new HashableArrayCollection('pid', false);
+		private var photoCollection:HashableArray = new HashableArray('pid', false);
 		
 		function AddTags_delegate(newTags:Array)
 		{

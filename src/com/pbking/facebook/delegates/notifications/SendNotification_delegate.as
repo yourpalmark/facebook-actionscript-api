@@ -4,13 +4,11 @@ package com.pbking.facebook.delegates.notifications
 	import com.pbking.facebook.data.users.FacebookUser;
 	import com.pbking.facebook.delegates.FacebookDelegate;
 	
-	import mx.logging.Log;
-
 	public class SendNotification_delegate extends FacebookDelegate
 	{
 		public function SendNotification_delegate(notification:String, users:Array=null)
 		{
-			Log.getLogger("pbking.facebook").debug("sending notification");
+			Facebook.instance.logHack("sending notification");
 			
 			fbCall.setRequestArgument("notification", notification);
 			

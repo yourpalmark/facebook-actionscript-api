@@ -35,8 +35,6 @@ package com.pbking.facebook.delegates.photos
 	import com.pbking.facebook.data.photos.FacebookPhoto;
 	import com.pbking.facebook.delegates.FacebookDelegate;
 	
-	import mx.logging.Log;
-
 	public class Upload_delegate extends FacebookDelegate
 	{
 		// VARIABLES //////////
@@ -47,7 +45,7 @@ package com.pbking.facebook.delegates.photos
 		
 		public function Upload_delegate(data:String, album:FacebookAlbum=null, caption:String="")
 		{
-			Log.getLogger("pbking.facebook").debug("uploading an image");
+			Facebook.instance.logHack("uploading an image");
 			
 			fbCall.setRequestArgument("data", data);
 			if(album != null)

@@ -31,6 +31,7 @@ OTHER DEALINGS IN THE SOFTWARE.
  */
 package com.pbking.facebook.delegates.photos
 {
+	import com.pbking.facebook.Facebook;
 	import com.pbking.facebook.data.photos.FacebookAlbum;
 	import com.pbking.facebook.data.photos.FacebookPhoto;
 	import com.pbking.facebook.data.users.FacebookUser;
@@ -38,8 +39,6 @@ package com.pbking.facebook.delegates.photos
 	
 	import flash.events.Event;
 	
-	import mx.logging.Log;
-
 	public class GetAlbums_delegate extends FacebookDelegate
 	{
 		// VARIABLES //////////
@@ -55,7 +54,7 @@ package com.pbking.facebook.delegates.photos
 		
 		public function GetAlbums_delegate(user:FacebookUser, doGetCovers:Boolean = false, doGetImages:Boolean = false)
 		{
-			Log.getLogger("pbking.facebook").debug("getting all albums for user: " + user.uid);
+			Facebook.instance.logHack("getting all albums for user: " + user.uid);
 			
 			this.doGetCovers = doGetCovers;
 			this.doGetImages = doGetImages;

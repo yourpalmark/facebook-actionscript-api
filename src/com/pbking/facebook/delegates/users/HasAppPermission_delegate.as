@@ -6,8 +6,6 @@ package com.pbking.facebook.delegates.users
 	
 	import flash.events.Event;
 	
-	import mx.logging.Log;
-
 	public class HasAppPermission_delegate extends FacebookDelegate
 	{
 		/**
@@ -19,7 +17,7 @@ package com.pbking.facebook.delegates.users
 		
 		public function HasAppPermission_delegate(extendedPermission:String)
 		{
-			Log.getLogger("pbking.facebook").debug("getting extended permission for: " + extendedPermission);
+			Facebook.instance.logHack("getting extended permission for: " + extendedPermission);
 			
 			this.extendedPermission = extendedPermission;
 			

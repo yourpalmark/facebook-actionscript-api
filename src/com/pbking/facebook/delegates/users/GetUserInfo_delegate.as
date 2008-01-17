@@ -9,7 +9,6 @@ package com.pbking.facebook.delegates.users
 	import com.pbking.facebook.data.users.FacebookUser;
 	import com.pbking.facebook.data.util.FacebookDataParser;
 	import com.pbking.facebook.delegates.FacebookDelegate;
-	import com.pbking.util.collection.HashableArrayCollection;
 	
 	import flash.events.Event;
 

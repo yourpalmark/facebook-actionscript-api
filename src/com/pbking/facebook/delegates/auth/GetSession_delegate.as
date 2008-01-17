@@ -34,7 +34,6 @@ package com.pbking.facebook.delegates.auth
 	import com.pbking.facebook.FacebookCall;
 	import com.pbking.facebook.Facebook;
 	import flash.events.Event;
-	import mx.logging.Log;
 	import com.pbking.facebook.delegates.FacebookDelegate;
 	
 	public class GetSession_delegate extends FacebookDelegate
@@ -56,7 +55,7 @@ package com.pbking.facebook.delegates.auth
 		{
 			this.auth_token = auth_token;
 
-			Log.getLogger("pbking.facebook").debug("starting facebook session with auth_token: " + auth_token);
+			Facebook.instance.logHack("starting facebook session with auth_token: " + auth_token);
 
 			fbCall.setRequestArgument("auth_token", auth_token);
 			fbCall.post("facebook.auth.getSession", fBook.default_rest_url, true);

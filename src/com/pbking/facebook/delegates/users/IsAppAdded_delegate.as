@@ -6,8 +6,6 @@ package com.pbking.facebook.delegates.users
 	
 	import flash.events.Event;
 	
-	import mx.logging.Log;
-
 	public class IsAppAdded_delegate extends FacebookDelegate
 	{
 		public var pageId:int;
@@ -15,7 +13,7 @@ package com.pbking.facebook.delegates.users
 		
 		public function IsAppAdded_delegate()
 		{
-			Log.getLogger("pbking.facebook").debug("checking if user has added app");
+			Facebook.instance.logHack("checking if user has added app");
 			
 			fbCall.setRequestArgument("page_id", pageId.toString());
 			fbCall.post("facebook.users.isAppAdded");

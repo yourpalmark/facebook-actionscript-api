@@ -41,16 +41,14 @@ package com.pbking.facebook
 	import com.pbking.facebook.data.users.FacebookUser;
 	import com.pbking.facebook.delegates.auth.*;
 	import com.pbking.facebook.methodGroups.*;
-	import com.pbking.util.collection.HashableArrayCollection;
+	import com.pbking.util.collection.HashableArray;
+	import com.pbking.util.logging.PBLogEvent;
 	
+	import flash.display.LoaderInfo;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.net.URLRequest;
 	import flash.net.navigateToURL;
-	
-	import mx.core.Application;
-	import mx.events.PropertyChangeEvent;
-	import mx.logging.Log;
 	
 	[Event(name="complete", type="flash.events.Event")]
 
@@ -59,9 +57,9 @@ package com.pbking.facebook
 	{	
 		// VARIABLES //////////
 		
-		private var _userCollection:HashableArrayCollection = new HashableArrayCollection('uid', false);
-		private var _groupCollection:HashableArrayCollection = new HashableArrayCollection('gid', false);
-		private var _eventCollection:HashableArrayCollection = new HashableArrayCollection('eid', false);
+		private var _userCollection:HashableArray = new HashableArray('uid', false);
+		private var _groupCollection:HashableArray = new HashableArray('gid', false);
+		private var _eventCollection:HashableArray = new HashableArray('eid', false);
 		
 		public var fb_sig_values:Object;
 		
@@ -134,14 +132,13 @@ package com.pbking.facebook
 		 * session key 
 		 */
 		private var _session_key:String;
-		public function set session_key(newVal:String):void { /*for binding*/ }
+		public function set session_key(newVal:String):void { this._session_key = newVal; }
 		public function get session_key():String { return _session_key; }
 		
 		/** 
 		 * logged in user
 		 */
 		private var _user:FacebookUser;
-		public function set user(newVal:FacebookUser):void { /*for binding*/ }
 		public function get user():FacebookUser 
 		{ 
 			if(!_user)
@@ -157,7 +154,6 @@ package com.pbking.facebook
 		 * If no profile is set, the logged in user is returned
 		 */
 		private var _currentProfile:FacebookUser;
-		public function set currentProfile(newVal:FacebookUser):void { /*for binding*/ }
 		public function get currentProfile():FacebookUser
 		{
 			if(!_currentProfile)
@@ -169,7 +165,6 @@ package com.pbking.facebook
 		/** 
 		 * Returns true if user is viewing their own profile
 		 */ 
-		public function set isUsersProfile(newVal:Boolean):void { /*for binding*/ }
 		public function get isUsersProfile():Boolean 
 		{ 
 			return this.currentProfile == this.user;
@@ -179,7 +174,6 @@ package com.pbking.facebook
 		 * connection time
 		 */
 		private var _time:Number = 0;
-		public function set time(newVal:Number):void { /*for binding*/ }
 		public function get time():Number 
 		{
 			if(_time == 0)
@@ -194,7 +188,6 @@ package com.pbking.facebook
 		 * 0 if it doesn't expire
 		 */
 		private var _expires:Number = 0;
-		public function set expires(newVal:Number):void { /*for binding*/ }
 		public function get expires():Number { return _expires; }
 		
 		/**
@@ -221,7 +214,6 @@ package com.pbking.facebook
 		 */
 		private var _isConnected:Boolean = false;
 		public function get isConnected():Boolean { return this._isConnected; }
-		public function set isConnected(newVal:Boolean):void { /*for binding*/ } 
 		
 		// METHOD GROUPS //////////
 		
@@ -333,7 +325,7 @@ package com.pbking.facebook
 		 * for your facebook calls.  If your api_key is set here and is also passed in via 
 		 * flashvars then that that value will be ignored.
 		 */
-		public function startWebSession(api_key:String=null, secret:String=null):void
+		public function startWebSession(loaderInfo:LoaderInfo, api_key:String=null, secret:String=null):void
 		{
 			if(secret)
 				this._secret = secret;
@@ -344,7 +336,7 @@ package com.pbking.facebook
 			sessionType = FacebookSessionType.WEB_APP;
 			
 			//pull the auth_token (which should have been sent in as a flashvar)
-			_auth_token = Application.application.parameters["auth_token"];
+			_auth_token = loaderInfo.parameters["auth_token"];
 			
 			//validate the session
 			var delegate:GetSession_delegate = new GetSession_delegate(_auth_token);
@@ -416,11 +408,8 @@ package com.pbking.facebook
 			{
 				_auth_token = delegate.auth_token;
 				
-				Log.getLogger("pbking.facebook").debug("token created: " + _auth_token);
-	
 				//now that we have an auth_token we need the user to login with it
 				var authenticateLoginURL:String = login_url + "?api_key="+api_key+"&v=1.0&auth_token="+_auth_token;
-				Log.getLogger("pbking.facebook").debug("prompting user for login at: " + authenticateLoginURL);
 				navigateToURL(new URLRequest(authenticateLoginURL), "_blank");
 			}
 			else
@@ -467,7 +456,7 @@ package com.pbking.facebook
 		 * for your facebook calls.  If your api_key is set here and is also passed in via 
 		 * flashvars then that that value will be ignored.
 		 */
-		public function startWidgetSession(api_key:String=null, secret:String=null):void
+		public function startWidgetSession(loaderInfo:LoaderInfo, api_key:String=null, secret:String=null):void
 		{
 			sessionType = FacebookSessionType.WIDGET_APP;
 			
@@ -482,11 +471,11 @@ package com.pbking.facebook
 			this.fb_sig_values = new Object();
 			
 			var prefix:String = "fb_sig";
-			for(var prop:String in Application.application.parameters)
+			for(var prop:String in loaderInfo.parameters)
 			{
 				if(prop.substring(0,prefix.length) == prefix)
 				{
-					this.fb_sig_values[prop] = Application.application.parameters[prop]; 
+					this.fb_sig_values[prop] = loaderInfo.parameters[prop]; 
 				}
 			}
 			
@@ -519,7 +508,6 @@ package com.pbking.facebook
 		private function onReady():void
 		{
 			_isConnected = true;
-			dispatchEvent(PropertyChangeEvent.createUpdateEvent(this, "isConnected", false, true));
 			dispatchEvent(new Event(Event.COMPLETE));
 		}
 		
@@ -530,7 +518,6 @@ package com.pbking.facebook
 		{
 			_isConnected = false;
 			_connectionErrorMessage = errorMessage;
-			dispatchEvent(PropertyChangeEvent.createUpdateEvent(this, "isConnected", false, false));
 			dispatchEvent(new Event(Event.COMPLETE));
 		}
 		
@@ -635,5 +622,15 @@ package com.pbking.facebook
 			return event;
 		}
 		
+		/**
+		 * Ok, this is embarassing . . . I'm sticking in a hack with which to log things. :P
+		 * Since I'm pulling out all the Flex mx.* stuff I can't use Flex logging.  But Flash
+		 * doesn't have any!  Perhaps I'll pull the Peanut Butter Logger out of retirement now.
+		 * For now, I'm just passing log messages here.
+		 */
+		public function logHack(message:String):void
+		{
+			dispatchEvent(new PBLogEvent(message));
+		}
 	}
 }

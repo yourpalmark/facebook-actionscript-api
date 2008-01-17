@@ -34,8 +34,11 @@ package com.pbking.facebook.delegates
 	import com.pbking.facebook.Facebook;
 	import com.pbking.facebook.FacebookCall;
 	
+	import flash.events.ErrorEvent;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
+	import flash.events.IOErrorEvent;
+	import flash.events.SecurityErrorEvent;
 
 	//dispatched when the delegate has completed the transaction
 	[Event(name="complete", type="flash.events.Event")]
@@ -54,6 +57,16 @@ package com.pbking.facebook.delegates
 			this.fBook = Facebook.instance;
 			fbCall = new FacebookCall(fBook);
 			fbCall.addEventListener(Event.COMPLETE, result);
+			fbCall.addEventListener(IOErrorEvent.IO_ERROR, onCallError);
+			fbCall.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onCallError);
+		}
+		
+		protected function onCallError(event:ErrorEvent):void
+		{
+			//something super sucky happened
+			errorCode = -1;
+			errorMessage = event.toString();
+			onError();
 		}
 		
 		protected function result(event:Event):void

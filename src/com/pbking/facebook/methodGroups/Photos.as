@@ -34,7 +34,7 @@ package com.pbking.facebook.methodGroups
 	import flash.display.BitmapData;
 	import flash.utils.ByteArray;
 	
-	import mx.graphics.codec.JPEGEncoder;
+	//import mx.graphics.codec.JPEGEncoder;
 	
 	public class Photos
 	{
@@ -81,7 +81,6 @@ package com.pbking.facebook.methodGroups
 		
 		/**
 		 * Works the same as the upload method but will handle the image jpeg conversion for you.
-		 */
 		public function encodeAndUpload(bitmap:BitmapData, quality:int=85, album:FacebookAlbum=null, caption:String="", callback:Function=null):Upload_delegate
 		{
 			var jpgEncoder:JPEGEncoder = new JPEGEncoder(quality);
@@ -89,6 +88,7 @@ package com.pbking.facebook.methodGroups
 			var encoded:String = Base64.encodeByteArray(jpgStream);	
 			return upload(encoded, album, caption, callback);
 		}
+		 */
 		
 		/**
 		 * Adds a tag with the given information to a photo.

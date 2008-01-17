@@ -6,13 +6,11 @@ package com.pbking.facebook.delegates.users
 	
 	import flash.events.Event;
 	
-	import mx.logging.Log;
-
 	public class SetStatus_delegate extends FacebookDelegate
 	{
 		public function SetStatus_delegate(status:String, clear:Boolean=false)
 		{
-			Log.getLogger("pbking.facebook").debug("setting status");
+			Facebook.instance.logHack("setting status");
 			
 			if(clear)
 				fbCall.setRequestArgument("clear", "true");

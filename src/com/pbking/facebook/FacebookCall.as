@@ -31,19 +31,18 @@ OTHER DEALINGS IN THE SOFTWARE.
  */
 package com.pbking.facebook
 {
-	import flash.events.EventDispatcher;
 	import com.gsolo.encryption.MD5;
+	
+	import flash.events.ErrorEvent;
+	import flash.events.Event;
+	import flash.events.EventDispatcher;
+	import flash.events.IOErrorEvent;
+	import flash.events.SecurityErrorEvent;
+	import flash.net.URLLoader;
+	import flash.net.URLLoaderDataFormat;
 	import flash.net.URLRequest;
 	import flash.net.URLRequestMethod;
 	import flash.net.URLVariables;
-	import flash.net.URLLoader;
-	import flash.events.Event;
-	import mx.logging.Log;
-	import flash.events.ErrorEvent;
-	import mx.core.Application;
-	import flash.events.IOErrorEvent;
-	import mx.rpc.http.HTTPService;
-	import mx.rpc.events.ResultEvent;
 	
 	public class FacebookCall extends EventDispatcher
 	{
@@ -52,7 +51,7 @@ package com.pbking.facebook
 		private static var callID:int = 0;
 		
 		private var _fb:Facebook;
-		private var _args:Object = {};
+		private var _args:URLVariables = new URLVariables();
 		private var _xml:XML;
 		
 		// CONSTRUCTION //////////
@@ -104,23 +103,26 @@ package com.pbking.facebook
 			}
 			
 			//create the service request
-			var req:HTTPService = new HTTPService();
+			var req:URLRequest = new URLRequest(url);
 			req.contentType = "application/x-www-form-urlencoded";
 			req.method = URLRequestMethod.POST;
-			req.request = _args;
-			req.url = url;
-			req.resultFormat = "e4x";
-			req.addEventListener(ResultEvent.RESULT, onResult);
+			req.data = _args;
+			
+			var loader:URLLoader = new URLLoader();
+			loader.dataFormat = URLLoaderDataFormat.TEXT;
+			loader.addEventListener(Event.COMPLETE, onResult);
+			loader.addEventListener(IOErrorEvent.IO_ERROR, onError);
+			loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onError);
 			
 			//construct the log message
-			var debugString:String = "> > > sending facebook message:\n" + req.toString() + "\n args:";
+			var debugString:String = "> > > sending facebook message:\n" + req.url + "\n args:";
 			for(var indexName:String in this._args)
 				debugString += "\n " + indexName + " = " + this._args[indexName];
-			Log.getLogger("pbking.facebook").debug(debugString);			
+
+			Facebook.instance.logHack(debugString);
 
 			//make the request!
-			req.send();
-			
+			loader.load(req);
 		}
 		
 		/**
@@ -136,36 +138,36 @@ package com.pbking.facebook
 			return _xml;
 		}
 		
-		public function getResponseArgument(name:String):*
-		{
-			//TODO: Figure out how to pull that value from the XML.  It should be easy but I can't figure out how!
-			return null;
-		}
-
 		// PRIVATE FUNCTIONS //////////
 		
-		private function onResult(event:ResultEvent):void
+		private function onError(event:ErrorEvent):void
 		{
+			dispatchEvent(event.clone());
+		}
+		
+		private function onResult(event:Event):void
+		{
+			var loader:URLLoader = event.target as URLLoader;
 			//pull the XML out of the loader
-			_xml = new XML(event.result);
+			_xml = new XML(loader.data);
 			
 			default xml namespace = _fb.FACEBOOK_NAMESPACE;
 
 			//dispatch the response
-			Log.getLogger("pbking.facebook").debug("< < < received facebook reply:\n" + _xml.toXMLString());
+			Facebook.instance.logHack("< < < received facebook reply:\n" + _xml.toXMLString());
 
 			if(_xml..error_code == undefined)
 			{
 				//all is well in the kingdom
-				dispatchEvent(new Event(Event.COMPLETE));
 			}
 			
 			else
 			{
 				//all is NOT well in the kingdom!
-				Log.getLogger("pbking.facebook").warn("!THERE WAS A FACEBOOK ERROR!" + _xml..code + ":" + _xml..msg);
-				//dispatchEvent(new ErrorEvent(ErrorEvent.ERROR));
+				Facebook.instance.logHack("!THERE WAS A FACEBOOK ERROR!" + _xml..code + ":" + _xml..msg);
 			}
+			
+			dispatchEvent(new Event(Event.COMPLETE));
 		}
 		
 		/**

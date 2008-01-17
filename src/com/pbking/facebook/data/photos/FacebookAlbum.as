@@ -37,12 +37,10 @@ package com.pbking.facebook.data.photos
 	import com.pbking.facebook.delegates.photos.GetPhotos_delegate;
 	
 	import flash.events.Event;
-	
-	import mx.collections.ArrayCollection;
-	import mx.events.PropertyChangeEvent;
+	import flash.events.EventDispatcher;
 	
 	[Bindable]
-	public class FacebookAlbum
+	public class FacebookAlbum extends EventDispatcher
 	{
 		// VARIABLES //////////
 		
@@ -186,7 +184,6 @@ package com.pbking.facebook.data.photos
 			_populating = false;
 			_populated = true;
 			
-			dispatchEvent(PropertyChangeEvent.createUpdateEvent(this, "populated", false, true));
 			dispatchEvent(new Event("populationComplete"));
 		}
 	}

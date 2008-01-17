@@ -7,15 +7,13 @@ package com.pbking.facebook.delegates.users
 	
 	import flash.events.Event;
 	
-	import mx.logging.Log;
-
 	public class GetLoggedInUser_delegate extends FacebookDelegate
 	{
 		public var user:FacebookUser;
 		
 		public function GetLoggedInUser_delegate()
 		{
-			Log.getLogger("pbking.facebook").debug("getting logged in user");
+			Facebook.instance.logHack("getting logged in user");
 			
 			fbCall.post("facebook.users.getLoggedInUser");
 		}
