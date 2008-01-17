@@ -8,6 +8,7 @@ package com.pbking.util.logging
 		
 		function PBLogEvent(message:String, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
+			this.message = message;
 			super("PBLogEvent", bubbles, cancelable)
 		}
 	}
