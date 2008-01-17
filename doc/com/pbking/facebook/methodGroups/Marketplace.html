@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="Marketplace,com.pbking.facebook.methodGroups.Marketplace,createListing,getCategories,getListings,getSubCategories,removeListing,search" name="keywords">
+<meta content="Marketplace,com.pbking.facebook.methodGroups.Marketplace,createListing,removeListing,getCategories,getSubCategories,getListings,search" name="keywords">
 <title>com.pbking.facebook.methodGroups.Marketplace</title>
 </head>
 <body>
@@ -53,50 +53,58 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#Marketplace()">Marketplace</a>(facebook:<a href="../Facebook.html">Facebook</a>)</div>
+<a class="signatureLink" href="#Marketplace()">Marketplace</a>()</div>
 <div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">Marketplace</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#createListing()">createListing</a>():void</div>
+<a class="signatureLink" href="#createListing()">createListing</a>(listing:<a href="../data/marketplace/MarketplaceListing.html">MarketplaceListing</a>, show_on_profile:Boolean = true, callback:Function = null):<a href="../delegates/marketplace/CreateListing_delegate.html">CreateListing_delegate</a>
+</div>
 <div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">Marketplace</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#getCategories()">getCategories</a>():void</div>
+<a class="signatureLink" href="#getCategories()">getCategories</a>(callback:Function = null):<a href="../delegates/marketplace/GetCategories_delegate.html">GetCategories_delegate</a>
+</div>
 <div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">Marketplace</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#getListings()">getListings</a>():void</div>
+<a class="signatureLink" href="#getListings()">getListings</a>(listingIds:Array = null, users:Array = null, callback:Function = null):<a href="../delegates/marketplace/GetListings_delegate.html">GetListings_delegate</a>
+</div>
+<div class="summaryTableDescription">
+   Return all Marketplace listings either by listing ID or by user.</div>
+</td><td class="summaryTableOwnerCol">Marketplace</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#getSubCategories()">getSubCategories</a>(category:String, callback:Function = null):<a href="../delegates/marketplace/GetSubCategories_delegate.html">GetSubCategories_delegate</a>
+</div>
 <div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">Marketplace</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#getSubCategories()">getSubCategories</a>():void</div>
+<a class="signatureLink" href="#removeListing()">removeListing</a>(listing_id:int, callback:Function):<a href="../delegates/marketplace/RemoveListing_delegate.html">RemoveListing_delegate</a>
+</div>
 <div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">Marketplace</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#removeListing()">removeListing</a>():void</div>
-<div class="summaryTableDescription"></div>
-</td><td class="summaryTableOwnerCol">Marketplace</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
-<div class="summarySignature">
-<a class="signatureLink" href="#search()">search</a>():void</div>
-<div class="summaryTableDescription"></div>
+<a class="signatureLink" href="#search()">search</a>(category:String = "", subcategory:String = "", query:String = "", callback:Function = null):<a href="../delegates/marketplace/SearchListings_delegate.html">SearchListings_delegate</a>
+</div>
+<div class="summaryTableDescription">
+   Search Marketplace for listings filtering by category, subcategory, and a query string.</div>
 </td><td class="summaryTableOwnerCol">Marketplace</td>
 </tr>
 </table>
@@ -115,12 +123,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function Marketplace(facebook:<a href="../Facebook.html">Facebook</a>)</code><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">facebook</span>:<a href="../Facebook.html">Facebook</a></code></td>
-</tr>
-</table>
+<code>public function Marketplace()</code>
 </div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
@@ -131,7 +134,31 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function createListing():void</code>
+<code>public function createListing(listing:<a href="../data/marketplace/MarketplaceListing.html">MarketplaceListing</a>, show_on_profile:Boolean = true, callback:Function = null):<a href="../delegates/marketplace/CreateListing_delegate.html">CreateListing_delegate</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">listing</span>:<a href="../data/marketplace/MarketplaceListing.html">MarketplaceListing</a></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">show_on_profile</span>:Boolean</code> (default = <code>true</code>)<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">callback</span>:Function</code> (default = <code>null</code>)<code></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../delegates/marketplace/CreateListing_delegate.html">CreateListing_delegate</a></code></td>
+</tr>
+</table>
 </div>
 <a name="getCategories()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -140,7 +167,19 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function getCategories():void</code>
+<code>public function getCategories(callback:Function = null):<a href="../delegates/marketplace/GetCategories_delegate.html">GetCategories_delegate</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">callback</span>:Function</code> (default = <code>null</code>)<code></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../delegates/marketplace/GetCategories_delegate.html">GetCategories_delegate</a></code></td>
+</tr>
+</table>
 </div>
 <a name="getListings()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -149,7 +188,33 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function getListings():void</code>
+<code>public function getListings(listingIds:Array = null, users:Array = null, callback:Function = null):<a href="../delegates/marketplace/GetListings_delegate.html">GetListings_delegate</a></code><p>
+   Return all Marketplace listings either by listing ID or by user. 
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">listingIds</span>:Array</code> (default = <code>null</code>)<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">users</span>:Array</code> (default = <code>null</code>)<code></code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">callback</span>:Function</code> (default = <code>null</code>)<code></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../delegates/marketplace/GetListings_delegate.html">GetListings_delegate</a></code></td>
+</tr>
+</table>
 </div>
 <a name="getSubCategories()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -158,7 +223,25 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function getSubCategories():void</code>
+<code>public function getSubCategories(category:String, callback:Function = null):<a href="../delegates/marketplace/GetSubCategories_delegate.html">GetSubCategories_delegate</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">category</span>:String</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">callback</span>:Function</code> (default = <code>null</code>)<code></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../delegates/marketplace/GetSubCategories_delegate.html">GetSubCategories_delegate</a></code></td>
+</tr>
+</table>
 </div>
 <a name="removeListing()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -167,7 +250,25 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function removeListing():void</code>
+<code>public function removeListing(listing_id:int, callback:Function):<a href="../delegates/marketplace/RemoveListing_delegate.html">RemoveListing_delegate</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">listing_id</span>:int</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">callback</span>:Function</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../delegates/marketplace/RemoveListing_delegate.html">RemoveListing_delegate</a></code></td>
+</tr>
+</table>
 </div>
 <a name="search()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -176,7 +277,44 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function search():void</code>
+<code>public function search(category:String = "", subcategory:String = "", query:String = "", callback:Function = null):<a href="../delegates/marketplace/SearchListings_delegate.html">SearchListings_delegate</a></code><p>
+   Search Marketplace for listings filtering by category, subcategory, and a query string. 
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">category</span>:String</code> (default = "<code></code>")<code></code> &mdash;  string  Filter by a Marketplace category.  (While this parameter is optional, you must specify it if you want to filter by subcategory.)   
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">subcategory</span>:String</code> (default = "<code></code>")<code></code> &mdash;  string  Filter by a Marketplace subcategory. (optional)   
+    </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">query</span>:String</code> (default = "<code></code>")<code></code> &mdash;  string  Filter by a query string.  (optional)
+
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">callback</span>:Function</code> (default = <code>null</code>)<code></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../delegates/marketplace/SearchListings_delegate.html">SearchListings_delegate</a></code></td>
+</tr>
+</table>
 </div>
 <br>
 <br>

@@ -116,7 +116,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#GetUserInfo_delegate()">GetUserInfo_delegate</a>(facebook:<a href="../../Facebook.html">Facebook</a>, users:Array, fields:Array)</div>
+<a class="signatureLink" href="#GetUserInfo_delegate()">GetUserInfo_delegate</a>(users:Array, fields:Array)</div>
 <div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">GetUserInfo_delegate</td>
 </tr>
@@ -143,6 +143,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a class="signatureLink" href="#handleResult()">handleResult</a>(resultXML:XML):void</div>
 <div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">GetUserInfo_delegate</td>
+</tr>
+<tr class="hideInheritedProtectedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../FacebookDelegate.html#onCallError()">onCallError</a>(event:ErrorEvent):void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol"><a href="../FacebookDelegate.html">FacebookDelegate</a></td>
 </tr>
 <tr class="hideInheritedProtectedMethod">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
@@ -216,14 +223,8 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function GetUserInfo_delegate(facebook:<a href="../../Facebook.html">Facebook</a>, users:Array, fields:Array)</code><span class="label">Parameters</span>
+<code>public function GetUserInfo_delegate(users:Array, fields:Array)</code><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">facebook</span>:<a href="../../Facebook.html">Facebook</a></code></td>
-</tr>
-<tr>
-<td class="paramSpacer">&nbsp;</td>
-</tr>
 <tr>
 <td width="20px"></td><td><code><span class="label">users</span>:Array</code></td>
 </tr>

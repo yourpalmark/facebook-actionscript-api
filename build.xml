@@ -19,7 +19,7 @@
 	<property name="doc" value="${basedir}/doc" />
 	<property name="bin" value="${basedir}/bin" />
 	<property name="src" value="${basedir}/src" />
-	<property name="version" value="0.7" />
+	<property name="version" value="0.7.7" />
 
 	<!-- DOCUMENT -->
 	

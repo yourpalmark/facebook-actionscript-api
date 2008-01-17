@@ -117,7 +117,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#CreateAlbum_delegate()">CreateAlbum_delegate</a>(fBook:<a href="../../Facebook.html">Facebook</a>, name:String, location:String = "", description:String = "")</div>
+<a class="signatureLink" href="#CreateAlbum_delegate()">CreateAlbum_delegate</a>(name:String, location:String = "", description:String = "")</div>
 <div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">CreateAlbum_delegate</td>
 </tr>
@@ -144,6 +144,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a class="signatureLink" href="#handleResult()">handleResult</a>(resultXML:XML):void</div>
 <div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">CreateAlbum_delegate</td>
+</tr>
+<tr class="hideInheritedProtectedMethod">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="../FacebookDelegate.html#onCallError()">onCallError</a>(event:ErrorEvent):void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol"><a href="../FacebookDelegate.html">FacebookDelegate</a></td>
 </tr>
 <tr class="hideInheritedProtectedMethod">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol">
@@ -217,14 +224,8 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function CreateAlbum_delegate(fBook:<a href="../../Facebook.html">Facebook</a>, name:String, location:String = "", description:String = "")</code><span class="label">Parameters</span>
+<code>public function CreateAlbum_delegate(name:String, location:String = "", description:String = "")</code><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">fBook</span>:<a href="../../Facebook.html">Facebook</a></code></td>
-</tr>
-<tr>
-<td class="paramSpacer">&nbsp;</td>
-</tr>
 <tr>
 <td width="20px"></td><td><code><span class="label">name</span>:String</code></td>
 </tr>

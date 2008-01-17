@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../print.css" type="text/css" media="print">
-<meta content="FacebookDelegate,com.pbking.facebook.delegates.FacebookDelegate,fBook,fbCall,success,errorCode,errorMessage,result,handleResult,onComplete,onError" name="keywords">
+<meta content="FacebookDelegate,com.pbking.facebook.delegates.FacebookDelegate,fBook,fbCall,success,errorCode,errorMessage,onCallError,result,handleResult,onComplete,onError" name="keywords">
 <title>com.pbking.facebook.delegates.FacebookDelegate</title>
 </head>
 <body>
@@ -41,7 +41,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">FacebookDelegate <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../../images/inherit-arrow.gif"> flash.events.EventDispatcher</td>
 </tr>
 <tr>
-<td class="classHeaderTableLabel">Subclasses</td><td><a href="photos/AddTags_delegate.html">AddTags_delegate</a>, <a href="friends/AreFriends_delegate.html">AreFriends_delegate</a>, <a href="photos/CreateAlbum_delegate.html">CreateAlbum_delegate</a>, <a href="auth/CreateToken_delegate.html">CreateToken_delegate</a>, <a href="fql/FqlQuery_delegate.html">FqlQuery_delegate</a>, <a href="photos/GetAlbums_delegate.html">GetAlbums_delegate</a>, <a href="friends/GetAppUsers_delegate.html">GetAppUsers_delegate</a>, <a href="events/GetEventMembers_delegate.html">GetEventMembers_delegate</a>, <a href="events/GetEvents_delegate.html">GetEvents_delegate</a>, <a href="profile/GetFBML_delegate.html">GetFBML_delegate</a>, <a href="friends/GetFriends_delegate.html">GetFriends_delegate</a>, <a href="groups/GetGroupMembers_delegate.html">GetGroupMembers_delegate</a>, <a href="groups/GetGroups_delegate.html">GetGroups_delegate</a>, <a href="users/GetLoggedInUser_delegate.html">GetLoggedInUser_delegate</a>, <a href="notifications/GetNotifications_delegate.html">GetNotifications_delegate</a>, <a href="photos/GetPhotos_delegate.html">GetPhotos_delegate</a>, <a href="auth/GetSession_delegate.html">GetSession_delegate</a>, <a href="photos/GetTags_delegate.html">GetTags_delegate</a>, <a href="users/GetUserInfo_delegate.html">GetUserInfo_delegate</a>, <a href="users/HasAppPermission_delegate.html">HasAppPermission_delegate</a>, <a href="users/IsAppAdded_delegate.html">IsAppAdded_delegate</a>, <a href="feed/PublishActionOfUser_delegate.html">PublishActionOfUser_delegate</a>, <a href="feed/PublishStoryToUser_delegate.html">PublishStoryToUser_delegate</a>, <a href="feed/PublishTemplatizedAction_delegate.html">PublishTemplatizedAction_delegate</a>, <a href="notifications/SendNotification_delegate.html">SendNotification_delegate</a>, <a href="profile/SetFBML_delegate.html">SetFBML_delegate</a>, <a href="users/SetStatus_delegate.html">SetStatus_delegate</a></td>
+<td class="classHeaderTableLabel">Subclasses</td><td><a href="photos/AddTags_delegate.html">AddTags_delegate</a>, <a href="friends/AreFriends_delegate.html">AreFriends_delegate</a>, <a href="photos/CreateAlbum_delegate.html">CreateAlbum_delegate</a>, <a href="marketplace/CreateListing_delegate.html">CreateListing_delegate</a>, <a href="auth/CreateToken_delegate.html">CreateToken_delegate</a>, <a href="fql/FqlQuery_delegate.html">FqlQuery_delegate</a>, <a href="photos/GetAlbums_delegate.html">GetAlbums_delegate</a>, <a href="friends/GetAppUsers_delegate.html">GetAppUsers_delegate</a>, <a href="marketplace/GetCategories_delegate.html">GetCategories_delegate</a>, <a href="events/GetEventMembers_delegate.html">GetEventMembers_delegate</a>, <a href="events/GetEvents_delegate.html">GetEvents_delegate</a>, <a href="profile/GetFBML_delegate.html">GetFBML_delegate</a>, <a href="friends/GetFriends_delegate.html">GetFriends_delegate</a>, <a href="groups/GetGroupMembers_delegate.html">GetGroupMembers_delegate</a>, <a href="groups/GetGroups_delegate.html">GetGroups_delegate</a>, <a href="marketplace/GetListings_delegate.html">GetListings_delegate</a>, <a href="users/GetLoggedInUser_delegate.html">GetLoggedInUser_delegate</a>, <a href="notifications/GetNotifications_delegate.html">GetNotifications_delegate</a>, <a href="photos/GetPhotos_delegate.html">GetPhotos_delegate</a>, <a href="auth/GetSession_delegate.html">GetSession_delegate</a>, <a href="marketplace/GetSubCategories_delegate.html">GetSubCategories_delegate</a>, <a href="photos/GetTags_delegate.html">GetTags_delegate</a>, <a href="users/GetUserInfo_delegate.html">GetUserInfo_delegate</a>, <a href="users/HasAppPermission_delegate.html">HasAppPermission_delegate</a>, <a href="users/IsAppAdded_delegate.html">IsAppAdded_delegate</a>, <a href="feed/PublishActionOfUser_delegate.html">PublishActionOfUser_delegate</a>, <a href="feed/PublishStoryToUser_delegate.html">PublishStoryToUser_delegate</a>, <a href="feed/PublishTemplatizedAction_delegate.html">PublishTemplatizedAction_delegate</a>, <a href="marketplace/RemoveListing_delegate.html">RemoveListing_delegate</a>, <a href="marketplace/SearchListings_delegate.html">SearchListings_delegate</a>, <a href="notifications/SendNotification_delegate.html">SendNotification_delegate</a>, <a href="profile/SetFBML_delegate.html">SetFBML_delegate</a>, <a href="users/SetStatus_delegate.html">SetStatus_delegate</a>, <a href="photos/Upload_delegate.html">Upload_delegate</a></td>
 </tr>
 </table>
 <p></p>
@@ -99,7 +99,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#FacebookDelegate()">FacebookDelegate</a>(fBook:<a href="../Facebook.html">Facebook</a>)</div>
+<a class="signatureLink" href="#FacebookDelegate()">FacebookDelegate</a>()</div>
 <div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">FacebookDelegate</td>
 </tr>
@@ -116,6 +116,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#handleResult()">handleResult</a>(resultXML:XML):void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">FacebookDelegate</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#onCallError()">onCallError</a>(event:ErrorEvent):void</div>
 <div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">FacebookDelegate</td>
 </tr>
@@ -219,12 +226,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function FacebookDelegate(fBook:<a href="../Facebook.html">Facebook</a>)</code><span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">fBook</span>:<a href="../Facebook.html">Facebook</a></code></td>
-</tr>
-</table>
+<code>public function FacebookDelegate()</code>
 </div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
@@ -239,6 +241,20 @@ showHideInherited();
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">resultXML</span>:XML</code></td>
+</tr>
+</table>
+</div>
+<a name="onCallError()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">onCallError</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function onCallError(event:ErrorEvent):void</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">event</span>:ErrorEvent</code></td>
 </tr>
 </table>
 </div>
