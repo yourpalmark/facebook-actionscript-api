@@ -54,7 +54,6 @@ package test.pbking.facebook.delegates
 
 		/**
 		 * Test Set Encode and Upload
-		 */
 		public function testEncodeAndUpload():void
 		{
 			var testDO:DisplayObject = new testImage();
@@ -69,6 +68,7 @@ package test.pbking.facebook.delegates
 			assertTrue(d.errorMessage, d.success);
 			assertTrue(d.uploadedPhoto);
 		}
+		 */
 		
 		public function testGetAlbums():void
 		{
