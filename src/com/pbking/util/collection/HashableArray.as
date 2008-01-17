@@ -1,11 +1,10 @@
 package com.pbking.util.collection
 {
-	import mx.collections.ArrayCollection;
 	import flash.utils.Dictionary;
 
 	/**
-	 * The HashableArrayCollection is an ArrayCollection that has been extended
-	 * to add all of the items to it to a hash map.  All items that are put into
+	 * The HashableArrayCollection is an Array that has been extended
+	 * to add all of the items in it to a hash map.  All items that are put into
 	 * this array MUST have an .id property (else an error will be thrown).
 	 * The id can be absolutely anything (string, number, function, complex object)  
 	 * and will be used in the key to the hash.  Additional methods (such as
@@ -22,7 +21,7 @@ package com.pbking.util.collection
 	 * 
 	 * @param itemKeyProperty:String 	 The name of the property that will be used as the key.  Default is 'id'.
 	 */
-	public class HashableArrayCollection extends ArrayCollection
+	public class HashableArray extends Array
 	{
 		// VARIABLES //////////
 		
@@ -32,7 +31,7 @@ package com.pbking.util.collection
 	
 		// CONSTRUCTION //////////
 	
-		public function HashableArrayCollection(itemKeyProperty:String='id', allowDuplicateKey:Boolean=true)
+		public function HashableArray(itemKeyProperty:String='id', allowDuplicateKey:Boolean=false)
 		{
 			this.itemKeyProperty = itemKeyProperty;
 			this.allowDuplicateKey = allowDuplicateKey;
@@ -40,57 +39,16 @@ package com.pbking.util.collection
 		}
 
 		// PUBLIC FUNCTIONS //////////
-		
-		override public function setItemAt(item:Object, index:int):Object
-	    {
-			if(addToHash(item))
-			{
-				return super.setItemAt(item, index);
-			}
-			else
-			{
-				return null;
-			}
-	    }
 
-		override public function addItemAt(item:Object, index:int):void
-	    {
-	    	if(addToHash(item))
-		    	super.addItemAt(item, index);
-	    }
-
-		override public function removeItemAt(index:int):Object
+		public function addItem(item:Object):uint
 		{
-			var item:Object = super.removeItemAt(index);
+			if( addToHash(item) )
+		    	super.push(item);
 			
-			if(item)
-				removeFromHash(item);
-				
-			return item;
-		}
-
-		override public function removeAll():void
-		{
-			this.hashedValues = new Dictionary(true);
-			super.removeAll();
+			return this.length;
 		}
 		
-		public function getItemById(id:*):Object
-		{
-			return hashedValues[id];
-		}
-		
-		public function removeItem(item:Object):Boolean
-		{
-			if(contains(item))
-			{
-				removeItemAt(getItemIndex(item));
-				return true;
-			}
-			return false;
-		}
-		
-		override public function contains(item:Object):Boolean
+		public function contains(item:Object):Boolean
 		{
 			//check to see if it's already in the hash
 			if(hashedValues[item[itemKeyProperty]])
@@ -103,6 +61,81 @@ package com.pbking.util.collection
 			}
 		}
 
+		public function removeAll():void
+		{
+			this.hashedValues = new Dictionary(true);
+			this.splice(0);
+		}
+		
+		public function getItemById(id:*):Object
+		{
+			return hashedValues[id];
+		}
+		
+		public function removeItemById(id:*):Boolean
+		{
+			//check to see if we have it
+			var item:Object = getItemById(id);
+			
+			if(!item)
+				return false;
+				
+			return removeItem(item);
+		}
+		
+		public function removeItem(item:Object):Boolean
+		{
+			if(contains(item))
+			{
+				delete this.hashedValues[item[itemKeyProperty]];
+				this.splice(getItemIndex(item), 1);
+				return true;
+			}
+			return false;
+		}
+		
+		public function getItemIndex(item:Object):uint
+		{
+			if(contains(item))
+			{
+				return indexOf(item);
+			}
+			return null;
+		}
+		
+		/*
+		override public function push(...rest):uint
+		{
+			for(var i:uint = 0; i < rest.length; i++)
+			{
+				if( addToHash(rest[i]) )
+			    	super.push(rest[i]);
+			}
+			return this.length;
+		}
+		
+		override public function pop():*
+		{
+			var popedItem:* = super.pop();
+			delete this.hashedValues[popedItem[itemKeyProperty]];
+		}
+		
+		override public function shift():*
+		{
+			var popedItem:* = super.shift();
+			delete this.hashedValues[popedItem[itemKeyProperty]];
+		}
+		
+		override public function unshift(...rest):uint
+		{
+			for(var i:uint = 0; i < rest.length; i++)
+			{
+				if( addToHash(rest[i]) )
+			    	super.unshift(rest[i]);
+			}
+			return this.length;
+		}
+		*/
 		// PRIVATE UTILITIES //////////
 
 		/**
