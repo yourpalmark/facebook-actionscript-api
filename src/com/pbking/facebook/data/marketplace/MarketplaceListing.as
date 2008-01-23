@@ -8,7 +8,7 @@ package com.pbking.facebook.data.marketplace
 	[Bindable]
 	public class MarketplaceListing extends EventDispatcher
 	{
-		public var listing_id:int;
+		public var listing_id:Number;
 		public var url:String;
 		public var poster:FacebookUser;
 		public var images:Array;
