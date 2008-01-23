@@ -4,12 +4,19 @@ package com.pbking.util.logging
 
 	public class PBLogEvent extends Event
 	{
-		public var message:String;
+		public static const LOG:String = "log";
 		
-		function PBLogEvent(message:String, bubbles:Boolean=false, cancelable:Boolean=false)
+		public var message:String;
+		public var level:int;
+		public var category:String;
+		
+		function PBLogEvent(message:String, level:int, category:String, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			this.message = message;
-			super("PBLogEvent", bubbles, cancelable)
+			this.level = level;
+			this.category = category;
+			
+			super(LOG, bubbles, cancelable)
 		}
 	}
 }
