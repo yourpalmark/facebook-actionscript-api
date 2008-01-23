@@ -65,7 +65,7 @@ package com.pbking.facebook
 		{
 			this._fb = fBook;
 
-			setRequestArgument("v", "1.0");
+			setRequestArgument("v", fBook.api_version);
 			
 			if(_fb.api_key != null)
 				setRequestArgument("api_key", _fb.api_key);

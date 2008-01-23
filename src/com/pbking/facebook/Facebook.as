@@ -42,7 +42,6 @@ package com.pbking.facebook
 	import com.pbking.facebook.delegates.auth.*;
 	import com.pbking.facebook.methodGroups.*;
 	import com.pbking.util.collection.HashableArray;
-	import com.pbking.util.logging.PBLogEvent;
 	import com.pbking.util.logging.PBLogger;
 	
 	import flash.events.Event;
@@ -216,6 +215,14 @@ package com.pbking.facebook
 		 */
 		private var _isConnected:Boolean = false;
 		public function get isConnected():Boolean { return this._isConnected; }
+		
+		/**
+		 * Version of the facebook API.  This will be updated as the API is updated, but you can
+		 * change it to use beta features, etc
+		 */
+		private var _api_version:String = "1.0";
+		public function get api_version():String { return this._api_version; }
+		public function set api_version(newVal:String):void { this._api_version = newVal);
 		
 		// METHOD GROUPS //////////
 		
