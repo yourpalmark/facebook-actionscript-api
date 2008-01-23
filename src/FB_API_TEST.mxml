@@ -15,6 +15,8 @@
 
 	<mx:Script>
 		<![CDATA[
+			import com.pbking.util.logging.PBLogBridge;
+			import com.pbking.util.logging.PBLogger;
 			import com.pbking.util.logging.PBLogEvent;
 			import mx.logging.Log;
 			import mx.logging.LogEvent;
@@ -23,14 +25,16 @@
 			import test.pbking.facebook.Facebook_test;
 			import flexunit.framework.TestSuite;
 			
-			private var config_api_key:String = "xxxxxx";
-			private var config_secret:String = "xxxxxx";
+			private var config_api_key:String = "xxx";
+			private var config_secret:String = "xxx";
+			
 			[Bindable] private var facebook:Facebook = new Facebook();
 						
 			private function onCreationComplete():void
 			{
-				Log.getLogger("pbking.facebook").addEventListener(LogEvent.LOG, onLog);
-				facebook.addEventListener("PBLogEvent", onLogHack);
+				PBLogger.getLogger("pbking.facebook").addEventListener(PBLogEvent.LOG, onLog);
+				PBLogBridge.initialize();
+
 				testRunner.test = createSuite();
  				testRunner.startTest();				
 			}
@@ -44,15 +48,11 @@
  				return ts;
 			}
 
-			private function onLog(le:LogEvent):void
+			private function onLog(le:PBLogEvent):void
 			{
 				logText.text += le.message + "\n";
 			}
 			
-			private function onLogHack(le:PBLogEvent):void
-			{
-				logText.text += le.message + "\n";
-			}
 		]]>
 	</mx:Script>
 

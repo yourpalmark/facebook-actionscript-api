@@ -47,6 +47,7 @@ Actionscript Developers group or send them to me (Jason Crist:jcrist@pbking.com)
 
 	<mx:Script>
 		<![CDATA[
+			import com.pbking.util.logging.PBLogger;
 			import com.pbking.util.logging.PBLogEvent;
 			import mx.controls.Alert;
 			import mx.collections.ArrayCollection;
@@ -65,24 +66,22 @@ Actionscript Developers group or send them to me (Jason Crist:jcrist@pbking.com)
 			[Bindable] private var fBook:Facebook;
 			[Bindable] private var myFriends:ArrayCollection;
 			
-			private var logger:ILogger;
+			private var logger:PBLogger;
 			
-			private var config_api_key:String = "xxxxxx";
-			private var config_secret:String = "xxxxxx";
+			private var config_api_key:String = "xxx";
+			private var config_secret:String = "xxx";
 
 			/**
 			 * Called when the application is ready
 			 */
 			private function init():void
 			{
-				logger = Log.getLogger("pbking.facebook");
-				logger.addEventListener(LogEvent.LOG, onLog);
+				logger = PBLogger.getLogger("pbking.facebook");
+				logger.addEventListener(PBLogEvent.LOG, onLog);
 				
 				fBook = new Facebook();
 				fBook.addEventListener(Event.COMPLETE, onFacebookReady);
 				
-				fBook.addEventListener("PBLogEvent", onLogHack);
-	
 				var flashVars:Object = Application.application.parameters;
 
 				if(flashVars['fb_sig'] != null) 
@@ -140,15 +139,10 @@ Actionscript Developers group or send them to me (Jason Crist:jcrist@pbking.com)
 			/**
 			 * util to show logging on the stage
 			 */
-			private function onLog(le:LogEvent):void
+			private function onLog(le:PBLogEvent):void
 			{
 				logText.text += le.message + "\n";
-			}
-			
-			private function onLogHack(le:PBLogEvent):void
-			{
-				logText.text += le.message + "\n";
-			}
+			}			
 		]]>
 	</mx:Script>
 	
