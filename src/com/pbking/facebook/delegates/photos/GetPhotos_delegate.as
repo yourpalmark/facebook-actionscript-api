@@ -31,10 +31,10 @@ OTHER DEALINGS IN THE SOFTWARE.
  */
 package com.pbking.facebook.delegates.photos
 {
-	import com.pbking.facebook.Facebook;
 	import com.pbking.facebook.data.*;
 	import com.pbking.facebook.data.photos.FacebookPhoto;
 	import com.pbking.facebook.delegates.FacebookDelegate;
+	import com.pbking.util.logging.PBLogger;
 	
 	public class GetPhotos_delegate extends FacebookDelegate
 	{
@@ -51,7 +51,7 @@ package com.pbking.facebook.delegates.photos
 			if(subj_id==null && aid==null && pids==null)
 				throw new Error('GetPhotos must have at least one of the values subj_id, aid, or pids set');
 			
-			Facebook.instance.logHack("getting photos based on query: subj_id: " + subj_id + " aid: " + aid + " pids: " + pids);
+			PBLogger.getLogger("pbking.facebook").debug("getting photos based on query: subj_id: " + subj_id + " aid: " + aid + " pids: " + pids);
 
 			//strip out any 0's from our pids.  We can't get 0's.
 			if(pids)

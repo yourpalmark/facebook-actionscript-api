@@ -1,11 +1,7 @@
 package com.pbking.facebook.delegates.friends
 {
-	import com.pbking.facebook.Facebook;
-	import com.pbking.facebook.FacebookCall;
-	import com.pbking.facebook.data.users.FacebookUser;
 	import com.pbking.facebook.delegates.FacebookDelegate;
-	
-	import flash.events.Event;
+	import com.pbking.util.logging.PBLogger;
 	
 	public class GetFriends_delegate extends FacebookDelegate
 	{
@@ -13,7 +9,7 @@ package com.pbking.facebook.delegates.friends
 		
 		public function GetFriends_delegate()
 		{
-			Facebook.instance.logHack("getting friends");
+			PBLogger.getLogger("pbking.facebook").debug("getting friends");
 			
 			fbCall.post("facebook.friends.get");
 		}

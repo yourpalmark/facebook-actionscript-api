@@ -43,8 +43,8 @@ package com.pbking.facebook
 	import com.pbking.facebook.methodGroups.*;
 	import com.pbking.util.collection.HashableArray;
 	import com.pbking.util.logging.PBLogEvent;
+	import com.pbking.util.logging.PBLogger;
 	
-	import flash.display.LoaderInfo;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.net.URLRequest;
@@ -56,6 +56,8 @@ package com.pbking.facebook
 	public class Facebook extends EventDispatcher
 	{	
 		// VARIABLES //////////
+		
+		private var logger:PBLogger = PBLogger.getLogger("pbking.facebook");
 		
 		private var _userCollection:HashableArray = new HashableArray('uid', false);
 		private var _groupCollection:HashableArray = new HashableArray('gid', false);
@@ -373,7 +375,7 @@ package com.pbking.facebook
 		 */
 		public function startDesktopSession(api_key:String, secret:String, infinite_session_key:String=""):void
 		{
-			logHack("starting desktop session");
+			logger.debug("starting desktop session");
 			
 			this._api_key = api_key;
 			this._secret = secret;
@@ -460,7 +462,7 @@ package com.pbking.facebook
 		 */
 		public function startWidgetSession(flashVars:Object, api_key:String=null, secret:String=null):void
 		{
-			logHack("starting facebook widget session");
+			logger.debug("starting facebook widget session");
 			
 			sessionType = FacebookSessionType.WIDGET_APP;
 			
@@ -474,13 +476,13 @@ package com.pbking.facebook
 			//these properties will be used to verify communication
 			this.fb_sig_values = new Object();
 			
-			logHack("- - - flashVars - - -");
+			logger.debug("- - - flashVars - - -");
 			var prefix:String = "fb_sig";
 			for(var prop:String in flashVars)
 			{
 				if(prop.substring(0,prefix.length) == prefix)
 				{
-					logHack(prop + ":" + flashVars[prop]);
+					logger.debug(prop + ":" + flashVars[prop]);
 					this.fb_sig_values[prop] = flashVars[prop]; 
 				}
 			}
@@ -499,7 +501,7 @@ package com.pbking.facebook
 			if(this._session_key == null)
 				this._session_key = fb_sig_values['fb_sig_session_key'];
 			
-			logHack("session key: " + this._session_key);
+			logger.debug("session key: " + this._session_key);
 			
 			if(this._api_key == null)	
 				this._api_key = fb_sig_values['fb_sig_api_key'];
@@ -628,17 +630,6 @@ package com.pbking.facebook
 				_eventCollection.addItem(event);
 			}
 			return event;
-		}
-		
-		/**
-		 * Ok, this is embarassing . . . I'm sticking in a hack with which to log things. :P
-		 * Since I'm pulling out all the Flex mx.* stuff I can't use Flex logging.  But Flash
-		 * doesn't have any!  Perhaps I'll pull the Peanut Butter Logger out of retirement now.
-		 * For now, I'm just passing log messages here.
-		 */
-		public function logHack(message:String):void
-		{
-			dispatchEvent(new PBLogEvent(message));
 		}
 	}
 }
