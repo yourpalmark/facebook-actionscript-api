@@ -32,6 +32,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 package com.pbking.facebook
 {
 	import com.gsolo.encryption.MD5;
+	import com.pbking.util.logging.PBLogger;
+	import com.shtif.web.MIMEConstructor;
 	
 	import flash.events.ErrorEvent;
 	import flash.events.Event;
@@ -43,12 +45,15 @@ package com.pbking.facebook
 	import flash.net.URLRequest;
 	import flash.net.URLRequestMethod;
 	import flash.net.URLVariables;
+	import flash.utils.ByteArray;
 	
 	public class FacebookCall extends EventDispatcher
 	{
 		// VARIABLES //////////
 		
 		private static var callID:int = 0;
+		
+		private var logger:PBLogger = PBLogger.getLogger("pbking.facebook");
 		
 		private var _fb:Facebook;
 		private var _args:URLVariables = new URLVariables();
@@ -102,33 +107,69 @@ package com.pbking.facebook
 				this.setRequestArgument("sig", this.sig);
 			}
 			
-			//create the service request
-			var req:URLRequest = new URLRequest(url);
-			req.contentType = "application/x-www-form-urlencoded";
-			req.method = URLRequestMethod.POST;
-			req.data = _args;
-			
 			var loader:URLLoader = new URLLoader();
-			loader.dataFormat = URLLoaderDataFormat.TEXT;
 			loader.addEventListener(Event.COMPLETE, onResult);
 			loader.addEventListener(IOErrorEvent.IO_ERROR, onError);
 			loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onError);
-			
-			//construct the log message
-			var debugString:String = "> > > sending facebook message:\n" + req.url + "\n args:";
-			for(var indexName:String in this._args)
-				debugString += "\n " + indexName + " = " + this._args[indexName];
 
-			Facebook.instance.logHack(debugString);
+			if(method != "facebook.photos.upload")
+			{
+				//create the service request
+				var req:URLRequest = new URLRequest(url);
+				req.contentType = "application/x-www-form-urlencoded";
+				req.method = URLRequestMethod.POST;
+				req.data = _args;
+				
+				loader.dataFormat = URLLoaderDataFormat.TEXT;
+				
+				//construct the log message
+				var debugString:String = "> > > sending facebook message:\n" + req.url + "\n args:";
+				for(var indexName:String in this._args)
+					debugString += "\n " + indexName + " = " + this._args[indexName];
+	
+				logger.debug(debugString);
+	
+				//make the request!
+				loader.load(req);
+			}
+			else
+			{
+				//special construction for uploads
 
-			//make the request!
-			loader.load(req);
+				var mime:MIMEConstructor = new MIMEConstructor();
+				var data:ByteArray;
+
+				for(var argIndexName:String in this._args)
+				{
+					if(argIndexName != "data")
+					{
+						debugString += "\n " + argIndexName + " = " + this._args[argIndexName];
+						mime.writePostData(argIndexName, this._args[argIndexName]);
+					}
+					else
+					{
+						mime.writeFileData("fn"+this._args['call_id']+".jpg", this._args[argIndexName]); 
+					}
+				}
+				mime.closePostData();
+
+				logger.debug(debugString);
+				
+				var urlreq:URLRequest = new URLRequest();
+				urlreq.method = URLRequestMethod.POST;
+				urlreq.contentType = "multipart/form-data; boundary="+mime.getBoundary();
+				urlreq.data = mime.getPostData();
+				urlreq.url = url;
+				
+				loader.dataFormat = URLLoaderDataFormat.BINARY;
+				loader.load(urlreq);				
+			}
 		}
 		
 		/**
 		 * Set a name value pair to be sent in request postdata
 		 */
-		public function setRequestArgument( name:String, value:String ):void
+		public function setRequestArgument( name:String, value:* ):void
 		{
 			this._args[name] = value;	
 		}
@@ -154,7 +195,7 @@ package com.pbking.facebook
 			default xml namespace = _fb.FACEBOOK_NAMESPACE;
 
 			//dispatch the response
-			Facebook.instance.logHack("< < < received facebook reply:\n" + _xml.toXMLString());
+			logger.debug("< < < received facebook reply:\n" + _xml.toXMLString());
 
 			if(_xml..error_code == undefined)
 			{
@@ -164,7 +205,7 @@ package com.pbking.facebook
 			else
 			{
 				//all is NOT well in the kingdom!
-				Facebook.instance.logHack("!THERE WAS A FACEBOOK ERROR!" + _xml..code + ":" + _xml..msg);
+				logger.warn("!THERE WAS A FACEBOOK ERROR!" + _xml..code + ":" + _xml..msg);
 			}
 			
 			dispatchEvent(new Event(Event.COMPLETE));
@@ -180,8 +221,9 @@ package com.pbking.facebook
 			
 			for( var p:String in this._args )
 			{
-				if( p !== 'sig' ){
-					a.push( p + '=' + this._args[p] );
+				var arg:* = this._args[p];
+				if( p !== 'sig' && !(arg is ByteArray)){
+					a.push( p + '=' + arg.toString() );
 				}
 			}
 			

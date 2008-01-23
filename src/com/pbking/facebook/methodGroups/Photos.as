@@ -25,16 +25,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 package com.pbking.facebook.methodGroups
 {
-	import com.dynamicflash.util.Base64;
-	import com.pbking.facebook.Facebook;
 	import com.pbking.facebook.data.photos.FacebookAlbum;
 	import com.pbking.facebook.data.users.FacebookUser;
 	import com.pbking.facebook.delegates.photos.*;
 	
 	import flash.display.BitmapData;
 	import flash.utils.ByteArray;
-	
-	//import mx.graphics.codec.JPEGEncoder;
 	
 	public class Photos
 	{
@@ -73,7 +69,7 @@ package com.pbking.facebook.methodGroups
 		 * visible on the site. Photos uploaded by applications with the photo_upload extended permission will be visible 
 		 * immediately.
 		 */
-		public function upload(data:String, album:FacebookAlbum=null, caption:String="", callback:Function=null):Upload_delegate
+		public function upload(data:ByteArray, album:FacebookAlbum=null, caption:String="", callback:Function=null):Upload_delegate
 		{
 			var delegate:Upload_delegate = new Upload_delegate(data, album, caption) 
 			return MethodGroupUtil.addCallback(delegate, callback) as Upload_delegate;		
@@ -81,12 +77,13 @@ package com.pbking.facebook.methodGroups
 		
 		/**
 		 * Works the same as the upload method but will handle the image jpeg conversion for you.
+		 * Alas, I cannot include this in the release as the JPEGEncoder is in the mx.* package (and probably just Flex3, though I'm not sure).
+		 * But I'm leaving it in here to show how you SHOULD encode a BMD object to send.
 		public function encodeAndUpload(bitmap:BitmapData, quality:int=85, album:FacebookAlbum=null, caption:String="", callback:Function=null):Upload_delegate
 		{
 			var jpgEncoder:JPEGEncoder = new JPEGEncoder(quality);
 			var jpgStream:ByteArray = jpgEncoder.encode(bitmap);
-			var encoded:String = Base64.encodeByteArray(jpgStream);	
-			return upload(encoded, album, caption, callback);
+			return upload(jpgStream, album, caption, callback);
 		}
 		 */
 		
