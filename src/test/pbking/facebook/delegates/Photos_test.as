@@ -10,11 +10,12 @@ package test.pbking.facebook.delegates
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.events.Event;
+	import flash.utils.ByteArray;
 	
 	import flexunit.framework.TestCase;
 	import flexunit.framework.TestSuite;
 	
-	import mx.collections.ArrayCollection;
+	import mx.graphics.codec.JPEGEncoder;
 	
 	import test.pbking.facebook.Facebook_test;
 	
@@ -40,8 +41,7 @@ package test.pbking.facebook.delegates
 			
 			var ts:TestSuite = new TestSuite();
 			
-			//test isn't ready for prime time just yet . . . -jc
-			//ts.addTest( new Photos_test("testEncodeAndUpload")); 
+			ts.addTest( new Photos_test("testUpload")); 
 			ts.addTest( new Photos_test("testGetAlbums"));
 			ts.addTest( new Photos_test("testGetPhotosForAlbum"));
 			ts.addTest( new Photos_test("testGetPhotos"));
@@ -54,21 +54,24 @@ package test.pbking.facebook.delegates
 
 		/**
 		 * Test Set Encode and Upload
-		public function testEncodeAndUpload():void
+		 */
+		public function testUpload():void
 		{
 			var testDO:DisplayObject = new testImage();
 			var bmd:BitmapData = new BitmapData(testDO.width, testDO.height, false, 0xFFFFFF);
 			bmd.draw(testDO);
 			
-			facebook.photos.encodeAndUpload(bmd, 85, null, "", addAsync(testEncodeAndUploadReply, Facebook_test.timeoutTime));
+			var jpgEncoder:JPEGEncoder = new JPEGEncoder(85);
+			var jpgStream:ByteArray = jpgEncoder.encode(bmd);
+			
+			facebook.photos.upload(jpgStream, null, "", addAsync(testUploadReply, Facebook_test.timeoutTime));
 		}
-		private function testEncodeAndUploadReply(e:Event):void
+		private function testUploadReply(e:Event):void
 		{
 			var d:Upload_delegate = e.target as Upload_delegate;
 			assertTrue(d.errorMessage, d.success);
 			assertTrue(d.uploadedPhoto);
 		}
-		 */
 		
 		public function testGetAlbums():void
 		{
