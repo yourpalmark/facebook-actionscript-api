@@ -34,7 +34,7 @@
 	
 	<!-- PACKAGE -->
 	
-	<target name='package'>
+	<target name='package' depends="build,document,build_swc">
 		
 		<!-- package API -->
 		
