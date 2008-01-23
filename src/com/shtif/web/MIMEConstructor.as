@@ -1,6 +1,6 @@
 /**
- * 	@author: Peter "sHTiF" Stefcek
- *  @description: Class that can build MIME multipart messages.
+ * 	@author Peter "sHTiF" Stefcek
+ *  @description Class that can build MIME multipart messages.
  */
 package com.shtif.web
 {
