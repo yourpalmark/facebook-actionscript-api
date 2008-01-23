@@ -222,7 +222,7 @@ package com.pbking.facebook
 		 */
 		private var _api_version:String = "1.0";
 		public function get api_version():String { return this._api_version; }
-		public function set api_version(newVal:String):void { this._api_version = newVal);
+		public function set api_version(newVal:String):void { this._api_version = newVal };
 		
 		// METHOD GROUPS //////////
 		
