@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	layout="absolute"
+	backgroundGradientAlphas="[1.0, 1.0]" 
+	backgroundGradientColors="[#FFFFFF, #FFFFFF]"
+	creationComplete="init();" >
+	
+	<mx:Script>
+		<![CDATA[
+
+			// IMPORTS //////////
+			
+			import com.pbking.facebook.Facebook;
+			import com.pbking.facebook.delegates.friends.GetFriends_delegate;
+			import com.pbking.facebook.delegates.FacebookDelegate;
+			import com.pbking.facebook.delegates.users.GetUserInfo_delegate;
+			import com.pbking.facebook.data.users.UserFields;
+			import com.pbking.facebook.data.users.FacebookUser;
+
+			import flash.net.navigateToURL;
+
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+		
+			// VARIABLES //////////
+			
+			private var api_key:String = "xxx";
+			private var secret:String = "xxx";
+			
+			private var addAppURL:String = "http://www.facebook.com/apps/application.php?id=xxx";
+			
+			[Bindable] private var facebook:Facebook;
+			[Bindable] private var user:FacebookUser;
+			[Bindable] private var myFriends:ArrayCollection;
+			[Bindable] private var currentFriend:FacebookUser;
+		
+			// CONSTRUCTION //////////
+			
+			private function init():void
+			{
+				//create our instance of the facebook object
+				facebook = new Facebook();
+				
+				//first thing, check the fb_sig_added property to see if the app has been added
+				var flashVars:Object = Application.application.parameters;
+				var hasAddedApp:Boolean = Number(flashVars.fb_sig_added) == 1;
+
+				if(hasAddedApp)
+				{
+					//the browsing user has hadded the app.
+					//listen for when the facebook connection is ready to go
+					facebook.addEventListener(Event.COMPLETE, onFacebookSessionStarted);
+					
+					//begin our session by passing in the flashVars, api key and secret
+					//the flashVars could also be gotten from Application.application.parameters in Flex
+					//or in Flash: LoaderInfo(root.loaderInfo).parameters
+					facebook.startWidgetSession(this.parameters, api_key, secret);
+
+					//(because we are starting a widget session and not a desktop session
+					//our application will ONLY work inside of the Facebook environment;
+					//testing locally won't work.  To test locally you'll need to start a 
+					//desktop session.  See the example in the API for more detail.
+				}
+				else
+				{
+					//the browsing user hasn't installed the app so none of our FB calls will work.
+					//go to our special page which we have setup to show them an install button.
+					currentState="notAdded";
+				}
+			}
+			
+			// UTIL FUNCTIONS //////////
+			
+			private function onFacebookSessionStarted(e:Event):void
+			{
+				//first we have to test to make sure we connected ok
+				if(facebook.isConnected)
+				{
+					//yay!  We're all connected!  Journey forth!
+					onFacebookReady();
+				}
+				else
+				{
+					//we didn't connect like we should have.  Alert the user.
+					Alert.show(facebook.connectionErrorMessage, "Error connecting");
+				}
+			}
+			
+			private function onFacebookReady():void
+			{
+				currentState="ready";
+				
+				//get some of the users info
+				user = facebook.user;
+				
+				var d:GetUserInfo_delegate = facebook.users.getInfo([user], [UserFields.name]);
+				d.addEventListener(Event.COMPLETE, onGotUserInfo);
+			}
+			
+			private function onGotUserInfo(e:Event):void
+			{
+				var d:GetUserInfo_delegate = e.target as GetUserInfo_delegate;
+				d.removeEventListener(Event.COMPLETE, onGotUserInfo);
+				
+				//check to see if the call was sucessful
+				if(d.success)
+				{
+					//our user's info has been updated and will show in our bindings
+					
+					//now let's get our user's friends
+					//here we'll demonstrate the "callback" so that you don't have to
+					//add and remove an event listener to the delegate.  The "callback"
+					//function works the same so note the delegate that is returned from the call.
+					facebook.friends.getFriends(onGotFriends);
+				}
+				else
+				{
+					handleErrorDelegate(d);
+				}
+			}
+			
+			private function handleErrorDelegate(d:FacebookDelegate):void
+			{
+				//something went wrong.  You should plan to handle this error better
+				//but for now we're just going to throw up an alert and stop here.
+				Alert.show(d.errorCode + ":" + d.errorMessage, "Facebook Error . . .");
+			}
+			
+			private function onGotFriends(e:Event):void
+			{
+				var d:GetFriends_delegate = e.target as GetFriends_delegate;
+				if(d.success)
+				{
+					//save my list of friends
+					myFriends = new ArrayCollection(d.friends);
+					
+					//all we have of the friends right now is a uid
+					//get some more info on them so we can at least show their name
+					facebook.users.getInfo(myFriends.source, [UserFields.name], onGotFriendsName);
+				}
+				else
+				{
+					handleErrorDelegate(d);
+				}
+			}
+			
+			private function onGotFriendsName(e:Event):void
+			{
+				var d:GetUserInfo_delegate = e.target as GetUserInfo_delegate;
+				
+				if(d.success)
+				{
+					//we now have all of the user's friends, and their names
+				}
+				else
+				{
+					handleErrorDelegate(d);
+				}
+			}
+			
+			private function selectFriend(friend:FacebookUser):void
+			{
+				//this method is called when a user selects a friend from the list
+				
+				//save the friend.
+				this.currentFriend = friend;
+				
+				//grab their info
+				facebook.users.getInfo([friend], [UserFields.pic_big, UserFields.about_me], onGotFriendInfo);
+			}
+			
+			private function onGotFriendInfo(e:Event):void
+			{
+				var d:GetUserInfo_delegate = e.target as GetUserInfo_delegate;
+				if(d.success)
+				{
+					//our friends info will update and bind
+				}
+				else
+				{
+					handleErrorDelegate(d);
+				}
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:states>
+	
+		<!-- not added -->
+	
+		<mx:State name="notAdded">
+			<mx:AddChild position="lastChild">
+				<mx:Label verticalCenter="0" horizontalCenter="0" 
+					text="You must first add this app before you use it."/>
+			</mx:AddChild>
+			<mx:AddChild position="lastChild">
+				<mx:Button verticalCenter="30" 
+					horizontalCenter="0" 
+					label="add application" 
+					click="navigateToURL(new URLRequest(addAppURL))"/>
+			</mx:AddChild>
+		</mx:State>
+
+		<!-- connection ready -->
+
+		<mx:State name="ready">
+			<mx:AddChild position="lastChild">
+				<mx:HBox bottom="10" right="10" top="10" left="10">
+				
+					<mx:VBox x="10" bottom="10" top="10" height="100%">
+					
+						<mx:Text text="Welcome {user.name}.  Select a friend below to see their details."  
+								 width="200"
+								 fontSize="12"/>
+								 
+						<mx:List id="friendList"
+								 width="200"
+								 height="100%"
+								 dataProvider="{myFriends}"
+								 labelField="name"
+								 allowMultipleSelection="false"
+								 change="selectFriend(friendList.selectedItem as FacebookUser);"/>
+						<mx:Text width="200" height="192">
+							<mx:htmlText>
+								<![CDATA[
+This example was build with the Facebook ActionScript 3 API created by Jason Crist.  <br/>
+The API is an MIT licensed library available on Google Code.  <br/>
+For more information or to help with the API please visit the site.<br/>
+<u><a href="http://code.google.com/p/facebook-actionscript-api">http://code.google.com/p/facebook-actionscript-api</a></u>
+								]]>
+							</mx:htmlText>
+						</mx:Text>
+					</mx:VBox>
+					<mx:VRule height="100%"/>
+					
+					<mx:VBox width="100%" height="100%" right="10" bottom="10">
+					
+						<mx:Label id="friendName"
+							text="{currentFriend.name}"
+							fontSize="14" 
+							width="300"/>
+							
+						<mx:Image id="friendPic"
+							source="{currentFriend.pic_big}"
+							scaleContent="false"/>
+							
+						<mx:TextArea id="friendAbout"
+							text="{currentFriend.about_me}"
+							fontSize="14" 
+							width="300" height="100%" borderStyle="none"/>
+							
+					</mx:VBox>
+						
+				</mx:HBox>
+			</mx:AddChild>
+		</mx:State>
+	
+	</mx:states>
+	
+</mx:Application>
