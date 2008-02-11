@@ -41,7 +41,7 @@ package com.pbking.facebook.data.photos
 		// VARIABLES //////////
 		
 		private var _pid:String;
-		private var _aid:Number;
+		private var _aid:String;
 		private var _owner:FacebookUser;
 		private var _src:String;
 		private var _src_big:String;
@@ -76,8 +76,8 @@ package com.pbking.facebook.data.photos
 		  	*/
 			default xml namespace = Facebook.instance.FACEBOOK_NAMESPACE;
 		  	
-		  	this._pid = Number(xml.pid);
-		  	this._aid = Number(xml.aid);
+		  	this._pid = xml.pid;
+		  	this._aid = xml.aid;
 		  	this._owner = Facebook.instance.getUser(parseInt(xml.owner));
 		  	this._src = xml.src;
 		  	this._src_big = xml.src_big;
@@ -89,12 +89,12 @@ package com.pbking.facebook.data.photos
 		
 		// GETTERS //////////
 		
-		public function get pid():Number
+		public function get pid():String
 		{
 			return _pid;
 		}
 		
-		public function get aid():Number
+		public function get aid():String
 		{
 			return _aid
 		}

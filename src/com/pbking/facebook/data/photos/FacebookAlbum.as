@@ -76,11 +76,11 @@ package com.pbking.facebook.data.photos
 		{
 			default xml namespace = Facebook.instance.FACEBOOK_NAMESPACE;
 
-			this._aid = Number(xml.aid);
+			this._aid = xml.aid;
 			
 			if(xml.cover_pid != undefined)
 			{
-				this._cover_pid = Number(xml.cover_pid);
+				this._cover_pid = xml.cover_pid;
 			}
 				
 			this._owner = Facebook.instance.getUser(parseInt(xml.owner));
@@ -99,12 +99,12 @@ package com.pbking.facebook.data.photos
 		
 		// GETTERS and SETTERS //////////
 		
-		public function get aid():Number
+		public function get aid():String
 		{
 			return this._aid;
 		}
 		
-		public function get cover_pid():Number
+		public function get cover_pid():String
 		{
 			return _cover_pid;
 		}
