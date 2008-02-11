@@ -61,6 +61,11 @@ package com.pbking.facebook.delegates
 			fbCall.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onCallError);
 		}
 		
+		public function getResponseXML():XML
+		{
+			return fbCall.getResponse();
+		}
+		
 		protected function onCallError(event:ErrorEvent):void
 		{
 			//something super sucky happened
