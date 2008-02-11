@@ -51,8 +51,8 @@ package com.pbking.facebook.data.photos
 		private var _photos:Array = [];
 		
 		//facebook props
-		private var _aid:Number;
-		private var _cover_pid:Number;
+		private var _aid:String;
+		private var _cover_pid:String;
 		private var _owner:FacebookUser;
 		private var _name:String;
 		private var _created:Date;

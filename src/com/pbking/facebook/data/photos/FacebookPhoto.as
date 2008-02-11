@@ -40,7 +40,7 @@ package com.pbking.facebook.data.photos
 	{
 		// VARIABLES //////////
 		
-		private var _pid:Number;
+		private var _pid:String;
 		private var _aid:Number;
 		private var _owner:FacebookUser;
 		private var _src:String;
