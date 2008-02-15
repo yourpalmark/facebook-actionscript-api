@@ -3,6 +3,7 @@ package com.pbking.facebook.data.events
 	import com.pbking.facebook.data.misc.FacebookLocation;
 	import com.pbking.facebook.data.users.FacebookUser;
 	import com.pbking.facebook.data.users.FacebookUserCollection;
+	import com.pbking.util.collection.HashableArray;
 	
 	[Bindable]
 	public class FacebookEvent
@@ -37,10 +38,35 @@ package com.pbking.facebook.data.events
 		
 		function FacebookEvent(eid:Number):void
 		{
+			if(_locked)
+				throw new Error("an event should be created by calling FacebookEvent.getEvent(eid) so that there is only ever a single instance of each event");
+
 			this.eid = eid;
 			
 			//making sure it's imported
 			RSVP_Status;
 		}
+
+		/**
+		 * This keeps a common collection of events so that all information gathered
+		 * on events is stored here and updated.  Each event should have only one instance.
+		 * 
+		 * Creating an event should happen from this method.
+		 */
+		public static function getEvent(eid:Number):FacebookEvent
+		{
+			var event:FacebookEvent = _eventCollection.getItemById(eid) as FacebookEvent;
+			if(!event)
+			{
+				_locked = false;
+				event = new FacebookEvent(eid);
+				_locked = true;
+				_eventCollection.addItem(event);
+			}
+			return event;
+		}
+		
+		private static var _eventCollection:HashableArray = new HashableArray('eid', false);
+		private static var _locked:Boolean = true;
 	}
 }

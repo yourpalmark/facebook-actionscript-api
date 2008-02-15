@@ -2,11 +2,11 @@ package test.pbking.facebook.delegates
 {
 	import com.pbking.facebook.Facebook;
 	import com.pbking.facebook.data.users.UserFields;
-	import com.pbking.facebook.delegates.users.GetLoggedInUser_delegate;
-	import com.pbking.facebook.delegates.users.GetUserInfo_delegate;
-	import com.pbking.facebook.delegates.users.HasAppPermission_delegate;
-	import com.pbking.facebook.delegates.users.IsAppAdded_delegate;
-	import com.pbking.facebook.delegates.users.SetStatus_delegate;
+	import com.pbking.facebook.delegates.users.GetLoggedInUserDelegate;
+	import com.pbking.facebook.delegates.users.GetUserInfoDelegate;
+	import com.pbking.facebook.delegates.users.HasAppPermissionDelegate;
+	import com.pbking.facebook.delegates.users.IsAppAddedDelegate;
+	import com.pbking.facebook.delegates.users.SetStatusDelegate;
 	
 	import flash.events.Event;
 	
@@ -52,7 +52,7 @@ package test.pbking.facebook.delegates
 		}
 		private function testGetLoggedInUserReply(e:Event):void
 		{
-			var d:GetLoggedInUser_delegate = e.target as GetLoggedInUser_delegate;
+			var d:GetLoggedInUserDelegate = e.target as GetLoggedInUserDelegate;
 			assertTrue(d.errorMessage, d.success);
 			assertTrue("matches session defined user", d.user.uid == facebook.user.uid);
 		}
@@ -66,7 +66,7 @@ package test.pbking.facebook.delegates
 		}
 		private function testGetUserInfoReply(e:Event):void
 		{
-			var d:GetUserInfo_delegate = e.target as GetUserInfo_delegate;
+			var d:GetUserInfoDelegate = e.target as GetUserInfoDelegate;
 			//because the info saved for each person differs, we can only really test to make sure the call was sucessful
 			assertTrue(d.errorMessage, d.success);
 		}
@@ -80,7 +80,7 @@ package test.pbking.facebook.delegates
 		}
 		private function testSetStatusReply(e:Event):void
 		{
-			var d:SetStatus_delegate = e.target as SetStatus_delegate;
+			var d:SetStatusDelegate = e.target as SetStatusDelegate;
 			if(d.errorCode == 250) //Updating status requires the extended permission status_update
 				assertFalse(d.success);
 			else
@@ -98,7 +98,7 @@ package test.pbking.facebook.delegates
 		}
 		private function testHasAppPermissionReply(e:Event):void
 		{
-			var d:HasAppPermission_delegate = e.target as HasAppPermission_delegate;
+			var d:HasAppPermissionDelegate = e.target as HasAppPermissionDelegate;
 			assertTrue(d.errorMessage, d.success);
 		}
 		
@@ -111,7 +111,7 @@ package test.pbking.facebook.delegates
 		}
 		private function testIsAppAddedReply(e:Event):void
 		{
-			var d:IsAppAdded_delegate = e.target as IsAppAdded_delegate;
+			var d:IsAppAddedDelegate = e.target as IsAppAddedDelegate;
 			assertTrue(d.errorMessage, d.success);
 			assertTrue(d.isAdded);
 		}

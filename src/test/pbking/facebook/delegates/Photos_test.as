@@ -2,10 +2,10 @@ package test.pbking.facebook.delegates
 {
 	import com.pbking.facebook.Facebook;
 	import com.pbking.facebook.data.photos.FacebookAlbum;
-	import com.pbking.facebook.delegates.photos.GetAlbums_delegate;
-	import com.pbking.facebook.delegates.photos.GetPhotos_delegate;
-	import com.pbking.facebook.delegates.photos.GetTags_delegate;
-	import com.pbking.facebook.delegates.photos.Upload_delegate;
+	import com.pbking.facebook.delegates.photos.GetAlbumsDelegate;
+	import com.pbking.facebook.delegates.photos.GetPhotosDelegate;
+	import com.pbking.facebook.delegates.photos.GetTagsDelegate;
+	import com.pbking.facebook.delegates.photos.UploadDelegate;
 	
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
@@ -68,7 +68,7 @@ package test.pbking.facebook.delegates
 		}
 		private function testUploadReply(e:Event):void
 		{
-			var d:Upload_delegate = e.target as Upload_delegate;
+			var d:UploadDelegate = e.target as UploadDelegate;
 			assertTrue(d.errorMessage, d.success);
 			assertTrue(d.uploadedPhoto);
 		}
@@ -79,7 +79,7 @@ package test.pbking.facebook.delegates
 		}
 		private function testGetAlbumsReply(e:Event):void
 		{
-			var d:GetAlbums_delegate = e.target as GetAlbums_delegate;
+			var d:GetAlbumsDelegate = e.target as GetAlbumsDelegate;
 			assertTrue(d.errorMessage, d.success);
 			testAlbum = d.albums[0];
 		}
@@ -90,7 +90,7 @@ package test.pbking.facebook.delegates
 		}
 		private function testGetPhotosForAlbumReply(e:Event):void
 		{
-			var d:GetPhotos_delegate = e.target as GetPhotos_delegate;
+			var d:GetPhotosDelegate = e.target as GetPhotosDelegate;
 			assertTrue(d.errorMessage, d.success);
 		}
 		
@@ -100,7 +100,7 @@ package test.pbking.facebook.delegates
 		}
 		private function testGetPhotosReply(e:Event):void
 		{
-			var d:GetPhotos_delegate = e.target as GetPhotos_delegate;
+			var d:GetPhotosDelegate = e.target as GetPhotosDelegate;
 			assertTrue(d.errorMessage, d.success);
 			testAlbum.photos = d.photos;
 		}
@@ -112,7 +112,7 @@ package test.pbking.facebook.delegates
 		}
 		private function testGetTagsReply(e:Event):void
 		{
-			var d:GetTags_delegate = e.target as GetTags_delegate;
+			var d:GetTagsDelegate = e.target as GetTagsDelegate;
 			assertTrue(d.errorMessage, d.success);
 		}
 

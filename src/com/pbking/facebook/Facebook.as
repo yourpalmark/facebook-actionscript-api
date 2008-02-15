@@ -35,13 +35,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 package com.pbking.facebook
 {
-	import com.gsolo.encryption.MD5;
-	import com.pbking.facebook.data.events.FacebookEvent;
-	import com.pbking.facebook.data.groups.FacebookGroup;
 	import com.pbking.facebook.data.users.FacebookUser;
 	import com.pbking.facebook.delegates.auth.*;
+	import com.pbking.facebook.delegates.users.GetLoggedInUserDelegate;
 	import com.pbking.facebook.methodGroups.*;
-	import com.pbking.util.collection.HashableArray;
 	import com.pbking.util.logging.PBLogger;
 	
 	import flash.events.Event;
@@ -57,12 +54,6 @@ package com.pbking.facebook
 		// VARIABLES //////////
 		
 		private var logger:PBLogger = PBLogger.getLogger("pbking.facebook");
-		
-		private var _userCollection:HashableArray = new HashableArray('uid', false);
-		private var _groupCollection:HashableArray = new HashableArray('gid', false);
-		private var _eventCollection:HashableArray = new HashableArray('eid', false);
-		
-		public var fb_sig_values:Object;
 		
 		private var _auth_token:String;
 		
@@ -85,21 +76,9 @@ package com.pbking.facebook
 
 		// CONSTRUCTION //////////
 		
-		private static var _instance:Facebook;
-		public static function get instance():Facebook
-		{
-			if(!_instance)
-				_instance = new Facebook();
-			return _instance;
-		}
-		
 		function Facebook():void
 		{
-			if(Facebook._instance)
-			{
-				throw new Error("Only once instance of the Facebook object should be created!  The preferred way to access the Facebook object is by Facebook.instance");
-			}
-			_instance = this;
+			//nothing here
 		}
 		
 		// GETTERS and SETTERS //////////
@@ -117,6 +96,21 @@ package com.pbking.facebook
 		public function get secret():String { return _secret; }
 		
 		/**
+		 * The session type.  It could be DESKTOP, WEB, or JAVASCRIPT_BRIDGE depending on the type of session that was started.
+		 * There IS a setter for binding purposes but this value IS NOT SETTABLE.
+		 */
+		private var _sessionType:String;
+		public function get sessionType():String { return this._sessionType; }
+		public function set sessionType(newVal:String):void {/*for binding*/}
+		private function setSessionType(newVal:String):void
+		{
+			this._sessionType = newVal;
+			//ping setter to execute bindings
+			this.sessionType = null; 
+		}
+		
+		
+		/**
 		 * Facebook namespace to use when pulling out XML data responses
 		 */
 		private var _facebook_namespace:Namespace;
@@ -132,14 +126,13 @@ package com.pbking.facebook
 		/** 
 		 * session key 
 		 */
-		private var _session_key:String;
 		public function set session_key(newVal:String):void { this._session_key = newVal; }
 		public function get session_key():String { return _session_key; }
+		private var _session_key:String;
 		
 		/** 
 		 * logged in user
 		 */
-		private var _user:FacebookUser;
 		public function get user():FacebookUser 
 		{ 
 			if(!_user)
@@ -149,32 +142,11 @@ package com.pbking.facebook
 			}
 			return _user; 
 		}
-		
-		/**
-		 * The user whos page is being viewed.
-		 * If no profile is set, the logged in user is returned
-		 */
-		private var _currentProfile:FacebookUser;
-		public function get currentProfile():FacebookUser
-		{
-			if(!_currentProfile)
-				return user;
-			else
-				return _currentProfile;
-		}
-		
-		/** 
-		 * Returns true if user is viewing their own profile
-		 */ 
-		public function get isUsersProfile():Boolean 
-		{ 
-			return this.currentProfile == this.user;
-		}
+		private var _user:FacebookUser;
 		
 		/**
 		 * connection time
 		 */
-		private var _time:Number = 0;
 		public function get time():Number 
 		{
 			if(_time == 0)
@@ -183,38 +155,27 @@ package com.pbking.facebook
 			}
 			return _time; 
 		}
+		private var _time:Number = 0;
 		
 		/**
 		 * The time the session will expire.
 		 * 0 if it doesn't expire
 		 */
-		private var _expires:Number = 0;
 		public function get expires():Number { return _expires; }
-		
-		/**
-		 * The type of application that is running.
-		 * Options are WEB_APP, DESKTOP_APP, WIDGET_APP.
-		 * Defined in the class FacebookSessionType
-		 */
-		private var _sessionType:String = FacebookSessionType.WIDGET_APP;
-		public function get sessionType():String { return _sessionType; }
-		public function set sessionType(newVal:String):void { _sessionType = newVal; }
-		
-		/**
-		 * Set this to true if you will be using a "redirect" server to forward your requests to the Facebook API.
-		 * Using a redirect server is much more secure (your secret won't be compiled into your .swf).
-		 * The service post will be constructed differently (as the sig will be constructed by your redirect server).
-		 */
-		private var _useRedirectServer:Boolean;
-		public function get useRedirectServer():Boolean { return _useRedirectServer; }
-		public function set useRedirectServer(newVal:Boolean):void { this._useRedirectServer = newVal; }
-		
+		private var _expires:Number = 0;
 		
 		/**
 		 * Returns true when the connection has been established and we are ready to make calls
+		 * There IS a setter for binding purposes but this value IS NOT SETTABLE.
 		 */
-		private var _isConnected:Boolean = false;
 		public function get isConnected():Boolean { return this._isConnected; }
+		public function set isConnected(newVal:Boolean):void {/*for binding*/}
+		private var _isConnected:Boolean = false;
+		private function setIsConnected(newVal:Boolean):void
+		{
+			_isConnected = newVal;
+			isConnected = !newVal; //ping to promote binding
+		}
 		
 		/**
 		 * Version of the facebook API.  This will be updated as the API is updated, but you can
@@ -224,13 +185,16 @@ package com.pbking.facebook
 		public function get api_version():String { return this._api_version; }
 		public function set api_version(newVal:String):void { this._api_version = newVal };
 		
+		private var _connectionErrorMessage:String;
+		public function get connectionErrorMessage():String { return _connectionErrorMessage; }
+		
 		// METHOD GROUPS //////////
 		
 		private var _photos:Photos;
 		public function get photos():Photos 
 		{ 
 			if(!_photos)
-				_photos = new Photos()
+				_photos = new Photos(this)
 			return this._photos; 
 		}
 		
@@ -238,7 +202,7 @@ package com.pbking.facebook
 		public function get friends():Friends 
 		{ 
 			if(!_friends)
-				_friends = new Friends()
+				_friends = new Friends(this)
 			return this._friends; 
 		}
 		
@@ -246,7 +210,7 @@ package com.pbking.facebook
 		public function get users():Users 
 		{ 
 			if(!_users)
-				_users = new Users()
+				_users = new Users(this)
 			return this._users; 
 		}
 		
@@ -254,7 +218,7 @@ package com.pbking.facebook
 		public function get events():Events 
 		{ 
 			if(!_events)
-				_events = new Events()
+				_events = new Events(this)
 			return this._events; 
 		}
 		
@@ -262,7 +226,7 @@ package com.pbking.facebook
 		public function get feed():Feed 
 		{ 
 			if(!_feed)
-				_feed = new Feed()
+				_feed = new Feed(this)
 			return this._feed; 
 		}
 		
@@ -270,7 +234,7 @@ package com.pbking.facebook
 		public function get fql():Fql 
 		{ 
 			if(!_fql)
-				_fql = new Fql()
+				_fql = new Fql(this)
 			return this._fql; 
 		}
 		
@@ -278,7 +242,7 @@ package com.pbking.facebook
 		public function get groups():Groups 
 		{ 
 			if(!_groups)
-				_groups = new Groups()
+				_groups = new Groups(this)
 			return this._groups; 
 		}
 		
@@ -286,7 +250,7 @@ package com.pbking.facebook
 		public function get marketplace():Marketplace 
 		{ 
 			if(!_marketplace)
-				_marketplace = new Marketplace()
+				_marketplace = new Marketplace(this)
 			return this._marketplace; 
 		}
 		
@@ -294,7 +258,7 @@ package com.pbking.facebook
 		public function get notifications():Notifications 
 		{ 
 			if(!_notifications)
-				_notifications = new Notifications()
+				_notifications = new Notifications(this)
 			return this._notifications; 
 		}
 		
@@ -304,7 +268,7 @@ package com.pbking.facebook
 		public function get pages():Pages 
 		{ 
 			if(!_pages)
-				_pages = new Pages()
+				_pages = new Pages(this)
 			return this._pages; 
 		}
 		*/
@@ -313,15 +277,26 @@ package com.pbking.facebook
 		public function get profile():Profile 
 		{ 
 			if(!_profile)
-				_profile = new Profile()
+				_profile = new Profile(this)
 			return this._profile; 
 		}
 		
-		private var _connectionErrorMessage:String;
-		public function get connectionErrorMessage():String { return _connectionErrorMessage; }
-		
 		// SESSION FUNCTIONS //////////
 
+		public function startJSBridgeSession(api_key:String, secret:String, session_key:String, expires:Number, user_id:Number):void
+		{
+			logger.debug("starting jsBridge session");
+			setSessionType(FacebookSessionType.JAVASCRIPT_BRIDGE);
+			this._api_key = api_key;
+			this._secret = secret;
+			this._session_key = session_key;
+			this._expires = expires;
+
+			this._user = FacebookUser.getUser(user_id);
+
+			onReady();
+		}
+		
 		/**
 		 * For testing purposes
 		 */
@@ -331,51 +306,7 @@ package com.pbking.facebook
 			this._secret = secret;
 		}
 
-		/**
-		 * Start a session for a web-based application.
-		 * You can choose not to pass in your secret if you plan on using a proxy server
-		 * for your facebook calls.  If your api_key is set here and is also passed in via 
-		 * flashvars then that that value will be ignored.
-		 */
-		public function startWebSession(flashVars:Object, api_key:String=null, secret:String=null):void
-		{
-			if(secret)
-				this._secret = secret;
-				
-			if(api_key)
-				this._api_key = api_key;
-				
-			sessionType = FacebookSessionType.WEB_APP;
-			
-			//pull the auth_token (which should have been sent in as a flashvar)
-			_auth_token = flashVars["auth_token"];
-			
-			//validate the session
-			var delegate:GetSession_delegate = new GetSession_delegate(_auth_token);
-			delegate.addEventListener(Event.COMPLETE, startWebSessionReply);
-		}
-
-		private function startWebSessionReply(event:Event):void
-		{
-			var delegate:GetSession_delegate = event.target as GetSession_delegate;
-			if(delegate.success)
-			{
-				this._user = getUser(delegate.uid);
-				this._user.isLoggedInUser = true;
-				
-				this._secret = delegate.secret;
-				this._session_key = delegate.session_key;
-				this._expires = delegate.expires;
-				
-				prepareSigValues();
-				onReady();
-			}
-			else
-			{
-				onConnectionError(delegate.errorMessage);
-			}
-		}
-		
+		private var non_inf_session_secret:String;
 		/**
 		 * Start a session for a desktop based application.
 		 * For this you need to know and pass the application api_key and secret.
@@ -383,41 +314,56 @@ package com.pbking.facebook
 		 * validateDesktopSession().  Alternately you could pass in an infinite_session_key which
 		 * will authenticate immediately (without navigating to the user login page).
 		 */
-		public function startDesktopSession(api_key:String, secret:String, infinite_session_key:String=""):void
+		public function startDesktopSession(api_key:String, secret:String, infinite_session_key:String=null, infinite_session_secret:String=null):void
 		{
 			logger.debug("starting desktop session");
+
+			setSessionType(FacebookSessionType.DESKTOP);
+			
+			this._sessionType = FacebookSessionType.DESKTOP;
+			this.sessionType = _sessionType;
 			
 			this._api_key = api_key;
-			this._secret = secret;
 			
-			sessionType = FacebookSessionType.DESKTOP_APP;
-			
-			if(infinite_session_key != "")
+			if(infinite_session_key)
 			{
-				//TODO: we need to do some error checking on the infinite_session_key
-
+				this.non_inf_session_secret = secret;
+				this._secret = infinite_session_secret;
 				this._session_key = infinite_session_key;
 
-				// The user id is everything after the hyphen in the session key
-				var i:Number = infinite_session_key.indexOf("-");
-				var userid:int = parseInt(infinite_session_key.substring(i+1));
-				this._user = getUser(userid);
+				//make a call to verify our session (and grab our user while we're at it)
+				this.users.getLoggedInUser(verifyInfinateSession);
+			}
+			else
+			{
+				this._secret = secret;
+				//construct a token and get ready for the user to enter user/pass
+				var delegate:CreateTokenDelegate = new CreateTokenDelegate(this);
+				delegate.addEventListener(Event.COMPLETE, onDesktopTokenCreated);
+			}
+		}
+		
+		private function verifyInfinateSession(e:Event):void
+		{
+			var d:GetLoggedInUserDelegate = e.target as GetLoggedInUserDelegate;
+			if(d.success)
+			{
+				this._user = d.user;
 				this._user.isLoggedInUser = true;
-
-				prepareSigValues();
 				onReady();
 			}
 			else
 			{
-				//construct a token and get ready for the user to enter user/pass
-				var delegate:CreateToken_delegate = new CreateToken_delegate();
-				delegate.addEventListener(Event.COMPLETE, onDesktopTokenCreated);
+				//infinate session didn't work out.  just start over without it
+				this.session_key = null;
+				this._secret = this.non_inf_session_secret;
+				startDesktopSession(this._api_key, this._secret);
 			}
 		}
 		
 		private function onDesktopTokenCreated(event:Event):void
 		{
-			var delegate:CreateToken_delegate = event.target as CreateToken_delegate;
+			var delegate:CreateTokenDelegate = event.target as CreateTokenDelegate;
 			if(delegate.success)
 			{
 				_auth_token = delegate.auth_token;
@@ -439,23 +385,23 @@ package com.pbking.facebook
 		public function validateDesktopSession():void
 		{
 			//validate the session
-			var delegate:GetSession_delegate = new GetSession_delegate(_auth_token);
+			var delegate:GetSessionDelegate = new GetSessionDelegate(this, _auth_token);
 			delegate.addEventListener(Event.COMPLETE, validateDesktopSessionReply);
 		}
 		
 		private function validateDesktopSessionReply(event:Event):void
 		{
-			var delegate:GetSession_delegate = event.target as GetSession_delegate;
+			var delegate:GetSessionDelegate = event.target as GetSessionDelegate;
 			
 			if(delegate.success)
 			{
-				this._user = getUser(delegate.uid);
+				this._user = FacebookUser.getUser(delegate.uid);
 				this._user.isLoggedInUser = true;
 
 				this._session_key = delegate.session_key;
 				this._expires = delegate.expires;
+				this._secret = delegate.secret;
 			
-				prepareSigValues();
 				onReady();
 			}
 			else
@@ -466,60 +412,33 @@ package com.pbking.facebook
 		
 		/**
 		 * Start a session for a Facebook widget application.
-		 * You can choose not to pass in your secret if you plan on using a proxy server
-		 * for your facebook calls.  If your api_key is set here and is also passed in via 
-		 * flashvars then that that value will be ignored.
+		 * This method is not secure and has been depreciated!  
+		 * Instead please use startJSBridgeSession.
 		 */
-		public function startWidgetSession(flashVars:Object, api_key:String=null, secret:String=null):void
+		public function startWidgetSession(flashVars:Object, api_key:String, secret:String):void
 		{
 			logger.debug("starting facebook widget session");
+			logger.warn("START WIDGET SESSION HAS BEEN DEPRECIATED!  USE .startJSAuthSession INSTEAD!");
 			
-			sessionType = FacebookSessionType.WIDGET_APP;
-			
-			if(secret)
-				this._secret = secret;
-				
-			if(api_key)
-				this._api_key = api_key;
-			
-			//pull out all of the fb_sig values (which should be passed in as flashvars)
-			//these properties will be used to verify communication
-			this.fb_sig_values = new Object();
-			
-			logger.debug("- - - flashVars - - -");
-			var prefix:String = "fb_sig";
-			for(var prop:String in flashVars)
-			{
-				if(prop.substring(0,prefix.length) == prefix)
-				{
-					logger.debug(prop + ":" + flashVars[prop]);
-					this.fb_sig_values[prop] = flashVars[prop]; 
-				}
-			}
+			setSessionType(FacebookSessionType.WEB);
+			this._secret = secret;
+			this._api_key = api_key;
 			
 			//save the information of those props into our class vars for use in the app
-			this._user = getUser(parseInt(fb_sig_values['fb_sig_user']));
+			this._user = FacebookUser.getUser(parseInt(flashVars['fb_sig_user']));
 			this._user.isLoggedInUser = true;
 			
-			this._time = fb_sig_values['fb_sig_time'];
+			this._time = flashVars['fb_sig_time'];
 			
-			this._expires = fb_sig_values['fb_sig_expires'];
-			
-			if(_user.uid != parseInt(fb_sig_values['fb_sig_profile']))
-				this._currentProfile = getUser(parseInt(fb_sig_values['fb_sig_profile']));
+			this._expires = flashVars['fb_sig_expires'];
 			
 			if(this._session_key == null)
-				this._session_key = fb_sig_values['fb_sig_session_key'];
-			
-			logger.debug("session key: " + this._session_key);
-			
-			if(this._api_key == null)	
-				this._api_key = fb_sig_values['fb_sig_api_key'];
+				this._session_key = flashVars['fb_sig_session_key'];
 			
 			if(session_key)
 				onReady();
 			else
-				onConnectionError("No session key for application session");
+				onConnectionError("No session key set for session");
 		}
 		
 		/**
@@ -527,7 +446,7 @@ package com.pbking.facebook
 		 */
 		private function onReady():void
 		{
-			_isConnected = true;
+			setIsConnected(true);
 			dispatchEvent(new Event(Event.COMPLETE));
 		}
 		
@@ -536,110 +455,10 @@ package com.pbking.facebook
 		 */
 		private function onConnectionError(errorMessage:String):void
 		{
-			_isConnected = false;
+			setIsConnected(false);
 			_connectionErrorMessage = errorMessage;
 			dispatchEvent(new Event(Event.COMPLETE));
 		}
 		
-		/**
-		 * Take the properties we have and put them into the fb_sig_values object 
-		 * in case we need to use them for a redirect server validation.
-		 * This is a helper function to Desktop and Web app functions.
-		 */
-		private function prepareSigValues():void
-		{
-			var temp_sig_values:Object = new Object();
-
-			temp_sig_values['user'] = this.user;
-			temp_sig_values['time'] = this.time; 
-			temp_sig_values['session_key'] = this.session_key;
-			temp_sig_values['api_key'] = this.api_key;
-			temp_sig_values['expires'] = this.expires;
-			
-			//calculate the sig for these values
-			var a:Array = [];
-			
-			for( var p:String in temp_sig_values )
-			{
-				if( p !== 'sig' ){
-					a.push( p + '=' + temp_sig_values[p] );
-				}
-			}
-			
-			a.sort();
-			
-			var s:String = '';
-			
-			for( var i:Number = 0; i < a.length; i++ )
-			{
-				s += a[i];
-			}
-			
-			s += secret;
-			var mySig:String = MD5.encrypt( s );
-			
-			//now put all these siggy things into our sig holder
-			
-			this.fb_sig_values = new Object()
-			
-			fb_sig_values['fb_sig'] = mySig;
-			for(var j:String in temp_sig_values)
-			{
-				this.fb_sig_values['fb_sig_' + j] = temp_sig_values[j];
-			}
-		}
-
-		// COLLECTION FUNCTIONS //////////
-		
-		/**
-		 * This keeps a common collection of users so that all information gathered
-		 * on users is stored here and updated.  Each user should have only one instance.
-		 * 
-		 * Creating a user should happen from this method.
-		 */
-		public function getUser(uid:int):FacebookUser
-		{
-			var user:FacebookUser = _userCollection.getItemById(uid) as FacebookUser;
-			if(!user)
-			{
-				user = new FacebookUser(uid);
-				_userCollection.addItem(user);
-			}
-			return user;
-		}
-		
-		/**
-		 * This keeps a common collection of groups so that all information gathered
-		 * on groups is stored here and updated.  Each group should have only one instance.
-		 * 
-		 * Creating a group should happen from this method.
-		 */
-		public function getGroup(gid:Number):FacebookGroup
-		{
-			var group:FacebookGroup = _groupCollection.getItemById(gid) as FacebookGroup;
-			if(!group)
-			{
-				group = new FacebookGroup(gid);
-				_groupCollection.addItem(group);
-			}
-			return group;
-		}
-		
-		/**
-		 * This keeps a common collection of events so that all information gathered
-		 * on events is stored here and updated.  Each event should have only one instance.
-		 * 
-		 * Creating an event should happen from this method.
-		 */
-		public function getEvent(eid:Number):FacebookEvent
-		{
-			var event:FacebookEvent = _eventCollection.getItemById(eid) as FacebookEvent;
-			if(!event)
-			{
-				event = new FacebookEvent(eid);
-				_eventCollection.addItem(event);
-			}
-			return event;
-		}
 	}
 }

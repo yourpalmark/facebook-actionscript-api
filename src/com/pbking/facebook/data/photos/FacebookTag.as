@@ -31,7 +31,6 @@ OTHER DEALINGS IN THE SOFTWARE.
  */
 package com.pbking.facebook.data.photos
 {
-	import com.pbking.facebook.Facebook;
 	import com.pbking.facebook.data.users.FacebookUser;
 	
 	
@@ -48,26 +47,12 @@ package com.pbking.facebook.data.photos
 		
 		// CONSTRUCTION //////////
 		
-		function FacebookTag(xml:XML)
+		function FacebookTag(initObj:Object)
 		{
-			if(xml) parseXML(xml);
-		}
-		
-		private function parseXML(xml:XML):void
-		{
-			/*
-			  <photo_tag>
-			    <pid>34995991612795</pid>
-			    <subject>1240078</subject>
-			    <xcoord>51.4901</xcoord>
-			    <ycoord>23.6203</ycoord>
-			  </photo_tag>
-			*/	
-			
-			this._pid = parseInt(xml.pid);
-			this._subject = Facebook.instance.getUser(parseInt(xml.subject));
-			this._xcoord = Number(xml.xcoord);
-			this._ycoord = Number(xml.ycoord);
+			this._pid = initObj.pid;
+			this._subject = FacebookUser.getUser(initObj.subject);
+			this._xcoord = Number(initObj.xcoord);
+			this._ycoord = Number(initObj.ycoord);
 		}
 		
 		// GETTERS //////////

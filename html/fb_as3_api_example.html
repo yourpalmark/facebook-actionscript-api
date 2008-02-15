@@ -1,0 +1,54 @@
+<html>
+	<head>
+		<title>ActionScript AS3 API Example</title>
+
+		<!-- include the API from facebook's server --> 
+		<script src="http://static.ak.facebook.com/js/api_lib/FacebookApi.debug.js" type="text/javascript"></script>
+		 
+		<!-- include swfobject library -->
+		<script type="text/javascript" src="swfobject.js"></script>
+		
+	</head>
+	
+	<body>
+		<script type="text/javascript">
+			
+			//create a new instance of the JS API passing in my application key and the location
+			//of my xd_receiver.htm file
+			var api = new FB.ApiClient('159d027464e070d541848874f1fed87a', '/xd_receiver.htm', null);
+			
+			//the first call (and only in our use) is to .requireLogin.  If this session hasn't been
+			//"validated" the user will either be asked to login and returned, or the page could
+			//just refresh.  Once this happens the session will be set and can be forwarded onto the
+			//flash app so that it can use the API.			
+			api.requireLogin(function(exception)
+			{
+				//this function will only be called once we have a valid session
+				
+				//define the flashVars
+				flashVars = {
+					user_id: api.get_session().uid,
+					api_key: api.apiKey,
+					secret: api.get_session().secret,
+					session_key: api.get_session().session_key,
+					expires: api.get_session().expires
+				};
+				
+				//now bring our .swf to the party.  I prefer to use swfobject to get this done but
+				//there are other solutions if you prefer.  Make sure to pass in the flashvars.
+				swfobject.embedSWF("FB_API_EXAMPLE.swf", "flashContent", "100%", "100%", "9.0.0", "expressInstall.swf", flashVars);
+			});
+			
+			function bridgeFacebookCall(method, args)
+			{
+				api._callMethod$1(method, args, function(result, exception)
+				{
+					document.flashContent.bridgeFacebookReply(result, exception);
+				});
+			}
+			
+		</script>
+
+		<div id="flashContent"></div>
+	</body>
+</html>

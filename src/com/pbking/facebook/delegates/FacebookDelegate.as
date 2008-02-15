@@ -45,6 +45,8 @@ package com.pbking.facebook.delegates
 	
 	public class FacebookDelegate extends EventDispatcher
 	{
+		// VARIABLES //////////
+		
 		protected var fBook:Facebook;
 		protected var fbCall:FacebookCall;
 		
@@ -52,51 +54,65 @@ package com.pbking.facebook.delegates
 		public var errorCode:int = 0;
 		public var errorMessage:String = "";
 		
-		function FacebookDelegate()
+		// CONSTRUCTION //////////
+		
+		function FacebookDelegate(facebook:Facebook)
 		{
-			this.fBook = Facebook.instance;
+			this.fBook = facebook;
 			fbCall = new FacebookCall(fBook);
-			fbCall.addEventListener(Event.COMPLETE, result);
+			fbCall.addEventListener(Event.COMPLETE, onCallComplete);
 			fbCall.addEventListener(IOErrorEvent.IO_ERROR, onCallError);
 			fbCall.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onCallError);
 		}
 		
-		public function getResponseXML():XML
+		//////////
+		
+		private function removeFBCallListeners():void
 		{
-			return fbCall.getResponse();
+			if(!fbCall) return;
+				
+			fbCall.removeEventListener(Event.COMPLETE, onCallComplete);
+			fbCall.removeEventListener(IOErrorEvent.IO_ERROR, onCallError);
+			fbCall.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, onCallError);
+		}
+		
+		public function get result():Object
+		{
+			return fbCall.result;
 		}
 		
 		protected function onCallError(event:ErrorEvent):void
 		{
+			removeFBCallListeners();
 			//something super sucky happened
 			errorCode = -1;
 			errorMessage = event.toString();
 			onError();
 		}
 		
-		protected function result(event:Event):void
+		protected function onCallComplete(event:Event):void
 		{
-			fbCall.removeEventListener(Event.COMPLETE, result);
-
-			default xml namespace = fBook.FACEBOOK_NAMESPACE;
+			removeFBCallListeners();
 			
+			var result:Object = fbCall.result;
+
 			//look for an error
-			if(fbCall.getResponse().error_code != undefined)
+			if(result && result.hasOwnProperty('error_code'))
 			{
 				//dang.  handle the error
-				this.errorCode = fbCall.getResponse().error_code;
-				this.errorMessage = fbCall.getResponse().error_msg;
+				this.errorCode = result.error_code;
+				this.errorMessage = result.error_msg;
 				onError();
 			}
 			else
 			{
 				//send the results to the children
-				handleResult(fbCall.getResponse());
+				handleResult(result);
 				onComplete();
 			}
 		}
 		
-		protected function handleResult(resultXML:XML):void
+		protected function handleResult(result:Object):void
 		{
 			//Children should override this methid
 		}

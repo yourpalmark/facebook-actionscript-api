@@ -1,7 +1,7 @@
 package test.pbking.facebook.delegates
 {
 	import com.pbking.facebook.Facebook;
-	import com.pbking.facebook.delegates.fql.FqlQuery_delegate;
+	import com.pbking.facebook.delegates.fql.FqlQueryDelegate;
 	
 	import flash.events.Event;
 	
@@ -45,7 +45,7 @@ package test.pbking.facebook.delegates
 		}
 		private function testQueryReply(e:Event):void
 		{
-			var d:FqlQuery_delegate = e.target as FqlQuery_delegate;
+			var d:FqlQueryDelegate = e.target as FqlQueryDelegate;
 			assertTrue(d.errorMessage, d.success);
 			
 		}

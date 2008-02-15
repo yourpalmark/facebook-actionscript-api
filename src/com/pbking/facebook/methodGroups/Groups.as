@@ -28,18 +28,20 @@ package com.pbking.facebook.methodGroups
 	import com.pbking.facebook.Facebook;
 	import com.pbking.facebook.data.groups.FacebookGroup;
 	import com.pbking.facebook.data.users.FacebookUser;
-	import com.pbking.facebook.delegates.groups.GetGroupMembers_delegate;
-	import com.pbking.facebook.delegates.groups.GetGroups_delegate;
+	import com.pbking.facebook.delegates.groups.GetGroupMembersDelegate;
+	import com.pbking.facebook.delegates.groups.GetGroupsDelegate;
 	
 	public class Groups
 	{
 		// VARIABLES //////////
 		
+		private var facebook:Facebook;
+		
 		// CONSTRUCTION //////////
 		
-		function Groups():void
+		function Groups(facebook:Facebook):void
 		{
-			//nothing here
+			this.facebook = facebook;
 		}
 		
 		// FACEBOOK FUNCTION CALLS //////////
@@ -56,16 +58,16 @@ package com.pbking.facebook.methodGroups
 		 * associated with the provided gids, regardless of any user relationship.
 		 * If both parameters are omitted, the method returns all groups of the session user. 
 		 */
-		public function getGroups(user:FacebookUser=null, groupsFilter:Array=null, callback:Function=null):GetGroups_delegate
+		public function getGroups(user:FacebookUser=null, groupsFilter:Array=null, callback:Function=null):GetGroupsDelegate
 		{
-			var d:GetGroups_delegate = new GetGroups_delegate(user, groupsFilter);
+			var d:GetGroupsDelegate = new GetGroupsDelegate(facebook, user, groupsFilter);
 			MethodGroupUtil.addCallback(d, callback);
 			return d;
 		}
 
-		public function getMembers(group:FacebookGroup, callback:Function=null):GetGroupMembers_delegate
+		public function getMembers(group:FacebookGroup, callback:Function=null):GetGroupMembersDelegate
 		{
-			var d:GetGroupMembers_delegate = new GetGroupMembers_delegate(group);
+			var d:GetGroupMembersDelegate = new GetGroupMembersDelegate(facebook, group);
 			MethodGroupUtil.addCallback(d, callback);
 			return d;
 		}

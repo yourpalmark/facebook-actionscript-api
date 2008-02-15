@@ -2,8 +2,8 @@ package test.pbking.facebook.delegates
 {
 	import com.pbking.facebook.Facebook;
 	import com.pbking.facebook.data.events.FacebookEvent;
-	import com.pbking.facebook.delegates.events.GetEventMembers_delegate;
-	import com.pbking.facebook.delegates.events.GetEvents_delegate;
+	import com.pbking.facebook.delegates.events.GetEventMembersDelegate;
+	import com.pbking.facebook.delegates.events.GetEventsDelegate;
 	
 	import flash.events.Event;
 	
@@ -46,7 +46,7 @@ package test.pbking.facebook.delegates
 		}
 		private function testGetEventsReply(e:Event):void
 		{
-			var d:GetEvents_delegate = e.target as GetEvents_delegate;
+			var d:GetEventsDelegate = e.target as GetEventsDelegate;
 			assertTrue(d.errorMessage, d.success);
 			
 			if(d.events.length > 0)
@@ -65,7 +65,7 @@ package test.pbking.facebook.delegates
 		}
 		private function testGetEventMembersReply(e:Event):void
 		{
-			var d:GetEventMembers_delegate = e.target as GetEventMembers_delegate;
+			var d:GetEventMembersDelegate = e.target as GetEventMembersDelegate;
 			assertTrue(d.errorMessage, d.success);
 		}
 	}

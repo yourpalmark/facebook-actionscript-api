@@ -1,8 +1,8 @@
 package test.pbking.facebook.delegates
 {
 	import com.pbking.facebook.Facebook;
-	import com.pbking.facebook.delegates.notifications.GetNotifications_delegate;
-	import com.pbking.facebook.delegates.notifications.SendNotification_delegate;
+	import com.pbking.facebook.delegates.notifications.GetNotificationsDelegate;
+	import com.pbking.facebook.delegates.notifications.SendNotificationDelegate;
 	
 	import flash.events.Event;
 	
@@ -47,7 +47,7 @@ package test.pbking.facebook.delegates
 		}
 		private function testSendReply(e:Event):void
 		{
-			var d:SendNotification_delegate = e.target as SendNotification_delegate;
+			var d:SendNotificationDelegate = e.target as SendNotificationDelegate;
 			assertTrue(d.errorMessage, d.success);
 			
 		}
@@ -61,7 +61,7 @@ package test.pbking.facebook.delegates
 		}
 		private function testGetNotificationsReply(e:Event):void
 		{
-			var d:GetNotifications_delegate = e.target as GetNotifications_delegate;
+			var d:GetNotificationsDelegate = e.target as GetNotificationsDelegate;
 			assertTrue(d.errorMessage, d.success);
 			
 		}

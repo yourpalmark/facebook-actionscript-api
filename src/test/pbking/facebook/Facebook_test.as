@@ -1,7 +1,7 @@
 package test.pbking.facebook
 {
 	import com.pbking.facebook.Facebook;
-	import com.pbking.facebook.delegates.auth.CreateToken_delegate;
+	import com.pbking.facebook.delegates.auth.CreateTokenDelegate;
 	
 	import flash.events.Event;
 	
@@ -67,12 +67,12 @@ package test.pbking.facebook
 		public function testCreateToken():void
 		{
 			testFacebook.startNoSession(testApi_key, testSecret);
-			var d:CreateToken_delegate = new CreateToken_delegate();
+			var d:CreateTokenDelegate = new CreateTokenDelegate(testFacebook);
 			d.addEventListener(Event.COMPLETE, addAsync(onTestCreateTokenReply, timeoutTime));
 		}
 		private function onTestCreateTokenReply(e:Event):void
 		{
-			var d:CreateToken_delegate = e.target as CreateToken_delegate;
+			var d:CreateTokenDelegate = e.target as CreateTokenDelegate;
 			assertTrue("create token call successful: ", d.success);
 			assertTrue("token created: ", d.auth_token != ""); 
 		}

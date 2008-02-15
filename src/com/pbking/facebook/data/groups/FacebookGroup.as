@@ -3,6 +3,7 @@ package com.pbking.facebook.data.groups
 	import com.pbking.facebook.data.misc.FacebookLocation;
 	import com.pbking.facebook.data.users.FacebookUser;
 	import com.pbking.facebook.data.users.FacebookUserCollection;
+	import com.pbking.util.collection.HashableArray;
 	
 	[Bindable]
 	public class FacebookGroup
@@ -35,7 +36,33 @@ package com.pbking.facebook.data.groups
 		
 		function FacebookGroup(gid:Number)
 		{
+			if(_locked)
+				throw new Error("a group should be created by calling FacebookGroup.getGroup(gid) so that there is only ever a single instance of each group");
+
 			this.gid = gid;
 		}
+		
+		/**
+		 * This keeps a common collection of groups so that all information gathered
+		 * on groups is stored here and updated.  Each group should have only one instance.
+		 * 
+		 * Creating a group should happen from this method.
+		 */
+		public static function getGroup(gid:Number):FacebookGroup
+		{
+			var group:FacebookGroup = _groupCollection.getItemById(gid) as FacebookGroup;
+			if(!group)
+			{
+				_locked = false;
+				group = new FacebookGroup(gid);
+				_locked = true;
+				_groupCollection.addItem(group);
+			}
+			return group;
+		}
+		
+		private static var _groupCollection:HashableArray = new HashableArray('gid', false);
+		private static var _locked:Boolean = true;
+		
 	}
 }

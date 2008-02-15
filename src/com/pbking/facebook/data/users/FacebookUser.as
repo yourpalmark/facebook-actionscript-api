@@ -1,6 +1,7 @@
 package com.pbking.facebook.data.users
 {
 	import com.pbking.facebook.data.misc.FacebookLocation;
+	import com.pbking.util.collection.HashableArray;
 	
 	import flash.events.EventDispatcher;
 	
@@ -70,10 +71,35 @@ package com.pbking.facebook.data.users
 
  		function FacebookUser(uid:int):void
 		{
+			if(_locked)
+				throw new Error("a user should be created by calling FacebookUser.getUser(uid) so that there is only ever a single instance of each user");
+				
 			this.uid = uid;
 			
 			//just making sure the UserFields is imported
 			UserFields;
 		}
+		
+		/**
+		 * This keeps a common collection of users so that all information gathered
+		 * on users is stored here and updated.  Each user should have only one instance.
+		 * 
+		 * Creating a user should happen from this method.
+		 */
+		public static function getUser(uid:int):FacebookUser
+		{
+			var user:FacebookUser = _userCollection.getItemById(uid) as FacebookUser;
+			if(!user)
+			{
+				_locked = false;
+				user = new FacebookUser(uid);
+				_locked = true;
+				_userCollection.addItem(user);
+			}
+			return user;
+		}
+		
+		private static var _userCollection:HashableArray = new HashableArray('uid', false);
+		private static var _locked:Boolean = true;
 	}
 }

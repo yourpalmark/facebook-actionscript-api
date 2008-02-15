@@ -26,24 +26,26 @@ OTHER DEALINGS IN THE SOFTWARE.
 package com.pbking.facebook.methodGroups
 {
 	import com.pbking.facebook.Facebook;
-	import com.pbking.facebook.delegates.fql.FqlQuery_delegate;
+	import com.pbking.facebook.delegates.fql.FqlQueryDelegate;
 	
 	public class Fql
 	{
 		// VARIABLES //////////
 		
+		private var facebook:Facebook;
+		
 		// CONSTRUCTION //////////
 		
-		function Fql():void
+		function Fql(facebook:Facebook):void
 		{
-			//nothing here
+			this.facebook = facebook;
 		}
 		
 		// FACEBOOK FUNCTION CALLS //////////
 		
-		public function query(query:String, callback:Function=null):FqlQuery_delegate
+		public function query(query:String, callback:Function=null):FqlQueryDelegate
 		{
-			var d:FqlQuery_delegate = new FqlQuery_delegate(query);
+			var d:FqlQueryDelegate = new FqlQueryDelegate(facebook, query);
 			MethodGroupUtil.addCallback(d, callback);
 			return d;
 		}

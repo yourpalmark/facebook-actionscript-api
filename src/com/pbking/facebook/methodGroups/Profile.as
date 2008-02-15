@@ -27,18 +27,20 @@ package com.pbking.facebook.methodGroups
 {
 	import com.pbking.facebook.Facebook;
 	import com.pbking.facebook.data.users.FacebookUser;
-	import com.pbking.facebook.delegates.profile.GetFBML_delegate;
-	import com.pbking.facebook.delegates.profile.SetFBML_delegate;
+	import com.pbking.facebook.delegates.profile.GetFBMLDelegate;
+	import com.pbking.facebook.delegates.profile.SetFBMLDelegate;
 	
 	public class Profile
 	{
 		// VARIABLES //////////
 		
+		private var facebook:Facebook;
+		
 		// CONSTRUCTION //////////
 		
-		function Profile():void
+		function Profile(facebook:Facebook):void
 		{
-			//nothing here
+			this.facebook = facebook;
 		}
 		
 		// FACEBOOK FUNCTION CALLS //////////
@@ -53,10 +55,10 @@ package com.pbking.facebook.methodGroups
 		 * If not specified, defaults to the logged-in user. 
 		 * Not allowed for desktop applications (since the application secret is essentially public).
 		 */
-		public function setFBML(markup:String, user:FacebookUser=null, callback:Function=null):SetFBML_delegate
+		public function setFBML(markup:String, user:FacebookUser=null, callback:Function=null):SetFBMLDelegate
 		{
-			var delegate:SetFBML_delegate = new SetFBML_delegate(markup, user);
-			return MethodGroupUtil.addCallback(delegate, callback) as SetFBML_delegate;		
+			var delegate:SetFBMLDelegate = new SetFBMLDelegate(facebook, markup, user);
+			return MethodGroupUtil.addCallback(delegate, callback) as SetFBMLDelegate;		
 		}
 
 		/**
@@ -65,10 +67,10 @@ package com.pbking.facebook.methodGroups
 		 * If not specified, defaults to the logged-in user. 
 		 * Not allowed for desktop applications (since the application secret is essentially public).
 		 */
-		public function getFBML(user:FacebookUser=null, callback:Function=null):GetFBML_delegate
+		public function getFBML(user:FacebookUser=null, callback:Function=null):GetFBMLDelegate
 		{
-			var delegate:GetFBML_delegate = new GetFBML_delegate(user);
-			return MethodGroupUtil.addCallback(delegate, callback) as GetFBML_delegate;		
+			var delegate:GetFBMLDelegate = new GetFBMLDelegate(facebook, user);
+			return MethodGroupUtil.addCallback(delegate, callback) as GetFBMLDelegate;		
 		}
 
 	}

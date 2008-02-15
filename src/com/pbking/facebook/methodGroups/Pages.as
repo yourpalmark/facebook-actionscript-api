@@ -30,12 +30,14 @@ package com.pbking.facebook.methodGroups
 	public class Pages
 	{
 		// VARIABLES //////////
-
+		
+		private var facebook:Facebook;
+		
 		// CONSTRUCTION //////////
 		
-		function Pages():void
+		function Pages(facebook:Facebook):void
 		{
-			//nothing here
+			this.facebook = facebook;
 		}
 		
 		// FACEBOOK FUNCTION CALLS //////////

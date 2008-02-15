@@ -1,8 +1,8 @@
 package test.pbking.facebook.delegates
 {
 	import com.pbking.facebook.Facebook;
-	import com.pbking.facebook.delegates.feed.PublishActionOfUser_delegate;
-	import com.pbking.facebook.delegates.feed.PublishStoryToUser_delegate;
+	import com.pbking.facebook.delegates.feed.PublishActionOfUserDelegate;
+	import com.pbking.facebook.delegates.feed.PublishStoryToUserDelegate;
 	
 	import flash.events.Event;
 	
@@ -50,7 +50,7 @@ package test.pbking.facebook.delegates
 		}
 		private function testPublishStoryToUserReply(e:Event):void
 		{
-			var d:PublishStoryToUser_delegate = e.target as PublishStoryToUser_delegate;
+			var d:PublishStoryToUserDelegate = e.target as PublishStoryToUserDelegate;
 			assertTrue(d.errorMessage, d.success);
 		}
 
@@ -63,7 +63,7 @@ package test.pbking.facebook.delegates
 		}
 		private function testPublishActionOfUserReply(e:Event):void
 		{
-			var d:PublishActionOfUser_delegate = e.target as PublishActionOfUser_delegate;
+			var d:PublishActionOfUserDelegate = e.target as PublishActionOfUserDelegate;
 			assertTrue(d.errorMessage, d.success);
 		}
 	}

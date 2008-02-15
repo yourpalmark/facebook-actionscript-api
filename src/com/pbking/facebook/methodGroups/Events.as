@@ -28,16 +28,20 @@ package com.pbking.facebook.methodGroups
 	import com.pbking.facebook.Facebook;
 	import com.pbking.facebook.data.events.FacebookEvent;
 	import com.pbking.facebook.data.users.FacebookUser;
-	import com.pbking.facebook.delegates.events.GetEventMembers_delegate;
-	import com.pbking.facebook.delegates.events.GetEvents_delegate;
+	import com.pbking.facebook.delegates.events.GetEventMembersDelegate;
+	import com.pbking.facebook.delegates.events.GetEventsDelegate;
 	
 	public class Events
 	{
+		// VARIABLES //////////
+		
+		private var facebook:Facebook;
+		
 		// CONSTRUCTION //////////
 		
-		function Events():void
+		function Events(facebook:Facebook):void
 		{
-			//nothing here
+			this.facebook = facebook;
 		}
 		
 		// FACEBOOK FUNCTION CALLS //////////
@@ -62,16 +66,16 @@ package com.pbking.facebook.methodGroups
 		 * which all events returned overlap. Note that if start_time is greater than or 
 		 * equal to end_time, an empty top-level element is returned. 
 		 */
-		public function getEvents(user:FacebookUser=null, eventsFilter:Array=null, start_time:Date=null, end_time:Date=null, rsvp_status_filter:String="", callback:Function=null):GetEvents_delegate
+		public function getEvents(user:FacebookUser=null, eventsFilter:Array=null, start_time:Date=null, end_time:Date=null, rsvp_status_filter:String="", callback:Function=null):GetEventsDelegate
 		{
-			var d:GetEvents_delegate = new GetEvents_delegate(user, eventsFilter, start_time, end_time, rsvp_status_filter);
+			var d:GetEventsDelegate = new GetEventsDelegate(facebook, user, eventsFilter, start_time, end_time, rsvp_status_filter);
 			MethodGroupUtil.addCallback(d, callback);
 			return d;
 		}
 		
-		public function getEventMembers(event:FacebookEvent, callback:Function=null):GetEventMembers_delegate
+		public function getEventMembers(event:FacebookEvent, callback:Function=null):GetEventMembersDelegate
 		{
-			var d:GetEventMembers_delegate = new GetEventMembers_delegate(event);
+			var d:GetEventMembersDelegate = new GetEventMembersDelegate(facebook, event);
 			MethodGroupUtil.addCallback(d, callback);
 			return d;
 		}

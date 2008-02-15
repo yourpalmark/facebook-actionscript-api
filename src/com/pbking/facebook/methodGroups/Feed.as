@@ -27,19 +27,21 @@ package com.pbking.facebook.methodGroups
 {
 	import com.pbking.facebook.Facebook;
 	import com.pbking.facebook.data.users.FacebookUser;
-	import com.pbking.facebook.delegates.feed.PublishActionOfUser_delegate;
-	import com.pbking.facebook.delegates.feed.PublishStoryToUser_delegate;
-	import com.pbking.facebook.delegates.feed.PublishTemplatizedAction_delegate;
+	import com.pbking.facebook.delegates.feed.PublishActionOfUserDelegate;
+	import com.pbking.facebook.delegates.feed.PublishStoryToUserDelegate;
+	import com.pbking.facebook.delegates.feed.PublishTemplatizedActionDelegate;
 	
 	public class Feed
 	{
 		// VARIABLES //////////
 		
+		private var facebook:Facebook;
+		
 		// CONSTRUCTION //////////
 		
-		function Feed():void
+		function Feed(facebook:Facebook):void
 		{
-			//nothing here
+			this.facebook = facebook;
 		}
 		
 		// FACEBOOK FUNCTION CALLS //////////
@@ -62,9 +64,9 @@ package com.pbking.facebook.methodGroups
 											image_2:String="", image_2_link:String="",
 											image_3:String="", image_3_link:String="",
 											image_4:String="", image_4_link:String="",
-											priority:String="", callback:Function=null):PublishStoryToUser_delegate
+											priority:String="", callback:Function=null):PublishStoryToUserDelegate
 		{
-			var d:PublishStoryToUser_delegate = new PublishStoryToUser_delegate(titleMarkup, bodyMarkup,
+			var d:PublishStoryToUserDelegate = new PublishStoryToUserDelegate(facebook, titleMarkup, bodyMarkup,
 																				image_1, image_1_link, image_2, image_2_link,
 																				image_3, image_3_link, image_4, image_4_link, priority);
 			MethodGroupUtil.addCallback(d, callback);
@@ -91,9 +93,9 @@ package com.pbking.facebook.methodGroups
 											image_2:String="", image_2_link:String="",
 											image_3:String="", image_3_link:String="",
 											image_4:String="", image_4_link:String="",
-											callback:Function=null):PublishActionOfUser_delegate
+											callback:Function=null):PublishActionOfUserDelegate
 		{
-			var d:PublishActionOfUser_delegate = new PublishActionOfUser_delegate(titleMarkup, bodyMarkup,
+			var d:PublishActionOfUserDelegate = new PublishActionOfUserDelegate(facebook, titleMarkup, bodyMarkup,
 																				image_1, image_1_link, image_2, image_2_link,
 																				image_3, image_3_link, image_4, image_4_link);
 			MethodGroupUtil.addCallback(d, callback);
@@ -112,9 +114,9 @@ package com.pbking.facebook.methodGroups
 													image_2:String="", image_2_link:String="",
 													image_3:String="", image_3_link:String="",
 													image_4:String="", image_4_link:String="",
-													callback:Function=null):PublishTemplatizedAction_delegate
+													callback:Function=null):PublishTemplatizedActionDelegate
 		{
-			var d:PublishTemplatizedAction_delegate = new PublishTemplatizedAction_delegate(actor, title_template, title_data,
+			var d:PublishTemplatizedActionDelegate = new PublishTemplatizedActionDelegate(facebook, actor, title_template, title_data,
 																							body_template, body_data, body_general, targetUsers,
 																							image_1, image_1_link, image_2, image_2_link,
 																							image_3, image_3_link, image_4, image_4_link);

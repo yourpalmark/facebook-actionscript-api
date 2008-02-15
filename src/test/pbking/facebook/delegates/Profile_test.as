@@ -1,8 +1,8 @@
 package test.pbking.facebook.delegates
 {
 	import com.pbking.facebook.Facebook;
-	import com.pbking.facebook.delegates.profile.GetFBML_delegate;
-	import com.pbking.facebook.delegates.profile.SetFBML_delegate;
+	import com.pbking.facebook.delegates.profile.GetFBMLDelegate;
+	import com.pbking.facebook.delegates.profile.SetFBMLDelegate;
 	
 	import flash.events.Event;
 	
@@ -46,7 +46,7 @@ package test.pbking.facebook.delegates
 		}
 		private function testSetFBMLReply(e:Event):void
 		{
-			var d:SetFBML_delegate = e.target as SetFBML_delegate;
+			var d:SetFBMLDelegate = e.target as SetFBMLDelegate;
 			assertTrue(d.errorMessage, d.success);
 			
 		}
@@ -60,7 +60,7 @@ package test.pbking.facebook.delegates
 		}
 		private function testGetFBMLReply(e:Event):void
 		{
-			var d:GetFBML_delegate = e.target as GetFBML_delegate;
+			var d:GetFBMLDelegate = e.target as GetFBMLDelegate;
 			assertTrue(d.errorMessage, d.success);
 		}
 

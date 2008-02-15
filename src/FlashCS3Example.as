@@ -15,10 +15,10 @@ package
 	import fl.controls.List;
 
 	import com.pbking.facebook.Facebook;
-	import com.pbking.facebook.delegates.users.GetUserInfo_delegate;
+	import com.pbking.facebook.delegates.users.GetUserInfoDelegate;
 	import com.pbking.facebook.data.users.FacebookUser;
 	import com.pbking.facebook.data.users.UserFields;
-	import com.pbking.facebook.delegates.friends.GetFriends_delegate;		
+	import com.pbking.facebook.delegates.friends.GetFriendsDelegate;		
 	
 	/**
 	* FbTest communicates with Facebook API
@@ -96,13 +96,13 @@ package
 		 */
 		private function _onGetFriends( evt:Event ):void
 		{
-			var delegate:GetFriends_delegate = evt.target as GetFriends_delegate;
+			var delegate:GetFriendsDelegate = evt.target as GetFriendsDelegate;
 			_fb.users.getInfo( delegate.friends, [ UserFields.name, UserFields.pic_big ], _onGetInfo );
 		}
 		
 		private function _onGetInfo( evt:Event ):void
 		{
-			var delegate:GetUserInfo_delegate = evt.target as GetUserInfo_delegate;
+			var delegate:GetUserInfoDelegate = evt.target as GetUserInfoDelegate;
 			var user:FacebookUser;
 			_friendList = delegate.users;
 			

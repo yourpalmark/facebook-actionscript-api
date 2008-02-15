@@ -31,7 +31,6 @@ OTHER DEALINGS IN THE SOFTWARE.
  */
 package com.pbking.facebook.data.photos
 {
-	import com.pbking.facebook.Facebook;
 	import com.pbking.facebook.data.users.FacebookUser;
 	import com.pbking.facebook.data.util.FacebookDataParser;
 	
@@ -54,37 +53,17 @@ package com.pbking.facebook.data.photos
 	
 		// CONSTRUCTION //////////
 		
-		function FacebookPhoto(xml:XML)
+		function FacebookPhoto(initObj:Object)
 		{
-			parseXML(xml);
-		}
-		
-		private function parseXML(xml:XML):void
-		{
-			/*
-			 <photo>
-			    <pid>34585991612804</pid>
-			    <aid>34585963571485</aid>
-			    <owner>1240077</owner>
-			    <src>http://ip002.facebook.com/v11/135/18/8055/s1240077_30043524_2020.jpg</src>
-			    <src_big>http://ip002.facebook.com/v11/135/18/8055/n1240077_30043524_2020.jpg</src>
-			    <src_small>http://ip002.facebook.com/v11/135/18/8055/t1240077_30043524_2020.jpg</src>
-			    <link>http://www.facebook.com/photo.php?pid=30043524&id=8055</link>
-			    <caption>From The Deathmatch (Trailer) (1999)</caption>
-			    <created>1132553361</created>
-			 </photo>
-		  	*/
-			default xml namespace = Facebook.instance.FACEBOOK_NAMESPACE;
-		  	
-		  	this._pid = xml.pid;
-		  	this._aid = xml.aid;
-		  	this._owner = Facebook.instance.getUser(parseInt(xml.owner));
-		  	this._src = xml.src;
-		  	this._src_big = xml.src_big;
-		  	this._src_small = xml.src_small;
-		  	this._link = xml.link;
-		  	this._caption = xml.caption;
-		  	this._created = FacebookDataParser.formatDate(xml.created);
+		  	this._pid = initObj.pid;
+		  	this._aid = initObj.aid;
+		  	this._owner = FacebookUser.getUser(initObj.owner);
+		  	this._src = initObj.src;
+		  	this._src_big = initObj.src_big;
+		  	this._src_small = initObj.src_small;
+		  	this._link = initObj.link;
+		  	this._caption = initObj.caption;
+		  	this._created = FacebookDataParser.formatDate(initObj.created);
 		}
 		
 		// GETTERS //////////

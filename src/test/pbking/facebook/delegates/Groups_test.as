@@ -3,8 +3,8 @@ package test.pbking.facebook.delegates
 	import com.pbking.facebook.Facebook;
 	import com.pbking.facebook.data.groups.FacebookGroup;
 	import com.pbking.facebook.data.users.FacebookUser;
-	import com.pbking.facebook.delegates.groups.GetGroupMembers_delegate;
-	import com.pbking.facebook.delegates.groups.GetGroups_delegate;
+	import com.pbking.facebook.delegates.groups.GetGroupMembersDelegate;
+	import com.pbking.facebook.delegates.groups.GetGroupsDelegate;
 	
 	import flash.events.Event;
 	
@@ -50,7 +50,7 @@ package test.pbking.facebook.delegates
 		}
 		private function testGetGroupsReply(e:Event):void
 		{
-			var d:GetGroups_delegate = e.target as GetGroups_delegate;
+			var d:GetGroupsDelegate = e.target as GetGroupsDelegate;
 			assertTrue(d.errorMessage, d.success);
 			
 			if(d.groups.length > 0)
@@ -69,7 +69,7 @@ package test.pbking.facebook.delegates
 		}
 		private function testGetGroupMembersReply(e:Event):void
 		{
-			var d:GetGroupMembers_delegate = e.target as GetGroupMembers_delegate;
+			var d:GetGroupMembersDelegate = e.target as GetGroupMembersDelegate;
 			assertTrue(d.errorMessage, d.success);
 		}
 		

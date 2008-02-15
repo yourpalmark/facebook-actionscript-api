@@ -34,7 +34,7 @@ package com.pbking.facebook.data.photos
 	import com.pbking.facebook.Facebook;
 	import com.pbking.facebook.data.users.FacebookUser;
 	import com.pbking.facebook.data.util.FacebookDataParser;
-	import com.pbking.facebook.delegates.photos.GetPhotos_delegate;
+	import com.pbking.facebook.delegates.photos.GetPhotosDelegate;
 	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
@@ -64,36 +64,27 @@ package com.pbking.facebook.data.photos
 		
 		// CONSTRUCTION //////////
 		
-		function FacebookAlbum(xml:XML)
+		function FacebookAlbum(initObj:Object)
 		{
-			parseXML(xml);
+			this._aid = initObj.aid;
 			
+			if(initObj.cover_pid)
+				this._cover_pid = initObj.cover_pid;
+				
+			this._owner = FacebookUser.getUser(parseInt(initObj.owner));
+			
+			this._name = initObj.name;
+			this._description = initObj.description;
+			this._location = initObj.location;
+			this._link = initObj.link;
+			
+			this._created = FacebookDataParser.formatDate(initObj.created);
+			this._modified = FacebookDataParser.formatDate(initObj.modified);
+			
+			this._size = Number(initObj.size);
+
 			if(this.size == 0)
 				this._populated = true;
-		}
-		
-		private function parseXML(xml:XML):void
-		{
-			default xml namespace = Facebook.instance.FACEBOOK_NAMESPACE;
-
-			this._aid = xml.aid;
-			
-			if(xml.cover_pid != undefined)
-			{
-				this._cover_pid = xml.cover_pid;
-			}
-				
-			this._owner = Facebook.instance.getUser(parseInt(xml.owner));
-			
-			this._name = xml.name;
-			this._description = xml.description;
-			this._location = xml.location;
-			this._link = xml.link;
-			
-			this._created = FacebookDataParser.formatDate(xml.created);
-			this._modified = FacebookDataParser.formatDate(xml.modified);
-			
-			this._size = Number(xml.size);
 		}
 		
 		
@@ -178,7 +169,7 @@ package com.pbking.facebook.data.photos
 		}
 		private function onPopulationComplete(event:Event):void
 		{
-			var delegate:GetPhotos_delegate = event.target as GetPhotos_delegate;
+			var delegate:GetPhotosDelegate = event.target as GetPhotosDelegate;
 			this._photos = delegate.photos;
 			
 			_populating = false;

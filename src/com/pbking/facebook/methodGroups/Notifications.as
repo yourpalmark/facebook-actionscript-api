@@ -26,18 +26,20 @@ OTHER DEALINGS IN THE SOFTWARE.
 package com.pbking.facebook.methodGroups
 {
 	import com.pbking.facebook.Facebook;
-	import com.pbking.facebook.delegates.notifications.GetNotifications_delegate;
-	import com.pbking.facebook.delegates.notifications.SendNotification_delegate;
+	import com.pbking.facebook.delegates.notifications.GetNotificationsDelegate;
+	import com.pbking.facebook.delegates.notifications.SendNotificationDelegate;
 	
 	public class Notifications
 	{
 		// VARIABLES //////////
 		
+		private var facebook:Facebook;
+		
 		// CONSTRUCTION //////////
 		
-		function Notifications():void
+		function Notifications(facebook:Facebook):void
 		{
-			//nothing here
+			this.facebook = facebook;
 		}
 		
 		// FACEBOOK FUNCTION CALLS //////////
@@ -45,10 +47,10 @@ package com.pbking.facebook.methodGroups
 		/**
 		 * Returns information on outstanding Facebook notifications for current session user.
 		 */
-		public function getNotifications(callback:Function=null):GetNotifications_delegate
+		public function getNotifications(callback:Function=null):GetNotificationsDelegate
 		{
-			var delegate:GetNotifications_delegate = new GetNotifications_delegate();
-			return MethodGroupUtil.addCallback(delegate, callback) as GetNotifications_delegate;
+			var delegate:GetNotificationsDelegate = new GetNotificationsDelegate(facebook);
+			return MethodGroupUtil.addCallback(delegate, callback) as GetNotificationsDelegate;
 		}
 
 		/**
@@ -66,10 +68,10 @@ package com.pbking.facebook.methodGroups
 		 * or people who have added your application. To send a notification to the current 
 		 * logged-in user without a name prepended to the message, set users to null.
 		 */
-		public function send(notification:String, users:Array=null, callback:Function=null):SendNotification_delegate
+		public function send(notification:String, users:Array=null, callback:Function=null):SendNotificationDelegate
 		{
-			var delegate:SendNotification_delegate = new SendNotification_delegate(notification, users);
-			return MethodGroupUtil.addCallback(delegate, callback) as SendNotification_delegate;
+			var delegate:SendNotificationDelegate = new SendNotificationDelegate(facebook, notification, users);
+			return MethodGroupUtil.addCallback(delegate, callback) as SendNotificationDelegate;
 		}
 
 	}

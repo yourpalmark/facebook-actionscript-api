@@ -1,9 +1,9 @@
 package test.pbking.facebook.delegates
 {
 	import com.pbking.facebook.Facebook;
-	import com.pbking.facebook.delegates.friends.AreFriends_delegate;
-	import com.pbking.facebook.delegates.friends.GetAppUsers_delegate;
-	import com.pbking.facebook.delegates.friends.GetFriends_delegate;
+	import com.pbking.facebook.delegates.friends.AreFriendsDelegate;
+	import com.pbking.facebook.delegates.friends.GetAppUsersDelegate;
+	import com.pbking.facebook.delegates.friends.GetFriendsDelegate;
 	
 	import flash.events.Event;
 	
@@ -53,7 +53,7 @@ package test.pbking.facebook.delegates
 		}
 		private function getFriendsReply(e:Event):void
 		{
-			var d:GetFriends_delegate = e.target as GetFriends_delegate;
+			var d:GetFriendsDelegate = e.target as GetFriendsDelegate;
 			assertTrue(d.errorMessage, d.success);
 			myFriends = d.friends
 			
@@ -70,7 +70,7 @@ package test.pbking.facebook.delegates
 		}
 		private function testAreFriendsReply(e:Event):void
 		{
-			var d:AreFriends_delegate = e.target as AreFriends_delegate;
+			var d:AreFriendsDelegate = e.target as AreFriendsDelegate;
 			assertTrue(d.errorMessage, d.success);
 			assertTrue("list1 has user", d.list1[0] == facebook.user);
 			assertTrue("list2 has friend 0", d.list2[0] == myFriends[0]);
@@ -86,7 +86,7 @@ package test.pbking.facebook.delegates
 		}
 		private function testAreFriends2Reply(e:Event):void
 		{
-			var d:AreFriends_delegate = e.target as AreFriends_delegate;
+			var d:AreFriendsDelegate = e.target as AreFriendsDelegate;
 			assertTrue(d.errorMessage, d.success);
 			assertTrue("list1 has user", d.list1[0] == facebook.user);
 			assertTrue("list2 has friend 0", d.list2[0] == myFriends[0]);
@@ -102,7 +102,7 @@ package test.pbking.facebook.delegates
 		}
 		private function testGetAppUsersReply(e:Event):void
 		{
-			var d:GetAppUsers_delegate = e.target as GetAppUsers_delegate;
+			var d:GetAppUsersDelegate = e.target as GetAppUsersDelegate;
 			assertTrue(d.errorMessage, d.success);
 		}
 		
