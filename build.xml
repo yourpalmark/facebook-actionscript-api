@@ -98,6 +98,9 @@
 		<copy todir="${build}/example" file="${basedir}/html/swfobject.js"/>
 		<copy todir="${build}/example" file="${basedir}/html/xd_receiver.htm"/>
 	
+		<mkdir dir="${build}/example/source"/>
+		<copy todir="${build}/example/source" file="${src}/FB_API_SIMPLE_EXAMPLE.mxml"/>
+
 		<echo message="Finished building Facebook example"/>
 
 	</target>

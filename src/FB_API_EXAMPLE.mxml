@@ -26,11 +26,13 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 <!--
 The following is an example application to get you started using
-the Facebook API in AS3.  Just paste your API_KEY and SECRET below.  
+the Facebook API in AS3.
+  
 The application can be run locally as a desktop application 
-(validation required) or on the facebook website with a simple 
-<fb:swf/> tag.  Please post questions and comments to the Facebook 
-Actionscript Developers group or send them to me (Jason Crist:jcrist@pbking.com)
+(validation required) or on the facebook website using the JavaScript API.  
+Please post questions and comments to the Google Group
+http://groups.google.com/group/facebook-actionscript-api
+or send them to me (Jason Crist:jcrist@pbking.com)
 -->
 <mx:Application 
 	xmlns:mx="http://www.adobe.com/2006/mxml" 
