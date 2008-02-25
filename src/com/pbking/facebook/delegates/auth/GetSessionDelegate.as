@@ -27,7 +27,6 @@ OTHER DEALINGS IN THE SOFTWARE.
  *  Delegates the call to facebook.auth.getSession
  * 
  * @author Jason Crist 
- * @author Chris Hill
  */
 package com.pbking.facebook.delegates.auth
 {

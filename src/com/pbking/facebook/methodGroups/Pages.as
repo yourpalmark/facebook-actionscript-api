@@ -26,6 +26,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 package com.pbking.facebook.methodGroups
 {
 	import com.pbking.facebook.Facebook;
+	import com.pbking.facebook.delegates.pages.GetPageInfoDelegate;
+	import com.pbking.facebook.delegates.pages.IsAdminDelegate;
+	import com.pbking.facebook.delegates.pages.IsAppAddedDelegate;
+	import com.pbking.facebook.delegates.pages.IsFanDelegate;
 	
 	public class Pages
 	{
@@ -42,24 +46,32 @@ package com.pbking.facebook.methodGroups
 		
 		// FACEBOOK FUNCTION CALLS //////////
 		
-		public function isAppAdded():void
+		public function isAppAdded(page_id:Number, callback:Function=null):IsAppAddedDelegate
 		{
-			//TODO: isAppAdded
+			var d:IsAppAddedDelegate = new IsAppAddedDelegate(facebook, page_id);
+			MethodGroupUtil.addCallback(d, callback);
+			return d;
 		}
 
-		public function isAdmin():void
+		public function isAdmin(page_id:Number, callback:Function):IsAdminDelegate
 		{
-			//TODO: isAdmin
+			var d:IsAdminDelegate = new IsAdminDelegate(facebook, page_id);
+			MethodGroupUtil.addCallback(d, callback);
+			return d;
 		}
 
-		public function isFan():void
+		public function isFan(page_id:Number, uid:String=null, callback:Function=null):IsFanDelegate
 		{
-			//TODO: isFan
+			var d:IsFanDelegate = new IsFanDelegate(facebook, page_id, uid);
+			MethodGroupUtil.addCallback(d, callback);
+			return d;
 		}
 
-		public function getInfo():void
+		public function getInfo(fields:Array, page_ids:Array=null, uid:String=null, type:String=null, callback:Function=null):GetPageInfoDelegate
 		{
-			//TODO: getInfo
+			var d:GetPageInfoDelegate = new GetPageInfoDelegate(facebook, fields, page_ids, uid, type);
+			MethodGroupUtil.addCallback(d, callback);
+			return d;
 		}
 
 	}

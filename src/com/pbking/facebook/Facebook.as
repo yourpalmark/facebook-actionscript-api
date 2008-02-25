@@ -30,7 +30,6 @@ OTHER DEALINGS IN THE SOFTWARE.
  * 
  * @see http://developers.facebook.com/documentation.php?v=1.0
  * @author Jason Crist 
- * @author Chris Hill
  */
 
 package com.pbking.facebook
@@ -262,8 +261,6 @@ package com.pbking.facebook
 			return this._notifications; 
 		}
 		
-		/*
-		Removed until the pages delegates have been created. -jc
 		private var _pages:Pages;
 		public function get pages():Pages 
 		{ 
@@ -271,7 +268,6 @@ package com.pbking.facebook
 				_pages = new Pages(this)
 			return this._pages; 
 		}
-		*/
 		
 		private var _profile:Profile;
 		public function get profile():Profile 
@@ -343,9 +339,9 @@ package com.pbking.facebook
 			}
 		}
 		
-		private function verifyInfinateSession(e:Event):void
+		private function verifyInfinateSession(event:Event):void
 		{
-			var d:GetLoggedInUserDelegate = e.target as GetLoggedInUserDelegate;
+			var d:GetLoggedInUserDelegate = event.target as GetLoggedInUserDelegate;
 			if(d.success)
 			{
 				this._user = d.user;
@@ -392,7 +388,6 @@ package com.pbking.facebook
 		private function validateDesktopSessionReply(event:Event):void
 		{
 			var delegate:GetSessionDelegate = event.target as GetSessionDelegate;
-			
 			if(delegate.success)
 			{
 				this._user = FacebookUser.getUser(delegate.uid);

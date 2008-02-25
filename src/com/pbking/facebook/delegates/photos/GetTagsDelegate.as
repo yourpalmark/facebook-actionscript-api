@@ -1,33 +1,7 @@
-/*
-Copyright (c) 2007 Jason Crist
-
-Permission is hereby granted, free of charge, to any person
-obtaining a copy of this software and associated documentation
-files (the "Software"), to deal in the Software without
-restriction, including without limitation the rights to use,
-copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the
-Software is furnished to do so, subject to the following
-conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
-*/
-
 /**
  *  Delegates call to facebook.photo.getTags
  * 
  * @author Jason Crist 
- * @author Chris Hill
  */
 package com.pbking.facebook.delegates.photos
 {
@@ -41,22 +15,27 @@ package com.pbking.facebook.delegates.photos
 	{
 		public var photos:Array;
 		public var tags:Array;
-		public var populatePhotosWithTags:Boolean;
 
 		private var photoCollection:HashableArray = new HashableArray('pid', false);
 		
-		function GetTagsDelegate(facebook:Facebook, photos:Array, populatePhotosWithTags:Boolean = true)
+		function GetTagsDelegate(facebook:Facebook, photos:Array)
 		{
 			super(facebook);
 			
 			this.photos = photos;
-			this.populatePhotosWithTags = populatePhotosWithTags;
 			
 			var pids:Array = [];
-			for each(var photo:FacebookPhoto in photos)
+			for(var i:int=0; i<photos.length; i++)
 			{
-				pids.push(photo.pid);
-				photoCollection.addItem(photo);
+				if(photos[i] is FacebookPhoto)
+				{
+					pids.push(photos[i].pid);
+					photoCollection.addItem(photos[i]);
+				}
+				else
+				{
+					pids.push(photos[i]);
+				}
 			}
 				
 			fbCall.setRequestArgument("photos", pids.join(","));
@@ -70,7 +49,7 @@ package com.pbking.facebook.delegates.photos
 			for each(var tagInit:Object in result)
 				this.tags.push(new FacebookTag(tagInit));
 
-			if(populatePhotosWithTags)
+			if(photoCollection.length > 0)
 			{
 				var tag:FacebookTag;
 				var photo:FacebookPhoto;
@@ -83,7 +62,7 @@ package com.pbking.facebook.delegates.photos
 						photo.tags.removeAll();
 				}
 				
-				//not (re)populate the tags in the images
+				//now (re)populate the tags in the images
 				for each(tag in tags)
 				{
 					photo = photoCollection.getItemById(tag.pid) as FacebookPhoto;

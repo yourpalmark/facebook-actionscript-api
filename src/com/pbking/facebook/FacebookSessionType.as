@@ -27,7 +27,6 @@ OTHER DEALINGS IN THE SOFTWARE.
  *  Type of session the Facebook app is currently in.  Can be desktop, web or widget
  * 
  * @author Jason Crist 
- * @author Chris Hill
  */
 package com.pbking.facebook
 {

@@ -27,7 +27,6 @@ OTHER DEALINGS IN THE SOFTWARE.
  *  Abstraction of the Facebook Tag object
  * 
  * @author Jason Crist 
- * @author Chris Hill
  */
 package com.pbking.facebook.data.photos
 {

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" creationComplete="init();">
+
+	<mx:Script>
+		<![CDATA[
+			import com.pbking.facebook.data.photos.FacebookPhoto;
+			import com.pbking.facebook.delegates.photos.GetPhotosDelegate;
+			import com.pbking.facebook.delegates.photos.GetAlbumsDelegate;
+			import com.pbking.facebook.FacebookSessionType;
+			import com.pbking.facebook.data.users.UserFields;
+			import com.pbking.facebook.data.photos.FacebookAlbum;
+			import com.pbking.facebook.data.users.FacebookUser;
+			import com.pbking.facebook.delegates.friends.GetFriendsDelegate;
+			import mx.controls.Alert;
+
+			import com.pbking.facebook.FacebookSessionUtil;
+			import com.pbking.facebook.Facebook;
+		
+			[Bindable]
+			public var facebook:Facebook;
+		
+			private function init():void
+			{
+				facebook = new FacebookSessionUtil().facebook;
+				facebook.addEventListener(Event.COMPLETE, onFacebookReady);
+			}
+
+			private function onFacebookReady(event:Event):void
+			{
+				if(facebook.isConnected)
+				{
+					facebook.friends.getFriends(onGetFriendsReply);
+				}
+				else
+				{
+					Alert.show("failed to connect to Facebook Server", "error");
+				}
+			}
+
+			private function onGetFriendsReply(event:Event):void
+			{
+				var delegate:GetFriendsDelegate = event.target as GetFriendsDelegate;
+				friendList.dataProvider = facebook.users.getInfo(delegate.friends, [UserFields.name]).users;
+			}
+			
+			private function selectFriend(user:FacebookUser):void
+			{
+				facebook.photos.getAlbums(user.uid, false, onGotAlbums);
+			}
+			
+			private function onGotAlbums(e:Event):void
+			{
+				var d:GetAlbumsDelegate = e.target as GetAlbumsDelegate;
+				albumList.dataProvider = d.albums;
+			}
+			
+			private function selectAlbum(album:FacebookAlbum):void
+			{
+				facebook.photos.getPhotos(null, album.aid, null, onGotPhotos);
+			}
+			
+			private function onGotPhotos(e:Event):void
+			{
+				var d:GetPhotosDelegate = e.target as GetPhotosDelegate;
+				imageList.dataProvider = d.photos;
+			}
+			
+			private function selectPhoto(photo:FacebookPhoto):void
+			{
+				selectedImage.source = photo.src_big;
+			}
+			
+		]]>
+	</mx:Script>
+
+	<mx:VBox x="0" y="0" width="200" height="100%">
+	
+		<mx:Button 
+			label="Validate (desktop app)" 
+			click="facebook.validateDesktopSession();"
+			visible="{facebook.sessionType == FacebookSessionType.DESKTOP &amp;&amp; !facebook.isConnected}"/>
+		
+		<mx:Label text="Friends"/>
+		<mx:List id="friendList" 
+			width="100%" 
+			height="100%" 
+			labelField="name" 
+			change="selectFriend(friendList.selectedItem as FacebookUser);"/>
+		
+		<mx:Label text="Albums"/>
+		<mx:List id="albumList" 
+			width="100%" 
+			height="100%"
+			labelField="name"
+			change="selectAlbum(albumList.selectedItem as FacebookAlbum);"/>
+		
+	</mx:VBox>
+	<mx:Image id="selectedImage" top="10" bottom="10" left="401" right="10"/>
+	<mx:Label text="Images" x="208" y="26"/>
+	<mx:TileList id="imageList" 		change="selectPhoto(imageList.selectedItem as FacebookPhoto);" 
+		left="208" 
+		top="52" 
+		width="175" bottom="0">
+		<mx:itemRenderer>
+			<mx:Component>
+				<mx:Image verticalAlign="middle" width="130" height="130" source="{data.src}"/>
+			</mx:Component>
+		</mx:itemRenderer>
+	</mx:TileList>
+</mx:Application>

@@ -144,7 +144,7 @@ or send them to me (Jason Crist:jcrist@pbking.com)
 					//now let's get our user's friends
 					//here we'll demonstrate the "callback" so that you don't have to
 					//add and remove an event listener to the delegate.  The "callback"
-					//function works the same so note the delegate that is returned from the call.
+					//function returns the delegate to the function passed.
 					facebook.friends.getFriends(onGotFriends);
 				}
 				else
@@ -160,9 +160,8 @@ or send them to me (Jason Crist:jcrist@pbking.com)
 				Alert.show(d.errorCode + ":" + d.errorMessage, "Facebook Error . . .");
 			}
 			
-			private function onGotFriends(e:Event):void
+			private function onGotFriends(d:GetFriendsDelegate):void
 			{
-				var d:GetFriendsDelegate = e.target as GetFriendsDelegate;
 				if(d.success)
 				{
 					//save my list of friends

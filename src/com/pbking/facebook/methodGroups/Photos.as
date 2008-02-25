@@ -62,9 +62,9 @@ package com.pbking.facebook.methodGroups
 		/**
 		 * Returns the set of user tags on all photos specified.
 		 */
-		public function getTags(photos:Array, populatePhotosWithTags:Boolean = true, callback:Function = null):GetTagsDelegate
+		public function getTags(photos:Array, callback:Function = null):GetTagsDelegate
 		{
-			var delegate:GetTagsDelegate = new GetTagsDelegate(facebook, photos, populatePhotosWithTags);
+			var delegate:GetTagsDelegate = new GetTagsDelegate(facebook, photos);
 			return MethodGroupUtil.addCallback(delegate, callback) as GetTagsDelegate;
 		}
 		
@@ -124,9 +124,9 @@ package com.pbking.facebook.methodGroups
 		 * Returns metadata about all of the photo albums uploaded by the specified user. 
 		 * The values returned from this call are not storable.
 		 */
-		public function getAlbums(user:FacebookUser, getCoverPhotos:Boolean = false, callback:Function = null):GetAlbumsDelegate
+		public function getAlbums(uid:int, getCoverPhotos:Boolean = false, callback:Function = null):GetAlbumsDelegate
 		{
-			var delegate:GetAlbumsDelegate = new GetAlbumsDelegate(facebook, user, getCoverPhotos);
+			var delegate:GetAlbumsDelegate = new GetAlbumsDelegate(facebook, uid, getCoverPhotos);
 			return MethodGroupUtil.addCallback(delegate, callback) as GetAlbumsDelegate;
 		}
 		
