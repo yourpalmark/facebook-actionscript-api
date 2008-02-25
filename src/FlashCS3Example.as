@@ -7,18 +7,15 @@
 
 package
 {
-	import flash.display.Sprite;
-	import flash.display.MovieClip;
-	import flash.text.TextField;
-	import flash.events.MouseEvent;
-	import flash.events.Event;
-	import fl.controls.List;
-
 	import com.pbking.facebook.Facebook;
-	import com.pbking.facebook.delegates.users.GetUserInfoDelegate;
 	import com.pbking.facebook.data.users.FacebookUser;
 	import com.pbking.facebook.data.users.UserFields;
-	import com.pbking.facebook.delegates.friends.GetFriendsDelegate;		
+	import com.pbking.facebook.delegates.friends.GetFriendsDelegate;
+	import com.pbking.facebook.delegates.users.GetUserInfoDelegate;
+	
+	import flash.display.Sprite;
+	import flash.events.Event;
+	import flash.events.MouseEvent;		
 	
 	/**
 	* FbTest communicates with Facebook API
@@ -49,7 +46,7 @@ package
 			mcSend.addEventListener( MouseEvent.CLICK, _onMcSendClick );
 			
 			// facebook
-			_fb = Facebook.instance;
+			_fb = new Facebook();
 			_fb.addEventListener( Event.COMPLETE, _onFacebookReady );
 			
 			txtLog.appendText( "start desktop session\n" );
