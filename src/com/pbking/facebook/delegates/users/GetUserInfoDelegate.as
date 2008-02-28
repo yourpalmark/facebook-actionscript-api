@@ -1,17 +1,12 @@
 package com.pbking.facebook.delegates.users
 {
 	import com.pbking.facebook.Facebook;
-	import com.pbking.facebook.data.misc.FacebookEducationInfo;
-	import com.pbking.facebook.data.misc.FacebookLocation;
-	import com.pbking.facebook.data.misc.FacebookNetwork;
-	import com.pbking.facebook.data.misc.FacebookWorkInfo;
 	import com.pbking.facebook.data.users.FacebookUser;
-	import com.pbking.facebook.data.util.FacebookDataParser;
 	import com.pbking.facebook.delegates.FacebookDelegate;
 
 	public class GetUserInfoDelegate extends FacebookDelegate
 	{
-		public var users:Array;
+		public var users:Array = [];
 		
 		function GetUserInfoDelegate(facebook:Facebook, users:Array, fields:Array)
 		{
@@ -23,6 +18,10 @@ package com.pbking.facebook.delegates.users
 			//we can handle either FacebookUser types or ints (uids)
 			for(var i:int=0; i<users.length; i++)
 				uids.push(users[i] is FacebookUser ? users[i].uid : users[i]);
+				
+			//now go ahead and stuff the users in the users array so we can use it now
+			for(var j:int=0; j<uids.length; j++)
+				users.push(FacebookUser.getUser(uids[j]));
 
 			fbCall.setRequestArgument("uids", uids.join(","));
 			fbCall.setRequestArgument("fields", fields.join(","));

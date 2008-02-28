@@ -3,6 +3,7 @@
 
 	<mx:Script>
 		<![CDATA[
+			import com.pbking.facebook.delegates.users.GetUserInfoDelegate;
 			import com.pbking.facebook.data.photos.FacebookPhoto;
 			import com.pbking.facebook.delegates.photos.GetPhotosDelegate;
 			import com.pbking.facebook.delegates.photos.GetAlbumsDelegate;
@@ -40,7 +41,13 @@
 			private function onGetFriendsReply(event:Event):void
 			{
 				var delegate:GetFriendsDelegate = event.target as GetFriendsDelegate;
-				friendList.dataProvider = facebook.users.getInfo(delegate.friends, [UserFields.name]).users;
+				facebook.users.getInfo(delegate.friends, [UserFields.name], onGetFriendsInfo);
+			}
+			
+			private function onGetFriendsInfo(event:Event):void
+			{
+				var d:GetUserInfoDelegate = event.target as GetUserInfoDelegate;
+				friendList.dataProvider = d.users;
 			}
 			
 			private function selectFriend(user:FacebookUser):void
@@ -84,7 +91,7 @@
 		<mx:List id="friendList" 
 			width="100%" 
 			height="100%" 
-			labelField="name" 
+			labelField="name"
 			change="selectFriend(friendList.selectedItem as FacebookUser);"/>
 		
 		<mx:Label text="Albums"/>
