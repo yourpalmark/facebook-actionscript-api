@@ -103,7 +103,7 @@ or send them to me (Jason Crist:jcrist@pbking.com)
 					//these flashVars are NOT the flashvars passed in when using an <fb:swf/> tag
 					//they are pulled out of the JS api instance.  See /html/fb_as3_api_example.html for an
 					//example of how to pull those values out and send them here.
-					fBook.startJSBridgeSession(flashVars.api_key, flashVars.secret, flashVars.session_key, flashVars.expires, flashVars.user_id); 
+					fBook.startJSBridgeSession(flashVars.api_key, flashVars.secret, flashVars.session_key, flashVars.expires, flashVars.user_id, flashVars.fb_js_api_name); 
 				}
 			}
 			

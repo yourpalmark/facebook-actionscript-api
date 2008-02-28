@@ -17,7 +17,6 @@ package com.pbking.facebook.delegates.users
 		{
 			super(facebook);
 			
-			this.users = users;
 			var uids:Array = [];
 
 			//put all of the users uids into an array to send
@@ -34,10 +33,12 @@ package com.pbking.facebook.delegates.users
 		
 		override protected function handleResult(result:Object):void
 		{
+			users = [];
 			for each(var user:Object in result)
 			{
 				var modUser:FacebookUser = FacebookUser.getUser(parseInt(user.uid));
 				modUser.parseProperties(user);
+				users.push(modUser);
 			}
 			
 		}

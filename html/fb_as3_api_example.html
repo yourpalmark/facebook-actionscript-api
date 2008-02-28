@@ -31,21 +31,14 @@
 					api_key: api.apiKey,
 					secret: api.get_session().secret,
 					session_key: api.get_session().session_key,
-					expires: api.get_session().expires
+					expires: api.get_session().expires,
+					fb_js_api_name: "fb_js_api"
 				};
 				
 				//now bring our .swf to the party.  I prefer to use swfobject to get this done but
 				//there are other solutions if you prefer.  Make sure to pass in the flashvars.
 				swfobject.embedSWF("FB_API_EXAMPLE.swf", "flashContent", "100%", "100%", "9.0.0", "expressInstall.swf", flashVars);
 			});
-			
-			function bridgeFacebookCall(method, args)
-			{
-				api._callMethod$1(method, args, function(result, exception)
-				{
-					document.flashContent.bridgeFacebookReply(result, exception);
-				});
-			}
 			
 		</script>
 

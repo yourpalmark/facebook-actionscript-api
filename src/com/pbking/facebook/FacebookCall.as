@@ -52,9 +52,14 @@ package com.pbking.facebook
 	{
 		// VARIABLES //////////
 		
-		private static var callID:int = 0;
+		private static var callID:uint = 0;
 		
-		private var externalInterfaceInitialized:Boolean;
+		public static var fb_js_api_name:String;
+
+		private static var externalInterfaceCallId:uint = 0;
+		private static var externalInterfaceInitialized:Boolean;
+		private static var externalInterfaceCallbacks:Object = {};
+		
 		private var logger:PBLogger = PBLogger.getLogger("pbking.facebook");
 		
 		private var _fb:Facebook;
@@ -94,15 +99,31 @@ package com.pbking.facebook
 		 */
 		private function post_bridge(method:String):void
 		{
-			if(!externalInterfaceInitialized)
-			{
-				ExternalInterface.addCallback("bridgeFacebookReply", bridgeFacebookReply);
-				externalInterfaceInitialized = true;
-			}
-			
-			ExternalInterface.call("bridgeFacebookCall", method, _args);
+			postBridgeAsync(method, _args, bridgeFacebookReply);
 		}
 			
+		private static function postBridgeAsync(method:String, args:Object, instanceCallback:Function):void
+		{
+			if(!externalInterfaceInitialized)
+			{
+				ExternalInterface.addCallback("bridgeFacebookReply", postBridgeAsyncReply);
+				externalInterfaceInitialized = true;
+			}
+
+			externalInterfaceCallId++;
+			externalInterfaceCallbacks[externalInterfaceCallId] = instanceCallback;
+			var bridgeCallFunctionName:String = "bridgeFacebookCall_"+externalInterfaceCallId;
+			var bridgeCall:String = "function "+bridgeCallFunctionName+"(method, args){"+fb_js_api_name+"._callMethod$1(method, args, function(result, exception){document.flashContent.bridgeFacebookReply(result, exception, "+externalInterfaceCallId+");});}";
+
+			ExternalInterface.call(bridgeCall, method, args);
+		}
+		
+		private static function postBridgeAsyncReply(result:Object, exception:Object, exCallId:uint):void
+		{
+			externalInterfaceCallbacks[exCallId](result, exception);
+			delete externalInterfaceCallbacks[exCallId];
+		}
+		
 		/**
 		 * Helper function for sending the call straight to the server
 		 */

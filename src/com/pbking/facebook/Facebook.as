@@ -279,10 +279,14 @@ package com.pbking.facebook
 		
 		// SESSION FUNCTIONS //////////
 
-		public function startJSBridgeSession(api_key:String, secret:String, session_key:String, expires:Number, user_id:Number):void
+		public function startJSBridgeSession(api_key:String, secret:String, session_key:String, expires:Number, user_id:Number, fb_js_api_name:String):void
 		{
 			logger.debug("starting jsBridge session");
+			
 			setSessionType(FacebookSessionType.JAVASCRIPT_BRIDGE);
+			
+			FacebookCall.fb_js_api_name = fb_js_api_name;
+			
 			this._api_key = api_key;
 			this._secret = secret;
 			this._session_key = session_key;
@@ -290,6 +294,24 @@ package com.pbking.facebook
 
 			this._user = FacebookUser.getUser(user_id);
 
+			if (_api_key == "" || _api_key == null)
+			{
+				onConnectionError("Incorrect api_key passed to startJSBridgeSession()");
+				return;
+			}
+			
+			if (_session_key == "" || _session_key == null)
+			{
+				onConnectionError("Incorrect session_key passed to startJSBridgeSession()");
+				return;
+			}
+			
+			if (FacebookCall.fb_js_api_name == "" || FacebookCall.fb_js_api_name == null)
+			{
+				onConnectionError("Incorrect Facebook JavaScript API name passed to startJSBridgeSession()");
+				return;
+			}
+			
 			onReady();
 		}
 		
@@ -452,6 +474,7 @@ package com.pbking.facebook
 		{
 			setIsConnected(false);
 			_connectionErrorMessage = errorMessage;
+			logger.fatal(errorMessage);
 			dispatchEvent(new Event(Event.COMPLETE));
 		}
 		
