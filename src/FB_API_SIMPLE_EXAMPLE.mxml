@@ -95,7 +95,7 @@ or send them to me (Jason Crist:jcrist@pbking.com)
 				//they are pulled out of the JS api instance.  See /html/fb_as3_api_example.html for an
 				//example of how to pull those values out and send them here.
 				var fv:Object = Application.application.parameters;
-				facebook.startJSBridgeSession(fv.api_key, fv.secret, fv.session_key, fv.expires, fv.user_id);
+				facebook.startJSBridgeSession(fv.api_key, fv.secret, fv.session_key, fv.expires, fv.user_id, fv.fb_js_api_name);
 			}
 			
 			// UTIL FUNCTIONS //////////
