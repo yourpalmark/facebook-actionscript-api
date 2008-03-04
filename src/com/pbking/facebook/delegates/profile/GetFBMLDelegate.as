@@ -21,7 +21,8 @@ package com.pbking.facebook.delegates.profile
 		
 		override protected function handleResult(result:Object):void
 		{
-			this.markup = result.toString();
+			if(result)
+				this.markup = result.toString();
 		}
 		
 	}
