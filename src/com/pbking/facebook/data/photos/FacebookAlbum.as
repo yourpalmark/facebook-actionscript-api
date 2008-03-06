@@ -169,7 +169,7 @@ package com.pbking.facebook.data.photos
 		private function onPopulationComplete(event:Event):void
 		{
 			var delegate:GetPhotosDelegate = event.target as GetPhotosDelegate;
-			this._photos = delegate.photos;
+			this.photos = delegate.photos;
 			
 			_populating = false;
 			_populated = true;
