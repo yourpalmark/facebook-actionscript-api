@@ -38,84 +38,34 @@ package com.pbking.facebook.data.photos
 	{
 		// VARIABLES //////////
 		
-		private var _pid:String;
-		private var _aid:String;
-		private var _owner:FacebookUser;
-		private var _src:String;
-		private var _src_big:String;
-		private var _src_small:String;
-		private var _link:String;
-		private var _caption:String;
-		private var _created:Date;
+		public var pid:String;
+		public var aid:String;
+		public var owner:FacebookUser;
+		public var src:String;
+		public var src_big:String;
+		public var src_small:String;
+		public var link:String;
+		public var caption:String;
+		public var created:Date;
 
-		private var _tags:Array = [];
+		public var tags:Array = [];
 	
 		// CONSTRUCTION //////////
 		
 		function FacebookPhoto(initObj:Object)
 		{
-		  	this._pid = initObj.pid;
-		  	this._aid = initObj.aid;
-		  	this._owner = FacebookUser.getUser(initObj.owner);
-		  	this._src = initObj.src;
-		  	this._src_big = initObj.src_big;
-		  	this._src_small = initObj.src_small;
-		  	this._link = initObj.link;
-		  	this._caption = initObj.caption;
-		  	this._created = FacebookDataParser.formatDate(initObj.created);
+		  	this.pid = initObj.pid;
+		  	this.aid = initObj.aid;
+		  	this.owner = FacebookUser.getUser(initObj.owner);
+		  	this.src = initObj.src;
+		  	this.src_big = initObj.src_big;
+		  	this.src_small = initObj.src_small;
+		  	this.link = initObj.link;
+		  	this.caption = initObj.caption;
+		  	this.created = FacebookDataParser.formatDate(initObj.created);
 		}
 		
 		// GETTERS //////////
-		
-		public function get pid():String
-		{
-			return _pid;
-		}
-		
-		public function get aid():String
-		{
-			return _aid
-		}
-		
-		public function get owner():FacebookUser
-		{
-			return _owner;
-		}
-		
-		public function get src():String
-		{
-			return _src
-		}
-		
-		public function get src_big():String
-		{
-			return _src_big;
-		}
-		
-		public function get src_small():String
-		{
-			return _src_small;
-		}
-		
-		public function get link():String
-		{
-			return _link;
-		}
-		
-		public function get caption():String
-		{
-			return _caption;
-		}
-		
-		public function get created():Date
-		{
-			return _created;
-		}
-		
-		public function get tags():Array
-		{
-			return _tags;
-		}
 		
 	}
 }
