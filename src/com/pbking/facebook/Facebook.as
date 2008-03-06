@@ -37,6 +37,7 @@ package com.pbking.facebook
 	import com.pbking.facebook.data.users.FacebookUser;
 	import com.pbking.facebook.delegates.auth.*;
 	import com.pbking.facebook.delegates.users.GetLoggedInUserDelegate;
+	import com.pbking.facebook.events.FacebookActionEvent;
 	import com.pbking.facebook.methodGroups.*;
 	import com.pbking.util.logging.PBLogger;
 	
@@ -45,7 +46,8 @@ package com.pbking.facebook
 	import flash.net.URLRequest;
 	import flash.net.navigateToURL;
 	
-	[Event(name="complete", type="flash.events.Event")]
+	[Event(name="complete", type="com.pbking.facebook.events.FacebookActionEvent")]
+	[Event(name="waiting_for_login", type="com.pbking.facebook.events.FacebookActionEvent")]
 
 	[Bindable]
 	public class Facebook extends EventDispatcher
@@ -389,6 +391,8 @@ package com.pbking.facebook
 				//now that we have an auth_token we need the user to login with it
 				var authenticateLoginURL:String = login_url + "?api_key="+api_key+"&v=1.0&auth_token="+_auth_token;
 				navigateToURL(new URLRequest(authenticateLoginURL), "_blank");
+				
+				this.dispatchEvent(new FacebookActionEvent(FacebookActionEvent.WAITING_FOR_LOGIN));
 			}
 			else
 			{
@@ -464,7 +468,7 @@ package com.pbking.facebook
 		private function onReady():void
 		{
 			setIsConnected(true);
-			dispatchEvent(new Event(Event.COMPLETE));
+			dispatchEvent(new FacebookActionEvent(FacebookActionEvent.COMPLETE));
 		}
 		
 		/**
@@ -475,7 +479,7 @@ package com.pbking.facebook
 			setIsConnected(false);
 			_connectionErrorMessage = errorMessage;
 			logger.fatal(errorMessage);
-			dispatchEvent(new Event(Event.COMPLETE));
+			dispatchEvent(new FacebookActionEvent(FacebookActionEvent.COMPLETE));
 		}
 		
 	}

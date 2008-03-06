@@ -1,5 +1,7 @@
 package com.pbking.facebook
 {
+	import com.pbking.facebook.events.FacebookActionEvent;
+	
 	import flash.events.Event;
 	import flash.net.SharedObject;
 	import flash.net.URLLoader;
@@ -16,7 +18,7 @@ package com.pbking.facebook
 		{
 			//create our facebook instance
 			facebook = new Facebook();
-			facebook.addEventListener(Event.COMPLETE, onFacebookReady);
+			facebook.addEventListener(FacebookActionEvent.COMPLETE, onFacebookReady);
 			
 			//determine if we're running locally.  if we are we'll run this
 			//app as an unsecure desktop app.  Otherwise fire up a JSAuth session
