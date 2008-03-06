@@ -9,17 +9,24 @@ package com.pbking.facebook.delegates.profile
 		public var markup:String;
 		public var user:FacebookUser;
 		
-		public function SetFBMLDelegate(facebook:Facebook, markup:String, user:FacebookUser=null)
+		public function SetFBMLDelegate(facebook:Facebook, markup:String, uid:String=null)
 		{
 			super(facebook);
 			
 			this.markup = markup;
-			this.user = user;
 			
+			if(uid)
+			{
+				fbCall.setRequestArgument("uid", uid);
+				user = FacebookUser.getUser(parseInt(uid));
+			}
+			else
+			{
+				fbCall.setRequestArgument("uid", facebook.user.uid);
+				user = facebook.user;
+			}
+
 			fbCall.setRequestArgument("markup", markup);
-			
-			if(user)
-				fbCall.setRequestArgument("uid", user.uid.toString());
 			
 			fbCall.post("facebook.profile.setFBML");
 		}

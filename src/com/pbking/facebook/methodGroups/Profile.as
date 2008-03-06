@@ -55,9 +55,9 @@ package com.pbking.facebook.methodGroups
 		 * If not specified, defaults to the logged-in user. 
 		 * Not allowed for desktop applications (since the application secret is essentially public).
 		 */
-		public function setFBML(markup:String, user:FacebookUser=null, callback:Function=null):SetFBMLDelegate
+		public function setFBML(markup:String, uid:String=null, callback:Function=null):SetFBMLDelegate
 		{
-			var delegate:SetFBMLDelegate = new SetFBMLDelegate(facebook, markup, user);
+			var delegate:SetFBMLDelegate = new SetFBMLDelegate(facebook, markup, uid);
 			return MethodGroupUtil.addCallback(delegate, callback) as SetFBMLDelegate;		
 		}
 
@@ -67,9 +67,9 @@ package com.pbking.facebook.methodGroups
 		 * If not specified, defaults to the logged-in user. 
 		 * Not allowed for desktop applications (since the application secret is essentially public).
 		 */
-		public function getFBML(user:FacebookUser=null, callback:Function=null):GetFBMLDelegate
+		public function getFBML(uid:String="", callback:Function=null):GetFBMLDelegate
 		{
-			var delegate:GetFBMLDelegate = new GetFBMLDelegate(facebook, user);
+			var delegate:GetFBMLDelegate = new GetFBMLDelegate(facebook, uid);
 			return MethodGroupUtil.addCallback(delegate, callback) as GetFBMLDelegate;		
 		}
 

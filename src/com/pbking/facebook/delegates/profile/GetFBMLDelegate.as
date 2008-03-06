@@ -6,15 +6,23 @@ package com.pbking.facebook.delegates.profile
 	
 	public class GetFBMLDelegate extends FacebookDelegate
 	{
-		public var markup:String;
+		public var markup:String = "";
 		public var user:FacebookUser;
 		
-		public function GetFBMLDelegate(facebook:Facebook, user:FacebookUser=null)
+		public function GetFBMLDelegate(facebook:Facebook, uid:String=null)
 		{
 			super(facebook);
 			
-			if(user)
-				fbCall.setRequestArgument("uid", user.uid.toString());
+			if(uid)
+			{
+				fbCall.setRequestArgument("uid", uid);
+				user = FacebookUser.getUser(parseInt(uid));
+			}
+			else
+			{
+				fbCall.setRequestArgument("uid", facebook.user.uid);
+				user = facebook.user;
+			}
 
 			fbCall.post("facebook.profile.getFBML");
 		}
