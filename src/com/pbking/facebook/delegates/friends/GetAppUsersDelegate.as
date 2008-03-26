@@ -15,9 +15,6 @@ package com.pbking.facebook.delegates.friends
 		public function GetAppUsersDelegate(facebook:Facebook)
 		{
 			super(facebook);
-			
-			var fbCall:FacebookCall = new FacebookCall(fBook);
-			fbCall.addEventListener(Event.COMPLETE, onCallComplete);
 			fbCall.post("facebook.friends.getAppUsers");
 		}
 		
