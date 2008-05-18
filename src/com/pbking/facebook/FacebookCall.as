@@ -40,7 +40,6 @@ package com.pbking.facebook
 	import flash.events.EventDispatcher;
 	import flash.events.IOErrorEvent;
 	import flash.events.SecurityErrorEvent;
-	import flash.external.ExternalInterface;
 	import flash.net.URLLoader;
 	import flash.net.URLLoaderDataFormat;
 	import flash.net.URLRequest;
@@ -48,17 +47,13 @@ package com.pbking.facebook
 	import flash.net.URLVariables;
 	import flash.utils.ByteArray;
 	
+	import mx.controls.Alert;
+	
 	public class FacebookCall extends EventDispatcher
 	{
 		// VARIABLES //////////
 		
 		private static var callID:uint = 0;
-		
-		public static var fb_js_api_name:String;
-
-		private static var externalInterfaceCallId:uint = 0;
-		private static var externalInterfaceInitialized:Boolean;
-		private static var externalInterfaceCallbacks:Object = {};
 		
 		private var logger:PBLogger = PBLogger.getLogger("pbking.facebook");
 		
@@ -99,31 +94,9 @@ package com.pbking.facebook
 		 */
 		private function post_bridge(method:String):void
 		{
-			postBridgeAsync(method, _args, bridgeFacebookReply);
+			FacebookJSBridge.postBridgeAsync(method, _args, bridgeFacebookReply, _fb.fb_js_api_name, _fb.as_app_name);
 		}
 			
-		private static function postBridgeAsync(method:String, args:Object, instanceCallback:Function):void
-		{
-			if(!externalInterfaceInitialized)
-			{
-				ExternalInterface.addCallback("bridgeFacebookReply", postBridgeAsyncReply);
-				externalInterfaceInitialized = true;
-			}
-
-			externalInterfaceCallId++;
-			externalInterfaceCallbacks[externalInterfaceCallId] = instanceCallback;
-			var bridgeCallFunctionName:String = "bridgeFacebookCall_"+externalInterfaceCallId;
-			var bridgeCall:String = "function "+bridgeCallFunctionName+"(method, args){"+fb_js_api_name+"._callMethod$1(method, args, function(result, exception){document.flashContent.bridgeFacebookReply(result, exception, "+externalInterfaceCallId+");});}";
-
-			ExternalInterface.call(bridgeCall, method, args);
-		}
-		
-		private static function postBridgeAsyncReply(result:Object, exception:Object, exCallId:uint):void
-		{
-			externalInterfaceCallbacks[exCallId](result, exception);
-			delete externalInterfaceCallbacks[exCallId];
-		}
-		
 		/**
 		 * Helper function for sending the call straight to the server
 		 */
@@ -219,7 +192,7 @@ package com.pbking.facebook
 			var loader:URLLoader = event.target as URLLoader;
 			var resultString:String = loader.data;
 			
-			result = JSON.decode(resultString);
+			this.result = JSON.decode(resultString);
 
 			logger.debug("< < < received facebook reply:\n" + resultString);
 
@@ -228,10 +201,11 @@ package com.pbking.facebook
 		
 		private function bridgeFacebookReply(result:Object, exception:Object):void
 		{
+			//Alert.show("call back: " + result + ":" + exception);
 			this.result = result;
 			this.exception = exception;
 			
-			//TODO: Check for & handle exception
+			logger.debug("< < < received facebook reply:\n" + result.toString());
 			
 			dispatchEvent(new Event(Event.COMPLETE));
 		}

@@ -12,34 +12,33 @@
 	
 	<body>
 		<script type="text/javascript">
-			
 			//create a new instance of the JS API passing in my application key and the location
 			//of my xd_receiver.htm file
-			var api = new FB.ApiClient('xxx', '/xd_receiver.htm', null);
+			var fb_js_api = new FB.ApiClient('API_KEY_HERE', '/xd_receiver.htm', null);
 			
 			//the first call (and only in our use) is to .requireLogin.  If this session hasn't been
 			//"validated" the user will either be asked to login and returned, or the page could
 			//just refresh.  Once this happens the session will be set and can be forwarded onto the
-			//flash app so that it can use the API.			
-			api.requireLogin(function(exception)
+			//flash app so that it can use the API.
+			fb_js_api.requireLogin(function(exception)
 			{
 				//this function will only be called once we have a valid session
 				
 				//define the flashVars
 				flashVars = {
-					user_id: api.get_session().uid,
-					api_key: api.apiKey,
-					secret: api.get_session().secret,
-					session_key: api.get_session().session_key,
-					expires: api.get_session().expires,
-					fb_js_api_name: "fb_js_api"
+					user_id: fb_js_api.get_session().uid,
+					api_key: fb_js_api.apiKey,
+					secret: fb_js_api.get_session().secret,
+					session_key: fb_js_api.get_session().session_key,
+					expires: fb_js_api.get_session().expires,
+					fb_js_api_name: "fb_js_api",
+					as_app_name: "flashContent"
 				};
 				
 				//now bring our .swf to the party.  I prefer to use swfobject to get this done but
 				//there are other solutions if you prefer.  Make sure to pass in the flashvars.
 				swfobject.embedSWF("FB_API_EXAMPLE.swf", "flashContent", "100%", "100%", "9.0.0", "expressInstall.swf", flashVars);
 			});
-			
 		</script>
 
 		<div id="flashContent"></div>

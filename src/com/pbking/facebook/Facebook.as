@@ -96,6 +96,12 @@ package com.pbking.facebook
 		private var _secret:String = '';
 		public function get secret():String { return _secret; }
 		
+		private var _fb_js_api_name:String;
+		public function get fb_js_api_name():String { return _fb_js_api_name; }
+		
+		private var _as_app_name:String;
+		public function get as_app_name():String { return _as_app_name; }
+
 		/**
 		 * The session type.  It could be DESKTOP, WEB, or JAVASCRIPT_BRIDGE depending on the type of session that was started.
 		 * There IS a setter for binding purposes but this value IS NOT SETTABLE.
@@ -281,13 +287,20 @@ package com.pbking.facebook
 		
 		// SESSION FUNCTIONS //////////
 
-		public function startJSBridgeSession(api_key:String, secret:String, session_key:String, expires:Number, user_id:Number, fb_js_api_name:String):void
+		public function startJSBridgeSession( api_key:String, 
+											  secret:String, 
+											  session_key:String, 
+											  expires:Number, 
+											  user_id:Number, 
+											  fb_js_api_name:String, 
+											  as_app_name:String):void
 		{
 			logger.debug("starting jsBridge session");
 			
 			setSessionType(FacebookSessionType.JAVASCRIPT_BRIDGE);
 			
-			FacebookCall.fb_js_api_name = fb_js_api_name;
+			this._fb_js_api_name = fb_js_api_name;
+			this._as_app_name = as_app_name;
 			
 			this._api_key = api_key;
 			this._secret = secret;
@@ -308,7 +321,7 @@ package com.pbking.facebook
 				return;
 			}
 			
-			if (FacebookCall.fb_js_api_name == "" || FacebookCall.fb_js_api_name == null)
+			if (this._fb_js_api_name == "" || this._fb_js_api_name == null)
 			{
 				onConnectionError("Incorrect Facebook JavaScript API name passed to startJSBridgeSession()");
 				return;

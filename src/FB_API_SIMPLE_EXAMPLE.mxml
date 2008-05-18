@@ -34,9 +34,6 @@ the Facebook API in AS3.
 The application can be on the facebook website using the JavaScript API.
 See the fb_as3_api_example.html file for details on how to creat the bridge.
 
-The Facebook API REQUIRES the as3corelib library (for JSON parsing).
-Get that here: http://code.google.com/p/as3corelib/
-  
 Please post questions and comments to the Google Group
 http://groups.google.com/group/facebook-actionscript-api
 or send them to me (Jason Crist:jcrist@pbking.com)
@@ -95,7 +92,7 @@ or send them to me (Jason Crist:jcrist@pbking.com)
 				//they are pulled out of the JS api instance.  See /html/fb_as3_api_example.html for an
 				//example of how to pull those values out and send them here.
 				var fv:Object = Application.application.parameters;
-				facebook.startJSBridgeSession(fv.api_key, fv.secret, fv.session_key, fv.expires, fv.user_id, fv.fb_js_api_name);
+				facebook.startJSBridgeSession(fv.api_key, fv.secret, fv.session_key, fv.expires, fv.user_id, fv.fb_js_api_name, fv.as_app_name);
 			}
 			
 			// UTIL FUNCTIONS //////////
@@ -160,8 +157,10 @@ or send them to me (Jason Crist:jcrist@pbking.com)
 				Alert.show(d.errorCode + ":" + d.errorMessage, "Facebook Error . . .");
 			}
 			
-			private function onGotFriends(d:GetFriendsDelegate):void
+			private function onGotFriends(e:Event):void
 			{
+				var d:GetFriendsDelegate = e.target as GetFriendsDelegate;
+
 				if(d.success)
 				{
 					//save my list of friends

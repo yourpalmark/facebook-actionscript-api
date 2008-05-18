@@ -34,7 +34,7 @@ package com.pbking.facebook
 				
 				storedSession = getStoredSession(flashVars.api_key);
 				
-				facebook.startJSBridgeSession(flashVars.api_key, flashVars.secret, flashVars.session_key, flashVars.expires, flashVars.user_id, flashVars.fb_js_api_name); 
+				facebook.startJSBridgeSession(flashVars.api_key, flashVars.secret, flashVars.session_key, flashVars.expires, flashVars.user_id, flashVars.fb_js_api_name, flashVars.as_app_name); 
 			}
 		}
 		

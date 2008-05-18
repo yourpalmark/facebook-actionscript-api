@@ -48,7 +48,7 @@
 		<delete dir="${deliverables}"/>
 		<mkdir dir="${deliverables}"/>
 
-			<!-- package API -->
+		<!-- package API -->
 		<zip destfile='${deliverables}/facebook_as3_api_v${version}.zip' excludes='**/.svn/**'>
 			<zipfileset dir='${src}/' prefix='facebook_as3_api_v${version}'/>
 		</zip>
@@ -81,7 +81,7 @@
 		
 	    <mxmlc  file="${src}/FB_API_SIMPLE_EXAMPLE.mxml" 
 	            output="${build}/example/FB_API_EXAMPLE.swf"
-	    		debug="false"
+	    		debug="true"
 	    		actionscript-file-encoding="UTF-8">
 	    	
 	    		<compiler.library-path dir="${basedir}/lib/as3" append="true">
