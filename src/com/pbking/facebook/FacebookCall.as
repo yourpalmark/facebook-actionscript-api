@@ -53,12 +53,12 @@ package com.pbking.facebook
 	{
 		// VARIABLES //////////
 		
-		private static var callID:uint = 0;
+		protected static var callID:uint = 0;
 		
-		private var logger:PBLogger = PBLogger.getLogger("pbking.facebook");
+		protected var logger:PBLogger = PBLogger.getLogger("pbking.facebook");
 		
-		private var _fb:Facebook;
-		private var _args:URLVariables = new URLVariables();
+		protected var _fb:Facebook;
+		protected var _args:URLVariables = new URLVariables();
 		
 		[Bindable] public var result:Object;
 		[Bindable] public var exception:Object;
@@ -92,7 +92,7 @@ package com.pbking.facebook
 		/**
 		 * Helper function for sending the call through the javascript bridge
 		 */
-		private function post_bridge(method:String):void
+		protected function post_bridge(method:String):void
 		{
 			FacebookJSBridge.postBridgeAsync(method, _args, bridgeFacebookReply, _fb.fb_js_api_name, _fb.as_app_name);
 		}
@@ -100,7 +100,7 @@ package com.pbking.facebook
 		/**
 		 * Helper function for sending the call straight to the server
 		 */
-		private function post_direct(method:String, url:String=null):void
+		protected function post_direct(method:String, url:String=null):void
 		{	
 			if(url == null) url = _fb.rest_url;
 
@@ -182,12 +182,12 @@ package com.pbking.facebook
 		
 		// PRIVATE FUNCTIONS //////////
 		
-		private function onError(event:ErrorEvent):void
+		protected function onError(event:ErrorEvent):void
 		{
 			dispatchEvent(event.clone());
 		}
 		
-		private function onResult(event:Event):void
+		protected function onResult(event:Event):void
 		{
 			var loader:URLLoader = event.target as URLLoader;
 			var resultString:String = loader.data;
@@ -199,7 +199,7 @@ package com.pbking.facebook
 			dispatchEvent(new Event(Event.COMPLETE));
 		}
 		
-		private function bridgeFacebookReply(result:Object, exception:Object):void
+		protected function bridgeFacebookReply(result:Object, exception:Object):void
 		{
 			//Alert.show("call back: " + result + ":" + exception);
 			this.result = result;
@@ -213,7 +213,7 @@ package com.pbking.facebook
 		/**
 		 * Construct the signature as described by Facebook api documentation
 		 */
-		private function getSig():String
+		protected function getSig():String
 		{
 			var a:Array = [];
 			
@@ -239,7 +239,7 @@ package com.pbking.facebook
 			return MD5.hash( s );
 		}	
 		
-		private function ioErrorHandler(event:IOErrorEvent):void
+		protected function ioErrorHandler(event:IOErrorEvent):void
 		{
 			//do nothing with unhandled ioError events
 		}

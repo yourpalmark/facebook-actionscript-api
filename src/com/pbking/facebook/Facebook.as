@@ -54,9 +54,9 @@ package com.pbking.facebook
 	{	
 		// VARIABLES //////////
 		
-		private var logger:PBLogger = PBLogger.getLogger("pbking.facebook");
+		protected var logger:PBLogger = PBLogger.getLogger("pbking.facebook");
 		
-		private var _auth_token:String;
+		protected var _auth_token:String;
 		
 		/**
 		 * The URL of the REST server that you will be using.
@@ -87,29 +87,29 @@ package com.pbking.facebook
 		/**
 		 * The "api_key" associated with your application and provided by Facebook.
 		 */
-		private var _api_key:String; 
+		protected var _api_key:String; 
 		public function get api_key():String { return _api_key;	}
 		
 		/**
 		 * The "secret" associated with your application and provided by Facebook.
 		 */
-		private var _secret:String = '';
+		protected var _secret:String = '';
 		public function get secret():String { return _secret; }
 		
-		private var _fb_js_api_name:String;
+		protected var _fb_js_api_name:String;
 		public function get fb_js_api_name():String { return _fb_js_api_name; }
 		
-		private var _as_app_name:String;
+		protected var _as_app_name:String;
 		public function get as_app_name():String { return _as_app_name; }
 
 		/**
 		 * The session type.  It could be DESKTOP, WEB, or JAVASCRIPT_BRIDGE depending on the type of session that was started.
 		 * There IS a setter for binding purposes but this value IS NOT SETTABLE.
 		 */
-		private var _sessionType:String;
+		protected var _sessionType:String;
 		public function get sessionType():String { return this._sessionType; }
 		public function set sessionType(newVal:String):void {/*for binding*/}
-		private function setSessionType(newVal:String):void
+		protected function setSessionType(newVal:String):void
 		{
 			this._sessionType = newVal;
 			//ping setter to execute bindings
@@ -120,7 +120,7 @@ package com.pbking.facebook
 		/**
 		 * Facebook namespace to use when pulling out XML data responses
 		 */
-		private var _facebook_namespace:Namespace;
+		protected var _facebook_namespace:Namespace;
 		public function get FACEBOOK_NAMESPACE():Namespace
 		{
 			if(_facebook_namespace == null)
@@ -135,7 +135,7 @@ package com.pbking.facebook
 		 */
 		public function set session_key(newVal:String):void { this._session_key = newVal; }
 		public function get session_key():String { return _session_key; }
-		private var _session_key:String;
+		protected var _session_key:String;
 		
 		/** 
 		 * logged in user
@@ -149,7 +149,7 @@ package com.pbking.facebook
 			}
 			return _user; 
 		}
-		private var _user:FacebookUser;
+		protected var _user:FacebookUser;
 		
 		/**
 		 * connection time
@@ -162,14 +162,14 @@ package com.pbking.facebook
 			}
 			return _time; 
 		}
-		private var _time:Number = 0;
+		protected var _time:Number = 0;
 		
 		/**
 		 * The time the session will expire.
 		 * 0 if it doesn't expire
 		 */
 		public function get expires():Number { return _expires; }
-		private var _expires:Number = 0;
+		protected var _expires:Number = 0;
 		
 		/**
 		 * Returns true when the connection has been established and we are ready to make calls
@@ -177,8 +177,8 @@ package com.pbking.facebook
 		 */
 		public function get isConnected():Boolean { return this._isConnected; }
 		public function set isConnected(newVal:Boolean):void {/*for binding*/}
-		private var _isConnected:Boolean = false;
-		private function setIsConnected(newVal:Boolean):void
+		protected var _isConnected:Boolean = false;
+		protected function setIsConnected(newVal:Boolean):void
 		{
 			_isConnected = newVal;
 			isConnected = !newVal; //ping to promote binding
@@ -188,16 +188,16 @@ package com.pbking.facebook
 		 * Version of the facebook API.  This will be updated as the API is updated, but you can
 		 * change it to use beta features, etc
 		 */
-		private var _api_version:String = "1.0";
+		protected var _api_version:String = "1.0";
 		public function get api_version():String { return this._api_version; }
 		public function set api_version(newVal:String):void { this._api_version = newVal };
 		
-		private var _connectionErrorMessage:String;
+		protected var _connectionErrorMessage:String;
 		public function get connectionErrorMessage():String { return _connectionErrorMessage; }
 		
 		// METHOD GROUPS //////////
 		
-		private var _photos:Photos;
+		protected var _photos:Photos;
 		public function get photos():Photos 
 		{ 
 			if(!_photos)
@@ -205,7 +205,7 @@ package com.pbking.facebook
 			return this._photos; 
 		}
 		
-		private var _friends:Friends;
+		protected var _friends:Friends;
 		public function get friends():Friends 
 		{ 
 			if(!_friends)
@@ -213,7 +213,7 @@ package com.pbking.facebook
 			return this._friends; 
 		}
 		
-		private var _users:Users;
+		protected var _users:Users;
 		public function get users():Users 
 		{ 
 			if(!_users)
@@ -221,7 +221,7 @@ package com.pbking.facebook
 			return this._users; 
 		}
 		
-		private var _events:Events;
+		protected var _events:Events;
 		public function get events():Events 
 		{ 
 			if(!_events)
@@ -229,7 +229,7 @@ package com.pbking.facebook
 			return this._events; 
 		}
 		
-		private var _feed:Feed;
+		protected var _feed:Feed;
 		public function get feed():Feed 
 		{ 
 			if(!_feed)
@@ -237,7 +237,7 @@ package com.pbking.facebook
 			return this._feed; 
 		}
 		
-		private var _fql:Fql;
+		protected var _fql:Fql;
 		public function get fql():Fql 
 		{ 
 			if(!_fql)
@@ -245,7 +245,7 @@ package com.pbking.facebook
 			return this._fql; 
 		}
 		
-		private var _groups:Groups;
+		protected var _groups:Groups;
 		public function get groups():Groups 
 		{ 
 			if(!_groups)
@@ -253,7 +253,7 @@ package com.pbking.facebook
 			return this._groups; 
 		}
 		
-		private var _marketplace:Marketplace;
+		protected var _marketplace:Marketplace;
 		public function get marketplace():Marketplace 
 		{ 
 			if(!_marketplace)
@@ -261,7 +261,7 @@ package com.pbking.facebook
 			return this._marketplace; 
 		}
 		
-		private var _notifications:Notifications;
+		protected var _notifications:Notifications;
 		public function get notifications():Notifications 
 		{ 
 			if(!_notifications)
@@ -269,7 +269,7 @@ package com.pbking.facebook
 			return this._notifications; 
 		}
 		
-		private var _pages:Pages;
+		protected var _pages:Pages;
 		public function get pages():Pages 
 		{ 
 			if(!_pages)
@@ -277,7 +277,7 @@ package com.pbking.facebook
 			return this._pages; 
 		}
 		
-		private var _profile:Profile;
+		protected var _profile:Profile;
 		public function get profile():Profile 
 		{ 
 			if(!_profile)
@@ -339,7 +339,7 @@ package com.pbking.facebook
 			this._secret = secret;
 		}
 
-		private var non_inf_session_secret:String;
+		protected var non_inf_session_secret:String;
 		/**
 		 * Start a session for a desktop based application.
 		 * For this you need to know and pass the application api_key and secret.
@@ -376,7 +376,7 @@ package com.pbking.facebook
 			}
 		}
 		
-		private function verifyInfinateSession(event:Event):void
+		protected function verifyInfinateSession(event:Event):void
 		{
 			var d:GetLoggedInUserDelegate = event.target as GetLoggedInUserDelegate;
 			if(d.success)
@@ -394,7 +394,7 @@ package com.pbking.facebook
 			}
 		}
 		
-		private function onDesktopTokenCreated(event:Event):void
+		protected function onDesktopTokenCreated(event:Event):void
 		{
 			var delegate:CreateTokenDelegate = event.target as CreateTokenDelegate;
 			if(delegate.success)
@@ -424,7 +424,7 @@ package com.pbking.facebook
 			delegate.addEventListener(Event.COMPLETE, validateDesktopSessionReply);
 		}
 		
-		private function validateDesktopSessionReply(event:Event):void
+		protected function validateDesktopSessionReply(event:Event):void
 		{
 			var delegate:GetSessionDelegate = event.target as GetSessionDelegate;
 			if(delegate.success)
@@ -478,7 +478,7 @@ package com.pbking.facebook
 		/**
 		 * Helper function.  Called when the connection is ready.
 		 */
-		private function onReady():void
+		protected function onReady():void
 		{
 			setIsConnected(true);
 			dispatchEvent(new FacebookActionEvent(FacebookActionEvent.COMPLETE));
@@ -487,7 +487,7 @@ package com.pbking.facebook
 		/**
 		 * Helper function.  Called when the connection fails to be made.
 		 */
-		private function onConnectionError(errorMessage:String):void
+		protected function onConnectionError(errorMessage:String):void
 		{
 			setIsConnected(false);
 			_connectionErrorMessage = errorMessage;
