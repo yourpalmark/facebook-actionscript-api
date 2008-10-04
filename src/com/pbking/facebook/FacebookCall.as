@@ -47,8 +47,6 @@ package com.pbking.facebook
 	import flash.net.URLVariables;
 	import flash.utils.ByteArray;
 	
-	import mx.controls.Alert;
-	
 	public class FacebookCall extends EventDispatcher
 	{
 		// VARIABLES //////////
@@ -201,7 +199,6 @@ package com.pbking.facebook
 		
 		protected function bridgeFacebookReply(result:Object, exception:Object):void
 		{
-			//Alert.show("call back: " + result + ":" + exception);
 			this.result = result;
 			this.exception = exception;
 			
