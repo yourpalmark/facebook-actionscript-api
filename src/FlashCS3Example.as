@@ -16,9 +16,15 @@ package
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;		
+	import flash.text.TextField;
+	import flash.display.MovieClip;
 	
 	/**
 	* FbTest communicates with Facebook API
+	* NOTE: The way this connects is NOT best practice!  Your secret is embedded in your .swf!
+	* This is provided as an EXAMPLE only.  The FacebookSessionUtil should be used to load your
+	* key/secret externally when testing locally and the JSBridge when running on a server.
+	* See FB_API_Simple_Image_Browser.mxml for an example of this.  =JC 
 	*/	
 	public class FlashCS3Example extends Sprite
 	{
