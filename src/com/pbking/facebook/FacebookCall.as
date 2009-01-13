@@ -30,23 +30,16 @@ OTHER DEALINGS IN THE SOFTWARE.
  */
 package com.pbking.facebook
 {
-	import com.adobe.crypto.MD5;
-	import com.adobe.serialization.json.JSON;
+	import com.pbking.facebook.delegates.IFacebookCallDelegate;
 	import com.pbking.util.logging.PBLogger;
-	import com.shtif.web.MIMEConstructor;
 	
-	import flash.events.ErrorEvent;
-	import flash.events.Event;
 	import flash.events.EventDispatcher;
-	import flash.events.IOErrorEvent;
-	import flash.events.SecurityErrorEvent;
-	import flash.net.URLLoader;
-	import flash.net.URLLoaderDataFormat;
-	import flash.net.URLRequest;
-	import flash.net.URLRequestMethod;
 	import flash.net.URLVariables;
-	import flash.utils.ByteArray;
+	import flash.utils.Dictionary;
 	
+	[Event(name="complete", type="flash.events.Event")]
+	
+	[Bindable]
 	public class FacebookCall extends EventDispatcher
 	{
 		// VARIABLES //////////
@@ -55,192 +48,180 @@ package com.pbking.facebook
 		
 		protected var logger:PBLogger = PBLogger.getLogger("pbking.facebook");
 		
-		protected var _fb:Facebook;
-		protected var _args:URLVariables = new URLVariables();
+		protected var repressOnComplete:Boolean = false;
 		
-		[Bindable] public var result:Object;
-		[Bindable] public var exception:Object;
+		public var args:URLVariables;
+		public var method:String;
+		
+		public var result:Object;
+		public var exception:Object;
+
+		public var success:Boolean = false;
+		public var errorCode:int = 0;
+		public var errorMessage:String = "";
+
+		public var facebook:Facebook;
+		
+		public var callbacks:Dictionary = new Dictionary(true);
 		
 		// CONSTRUCTION //////////
 		
-		function FacebookCall(fBook:Facebook)
+		function FacebookCall(method:String="no_method_required", args:URLVariables=null)
 		{
-			this._fb = fBook;
+			this.method = method;
+			this.args = args ? args : new URLVariables();
 		}
 		
-		// PUBLIC FUNCTIONS //////////
+		// PUBLIC METHODS //////////
 		
 		/**
-		 * Send this call to the server
+		 * Similar to a dispatched event this will call a method when a call is complete
+		 * (either successful or not).  Instead of an Event instance being passed to
+		 * the function, however, this instance of the call is passed. A weak-keyed
+		 * dictionary is used to keep track of the callbacks so that reference to objects
+		 * shouldn't "hang around" after they are no longer needed.
+		 * 
+		 * @param callback Function the function to call when the call is complete.  
+		 * The function will be passed this instance of FacebookCall.
 		 */
-		public function post(method:String="no_method_required", url:String=null):void
+		public function addCallback(callback:Function):void
 		{
-			//construct the log message
-			var debugString:String = "> > > calling method: " + method;
-			for(var indexName:String in this._args)
-				debugString += "\n  +" + indexName + " = " + this._args[indexName];
-			logger.debug(debugString);
-					
-			if(_fb.sessionType == FacebookSessionType.JAVASCRIPT_BRIDGE)
-				post_bridge(method);
-			else
-				post_direct(method, url);
+			callbacks[callback] = callback;
 		}
-		
+
 		/**
-		 * Helper function for sending the call through the javascript bridge
-		 */
-		protected function post_bridge(method:String):void
-		{
-			FacebookJSBridge.postBridgeAsync(method, _args, bridgeFacebookReply, _fb.fb_js_api_name, _fb.as_app_name);
-		}
-			
-		/**
-		 * Helper function for sending the call straight to the server
-		 */
-		protected function post_direct(method:String, url:String=null):void
-		{	
-			if(url == null) url = _fb.rest_url;
-
-			setRequestArgument("v", _fb.api_version);
-			
-			setRequestArgument("format", "JSON");
-			
-			if(_fb.api_key != null)
-				setRequestArgument("api_key", _fb.api_key);
-
-			if(_fb.session_key != null)
-				setRequestArgument("session_key", _fb.session_key);
-
-			var call_id:String = ( new Date().valueOf() ).toString() + ( FacebookCall.callID++ ).toString();
-			this.setRequestArgument( 'call_id', call_id );
-
-			this.setRequestArgument( 'method', method );
-			
-			//create encrypted signature. NOTE: You cannot use setRequestArgument() after calling this or you will bork the checksum!!
-			this.setRequestArgument("sig", getSig());
-			
-			//construct the log message
-			var loader:URLLoader = new URLLoader();
-			loader.addEventListener(Event.COMPLETE, onResult);
-			loader.addEventListener(IOErrorEvent.IO_ERROR, onError);
-			loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onError);
-
-			if(method != "facebook.photos.upload")
-			{
-				//create the service request
-				var req:URLRequest = new URLRequest(url);
-				req.contentType = "application/x-www-form-urlencoded";
-				req.method = URLRequestMethod.POST;
-				req.data = _args;
-				
-				loader.dataFormat = URLLoaderDataFormat.TEXT;
-				
-				//make the request!
-				loader.load(req);
-			}
-			else
-			{
-				//special construction for uploads
-
-				var mime:MIMEConstructor = new MIMEConstructor();
-				var data:ByteArray;
-
-				for(var argIndexName:String in this._args)
-				{
-					if(argIndexName != "data")
-					{
-						mime.writePostData(argIndexName, this._args[argIndexName]);
-					}
-					else
-					{
-						mime.writeFileData("fn"+this._args['call_id']+".jpg", this._args[argIndexName]); 
-					}
-				}
-				mime.closePostData();
-
-				var urlreq:URLRequest = new URLRequest();
-				urlreq.method = URLRequestMethod.POST;
-				urlreq.contentType = "multipart/form-data; boundary="+mime.getBoundary();
-				urlreq.data = mime.getPostData();
-				urlreq.url = url;
-				
-				loader.dataFormat = URLLoaderDataFormat.BINARY;
-				loader.load(urlreq);				
-			}
-		}
-		
-		/**
-		 * Set a name value pair to be sent in request postdata
+		 * Set a name value pair to be sent in request postdata.  
+		 * You could of course set these directly on the args variable 
+		 * but this method proves handy too.
+		 * 
+		 * @param name String the name of the argument
+		 * @param value * the value of the argument
 		 */
 		public function setRequestArgument( name:String, value:* ):void
 		{
-			this._args[name] = value;	
+			this.args[name] = value;	
 		}
 		
-		// PRIVATE FUNCTIONS //////////
-		
-		protected function onError(event:ErrorEvent):void
+		/**
+		 * Clear the values out the the .args object.  Sometiles useful
+		 * in the initialize() method.
+		 */
+		public function clearRequestArguments():void
 		{
-			dispatchEvent(event.clone());
+			this.args = new URLVariables();
 		}
 		
-		protected function onResult(event:Event):void
+		/** 
+		 * Initialize the facebook call.
+		 * This will normally be used to convert class variables into arg values.
+		 * Because a call can be used over and over if desired this method will
+		 * be called so that child classes can re-initialize the .arg values.
+		 */
+		public function initialize():void
 		{
-			var loader:URLLoader = event.target as URLLoader;
-			var resultString:String = loader.data;
-			
-			this.result = JSON.decode(resultString);
-
-			logger.debug("< < < received facebook reply:\n" + resultString);
-
-			dispatchEvent(new Event(Event.COMPLETE));
+			//override in case something needs to be initialized prior to execution
 		}
 		
-		protected function bridgeFacebookReply(result:Object, exception:Object):void
+		/**
+		 * Execute a call.  A Facebook value MUST be provided either as a param 
+		 * or set as the public class variable.
+		 * To execute a call you can either pass the call to a facebook instance
+		 * [facebookInstance.post(callInstance); ] or call this method which will 
+		 * pass the call to the facebook for you.  This method will mostly be used
+		 * when the call is constructed as an MXML object.
+		 * 
+		 * @param facebook Facebook optional facebook instance that the call will
+		 * be executed with.  If this paramater is not set the public .facebook
+		 * property MUST be set or an error will be thrown.
+		 */
+		public function execute(facebook:Facebook=null):IFacebookCallDelegate
+		{
+			if(facebook)
+				return facebook.post(this);
+				
+			else if(this.facebook)
+				return this.facebook.post(this);
+
+			throw new Error("No Facebook value defined for FacebookCall to execute with");
+			return null;
+		}
+		
+		/**
+		 * Called from the IFacebookCallDelegate when the communication 
+		 * has been completed. This method will determine the success, 
+		 * parse out any errors, call the handleSuccess method on successful
+		 * calls (so that extended classes can easily handle the success of
+		 * the call) and inform any listeners/callbacks that the call is
+		 * complete.
+		 * 
+		 * @param result Object the result object provided from the Facebook 
+		 * REST services
+		 *
+ 		 * @param exception Object the exception object provided from the Facebook 
+		 * REST services
+		 */
+		public function handleResult(result:Object, exception:Object):void
 		{
 			this.result = result;
 			this.exception = exception;
 			
-			logger.debug("< < < received facebook reply:\n" + result.toString());
-			
-			dispatchEvent(new Event(Event.COMPLETE));
+			//look for an error
+			if(result && result.hasOwnProperty('error_code'))
+			{
+				//dang.  handle the error
+				this.errorCode = result.error_code;
+				this.errorMessage = result.error_msg;
+				this.success = false;
+
+				//pass it on in case a child wants to do something with it
+				handleException(exception);
+				
+				logger.debug('error making call: ' + errorCode +"|"+errorMessage);
+			}
+			else
+			{
+				this.success = true;
+				handleSuccess(result);
+			}
+
+			if(!repressOnComplete)
+				onComplete();
 		}
 		
 		/**
-		 * Construct the signature as described by Facebook api documentation
+		 * Handles the event dispatching and callbacks for when a call has been completed.
+		 * This is NORMALLY called at the end of handleResult, however it's possible for
+		 * an extended class to set the respressOnComplete value to TRUE so that this 
+		 * doesn't happen.  In that case the child class would then need to call the 
+		 * onComplete method itself.  GetAlbums is an example of this.
 		 */
-		protected function getSig():String
+		protected function onComplete():void
 		{
-			var a:Array = [];
+			dispatchEvent(new Event(Event.COMPLETE));
 			
-			for( var p:String in this._args )
-			{
-				var arg:* = this._args[p];
-				if( p !== 'sig' && !(arg is ByteArray)){
-					a.push( p + '=' + arg.toString() );
-				}
-			}
-			
-			a.sort();
-			
-			var s:String = '';
-			
-			for( var i:Number = 0; i < a.length; i++ )
-			{
-				s += a[i];
-			}
-			
-			s += _fb.secret;
-			
-			return MD5.hash( s );
-		}	
-		
-		protected function ioErrorHandler(event:IOErrorEvent):void
-		{
-			//do nothing with unhandled ioError events
+			for each(var f:Function in callbacks)
+				f(this);
 		}
 		
-		
+		/**
+		 * A utility method used by extended classes.  The result is
+		 * passed to this method from the handleResult method.
+		 * This method should NOT be called directly.
+		 */
+		protected function handleSuccess(result:Object):void
+		{
+			//override this
+		}
+
+		/**
+		 * A utility method used by extended classes.  The exception is
+		 * passed to this method from the handleResult method.
+		 * This method should NOT be called directly.
+		 */
+		protected function handleException(exception:Object):void
+		{
+			//override this
+		}
+
 	}
 }
