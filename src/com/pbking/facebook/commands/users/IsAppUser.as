@@ -1,4 +1,4 @@
-package com.pbking.facebook.delegates.users
+package com.pbking.facebook.commands.users
 {
 	import com.pbking.facebook.FacebookCall;
 	
@@ -11,7 +11,7 @@ package com.pbking.facebook.delegates.users
 		{
 			super("facebook.users.isAppAdded");
 
-			this.pageId = pageId;
+			this.uid = uid;
 		}
 		
 		override public function initialize():void

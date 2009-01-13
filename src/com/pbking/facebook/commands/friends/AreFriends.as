@@ -1,10 +1,10 @@
-package com.pbking.facebook.delegates.friends
+package com.pbking.facebook.commands.friends
 {
 	import com.pbking.facebook.FacebookCall;
 	import com.pbking.facebook.data.users.FacebookUser;
 	import com.pbking.util.collection.HashableArray;
 	
-	public class AreFriendsDelegate extends FacebookCall
+	public class AreFriends extends FacebookCall
 	{
 		public var list1:Array;
 		public var list2:Array;
@@ -13,7 +13,7 @@ package com.pbking.facebook.delegates.friends
 		
 		private var totalUserCollection:HashableArray = new HashableArray("uid", false);
 		
-		public function AreFriendsDelegate(list1:Array=null, list2:Arraynull)
+		public function AreFriends(list1:Array=null, list2:Array=null)
 		{
 			super("facebook.friends.areFriends");
 			

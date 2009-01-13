@@ -1,11 +1,11 @@
-package com.pbking.facebook.delegates.feed
+package com.pbking.facebook.commands.feed
 {
 	import com.pbking.facebook.FacebookCall;
 	import com.pbking.facebook.data.users.FacebookUser;
 
 	public class PublishTemplatizedAction extends FacebookCall
 	{
-		
+		public var actor:FacebookUser;
 		public var title_template:String;
 		public var title_data:String;
 		public var body_template:String;
@@ -32,6 +32,7 @@ package com.pbking.facebook.delegates.feed
 		{
 			super("facebook.feed.publishTemplatizedAction");
 			
+			this.actor = actor;
 			this.title_template = title_template;
 			this.title_data = title_data;
 			this.body_template = body_template;

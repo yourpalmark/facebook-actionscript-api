@@ -1,4 +1,4 @@
-package com.pbking.facebook.delegates.marketplace
+package com.pbking.facebook.commands.marketplace
 {
 	import com.pbking.facebook.Facebook;
 	import com.pbking.facebook.FacebookCall;
@@ -25,7 +25,7 @@ package com.pbking.facebook.delegates.marketplace
 			this.query = query;
 		}
 		
-		override public function initialize():void;
+		override public function initialize():void
 		{
 			clearRequestArguments();
 			

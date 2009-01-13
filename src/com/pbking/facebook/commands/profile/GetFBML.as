@@ -1,4 +1,4 @@
-package com.pbking.facebook.delegates.profile
+package com.pbking.facebook.commands.profile
 {
 	import com.pbking.facebook.FacebookCall;
 	import com.pbking.facebook.data.users.FacebookUser;
@@ -8,9 +8,9 @@ package com.pbking.facebook.delegates.profile
 		public var markup:String = "";
 		
 		public var uid:String;
-		public var type:int;
+		public var type:String;
 		
-		public function GetFBML(uid:String=null, type:int)
+		public function GetFBML(uid:String=null, type:String=null)
 		{
 			super("facebook.profile.getFBML");
 		}
@@ -23,7 +23,7 @@ package com.pbking.facebook.delegates.profile
 				setRequestArgument("uid", uid);
 				
 			if(type)
-				setRequestArgument("type", type.toString());
+				setRequestArgument("type", type);
 		}
 		
 		override protected function handleSuccess(result:Object):void

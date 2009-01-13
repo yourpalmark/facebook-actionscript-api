@@ -28,7 +28,7 @@ OTHER DEALINGS IN THE SOFTWARE.
  * 
  * @author Jason Crist 
  */
-package com.pbking.facebook.delegates.photos
+package com.pbking.facebook.commands.photos
 {
 	import com.pbking.facebook.FacebookCall;
 	import com.pbking.facebook.data.photos.FacebookPhoto;
@@ -75,7 +75,7 @@ package com.pbking.facebook.delegates.photos
 
 		// RESULT //////////
 
-		override protected function handleResult(result:Object):void
+		override protected function handleSuccess(result:Object):void
 		{
 			uploadedPhoto = new FacebookPhoto(result);
 		}

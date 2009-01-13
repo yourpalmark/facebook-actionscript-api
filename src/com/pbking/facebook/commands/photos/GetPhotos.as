@@ -3,7 +3,7 @@
  * 
  * @author Jason Crist 
  */
-package com.pbking.facebook.delegates.photos
+package com.pbking.facebook.commands.photos
 {
 	import com.pbking.facebook.FacebookCall;
 	import com.pbking.facebook.data.*;

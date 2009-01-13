@@ -1,10 +1,8 @@
-package com.pbking.facebook.delegates.notifications
+package com.pbking.facebook.commands.notifications
 {
-	import com.pbking.facebook.Facebook;
-	import com.pbking.facebook.delegates.FacebookDelegate;
-	import com.pbking.util.logging.PBLogger;
+	import com.pbking.facebook.FacebookCall;
 	
-	public class GetNotifications extends FacebookDelegate
+	public class GetNotifications extends FacebookCall
 	{
 		
 		public var notifications:Object = new Object();

@@ -1,4 +1,4 @@
-package com.pbking.facebook.delegates.pages
+package com.pbking.facebook.commands.pages
 {
 	import com.pbking.facebook.FacebookCall;
 
@@ -20,7 +20,7 @@ package com.pbking.facebook.delegates.pages
 			setRequestArgument("page_id", page_id);
 
 			if(uid)
-				fbCall.setRequestArgument("uid", uid);
+				setRequestArgument("uid", uid);
 		}
 	}
 }

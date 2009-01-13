@@ -31,9 +31,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 package com.pbking.facebook.data.photos
 {
 	import com.pbking.facebook.Facebook;
+	import com.pbking.facebook.commands.photos.GetPhotos;
 	import com.pbking.facebook.data.users.FacebookUser;
 	import com.pbking.facebook.data.util.FacebookDataParser;
-	import com.pbking.facebook.delegates.photos.GetPhotos;
 	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;

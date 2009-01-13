@@ -1,9 +1,8 @@
-package com.pbking.facebook.delegates.marketplace
+package com.pbking.facebook.commands.marketplace
 {
-	import com.pbking.facebook.Facebook;
-	import com.pbking.facebook.delegates.FacebookDelegate;
+	import com.pbking.facebook.FacebookCall;
 
-	public class GetCategories extends FacebookDelegate
+	public class GetCategories extends FacebookCall
 	{
 		public var categories:Array;
 		

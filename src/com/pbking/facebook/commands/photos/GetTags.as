@@ -3,7 +3,7 @@
  * 
  * @author Jason Crist 
  */
-package com.pbking.facebook.delegates.photos
+package com.pbking.facebook.commands.photos
 {
 	import com.pbking.facebook.FacebookCall;
 	import com.pbking.facebook.data.photos.FacebookPhoto;
@@ -24,7 +24,7 @@ package com.pbking.facebook.delegates.photos
 			this.photos = photos;
 		}
 		
-		override protected function initialize():void
+		override public function initialize():void
 		{
 			var pids:Array = [];
 			

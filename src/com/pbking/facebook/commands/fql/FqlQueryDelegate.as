@@ -1,8 +1,8 @@
-package com.pbking.facebook.delegates.fql
+package com.pbking.facebook.commands.fql
 {
-	import com.pbking.facebook.Facebook;
+	import com.pbking.facebook.FacebookCall;
 
-	public class FqlQueryDelegate extends FacebookDelegate
+	public class FqlQueryDelegate extends FacebookCall
 	{
 		public var query:String;
 		
@@ -13,7 +13,7 @@ package com.pbking.facebook.delegates.fql
 			this.query = query;
 		}
 		
-		override public function inialize():void
+		override public function initialize():void
 		{			
 			setRequestArgument("query", query);
 		}

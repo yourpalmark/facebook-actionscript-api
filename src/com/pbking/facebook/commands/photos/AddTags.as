@@ -3,7 +3,7 @@
  * 
  * @author Jason Crist 
  */
-package com.pbking.facebook.delegates.photos
+package com.pbking.facebook.commands.photos
 {
 	import com.pbking.facebook.FacebookCall;
 	import com.pbking.facebook.data.photos.NewTag;
@@ -16,7 +16,7 @@ package com.pbking.facebook.delegates.photos
 		{
 			super("facebook.photos.addTag");
 
-			this.newTags = newTags;
+			this.tags = tags;
 		}
 		
 		override public function initialize():void

@@ -1,8 +1,7 @@
-package com.pbking.facebook.delegates.users
+package com.pbking.facebook.commands.users
 {
 	import com.pbking.facebook.Facebook;
 	import com.pbking.facebook.data.users.FacebookUser;
-	import com.pbking.facebook.delegates.FacebookDelegate;
 	import com.pbking.util.logging.PBLogger;
 	import com.pbking.facebook.FacebookCall;
 	

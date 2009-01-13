@@ -1,4 +1,4 @@
-package com.pbking.facebook.delegates.marketplace
+package com.pbking.facebook.commands.marketplace
 {
 	import com.pbking.facebook.FacebookCall;
 	import com.pbking.facebook.data.marketplace.MarketplaceListing;
@@ -31,12 +31,12 @@ package com.pbking.facebook.delegates.marketplace
 			if(users)
 			{
 				var userIds:Array = [];
-				for(var i:int=0; i<users.length; i++
+				for(var i:int=0; i<users.length; i++)
 				{
 					userIds.push(users[i] is FacebookUser ? users[i].uid : users[i]);
 				}
 					
-				fbCall.setRequestArgument("uids", userIds.join(","));
+				setRequestArgument("uids", userIds.join(","));
 			}
 		}
 		

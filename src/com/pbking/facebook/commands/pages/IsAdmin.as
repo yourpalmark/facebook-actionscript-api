@@ -1,4 +1,4 @@
-package com.pbking.facebook.delegates.pages
+package com.pbking.facebook.commands.pages
 {
 	import com.pbking.facebook.FacebookCall;
 
@@ -6,7 +6,7 @@ package com.pbking.facebook.delegates.pages
 	{
 		public var page_id:String;
 		
-		function IsAdmin(page_id:Number)
+		function IsAdmin(page_id:String)
 		{
 			super("facebook.pages.isAdmin");
 			

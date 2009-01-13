@@ -3,7 +3,7 @@
  * 
  * @author Jason Crist 
  */
-package com.pbking.facebook.delegates.photos
+package com.pbking.facebook.commands.photos
 {
 	import com.pbking.facebook.FacebookCall;
 	import com.pbking.facebook.data.photos.FacebookAlbum;
@@ -37,10 +37,10 @@ package com.pbking.facebook.delegates.photos
 		
 		override public function initialize():void
 		{
-			fbCall.setRequestArgument("uid", uid.toString());
+			setRequestArgument("uid", uid.toString());
 		}
 		
-		override public function handleSuccess(result:Object):void
+		override protected function handleSuccess(result:Object):void
 		{
 			albums = [];
 			
@@ -76,7 +76,7 @@ package com.pbking.facebook.delegates.photos
 			this.facebook.post(new GetPhotos(null, null, cover_pids), onGotCovers);
 		}
 		
-		private function onGotCovers(var call:GetPhotos):void
+		private function onGotCovers(call:GetPhotos):void
 		{
 			if(call.success)
 			{

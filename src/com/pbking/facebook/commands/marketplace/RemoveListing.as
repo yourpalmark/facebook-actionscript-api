@@ -1,4 +1,4 @@
-package com.pbking.facebook.delegates.marketplace
+package com.pbking.facebook.commands.marketplace
 {
 	import com.pbking.facebook.FacebookCall;
 
@@ -13,7 +13,7 @@ package com.pbking.facebook.delegates.marketplace
 			this.listing_id = listing_id;
 		}
 		
-		override public function initilize():void
+		override public function initialize():void
 		{
 			setRequestArgument("listing_id", listing_id.toString());
 		}

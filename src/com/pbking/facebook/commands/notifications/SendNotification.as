@@ -1,4 +1,4 @@
-package com.pbking.facebook.delegates.notifications
+package com.pbking.facebook.commands.notifications
 {
 	import com.pbking.facebook.FacebookCall;
 	import com.pbking.facebook.data.users.FacebookUser;
@@ -40,7 +40,7 @@ package com.pbking.facebook.delegates.notifications
 			}
 			else
 			{
-				fbCall.setRequestArgument("to_ids", "");
+				setRequestArgument("to_ids", "");
 			}
 			
 		}		

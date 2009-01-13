@@ -1,4 +1,4 @@
-package com.pbking.facebook.delegates.profile
+package com.pbking.facebook.commands.profile
 {
 	import com.pbking.facebook.Facebook;
 	import com.pbking.facebook.FacebookCall;

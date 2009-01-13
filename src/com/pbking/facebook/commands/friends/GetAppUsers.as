@@ -1,4 +1,4 @@
-package com.pbking.facebook.delegates.friends
+package com.pbking.facebook.commands.friends
 {
 	import com.pbking.facebook.FacebookCall;
 	import com.pbking.facebook.data.users.FacebookUser;
