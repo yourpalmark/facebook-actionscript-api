@@ -99,7 +99,8 @@ package com.pbking.facebook
 		 */
 		public function setRequestArgument( name:String, value:* ):void
 		{
-			this.args[name] = value;	
+			if(value)
+				this.args[name] = value;	
 		}
 		
 		/**
