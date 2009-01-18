@@ -37,7 +37,10 @@ package com.pbking.facebook.commands.photos
 		
 		override public function initialize():void
 		{
-			setRequestArgument("uid", uid.toString());
+			clearRequestArguments();
+			
+			if(uid)
+				setRequestArgument("uid", uid);
 		}
 		
 		override protected function handleSuccess(result:Object):void
