@@ -11,6 +11,7 @@ package com.pbking.facebook.commands.photos
 	
 	import flash.events.Event;
 	
+	[Bindable]
 	public class GetAlbums extends FacebookCall
 	{
 		// VARIABLES //////////

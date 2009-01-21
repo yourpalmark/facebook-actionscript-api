@@ -9,6 +9,7 @@ package com.pbking.facebook.commands.photos
 	import com.pbking.facebook.data.*;
 	import com.pbking.facebook.data.photos.FacebookPhoto;
 	
+	[Bindable]
 	public class GetPhotos extends FacebookCall
 	{
 		// VARIABLES //////////

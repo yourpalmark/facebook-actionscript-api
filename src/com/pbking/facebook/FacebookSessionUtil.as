@@ -14,6 +14,7 @@ package com.pbking.facebook
 	import mx.events.CloseEvent;
 	import com.pbking.util.logging.PBLogger;
 	import com.pbking.facebook.session.FBJSBridgeSession;
+	import com.pbking.facebook.session.WebSession;
 	
 	public class FacebookSessionUtil
 	{
@@ -51,6 +52,12 @@ package com.pbking.facebook
 			
 			var flashVars:Object = Application.application.parameters;
 			
+			//trace out the flashvars
+			var flashVarsDebugString:String = "flashvars:\n";
+			for (var s:String in flashVars)
+				flashVarsDebugString += s + " = " + flashVars[s] + "\n";
+			logger.debug(flashVarsDebugString);
+			
 			if(Application.application.url.slice(0, 5) == "file:")
 			{
 				logger.debug("determined a desktop application");
@@ -66,15 +73,25 @@ package com.pbking.facebook
 					keyLoader.load(new URLRequest(localKeyFile));
 				}
 			}
+			else if(flashVars.fb_sig_ss && flashVars.fb_sig_api_key && flashVars.fb_sig_session_key)
+			{
+				logger.debug("determined a web application");
+				facebook.startSession(new WebSession(flashVars.fb_sig_api_key, flashVars.fb_sig_ss, flashVars.fb_sig_session_key));
+			}
 			else if(flashVars.fb_local_connection)
 			{
 				logger.debug("determined a fbjsBridge application (with " + flashVars.fb_local_connection + ")");
 				facebook.startSession(new FBJSBridgeSession(flashVars.fb_local_connection));
 			}
-			else
+			else if(flashVars.as_app_name)
 			{
 				logger.debug("determined a jsBridge application");
 				facebook.startSession(new JSBridgeSession(flashVars.as_app_name));
+			}
+			else
+			{
+				logger.fatal("could not determind facebook connection type");
+				throw new Error("could not determind facebook connection type");
 			}
 		}
 		

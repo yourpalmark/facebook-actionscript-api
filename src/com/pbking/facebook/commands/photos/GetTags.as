@@ -9,7 +9,8 @@ package com.pbking.facebook.commands.photos
 	import com.pbking.facebook.data.photos.FacebookPhoto;
 	import com.pbking.facebook.data.photos.FacebookTag;
 	import com.pbking.util.collection.HashableArray;
-		
+	
+	[Bindable]	
 	public class GetTags extends FacebookCall
 	{
 		public var photos:Array;

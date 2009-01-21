@@ -13,44 +13,21 @@ package com.pbking.facebook.session
 	[Event(name="connect", type="com.pbking.facebook.events.FacebookActionEvent")]
 	[Event(name="waiting_for_login", type="com.pbking.facebook.events.FacebookActionEvent")]
 
-	public class DesktopSession extends EventDispatcher implements IFacebookSession
+	public class DesktopSession extends WebSession implements IFacebookSession
 	{
 		protected var _auth_token:String;
-		protected var _api_key:String; 
 		protected var non_inf_session_secret:String;
-		protected var _secret:String = '';
-		protected var _session_key:String;
-		protected var _uid:String;
-		protected var _expires:Number;
-		protected var _api_version:String = "1.0";
 		protected var _is_connected:Boolean = false;
 		protected var _waiting_for_login:Boolean = false;
-		protected var logger:PBLogger = PBLogger.getLogger("pbking.facebook");
-
-		/**
-		 * The URL of the REST server that you will be using.
-		 * Change this if you are using a redirect server. (not recommended)
-		 */
-		public var rest_url:String = "http://api.facebook.com/restserver.php";
-
-		/**
-		 * This ACTUAL FACEBOOK rest URL.  This cannot be changed.
-		 */
-		public var default_rest_url:String = "http://api.facebook.com/restserver.php";
-
-		/**
-		 * The URL of the login page a user will be directed to (for desktop applications)
-		 * The default will work fine but you can set it to something else.
-		 */
-		public var login_url:String = "http://www.facebook.com/login.php";
 
 		// CONSTRUCTION //////////
 		
 		public function DesktopSession(api_key:String, secret:String, infinite_session_key:String=null, infinite_session_secret:String=null)
 		{
-			this._api_key = api_key;
-			this._secret = secret;
-			
+			super(api_key, secret, null);
+
+			this._is_connected = false;
+
 			if(infinite_session_key)
 			{
 				this.non_inf_session_secret = secret;
@@ -72,24 +49,11 @@ package com.pbking.facebook.session
 
 		// INTERFACE REQUIREMENTS //////////
 
-		public function get is_connected():Boolean { return _is_connected; }
+		override public function get is_connected():Boolean { return _is_connected; }
 
-		public function get api_version():String { return this._api_version; }
-		public function set api_version(newVal:String):void { this._api_version = newVal; }
+		override public function get waiting_for_login():Boolean { return _waiting_for_login; }
 
-		public function get api_key():String { return _api_key;	}
-		
-		public function get secret():String { return _secret; }
-
-		public function get session_key():String { return _session_key; }
-
-		public function get expires():Number { return _expires; }
-		
-		public function get uid():String { return _uid; } 
-		
-		public function get waiting_for_login():Boolean { return _waiting_for_login; }
-
-		public function post(call:FacebookCall):IFacebookCallDelegate
+		override public function post(call:FacebookCall):IFacebookCallDelegate
 		{
 			return new DesktopDelegate(call, this);
 		}
