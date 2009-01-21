@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<title>Facebook AS3 API iFrame WebSession Example</title>
+
+		<!-- include swfobject library -->
+		<script type="text/javascript" src="swfobject.js"></script>
+	</head>
+	
+	<body>
+		<script type="text/javascript">
+		
+      //define your flashVars from the URL GET string
+
+      var flashVars = {};
+      var strHref = window.location.href;
+      if ( strHref.indexOf("?") > -1 ) {
+        var strQueryString = strHref.substr(strHref.indexOf("?")+1);
+        var aQueryString = strQueryString.split("&");
+        for ( var iParam = 0; iParam < aQueryString.length; iParam++ ) {
+          var aParam = aQueryString[iParam].split("=");
+          flashVars[aParam[0]] = aParam[1];
+        }
+      }
+
+      //create your instance of your .swf
+      swfobject.embedSWF("Facebook_MXML_example.swf", "flashContent", "100%", "100%", "9.0.0", "expressInstall.swf", flashVars);
+		</script>
+
+		<!--  this is where your flash content will be placed when created -->
+		<div id="flashContent"></div>
+		
+	</body>
+</html>
