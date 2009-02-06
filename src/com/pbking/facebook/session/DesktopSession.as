@@ -4,13 +4,12 @@ package com.pbking.facebook.session
 	import com.pbking.facebook.delegates.DesktopDelegate;
 	import com.pbking.facebook.delegates.IFacebookCallDelegate;
 	import com.pbking.facebook.events.FacebookActionEvent;
-	import com.pbking.util.logging.PBLogger;
 	
-	import flash.events.EventDispatcher;
 	import flash.net.URLRequest;
 	import flash.net.navigateToURL;
 	
 	[Event(name="connect", type="com.pbking.facebook.events.FacebookActionEvent")]
+	[Event(name="connection_error", type="com.pbking.facebook.events.FacebookActionEvent")]
 	[Event(name="waiting_for_login", type="com.pbking.facebook.events.FacebookActionEvent")]
 
 	public class DesktopSession extends WebSession implements IFacebookSession
@@ -128,9 +127,12 @@ package com.pbking.facebook.session
 		
 		protected function onConnectionError(message:String):void
 		{
-			logger.warn(message);
+			//logger.warn(message);
 			_is_connected = false;
-			this.dispatchEvent(new FacebookActionEvent(FacebookActionEvent.CONNECT));
+			var e:FacebookActionEvent = new FacebookActionEvent(FacebookActionEvent.CONNECTION_ERROR);
+			e.message = message;
+			
+			this.dispatchEvent(e);
 		}
 
 		protected function verifyInfinateSession(call:FacebookCall):void

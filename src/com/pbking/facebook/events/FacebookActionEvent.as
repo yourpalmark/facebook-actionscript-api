@@ -6,10 +6,14 @@ package com.pbking.facebook.events
 	{
 		public static const WAITING_FOR_LOGIN:String = "waiting_for_login";
 		public static const CONNECT:String = "connect";
+		public static const CONNECTION_ERROR:String = "connection_error";
 		
-		public function FacebookActionEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
+		public var message:String;
+		
+		public function FacebookActionEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false, message:String=null)
 		{
 			super(type, bubbles, cancelable);
+			this.message = message;
 		}
 		
 	}

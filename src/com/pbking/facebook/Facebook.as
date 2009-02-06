@@ -51,7 +51,6 @@ package com.pbking.facebook
 		// VARIABLES //////////
 		
 		public var logger:PBLogger = PBLogger.getLogger("pbking.facebook");
-		public var connectionErrorMessage:String;
 		public var waiting_for_login:Boolean;
 
 		protected static var _facebook_namespace:Namespace;
@@ -111,6 +110,7 @@ package com.pbking.facebook
 			else
 			{
 				_currentSession.addEventListener(FacebookActionEvent.CONNECT, onSessionConnected);
+				_currentSession.addEventListener(FacebookActionEvent.CONNECTION_ERROR, onConnectionError);
 				_currentSession.addEventListener(FacebookActionEvent.WAITING_FOR_LOGIN, onWaitingForLogin);
 			}
 		}
@@ -157,6 +157,11 @@ package com.pbking.facebook
 			dispatchEvent(new FacebookActionEvent(FacebookActionEvent.CONNECT));
 		}
 		
+		protected function onConnectionError(e:FacebookActionEvent):void
+		{
+			dispatchEvent(new FacebookActionEvent(e.type, e.bubbles, e.cancelable, e.message));
+		}
+
 		protected function onWaitingForLogin(e:FacebookActionEvent):void
 		{
 			waiting_for_login = true;
