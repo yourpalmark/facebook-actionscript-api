@@ -8,6 +8,7 @@ package com.pbking.facebook.commands.photos
 	import com.pbking.facebook.FacebookCall;
 	import com.pbking.facebook.data.photos.NewTag;
 		
+	[Bindable]	
 	public class AddTags extends FacebookCall
 	{
 		public var tags:Array;

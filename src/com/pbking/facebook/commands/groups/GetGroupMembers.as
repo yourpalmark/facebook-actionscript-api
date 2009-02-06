@@ -4,6 +4,7 @@ package com.pbking.facebook.commands.groups
 	import com.pbking.facebook.data.groups.FacebookGroup;
 	import com.pbking.facebook.data.users.FacebookUser;
 
+	[Bindable]
 	public class GetGroupMembers extends FacebookCall
 	{
 		public var group:FacebookGroup;

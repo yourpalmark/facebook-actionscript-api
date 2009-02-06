@@ -5,6 +5,7 @@ package com.pbking.facebook.commands.users
 	import com.pbking.util.logging.PBLogger;
 	import com.pbking.facebook.FacebookCall;
 	
+	[Bindable]	
 	public class GetLoggedInUser extends FacebookCall
 	{
 		public var user:FacebookUser;

@@ -3,6 +3,7 @@ package com.pbking.facebook.commands.pages
 	import com.pbking.facebook.FacebookCall;
 	import com.pbking.facebook.data.pages.FacebookPage;
 
+	[Bindable]	
 	public class GetPageInfo extends FacebookCall
 	{
 		public var fields:Array;

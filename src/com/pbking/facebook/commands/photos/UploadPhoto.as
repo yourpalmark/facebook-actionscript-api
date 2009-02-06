@@ -35,6 +35,7 @@ package com.pbking.facebook.commands.photos
 	
 	import flash.utils.ByteArray;
 	
+	[Bindable]	
 	public class UploadPhoto extends FacebookCall
 	{
 		// VARIABLES //////////

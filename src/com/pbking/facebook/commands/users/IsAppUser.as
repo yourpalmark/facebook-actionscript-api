@@ -2,6 +2,7 @@ package com.pbking.facebook.commands.users
 {
 	import com.pbking.facebook.FacebookCall;
 	
+	[Bindable]	
 	public class IsAppUser extends FacebookCall
 	{
 		public var uid:String;

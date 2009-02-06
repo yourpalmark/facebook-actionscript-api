@@ -4,6 +4,7 @@ package com.pbking.facebook.commands.marketplace
 	import com.pbking.facebook.FacebookCall;
 	import com.pbking.facebook.data.marketplace.MarketplaceListing;
 	
+	[Bindable]
 	public class SearchListings extends FacebookCall
 	{
 		// VARIABLES //////////

@@ -2,6 +2,7 @@ package com.pbking.facebook.commands.marketplace
 {
 	import com.pbking.facebook.FacebookCall;
 
+	[Bindable]
 	public class RemoveListing extends FacebookCall
 	{
 		public var listing_id:String;

@@ -3,6 +3,7 @@ package com.pbking.facebook.commands.users
 	import com.pbking.facebook.Facebook;
 	import com.pbking.facebook.FacebookCall;
 	
+	[Bindable]	
 	public class HasAppPermission extends FacebookCall
 	{
 		/**

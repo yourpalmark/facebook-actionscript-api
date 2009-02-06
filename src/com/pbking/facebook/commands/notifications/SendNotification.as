@@ -3,6 +3,7 @@ package com.pbking.facebook.commands.notifications
 	import com.pbking.facebook.FacebookCall;
 	import com.pbking.facebook.data.users.FacebookUser;
 	
+	[Bindable]	
 	public class SendNotification extends FacebookCall
 	{
 		public var notification:String;

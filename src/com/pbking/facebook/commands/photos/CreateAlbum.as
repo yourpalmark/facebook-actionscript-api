@@ -3,6 +3,7 @@ package com.pbking.facebook.commands.photos
 	import com.pbking.facebook.FacebookCall;
 	import com.pbking.facebook.data.photos.FacebookAlbum;
 
+	[Bindable]	
 	public class CreateAlbum extends FacebookCall
 	{
 		public var name:String;

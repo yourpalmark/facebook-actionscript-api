@@ -3,6 +3,7 @@ package com.pbking.facebook.commands.profile
 	import com.pbking.facebook.FacebookCall;
 	import com.pbking.facebook.data.users.FacebookUser;
 	
+	[Bindable]	
 	public class GetFBML extends FacebookCall
 	{
 		public var markup:String = "";

@@ -3,6 +3,7 @@ package com.pbking.facebook.commands.feed
 	import com.pbking.facebook.FacebookCall;
 	import com.pbking.facebook.data.users.FacebookUser;
 
+	[Bindable]
 	public class PublishTemplatizedAction extends FacebookCall
 	{
 		public var actor:FacebookUser;

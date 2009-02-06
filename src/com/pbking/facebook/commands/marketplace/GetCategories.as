@@ -2,6 +2,7 @@ package com.pbking.facebook.commands.marketplace
 {
 	import com.pbking.facebook.FacebookCall;
 
+	[Bindable]
 	public class GetCategories extends FacebookCall
 	{
 		public var categories:Array;

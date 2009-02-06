@@ -1,7 +1,8 @@
 package com.pbking.facebook.commands.notifications
 {
 	import com.pbking.facebook.FacebookCall;
-	
+
+	[Bindable]	
 	public class GetNotifications extends FacebookCall
 	{
 		

@@ -4,6 +4,7 @@ package com.pbking.facebook.commands.friends
 	import com.pbking.facebook.data.users.FacebookUser;
 	import com.pbking.util.collection.HashableArray;
 	
+	[Bindable]
 	public class AreFriends extends FacebookCall
 	{
 		public var list1:Array;
