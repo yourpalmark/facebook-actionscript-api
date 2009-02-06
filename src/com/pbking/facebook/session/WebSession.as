@@ -1,12 +1,12 @@
 package com.pbking.facebook.session
 {
-	import flash.events.IEventDispatcher;
-	import com.pbking.facebook.delegates.IFacebookCallDelegate;
 	import com.pbking.facebook.FacebookCall;
-	import flash.events.EventDispatcher;
-	import flash.events.Event;
+	import com.pbking.facebook.delegates.IFacebookCallDelegate;
 	import com.pbking.facebook.delegates.WebDelegate;
+	import com.pbking.facebook.events.FacebookActionEvent;
 	import com.pbking.util.logging.PBLogger;
+	
+	import flash.events.EventDispatcher;
 
 	public class WebSession extends EventDispatcher implements IFacebookSession
 	{
@@ -18,6 +18,7 @@ package com.pbking.facebook.session
 		protected var _uid:String;
 		protected var _expires:Number;
 		protected var _api_version:String = "1.0";
+		protected var _is_connected:Boolean = false;
 		protected var logger:PBLogger = PBLogger.getLogger("pbking.facebook");
 
 		/**
@@ -46,11 +47,51 @@ package com.pbking.facebook.session
 			this._api_key = api_key;
 			this._secret = secret;
 			this._session_key = session_key;
+			
+			initConnection();
 		}
 		
+		protected function initConnection():void
+		{
+			//all we need to do is test the connection to make sure it works
+			logger.debug("testing web session");
+			var call:FacebookCall = new FacebookCall("facebook.users.getLoggedInUser");
+			call.addCallback(verifyWebSession);
+			this.post(call);
+		}
+		
+		private function verifyWebSession(call:FacebookCall):void
+		{
+			if(call.success)
+			{
+				this._uid = call.result.toString();
+				onReady();
+			}
+			else
+			{
+				onConnectionError(call.errorMessage);
+			}
+		}
+		
+		protected function onReady():void
+		{
+			_is_connected = true;
+			this.dispatchEvent(new FacebookActionEvent(FacebookActionEvent.CONNECT));
+		}
+		
+		protected function onConnectionError(message:String):void
+		{
+			//logger.warn(message);
+			_is_connected = false;
+			var e:FacebookActionEvent = new FacebookActionEvent(FacebookActionEvent.CONNECTION_ERROR);
+			e.message = message;
+			
+			this.dispatchEvent(e);
+		}
+
 		// INTERFACE REQUIREMENTS //////////
 
-		public function get is_connected():Boolean { return true; }
+		public function get is_connected():Boolean { return _is_connected; }
 
 		public function get api_version():String { return this._api_version; }
 		public function set api_version(newVal:String):void { this._api_version = newVal; }

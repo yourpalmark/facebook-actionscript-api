@@ -16,17 +16,23 @@ package com.pbking.facebook.session
 	{
 		protected var _auth_token:String;
 		protected var non_inf_session_secret:String;
-		protected var _is_connected:Boolean = false;
 		protected var _waiting_for_login:Boolean = false;
 
+		private var infinite_session_key:String;
+		private var infinite_session_secret:String;
+
 		// CONSTRUCTION //////////
-		
+
 		public function DesktopSession(api_key:String, secret:String, infinite_session_key:String=null, infinite_session_secret:String=null)
 		{
+			this.infinite_session_key = infinite_session_key;
+			this.infinite_session_secret = infinite_session_secret;
+			
 			super(api_key, secret, null);
-
-			this._is_connected = false;
-
+		}
+		
+		override protected function initConnection():void
+		{
 			if(infinite_session_key)
 			{
 				this.non_inf_session_secret = secret;
@@ -47,8 +53,6 @@ package com.pbking.facebook.session
 		}
 
 		// INTERFACE REQUIREMENTS //////////
-
-		override public function get is_connected():Boolean { return _is_connected; }
 
 		override public function get waiting_for_login():Boolean { return _waiting_for_login; }
 
@@ -119,22 +123,6 @@ package com.pbking.facebook.session
 			}
 		}
 		
-		protected function onReady():void
-		{
-			_is_connected = true;
-			this.dispatchEvent(new FacebookActionEvent(FacebookActionEvent.CONNECT));
-		}
-		
-		protected function onConnectionError(message:String):void
-		{
-			//logger.warn(message);
-			_is_connected = false;
-			var e:FacebookActionEvent = new FacebookActionEvent(FacebookActionEvent.CONNECTION_ERROR);
-			e.message = message;
-			
-			this.dispatchEvent(e);
-		}
-
 		protected function verifyInfinateSession(call:FacebookCall):void
 		{
 			if(call.success)
