@@ -28,7 +28,7 @@ package com.pbking.facebook.session
 			this.infinite_session_key = infinite_session_key;
 			this.infinite_session_secret = infinite_session_secret;
 			
-			super(api_key, secret, null);
+			super(api_key, secret, null, null);
 		}
 		
 		override protected function initConnection():void

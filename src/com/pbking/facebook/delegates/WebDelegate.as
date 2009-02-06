@@ -89,7 +89,8 @@ package com.pbking.facebook.delegates
 			addOptionalArguments();
 			
 			//create encrypted signature. NOTE: You cannot use setRequestArgument() after calling this or you will bork the checksum!!
-			call.setRequestArgument("sig", getSig());
+			if(!session.is_sessionless)
+				call.setRequestArgument("sig", getSig());
 			
 			//construct the loader
 			var loader:URLLoader = new URLLoader();
@@ -156,7 +157,8 @@ package com.pbking.facebook.delegates
 		{
 			//setting thes 'ss' argument (secret session) to true
 			//since that's what we should be using for a web session
-			call.setRequestArgument( "ss", true );
+			if(!session.is_sessionless)
+				call.setRequestArgument( "ss", true );
 		}
 		
 		/**

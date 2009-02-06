@@ -87,6 +87,9 @@ package com.pbking.facebook
 		public function get api_version():String 
 		{ return _currentSession ? this._currentSession.api_version : null; }
 
+		public function get is_sessionless():Boolean
+		{ return _currentSession ? this._currentSession.is_sessionless : true; }
+
 		/**
 		 * Facebook namespace to use when pulling out XML data responses
 		 */
@@ -143,6 +146,16 @@ package com.pbking.facebook
 			{
 				DesktopSession(_currentSession).validateDesktopSession();
 			}
+		}
+		
+		public function getInstallationURL():String
+		{
+			if(api_key)
+			{
+				return "http://www.facebook.com/tos.php?api_key=" + api_key;
+			}
+
+			return null;
 		}
 		
 		// UTILS //////////

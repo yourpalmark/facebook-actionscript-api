@@ -19,6 +19,7 @@ package com.pbking.facebook.session
 		protected var _expires:Number;
 		protected var _api_version:String = "1.0";
 		protected var _is_connected:Boolean = false;
+		protected var _is_sessionless:Boolean = false;
 		protected var logger:PBLogger = PBLogger.getLogger("pbking.facebook");
 
 		/**
@@ -40,24 +41,35 @@ package com.pbking.facebook.session
 
 		// CONSTRUCTION //////////
 
-		public function WebSession(api_key:String, secret:String, session_key:String)
+		public function WebSession(api_key:String, secret:String, session_key:String, uid:String)
 		{
 			super();
 			
 			this._api_key = api_key;
 			this._secret = secret;
 			this._session_key = session_key;
+			this._uid = uid;
 			
 			initConnection();
 		}
 		
 		protected function initConnection():void
 		{
-			//all we need to do is test the connection to make sure it works
-			logger.debug("testing web session");
-			var call:FacebookCall = new FacebookCall("facebook.users.getLoggedInUser");
-			call.addCallback(verifyWebSession);
-			this.post(call);
+			if(!secret && !session_key)
+			{
+				//we are just going to assume that everything is ok.
+				//we can't really do much without a session anyway
+				_is_sessionless = true;
+				onReady();
+			}
+			else
+			{
+				//all we need to do is test the connection to make sure it works
+				logger.debug("testing web session");
+				var call:FacebookCall = new FacebookCall("facebook.users.getLoggedInUser");
+				call.addCallback(verifyWebSession);
+				this.post(call);
+			}
 		}
 		
 		private function verifyWebSession(call:FacebookCall):void
@@ -92,6 +104,8 @@ package com.pbking.facebook.session
 		// INTERFACE REQUIREMENTS //////////
 
 		public function get is_connected():Boolean { return _is_connected; }
+
+		public function get is_sessionless():Boolean { return _is_sessionless; }
 
 		public function get api_version():String { return this._api_version; }
 		public function set api_version(newVal:String):void { this._api_version = newVal; }

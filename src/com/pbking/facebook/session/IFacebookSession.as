@@ -22,6 +22,8 @@ package com.pbking.facebook.session
 
 		function get api_version():String;
 		
+		function get is_sessionless():Boolean; 
+
 		function post(call:FacebookCall):IFacebookCallDelegate; 
 	}
 }

@@ -23,6 +23,8 @@ package com.pbking.facebook.session
 		// INTERFACE METHODS //////////
 
 		public function get is_connected():Boolean { return true; }
+
+		public function get is_sessionless():Boolean { return true; }
 		
 		public function get waiting_for_login():Boolean { return true; }
 		

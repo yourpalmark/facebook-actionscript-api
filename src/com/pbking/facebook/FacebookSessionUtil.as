@@ -2,19 +2,19 @@ package com.pbking.facebook
 {
 	import com.pbking.facebook.events.FacebookActionEvent;
 	import com.pbking.facebook.session.DesktopSession;
+	import com.pbking.facebook.session.FBJSBridgeSession;
 	import com.pbking.facebook.session.JSBridgeSession;
+	import com.pbking.facebook.session.WebSession;
+	import com.pbking.util.logging.PBLogger;
 	
 	import flash.events.Event;
 	import flash.net.SharedObject;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	
-	import mx.core.Application;
 	import mx.controls.Alert;
+	import mx.core.Application;
 	import mx.events.CloseEvent;
-	import com.pbking.util.logging.PBLogger;
-	import com.pbking.facebook.session.FBJSBridgeSession;
-	import com.pbking.facebook.session.WebSession;
 	
 	public class FacebookSessionUtil
 	{
@@ -75,8 +75,14 @@ package com.pbking.facebook
 			}
 			else if(flashVars.fb_sig_ss && flashVars.fb_sig_api_key && flashVars.fb_sig_session_key)
 			{
-				logger.debug("determined a web application");
-				facebook.startSession(new WebSession(flashVars.fb_sig_api_key, flashVars.fb_sig_ss, flashVars.fb_sig_session_key));
+				logger.debug("determined an installed web application");
+				facebook.startSession(new WebSession(flashVars.fb_sig_api_key, flashVars.fb_sig_ss, flashVars.fb_sig_session_key, null));
+			}
+			else if(flashVars.fb_sig_api_key && flashVars.fb_sig)
+			{
+				logger.debug("determined a not-installed web application");
+				
+				facebook.startSession(new WebSession(flashVars.fb_sig_api_key, null, null, flashVars.fb_sig_canvas_user));
 			}
 			else if(flashVars.fb_local_connection)
 			{
