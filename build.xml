@@ -1,7 +1,7 @@
 <project name='Facebook API' default='package' basedir='.'>
 
 	<description>
-		Facebook AS3 API, Documentation and example
+		Facebook AS3 API, Documentation and swc
 	</description>
 	
 	<!-- user build properties -->
@@ -20,7 +20,7 @@
 	<property name="doc" value="${build}/doc" />
 	<property name="bin" value="${basedir}/bin" />
 	<property name="src" value="${basedir}/src" />
-	<property name="version" value="0.9.2" />
+	<property name="version" value="2.0.0" />
 
 	<!-- DOCUMENT -->
 	
@@ -35,7 +35,7 @@
 			<arg line="-window-title 'Facebook AS3 API Documentation'" />
 			<arg line="-source-path '${src}'" />
 			<arg line="-doc-sources '${src}/com/pbking'" />
-			<arg line="-library-path+='${basedir}/lib/as3'" />
+			<arg line="-library-path+='${basedir}/lib/as3','${FLEX_FRAMEWORKS}/libs/air'" />
 			<arg line="-left-frameset-width 300" />
 			<arg line="-output '${doc}'" />
 		</exec>
@@ -43,7 +43,7 @@
 	
 	<!-- PACKAGE -->
 	
-	<target name='package' depends="build_example,document,build_swc">
+	<target name='package' depends="document,build_swc">
 		
 		<delete dir="${deliverables}"/>
 		<mkdir dir="${deliverables}"/>
@@ -70,69 +70,6 @@
 
 	</target>
 
-	<!-- BUILD EXAMPLE-->
-	
-	<target name='build_example'>
-
-		<echo message="Building Facebook example"/>
-		
-		<delete dir="${build}/example"/>
-		<mkdir dir="${build}/example"/>
-		
-	    <mxmlc  file="${src}/FB_API_SIMPLE_EXAMPLE.mxml" 
-	            output="${build}/example/FB_API_EXAMPLE.swf"
-	    		debug="true"
-	    		actionscript-file-encoding="UTF-8">
-	    	
-	    		<compiler.library-path dir="${basedir}/lib/as3" append="true">
-	    			<include name="corelib.swc"/>
-	    		</compiler.library-path>
-	    	
-	    		<load-config filename="${FLEX_CONFIG}"/>
-	        	<source-path path-element="${FLEX_FRAMEWORKS}"/>
-	            <default-size width="500" height="400" />
-		</mxmlc>
-	
-		<copy todir="${build}/example" file="${basedir}/html/expressInstall.swf"/>
-		<copy todir="${build}/example" file="${basedir}/html/fb_as3_api_example.html"/>
-		<copy todir="${build}/example" file="${basedir}/html/swfobject.js"/>
-		<copy todir="${build}/example" file="${basedir}/html/xd_receiver.htm"/>
-	
-		<mkdir dir="${build}/example/source"/>
-		<copy todir="${build}/example/source" file="${src}/FB_API_SIMPLE_EXAMPLE.mxml"/>
-
-		<echo message="Finished building Facebook example"/>
-
-	</target>
-	
-	<!-- TEST -->
-	
-	<target name='unit_test'>
-
-		<echo message="Building Facebook unit test"/>
-	
-		<delete dir="${build}/test"/>
-		<mkdir dir="${build}/test"/>
-
-		<mxmlc  file="${src}/FB_API_TEST.mxml" 
-            output="${build}/test/FB_API_TEST.swf"
-    		debug="false"
-    		actionscript-file-encoding="UTF-8">
-    	
-    		<compiler.library-path dir="${basedir}/lib/as3" append="true">
-    			<include name="corelib.swc"/>
-    	        <include name="flexunit.swc"/>    
-    		</compiler.library-path>
-
-    		<load-config filename="${FLEX_CONFIG}"/>
-        	<source-path path-element="${FLEX_FRAMEWORKS}"/>
-            <default-size width="800" height="600" />
-		</mxmlc>
-	
-		<echo message="Finished building Facebook unit test"/>
-
-	</target>
-	
 	<!-- BUILD SWC -->
 	
 	<target name='build_swc'>
@@ -143,12 +80,14 @@
 		<mkdir dir="${build}/swc"/>
 
 			<compc output="${build}/swc/facebook_as3_api.swc">
-			<source-path path-element="${src}"/>
-    		<compiler.external-library-path dir="${basedir}/lib/as3" append="true">
-    			<include name="corelib.swc"/>
-    		</compiler.external-library-path>
-			<include-sources dir="${src}/com" includes="*"/>
-		</compc>
+				<source-path path-element="${src}"/>
+				<!--
+    			<compiler.external-library-path dir="${basedir}/lib/as3" append="true">
+    				<include name="corelib.swc"/>
+    			</compiler.external-library-path>
+    			-->
+				<include-sources dir="${src}/com" includes="*"/>
+			</compc>
 		
 		<echo message="Finished building Facebook swc"/>
 
