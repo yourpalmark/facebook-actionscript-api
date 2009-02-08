@@ -20,7 +20,7 @@
 	<property name="doc" value="${build}/doc" />
 	<property name="bin" value="${basedir}/bin" />
 	<property name="src" value="${basedir}/src" />
-	<property name="version" value="2.0.0" />
+	<property name="version" value="butter_0.1.0" />
 
 	<!-- DOCUMENT -->
 	
