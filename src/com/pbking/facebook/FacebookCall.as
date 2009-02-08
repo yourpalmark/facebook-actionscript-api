@@ -33,6 +33,7 @@ package com.pbking.facebook
 	import com.pbking.facebook.delegates.IFacebookCallDelegate;
 	import com.pbking.util.logging.PBLogger;
 	
+	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.net.URLVariables;
 	import flash.utils.Dictionary;
