@@ -1,4 +1,4 @@
-package com.pbking.facebook
+package com.pbking.facebook.util
 {
 	import com.pbking.facebook.session.AirSession;
 	
@@ -7,7 +7,7 @@ package com.pbking.facebook
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	
-	public class FacebookAirSessionUtil extends FacebookSessionUtil 
+	public class FacebookAirSessionUtil extends FacebookFlexSessionUtil 
 	{
 		function FacebookAirSessionUtil()
 		{

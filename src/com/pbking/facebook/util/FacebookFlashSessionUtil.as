@@ -1,4 +1,4 @@
-package com.pbking.facebook
+package com.pbking.facebook.util
 {
 	import com.pbking.facebook.events.FacebookActionEvent;
 	import com.pbking.facebook.session.DesktopSession;
@@ -8,6 +8,7 @@ package com.pbking.facebook
 	import com.pbking.util.logging.PBLogger;
 	
 	import flash.events.Event;
+	import flash.events.EventDispatcher;
 	import flash.net.SharedObject;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
@@ -16,7 +17,10 @@ package com.pbking.facebook
 	import mx.core.Application;
 	import mx.events.CloseEvent;
 	
-	public class FacebookSessionUtil
+	[Event(name="connect", type="com.pbking.facebook.events.FacebookActionEvent")]
+	[Event(name="waiting_for_login", type="com.pbking.facebook.events.FacebookActionEvent")]
+
+	public class FacebookFlashSessionUtil extends EventDispatcher
 	{
 		public var facebook:Facebook;
 		
@@ -29,7 +33,7 @@ package com.pbking.facebook
 		
 		// CONSTRUCTION //////////
 		
-		function FacebookSessionUtil()
+		function FacebookFlashSessionUtil()
 		{
 			//create our facebook instance
 			facebook = new Facebook();
@@ -141,6 +145,8 @@ package com.pbking.facebook
 		
 		protected function onWaitingForLogin(e:FacebookActionEvent):void
 		{
+			this.dispatchEvent(new FacebookActionEvent(FacebookActionEvent.WAITING_FOR_LOGIN));
+			
 			Alert.show("A Facebook login prompt is opening in a browser window.  Login and when instructed close that window and click 'OK'.", "Facebook Login", 4, null, onLoginAlertClose);
 		}
 		
@@ -166,6 +172,8 @@ package com.pbking.facebook
 					storedSession.data.stored_secret = facebook.secret;
 					storedSession.flush();
 				}
+
+				this.dispatchEvent(new FacebookActionEvent(FacebookActionEvent.CONNECT));
 			}
 			else
 			{

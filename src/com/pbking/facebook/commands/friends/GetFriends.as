@@ -7,10 +7,20 @@ package com.pbking.facebook.commands.friends
 	public class GetFriends extends FacebookCall
 	{
 		public var friends:Array;
+		public var uid:String;
 		
-		public function GetFriends()
+		public function GetFriends(uid:String=null)
 		{
 			super("facebook.friends.get");
+
+			this.uid = uid;
+		}
+		
+		override public function initialize():void
+		{
+			clearRequestArguments();
+			if(uid)
+				setRequestArgument("uid", uid);
 		}
 		
 		override protected function handleSuccess(result:Object):void

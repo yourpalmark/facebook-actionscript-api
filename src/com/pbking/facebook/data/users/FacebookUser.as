@@ -12,7 +12,7 @@ package com.pbking.facebook.data.users
 	[Bindable]
 	public class FacebookUser extends EventDispatcher
 	{
-		public var uid:Number;
+		public var uid:uint;
 		
 		public var isLoggedInUser:Boolean;
 		
