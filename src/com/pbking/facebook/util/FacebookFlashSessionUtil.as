@@ -1,5 +1,6 @@
 package com.pbking.facebook.util
 {
+	import com.pbking.facebook.Facebook;
 	import com.pbking.facebook.events.FacebookActionEvent;
 	import com.pbking.facebook.session.DesktopSession;
 	import com.pbking.facebook.session.FBJSBridgeSession;
@@ -7,15 +8,12 @@ package com.pbking.facebook.util
 	import com.pbking.facebook.session.WebSession;
 	import com.pbking.util.logging.PBLogger;
 	
+	import flash.display.LoaderInfo;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.net.SharedObject;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
-	
-	import mx.controls.Alert;
-	import mx.core.Application;
-	import mx.events.CloseEvent;
 	
 	[Event(name="connect", type="com.pbking.facebook.events.FacebookActionEvent")]
 	[Event(name="waiting_for_login", type="com.pbking.facebook.events.FacebookActionEvent")]
@@ -45,7 +43,7 @@ package com.pbking.facebook.util
 		/**
 		 * initiate connection.
 		 */
-		public function connect(api_key:String=null, secret:String=null, localKeyFile:String="api_key_secret.xml"):void
+		public function connect(loaderInfo:LoaderInfo, api_key:String=null, secret:String=null, localKeyFile:String="api_key_secret.xml"):void
 		{
 			this.localKeyFile = localKeyFile;
 			this.api_key = api_key;
@@ -54,7 +52,7 @@ package com.pbking.facebook.util
 			//determine if we're running locally.  if we are we'll run this
 			//app as an unsecure desktop app.  Otherwise fire up a JSAuth session
 			
-			var flashVars:Object = Application.application.parameters;
+			var flashVars:Object = loaderInfo.parameters;
 			
 			//trace out the flashvars
 			var flashVarsDebugString:String = "flashvars:\n";
@@ -62,7 +60,7 @@ package com.pbking.facebook.util
 				flashVarsDebugString += s + " = " + flashVars[s] + "\n";
 			logger.debug(flashVarsDebugString);
 			
-			if(Application.application.url.slice(0, 5) == "file:")
+			if(loaderInfo.url.slice(0, 5) == "file:")
 			{
 				logger.debug("determined a desktop application");
 
@@ -147,12 +145,7 @@ package com.pbking.facebook.util
 		{
 			this.dispatchEvent(new FacebookActionEvent(FacebookActionEvent.WAITING_FOR_LOGIN));
 			
-			Alert.show("A Facebook login prompt is opening in a browser window.  Login and when instructed close that window and click 'OK'.", "Facebook Login", 4, null, onLoginAlertClose);
-		}
-		
-		protected function onLoginAlertClose(e:CloseEvent):void
-		{
-			facebook.validateDesktopSession();
+			logger.info("A Facebook login prompt is opening in a browser window.  Login and when instructed close that window and validate.");
 		}
 		
 		/**
