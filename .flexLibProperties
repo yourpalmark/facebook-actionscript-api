@@ -11,9 +11,7 @@
 <classEntry path="com.adobe.serialization.json.JSONTokenizer"/>
 <classEntry path="com.adobe.utils.IntUtil"/>
 <classEntry path="com.pbking.facebook.Facebook"/>
-<classEntry path="com.pbking.facebook.FacebookAirSessionUtil"/>
 <classEntry path="com.pbking.facebook.FacebookCall"/>
-<classEntry path="com.pbking.facebook.FacebookSessionUtil"/>
 <classEntry path="com.pbking.facebook.commands.feed.PublishTemplatizedAction"/>
 <classEntry path="com.pbking.facebook.commands.fql.FqlQueryDelegate"/>
 <classEntry path="com.pbking.facebook.commands.friends.AreFriends"/>
@@ -78,6 +76,9 @@
 <classEntry path="com.pbking.facebook.session.IFacebookSession"/>
 <classEntry path="com.pbking.facebook.session.JSBridgeSession"/>
 <classEntry path="com.pbking.facebook.session.WebSession"/>
+<classEntry path="com.pbking.facebook.util.FacebookAirSessionUtil"/>
+<classEntry path="com.pbking.facebook.util.FacebookFlashSessionUtil"/>
+<classEntry path="com.pbking.facebook.util.FacebookFlexSessionUtil"/>
 <classEntry path="com.pbking.util.collection.HashableArray"/>
 <classEntry path="com.pbking.util.logging.PBLogBridge"/>
 <classEntry path="com.pbking.util.logging.PBLogEvent"/>

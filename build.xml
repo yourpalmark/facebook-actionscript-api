@@ -20,7 +20,7 @@
 	<property name="doc" value="${build}/doc" />
 	<property name="bin" value="${basedir}/bin" />
 	<property name="src" value="${basedir}/src" />
-	<property name="version" value="butter_0.1.0" />
+	<property name="version" value="2_0.1.0" />
 
 	<!-- DOCUMENT -->
 	
@@ -49,25 +49,20 @@
 		<mkdir dir="${deliverables}"/>
 
 		<!-- package API -->
-		<zip destfile='${deliverables}/facebook_as3_api_v${version}.zip' excludes='**/.svn/**'>
-			<zipfileset dir='${src}/' prefix='facebook_as3_api_v${version}'/>
+		<zip destfile='${deliverables}/fb_as3_api_v${version}.zip' excludes='**/.svn/**'>
+			<zipfileset dir='${src}/' prefix='fb_as3_api_v${version}'/>
 		</zip>
 		
 		<!-- package documentation -->
-		<zip destfile='${deliverables}/facebook_as3_api_documentation_v${version}.zip' excludes='**/.svn/**'>
-			<zipfileset dir='${doc}' prefix='facebook_as3_api_documentation_v${version}'/>
+		<zip destfile='${deliverables}/fb_as3_api_documentation_v${version}.zip' excludes='**/.svn/**'>
+			<zipfileset dir='${doc}' prefix='fb_as3_api_documentation_v${version}'/>
 		</zip>
 		
 		<!-- package .swc -->
-		<zip destfile='${deliverables}/facebook_as3_api_swc_v${version}.zip' excludes='**/.svn/**'>
-			<zipfileset file="${build}/swc/facebook_as3_api.swc" prefix='facebook_as3_api_swc_v${version}'/>
+		<zip destfile='${deliverables}/fb_as3_api_swc_v${version}.zip' excludes='**/.svn/**'>
+			<zipfileset file="${build}/swc/fbAs3Api.swc" prefix='fb_as3_api_swc_v${version}'/>
 		</zip>
 		
-		<!-- package example -->
-		<zip destfile='${deliverables}/facebook_as3_api_example_v${version}.zip' excludes='**/.svn/**'>
-			<zipfileset dir='${build}/example/' prefix='facebook_as3_api_example_v${version}'/>
-		</zip>
-
 	</target>
 
 	<!-- BUILD SWC -->
@@ -79,13 +74,16 @@
 		<delete dir="${build}/swc"/>
 		<mkdir dir="${build}/swc"/>
 
-			<compc output="${build}/swc/facebook_as3_api.swc">
+			<compc output="${build}/swc/fbAs3Api.swc">
 				<source-path path-element="${src}"/>
-				<!--
-    			<compiler.external-library-path dir="${basedir}/lib/as3" append="true">
-    				<include name="corelib.swc"/>
+				
+    			<compiler.external-library-path 
+    				dir="${FLEX_FRAMEWORKS}/libs/air" 
+    				append="true">
+    				<include name="airframework.swc"/>
+    				<include name="airglobal.swc"/>
     			</compiler.external-library-path>
-    			-->
+
 				<include-sources dir="${src}/com" includes="*"/>
 			</compc>
 		
