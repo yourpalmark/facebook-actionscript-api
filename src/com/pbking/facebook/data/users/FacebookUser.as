@@ -121,7 +121,7 @@ package com.pbking.facebook.data.users
 			
 			// NETWORKS
 			
-			if(userProperties.pic)
+			if(userProperties.affiliations)
 			{
 				this.affiliations = [];
 				for each ( var xNetwork:Object in userProperties.affiliations ) 
