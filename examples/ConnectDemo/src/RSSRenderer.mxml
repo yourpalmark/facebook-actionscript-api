@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="25" verticalGap="1" verticalAlign="middle">
+	<mx:Script>
+		<![CDATA[
+			override protected function commitProperties():void {
+				super.commitProperties();
+				if (data == null) { return; }
+				
+				lbl.text = data.title;
+			}
+			
+			protected function postToFacebook():void {
+				dispatchEvent(new Event('post', true));
+			}
+			
+			protected function shareLink():void {
+				dispatchEvent(new Event('share', true));
+			}
+			
+		]]>
+	</mx:Script>
+	<mx:Text id="lbl" width="200" color="0x0" selectable="false" />
+	<mx:Button label="Post to Facebook" click="postToFacebook()" />
+	<mx:Button label="Share Link" click="shareLink()" />
+</mx:HBox>

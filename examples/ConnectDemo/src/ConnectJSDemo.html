@@ -1,0 +1,94 @@
+<html>
+	<head>
+		<title>Facebook AS3 API Connect Demo</title>
+
+		<!-- include the API from facebook's server  -->
+		<script src="http://static.ak.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script> 
+		
+		<!-- include swfobject library -->
+		<script type="text/javascript" src="swfobject.js"></script>
+	</head>
+	
+	<body>
+	
+		<script type="text/javascript">
+			FB_RequireFeatures(["Api"], function() { 
+				FB.Facebook.init('ec1873961d6cfe470db41c111390f792', 'xd_receiver.htm');
+				
+				FB.Facebook.apiClient.requireLogin(function(exception) {
+					//define your flashVars
+					//the only one necessary is the name of your .swf 
+					//which should be the same as in your call to embedSWF()
+					var flashVars = {
+						as_swf_name: "flashContent"
+					};
+					
+					//create your instance of your .swf
+					var params = {wmode: "window"};
+					swfobject.embedSWF("ConnectJSDemo.swf", "flashContent", "100%", "100%", "9.0.0", "expressInstall.swf", flashVars, params);
+				});
+			});
+			
+			FB.Bootstrap.requireFeatures(["Connect"], function() {
+				FB.Connect.requireSession();
+			});
+			
+			function showPermissionDialog() {
+				FB.Connect.showPermissionDialog("email");
+			}
+			
+			function inviteConnectUsers() {
+				FB.Connect.inviteConnectUsers();
+			}
+			
+			function showShareDialog() {
+				FB.Connect.showShareDialog("http://www.gskinner.com/blog");
+			}
+			
+			function getLoggedInUser() {
+				alert(FB.Connect.get_loggedInUser());
+			}
+			
+			function callJS() {
+				obj = new Object;
+				obj.user = 616480475;
+				obj.integration_point_name = "email_disable_message_location";
+				
+				r = FB.Facebook.apiClient.callMethod("admin.getAllocation", obj, fbCallback);
+			}
+			
+			function fbCallback (result, exception) {
+				alert('callMethod CallBack');
+				document.flashContent.bridgeFacebookReply(result, exception, 2);
+			}
+			
+			function callSWF() {
+				document.flashContent.bridgeFacebookReply('one', 'two', 3);
+			}
+			
+			function showFeedDialog() {
+				tData = new Object;
+				tData.pageUrl = '<a href="http://www.gskinner.com/DiggTop/">http://www.gskinner.com/DiggTop/</a>';
+				tData.appName = 'DiggTop';
+				
+				FB.Connect.showFeedDialog(76620982109,  {pageUrl:"<a href=\"http://www.gskinner.com/DiggTop/\">http://www.gskinner.com/DiggTop/</a>",appName:"DiggTop"}, [1016094153], 'Some body', null, "require");
+			}
+			
+		</script>
+		
+		<!--
+			<a href="#" onClick="callSWF()">Call SWF</a>
+			<a href="#" onClick="callJS()">Call JS</a>
+			 - 
+			<a href="#" onClick="getLoggedInUser()">getLoggedInUser()</a>
+			<a href="#" onClick="inviteConnectUsers()">inviteConnectUsers()</a>
+			<a href="#" onClick="showPermissionDialog()">showPermissionDialog()</a>
+			<a href="#" onClick="showShareDialog()">showShareDialog()</a>
+			<a href="#" onClick="showFeedDialog()">showFeedDialog()</a>
+		-->
+		
+		<!--  this is where your flash content will be placed when created -->
+		<div id="flashContent"></div>
+		
+	</body>
+</html>

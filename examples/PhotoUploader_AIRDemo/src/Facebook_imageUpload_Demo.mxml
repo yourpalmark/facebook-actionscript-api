@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:WindowedApplication
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	layout="absolute" creationComplete="init()"
+	>
+	
+	<mx:Script>
+		<![CDATA[
+			import com.facebook.data.users.GetInfoData;
+			import com.facebook.commands.photos.UploadPhoto;
+			import mx.managers.DragManager;
+			import mx.events.DragEvent;
+			import com.facebook.data.auth.ExtendedPermissionValues;
+			import com.facebook.data.photos.AlbumData;
+			import com.facebook.utils.FacebookDataUtils;
+			import com.facebook.data.photos.GetAlbumsData;
+			import com.facebook.data.BooleanResultData;
+			import com.facebook.data.batch.BatchResult;
+			import com.facebook.commands.photos.GetAlbums;
+			import com.facebook.data.users.GetInfoFieldValues;
+			import com.facebook.data.users.FacebookUser;
+			import com.facebook.data.auth.GetSessionData;
+			import com.facebook.data.users.HasAppPermissionValues;
+			import com.facebook.commands.users.HasAppPermission;
+			import mx.controls.Alert;
+			import mx.managers.PopUpManager;
+			import mx.containers.Panel;
+			import mx.controls.Image;
+			
+			import com.facebook.Facebook;
+			import com.facebook.commands.batch.BatchRun;
+			import com.facebook.commands.users.GetInfo;
+			import com.facebook.commands.users.GetLoggedInUser;
+			import com.facebook.data.NumberResultData;
+			import com.facebook.data.batch.BatchCollection;
+			import com.facebook.events.FacebookEvent;
+			import com.facebook.net.FacebookCall;
+			import com.facebook.session.DesktopSession;
+			import com.facebook.utils.EmailHashUtil;
+			import com.facebook.views.FacebookWindow;
+			
+			import flash.display.Sprite;
+			import flash.display.StageScaleMode;
+			import flash.text.TextField;
+			import flash.text.TextFieldAutoSize;
+			import flash.text.TextFormat;
+			
+			protected var fb:Facebook;
+			protected var desktopSession:DesktopSession;
+			protected var facebookDialog:FacebookWindow;
+			protected var dialog:Panel;
+			protected var ad:AlbumData;
+			protected var fileStream:FileStream;
+			protected var defaultAlbum:Boolean;
+			protected var prompt:Alert;
+			protected var uploadPhoto:UploadPhoto
+			
+			[Embed (source="assets/drag_icon.png")]
+			[Bindable]
+			public var dragTargetImage:Class;
+			
+			protected var fbUserId:String;
+			
+			/**
+			 * Create your own application keys at http://www.facebook.com/home.php#/developers/createapp.php
+			 */
+			protected static var API_KEY:String = 'YOUR_API_KEY';
+			protected static var SECRET_KEY:String = 'YOUR_SECRET_KEY';
+			
+			protected function init():void {
+				//Create an instance of Facebook
+				fb = new Facebook();
+				fb.addEventListener(FacebookEvent.WAITING_FOR_LOGIN, onWaitingForLogin);
+				fb.addEventListener(FacebookEvent.CONNECT, onFacebookConnect);
+				defaultAlbum = false;
+			
+				fileStream = new FileStream();
+				prompt = new Alert();
+				//Create what session you wish to work with.
+				desktopSession = new DesktopSession(API_KEY, SECRET_KEY);
+				
+				//Start the session with Facebook
+				fb.startSession(desktopSession);
+				
+				dialog = new Panel();
+			}
+			
+			/**
+			 * Called after we receive the auth token from Facebook (for DesktopSession)
+			 * 
+			 */
+			protected function onWaitingForLogin(event:FacebookEvent):void {
+			
+			}
+			
+			/**
+			 * Called after the user has logged in to facebook, and clicks "Okay" on the dialog
+			 * 
+			 */
+			protected function onConfirmLogin(event:Event):void {
+				fb.refreshSession();
+			}
+			
+			/**
+			 * Called after we have the users session Key.
+			 *   as a test, we ask Facebook to return the current users id.
+			 * 
+			 * All the commands can be found in com.facebook.commands.*, and will mostly match the names found in the API list at:
+			 * Some naming execions are "friends.get", the command class is GetFriends
+			 * http://wiki.developers.facebook.com/index.php/API
+			 * 
+			 */
+			protected function onFacebookConnect(event:FacebookEvent):void {
+				(event.data as GetSessionData).session_key;
+				(event.data as GetSessionData).secret;
+				
+				//Store off the users id, for later use.
+				fbUserId = (event.data as GetSessionData).uid; 
+				
+				
+				//Take advantage of the batch api here, to make multiple calls at once.
+				var batch:BatchCollection = new BatchCollection();
+				batch.addItem(new HasAppPermission(HasAppPermissionValues.PHOTO_UPLOAD));
+				batch.addItem(new GetInfo([fbUserId], [GetInfoFieldValues.FIRST_NAME, GetInfoFieldValues.CURRENT_LOCATION]));
+				batch.addItem(new GetAlbums());
+				
+				var batchRun:BatchRun = fb.post(new BatchRun(batch)) as BatchRun;
+				batchRun.addEventListener(FacebookEvent.COMPLETE, onBatchComplete);
+			}
+			
+			/**
+			 * Returns results (array) from the batch call.
+			 * 	results[0] --> boolean if user has permissions
+			 *  results[1] --> user information
+			 *  results[2] --> album information
+			 *  Will display user permissions if result[0] == false.
+			 * Displays welcome message using user information.
+			 * Displays user albums using album information from user.
+			 */ 
+			protected function onBatchComplete(event:FacebookEvent):void {
+				if (event.success) {
+					var results:Array = (event.data as BatchResult).results;
+					
+					var hasAppPermissionResult:BooleanResultData = results[0];
+					var getInfoResult:GetInfoData = results[1];
+					var getAlbumsResult:GetAlbumsData = results[2];
+					
+					if (hasAppPermissionResult.value == false) {
+						extPermMessage.visible = true;
+						extPermMessage.includeInLayout = true;
+					}
+					
+					var user:FacebookUser = getInfoResult.userCollection.getItemAt(0) as FacebookUser;
+					welcomeMessage.text = 'Hello ' + user.first_name+ ', from ' + user.current_location.city;
+					
+					albumsList.dataProvider = getAlbumsResult.albumCollection.toArray();
+					
+					this.addEventListener(NativeDragEvent.NATIVE_DRAG_ENTER, onDragEnter, false, 0, true);
+					this.addEventListener(NativeDragEvent.NATIVE_DRAG_DROP, onDragDrop, false, 0, true);
+				}
+			}
+			
+			protected function doLogin():void {
+				//Redirects the user to facebook.com, and asks them to login.
+				//setting to true asks the user for offline_access (this craetes an Infinate session, with facebook, so you can save it, then re-use the session next time the user opens the application).
+				Alert.okLabel = 'Okay';
+				Alert.show('Please wait while we log you into facebook.  Click "Okay" after you have logged into facebook.com', 'Logging in', Alert.OK, this, onConfirmLogin);
+				
+				fb.login(true);
+			}
+			/**
+			 * Redirects you to Facebook.com to set user permissions for Photo upload
+			 * 
+			 */ 
+			protected function askForExtPerms():void {
+				fb.grantExtendedPermission(ExtendedPermissionValues.PHOTO_UPLOAD);
+			}
+			/**
+			 * Handler when user drags and image over the target.
+			 * Will determine to accept drop or not.
+			 */ 
+			protected function onDragEnter(event:NativeDragEvent):void {
+				if (event.clipboard.hasFormat(ClipboardFormats.FILE_LIST_FORMAT)) {
+					NativeDragManager.acceptDragDrop(this);
+				}
+			}
+			
+			/**
+			 * After user drop image, we check against Facebook's supported image types.
+			 * http://wiki.developers.facebook.com/index.php/Photos.upload
+			 * Once confirmed type is valid we add image to the stage.
+			 */ 
+			protected function onDragDrop(event:NativeDragEvent):void {
+				var files:Array = event.clipboard.getData(ClipboardFormats.FILE_LIST_FORMAT) as Array;
+				for each( var file:File in files) {
+					var ext:String = file.extension.toLowerCase();
+					switch(ext) {
+						case 'png':
+						case 'jpg':
+						case 'jpeg':
+						case 'gif':
+						case 'xbm':
+						case 'wbmp':
+						case 'iff':
+						case 'jp2':
+						case 'tiff':
+						case 'psd':
+							addImageToStage(file.nativePath, file);
+							break;
+						default:
+							Alert.show("Error -- File is not a supported format");
+					}
+				}
+			}
+			
+			/**
+			 * Before adding to stage we check the OS for source path.
+			 * Then we call uploadImage() that will send our image information to Facebook.
+			 */ 
+			protected function addImageToStage(path:String, fileInfo:File):void {
+				if (getPlatform() == 'MAC') {
+					dragTarget.source = 'file://' + path;
+				}else {
+					dragTarget.source = path;
+				}
+				dragTarget.visible = false;
+				dragTarget.maintainAspectRatio = true;
+				dragTarget.width = 125;
+				dragTarget.height = 125;
+				uploadImage(fileInfo);
+			}
+			/**
+			 * Simple check for OS. 
+			 */
+			protected function getPlatform():String {
+				var type:String = (Capabilities.os.search("Mac") >= 0) ? 'MAC' : 'OTHER';
+				return type;
+			}
+			/**
+			 * Receives file object, fileStream will open/read file's information creating a byte array 
+			 * that is used to upload to Facebook.
+			 * Checking for a "default" album and a selected album
+			 */ 
+			protected function uploadImage(fileInfo:File):void {
+				fileStream.open(fileInfo, FileMode.READ);
+                var imageData:ByteArray = new ByteArray();
+                fileStream.readBytes(imageData);
+               	var bmpData:BitmapData = new BitmapData(this.width, this.height, false, 0x000000);
+               	bmpData.draw(this);
+               	
+                var date:Date = new Date();
+                
+                if (albumsList.prompt == 'Select an Album' && albumsList.selectedItem == null) {
+					defaultAlbum = true;
+				}
+               
+                if (!defaultAlbum) {
+                	Alert.show("You are going to upload to album: " + ad.name,'Photo upload' ,Alert.OK, this, onUploadComplete);
+                	uploadPhoto = fb.post(new UploadPhoto(bmpData, ad.aid, fileInfo.name+ ' : ' + date.getTime(),null)) as UploadPhoto;
+                }else {
+                	Alert.show("You are going to upload to default album.");
+                	uploadPhoto = fb.post(new UploadPhoto(bmpData)) as UploadPhoto;
+                }
+			}
+			/**
+			 *Upload complete show preview of image.
+			 */
+			protected function onUploadComplete(event:Event):void {
+				dragTarget.visible = true;
+			}
+			
+			/**
+			 * Changes the selected album.
+			 */ 
+			protected function onAlbumChange(event:Event):void {
+				ad = event.target.selectedItem as AlbumData;
+				defaultAlbum = false;
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:VBox width="100%" height="100%">
+		<mx:HBox id="extPermMessage" width="100%" horizontalGap="0" visible="false" includeInLayout="false" verticalAlign="middle">
+			<mx:Label text="To have more functionality you can get extended permissions " />
+			<mx:LinkButton label="Click here" click="askForExtPerms()" />
+			<mx:Label text=" to get premission." />
+		</mx:HBox>
+		
+		<mx:Label id="welcomeMessage" />
+		<mx:Box width="100%" horizontalAlign="right">
+			<mx:Button label="Login" click="doLogin()" />
+		</mx:Box>
+		
+		<mx:HBox>
+			<mx:Label text="Album: " />
+			<mx:ComboBox id="albumsList" prompt="Select an Album" labelField="name" change="onAlbumChange(event)" />
+		</mx:HBox>
+		<mx:Box width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
+			<mx:Image id="dragTarget" source="{dragTargetImage}" />
+		</mx:Box>
+	</mx:VBox>
+	
+</mx:WindowedApplication>

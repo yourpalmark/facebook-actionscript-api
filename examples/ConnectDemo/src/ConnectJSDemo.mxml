@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" applicationComplete="init()">
+	<mx:Script>
+		<![CDATA[
+			import com.facebook.data.auth.ExtendedPermissionValues;
+			import com.facebook.data.JSONResultData;
+			import com.facebook.session.IFacebookSession;
+			import com.facebook.session.JSSession;
+			import com.facebook.data.users.GetInfoData;
+			import com.facebook.data.users.GetInfoFieldValues;
+			import com.facebook.data.users.FacebookUser;
+			import com.facebook.commands.users.GetInfo;
+			import com.facebook.data.batch.BatchCollection;
+			import com.facebook.commands.batch.BatchRun;
+			import com.facebook.data.friends.GetFriendsData;
+			import mx.controls.Alert;
+			import com.facebook.utils.FacebookSessionUtil;
+			import com.facebook.delegates.IFacebookCallDelegate;
+			import com.facebook.events.FacebookEvent;
+			import com.facebook.net.FacebookCall;
+			import com.facebook.Facebook;
+			import com.facebook.commands.friends.GetFriends;
+			import com.facebook.utils.FacebookConnectUtil;
+			
+			protected const RSS_URL:String = 'http://blogs.adobe.com/index.xml';
+			
+			protected var connect:FacebookConnectUtil;
+			protected var sessionUtil:FacebookSessionUtil;
+			protected var jsSession:JSSession;
+			protected var facebook:Facebook;
+			
+			protected function init():void {
+				connect = new FacebookConnectUtil(loaderInfo);
+				facebook = new Facebook();
+				
+				jsSession = new JSSession('ec1873961d6cfe470db41c111390f792', this.loaderInfo.parameters.as_swf_name);
+				facebook.startSession(jsSession);
+				
+				jsSession.addEventListener(FacebookEvent.CONNECT, onJSConnect);
+				jsSession.verifySession();
+				
+				rssList.addEventListener('post', postToFacebook);
+				rssList.addEventListener('share', shareLink);
+				
+				var permsDP:Array = [
+					ExtendedPermissionValues.CREATE_EVENT, ExtendedPermissionValues.CREATE_NOTE, ExtendedPermissionValues.EMAIL,
+					ExtendedPermissionValues.OFFLINE_ACCESS, ExtendedPermissionValues.PHOTO_UPLOAD, ExtendedPermissionValues.RSVP_EVENT,
+					ExtendedPermissionValues.SMS, ExtendedPermissionValues.STATUS_UPDATE
+				];
+				permsCB.dataProvider = permsDP;
+				
+				rssService.url = RSS_URL;
+				rssService.send();
+			}
+			
+			protected function onServiceResult():void {
+				if (rssService.lastResult == null) { return; }
+				
+				var results:XMLList = rssService.lastResult..item;
+				if (results.length() == 0) { rssList.dataProvider = []; return; }
+				rssList.dataProvider = results;
+			}
+			
+			protected function onJSConnect(event:FacebookEvent):void {
+				if (event.success) {
+					var call:FacebookCall = facebook.post(new GetFriends());
+					call.addEventListener(FacebookEvent.COMPLETE, onFriendsLoad);
+				} else {
+					sessionUtil.login();
+				}
+			}
+			
+			protected function onFriendsLoad(event:FacebookEvent):void {
+				if (event.success) {	
+					var friends:Array = (event.data as JSONResultData).result as Array;
+					var call:GetInfo = new GetInfo(friends.slice(0, Math.min(friends.length, 100)), [GetInfoFieldValues.FIRST_NAME, GetInfoFieldValues.LAST_NAME]);
+					call.addEventListener(FacebookEvent.COMPLETE, onJSONFriendsLoad);
+					facebook.post(call);
+				} else {
+					//trace(event.error.rawResult);
+				}
+			}
+			
+			protected function onJSONFriendsLoad(event:FacebookEvent):void {
+				if (event.success) {
+					var dp:Array = (event.data as JSONResultData).result as Array;
+					friendsList.dataProvider = dp;
+					
+					var idx:Number = Math.random() * dp.length>>0;
+					friendsList.selectedIndex = idx;
+					callLater(friendsList.scrollToIndex, [idx]);
+					friendsList.labelFunction = formatFriendsLabel;
+				} else {
+					Alert.show('There was an error loading your friends.', 'Error');
+				}
+			}
+			
+			protected function onGetInfoLoad(event:FacebookEvent):void {
+				friendsList.labelFunction = formatFriendsLabel;
+				
+				var dp:Array = (event.data as GetInfoData).userCollection.toArray();
+				friendsList.dataProvider = dp;
+				friendsList.selectedIndex = 0;
+			}
+			
+			protected function formatFriendsLabel(user:Object, ...rest):String {
+				return user.first_name + ', ' + user.last_name;
+			}
+			
+			protected function shareLink(event:Event):void {
+				connect.callMethod('showShareDialog', rssList.selectedItem.link);
+			}
+			
+			protected function postToFacebook(event:Event):void {
+				var tData:Object = new Object();
+				
+				var url:String = rssList.selectedItem.link;
+				tData.postTitle = rssList.selectedItem.title;
+				tData.pageUrl = '<a href="'+url+'">'+url+'</a>';
+				
+				var uids:Array = getSelectedFriends();
+				
+				connect.callMethod('showFeedDialog', '76726577109', tData, uids);
+			}
+			
+			protected function getSelectedFriends():Array {
+				var uids:Array = [];
+				var selItems:Array = friendsList.selectedItems;
+				
+				if (selItems != null || selItems.length != 0) {
+					var l:uint = selItems.length;
+					for (var i:uint=0;i<l;i++) {
+						uids.push(selItems[i].uid);
+					}
+				} else {
+					uids = [];
+				}
+				
+				return uids;
+			}
+			
+			protected function loadFriends():void {
+				var call:FacebookCall = facebook.post(new GetFriends());
+				jsSession.addEventListener(FacebookEvent.COMPLETE, onFriendsLoad);
+			}
+			
+			protected function showPermissionDialog():void {
+				connect.callMethod('showPermissionDialog', permsCB.selectedLabel);
+			}
+			
+			protected function showFeedDialog():void {
+				var tData:Object = new Object();
+				tData.pageUrl = '<a href="http://www.facebook.com/">http://www.facebook.com/</a>';
+				tData.appName = 'DiggTop';
+				
+				connect.callMethod('showFeedDialog', '76620982109', tData, getSelectedFriends(), 'Some body', null, "require");
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:HTTPService id="rssService" result="onServiceResult()" resultFormat="e4x" />
+	<mx:HBox>
+		<mx:VBox paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" borderColor="0x0" borderThickness="1" borderStyle="solid">
+			<mx:ComboBox id="permsCB" />
+			<mx:Button label="showPermissionDialog()" click="showPermissionDialog()" />
+		</mx:VBox>
+		<mx:Button label="showFeedDialog()" click="showFeedDialog()" />
+	</mx:HBox>
+	<mx:HBox>
+		<mx:VBox>
+			<mx:Text text="Post to your friends Facebook pages:" width="200" />	
+			<mx:List id="friendsList" allowMultipleSelection="false" width="200" />
+		</mx:VBox>
+		<mx:List id="rssList" width="450" itemRenderer="RSSRenderer" labelField="title" />
+	</mx:HBox>
+</mx:Application>
