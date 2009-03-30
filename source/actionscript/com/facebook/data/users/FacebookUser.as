@@ -32,6 +32,7 @@ package com.facebook.data.users {
 		public var quotes:String;
 		public var religion:String
 		public var tv:String;
+		public var status:StatusData;
 
 		public var networkAffiliations:Array;
 
@@ -57,8 +58,6 @@ package com.facebook.data.users {
 		public var significant_other_id:int;
 
 		public var profile_update_time:Date;
-		public var status_message:String;
-		public var status_time:Date;
 
 		public var notes_count:int;
 		public var wall_count:int;

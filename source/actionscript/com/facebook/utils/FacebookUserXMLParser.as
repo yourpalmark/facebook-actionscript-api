@@ -5,6 +5,7 @@ package com.facebook.utils {
 	import com.facebook.data.FacebookNetwork;
 	import com.facebook.data.FacebookWorkInfo;
 	import com.facebook.data.users.FacebookUser;
+	import com.facebook.data.users.StatusData;
 	
 	
 	public class FacebookUserXMLParser {
@@ -16,7 +17,7 @@ package com.facebook.utils {
 			var hometownLocation:XMLList;
 			var currentLocation:XMLList;
 			var fbUser:FacebookUser = new FacebookUser();
-			fbUser.uid = userProperties..ns::uid;
+			fbUser.uid = userProperties..ns::uid.toString();
 			
 			if (fbUser != null) {
 				//return fbUser;
@@ -52,25 +53,26 @@ package com.facebook.utils {
 			}
 
 			// STATUS
-			if (userProperties..ns::status_message) {
-				fbUser.status_message = userProperties..ns::status.message.toString();
-			}
-
-			if (userProperties..ns::status_time) {
-				fbUser.status_time = FacebookDataUtils.formatDate(userProperties..ns::status.time);
+			if (userProperties..ns::status) {
+				var status:XML = userProperties..ns::status[0];
+				var statusData:StatusData = new StatusData();
+				
+				statusData.message = status..ns::message.toString();
+				statusData.time = FacebookDataUtils.formatDate(status..ns::time.toString());
+				fbUser.status = statusData;
 			}
 			
 			// NETWORKS
 			if (userProperties..ns::affiliations) {
 				fbUser.affiliations = [];
-				for each (var xNetwork:Object in userProperties..ns::affiliations) {
+				var affilications:XMLList = userProperties..ns::affiliation;
+				for each (var xNetwork:* in affilications) {
 					var fbNetwork:FacebookNetwork = new FacebookNetwork();
-					fbNetwork.nid = parseInt( xNetwork.nid );
-					fbNetwork.name = xNetwork.name.toString();
-					fbNetwork.type = xNetwork.type.toString();
-					fbNetwork.status = xNetwork.status.toString();
-					fbNetwork.year = xNetwork.year.toString();
-	
+					fbNetwork.nid = parseInt( xNetwork.ns::nid );
+					fbNetwork.name = xNetwork.ns::name.toString();
+					fbNetwork.type = xNetwork.ns::type.toString();
+					fbNetwork.status = xNetwork.ns::status.toString();
+					fbNetwork.year = xNetwork.ns::year.toString();
 					fbUser.affiliations.push(fbNetwork);
 				}
 			}
