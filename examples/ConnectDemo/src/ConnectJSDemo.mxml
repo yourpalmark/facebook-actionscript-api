@@ -42,7 +42,7 @@
 				rssList.addEventListener('post', postToFacebook);
 				rssList.addEventListener('share', shareLink);
 				
-				var permsDP:Array = [
+				var permsDP:Array = [ExtendedPermissionValues.SHARE_ITEM, 
 					ExtendedPermissionValues.CREATE_EVENT, ExtendedPermissionValues.CREATE_NOTE, ExtendedPermissionValues.EMAIL,
 					ExtendedPermissionValues.OFFLINE_ACCESS, ExtendedPermissionValues.PHOTO_UPLOAD, ExtendedPermissionValues.RSVP_EVENT,
 					ExtendedPermissionValues.SMS, ExtendedPermissionValues.STATUS_UPDATE
@@ -148,24 +148,16 @@
 				connect.callMethod('showPermissionDialog', permsCB.selectedLabel);
 			}
 			
-			protected function showFeedDialog():void {
-				var tData:Object = new Object();
-				tData.pageUrl = '<a href="http://www.facebook.com/">http://www.facebook.com/</a>';
-				tData.appName = 'DiggTop';
-				
-				connect.callMethod('showFeedDialog', '76620982109', tData, getSelectedFriends(), 'Some body', null, "require");
-			}
-			
 		]]>
 	</mx:Script>
 	
 	<mx:HTTPService id="rssService" result="onServiceResult()" resultFormat="e4x" />
 	<mx:HBox>
-		<mx:VBox paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" borderColor="0x0" borderThickness="1" borderStyle="solid">
+		<mx:HBox paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" borderColor="0x0" borderThickness="1" borderStyle="solid">
+			<mx:Label text="Select the permission you wish to ask for." />
 			<mx:ComboBox id="permsCB" />
 			<mx:Button label="showPermissionDialog()" click="showPermissionDialog()" />
-		</mx:VBox>
-		<mx:Button label="showFeedDialog()" click="showFeedDialog()" />
+		</mx:HBox>
 	</mx:HBox>
 	<mx:HBox>
 		<mx:VBox>
