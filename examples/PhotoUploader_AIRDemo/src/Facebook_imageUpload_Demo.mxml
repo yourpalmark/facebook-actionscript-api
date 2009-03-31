@@ -6,6 +6,8 @@
 	
 	<mx:Script>
 		<![CDATA[
+			import mx.effects.Blur;
+			import mx.core.UIComponent;
 			import com.facebook.data.users.GetInfoData;
 			import com.facebook.commands.photos.UploadPhoto;
 			import mx.managers.DragManager;
@@ -37,7 +39,6 @@
 			import com.facebook.net.FacebookCall;
 			import com.facebook.session.DesktopSession;
 			import com.facebook.utils.EmailHashUtil;
-			import com.facebook.views.FacebookWindow;
 			
 			import flash.display.Sprite;
 			import flash.display.StageScaleMode;
@@ -47,7 +48,6 @@
 			
 			protected var fb:Facebook;
 			protected var desktopSession:DesktopSession;
-			protected var facebookDialog:FacebookWindow;
 			protected var dialog:Panel;
 			protected var ad:AlbumData;
 			protected var fileStream:FileStream;
@@ -111,21 +111,25 @@
 			 * 
 			 */
 			protected function onFacebookConnect(event:FacebookEvent):void {
-				(event.data as GetSessionData).session_key;
-				(event.data as GetSessionData).secret;
-				
-				//Store off the users id, for later use.
-				fbUserId = (event.data as GetSessionData).uid; 
-				
-				
-				//Take advantage of the batch api here, to make multiple calls at once.
-				var batch:BatchCollection = new BatchCollection();
-				batch.addItem(new HasAppPermission(HasAppPermissionValues.PHOTO_UPLOAD));
-				batch.addItem(new GetInfo([fbUserId], [GetInfoFieldValues.FIRST_NAME, GetInfoFieldValues.CURRENT_LOCATION]));
-				batch.addItem(new GetAlbums());
-				
-				var batchRun:BatchRun = fb.post(new BatchRun(batch)) as BatchRun;
-				batchRun.addEventListener(FacebookEvent.COMPLETE, onBatchComplete);
+				if (event.success) {
+					(event.data as GetSessionData).session_key;
+					(event.data as GetSessionData).secret;
+					
+					//Store off the users id, for later use.
+					fbUserId = (event.data as GetSessionData).uid; 
+					
+					
+					//Take advantage of the batch api here, to make multiple calls at once.
+					var batch:BatchCollection = new BatchCollection();
+					batch.addItem(new HasAppPermission(HasAppPermissionValues.PHOTO_UPLOAD));
+					batch.addItem(new GetInfo([fbUserId], [GetInfoFieldValues.FIRST_NAME, GetInfoFieldValues.CURRENT_LOCATION]));
+					batch.addItem(new GetAlbums());
+					
+					var batchRun:BatchRun = fb.post(new BatchRun(batch)) as BatchRun;
+					batchRun.addEventListener(FacebookEvent.COMPLETE, onBatchComplete);
+				} else {
+					Alert.show('Error logging in.  Please verify your API key is valid.');
+				}
 			}
 			
 			/**
@@ -151,7 +155,7 @@
 					}
 					
 					var user:FacebookUser = getInfoResult.userCollection.getItemAt(0) as FacebookUser;
-					welcomeMessage.text = 'Hello ' + user.first_name+ ', from ' + user.current_location.city;
+					welcomeMessage.text = 'Hello ' + user.first_name;
 					
 					albumsList.dataProvider = getAlbumsResult.albumCollection.toArray();
 					
@@ -192,6 +196,7 @@
 			 */ 
 			protected function onDragDrop(event:NativeDragEvent):void {
 				var files:Array = event.clipboard.getData(ClipboardFormats.FILE_LIST_FORMAT) as Array;
+				
 				for each( var file:File in files) {
 					var ext:String = file.extension.toLowerCase();
 					switch(ext) {
@@ -245,21 +250,17 @@
 				fileStream.open(fileInfo, FileMode.READ);
                 var imageData:ByteArray = new ByteArray();
                 fileStream.readBytes(imageData);
-               	var bmpData:BitmapData = new BitmapData(this.width, this.height, false, 0x000000);
-               	bmpData.draw(this);
-               	
-                var date:Date = new Date();
                 
                 if (albumsList.prompt == 'Select an Album' && albumsList.selectedItem == null) {
 					defaultAlbum = true;
 				}
                
                 if (!defaultAlbum) {
-                	Alert.show("You are going to upload to album: " + ad.name,'Photo upload' ,Alert.OK, this, onUploadComplete);
-                	uploadPhoto = fb.post(new UploadPhoto(bmpData, ad.aid, fileInfo.name+ ' : ' + date.getTime(),null)) as UploadPhoto;
+                	Alert.show("You are uploading to album: " + ad.name,'Photo upload' ,Alert.OK, this, onUploadComplete);
+                	uploadPhoto = fb.post(new UploadPhoto(imageData, ad.aid, fileInfo.name+ ' : ' + new Date().getTime(),null)) as UploadPhoto;
                 }else {
-                	Alert.show("You are going to upload to default album.");
-                	uploadPhoto = fb.post(new UploadPhoto(bmpData)) as UploadPhoto;
+                	Alert.show("You are uploading to the applications default album.");
+                	uploadPhoto = fb.post(new UploadPhoto(imageData)) as UploadPhoto;
                 }
 			}
 			/**
