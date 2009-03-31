@@ -18,7 +18,7 @@ package com.facebook {
 	 * Facebook session, but also to session management methods, such as logging
 	 * in, starting, posting commands, refreshing, and logging out of a session. 
 	 * The Facebook class also provides access to application-level management
-	 * methods that ask users for normal and extended permissions for your application.
+	 * methods that ask users to authorize or grant extended permissions to your application.
 	 * 
 	 * @see http://code.google.com/p/facebook-actionscript-api/
 	 * @see com.facebook.session
@@ -68,6 +68,10 @@ package com.facebook {
 		 * @see http://wiki.developers.facebook.com/index.php/User_ID
 		 */
 		public function get uid():String { return _currentSession ? this._currentSession.uid : null; }
+		/**
+		 * The Facebook API version. This value is currently hard-coded in this library as "1.0" and is
+		 * not gathered from the Facebook server.
+		 */
 		public function get api_version():String  { return _currentSession ? this._currentSession.api_version : null; }
 		
 		public function startSession(session:IFacebookSession):void {
