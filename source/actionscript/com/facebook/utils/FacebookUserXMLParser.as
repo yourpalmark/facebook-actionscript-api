@@ -7,21 +7,15 @@ package com.facebook.utils {
 	import com.facebook.data.users.FacebookUser;
 	import com.facebook.data.users.StatusData;
 	
-	
 	public class FacebookUserXMLParser {
 		
 		public function FacebookUserXMLParser() { }
 		
 		public static function createFacebookUser(userProperties:XML, ns:Namespace):FacebookUser {
-			//var userID:Number = Number(userProperties..uid[0]);
 			var hometownLocation:XMLList;
 			var currentLocation:XMLList;
 			var fbUser:FacebookUser = new FacebookUser();
 			fbUser.uid = userProperties..ns::uid.toString();
-			
-			if (fbUser != null) {
-				//return fbUser;
-			}
 			
 			if (userProperties.name) { 
 				fbUser.name = userProperties.ns::name.toString(); 
@@ -199,24 +193,15 @@ package com.facebook.utils {
 			}
 			
 			// EDUCATION
-			if (userProperties..ns::hs1_name) {
-				fbUser.hs1_name = userProperties..ns::hs_info.hs1_name.toString();
-			}
-
-			if (userProperties..ns::hs2_name) {
-				fbUser.hs2_name = userProperties..ns::hs_info.hs2_name.toString();
-			}
-
-			if (userProperties.ns::grad_year) {
-				fbUser.grad_year = userProperties.ns::hs_info.grad_year.toString();
-			}
-
-			if (userProperties..ns::hs1_id) {
-				fbUser.hs1_id = parseInt(userProperties..ns::hs_info.hs1_id);
-			}
-
-			if (userProperties..ns::hs2_id) {
-				fbUser.hs2_id = parseInt(userProperties..ns::hs_info.hs2_id);
+			
+			if (userProperties..ns::hs_info) {
+				for each(var o:XML in userProperties..ns::hs_info) {
+					fbUser.hs1_id = parseInt(o.ns::hs1_id);
+					fbUser.hs1_name = String(o.ns::hs1_name);
+					fbUser.hs2_id = parseInt(o.ns::hs2_id)
+					fbUser.hs2_name = String(o.ns::hs2_name);
+					fbUser.grad_year = String(o.ns::grad_year);
+				}
 			}
 			
 			if (userProperties..ns::education_history) {
@@ -241,7 +226,7 @@ package com.facebook.utils {
 			if (userProperties..ns::work_history) {
 				fbUser.work_history = [];
 				
-				for each (var xWorkInfo:Object in userProperties..ns::work_history) {
+				for each (var xWorkInfo:Object in userProperties..ns::work_info) {
 					var workInfo:FacebookWorkInfo = new FacebookWorkInfo();
 	
 					workInfo.location = new FacebookLocation();
@@ -250,13 +235,13 @@ package com.facebook.utils {
 					workInfo.location.state = xWorkInfo.ns::location.state;
 					workInfo.location.country = xWorkInfo.ns::location.country;
 					workInfo.location.zip = xWorkInfo.ns::location.zip;
-	
+					
 					workInfo.company_name = xWorkInfo.ns::company_name;
-					workInfo.description = xWorkInfo.ns::description;
-					workInfo.position = xWorkInfo.ns::position;
+					
+					workInfo.description = xWorkInfo..ns::description;
+					workInfo.position = xWorkInfo..ns::position;
 					workInfo.start_date = FacebookDataUtils.formatDate(xWorkInfo.ns::start_date);
 					workInfo.end_date = FacebookDataUtils.formatDate(xWorkInfo.ns::end_date);
-					
 					fbUser.work_history.push( workInfo );
 				}
 			}
