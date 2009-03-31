@@ -285,7 +285,7 @@
 		<mx:HBox id="extPermMessage" width="100%" horizontalGap="0" visible="false" includeInLayout="false" verticalAlign="middle">
 			<mx:Label text="To have more functionality you can get extended permissions " />
 			<mx:LinkButton label="Click here" click="askForExtPerms()" />
-			<mx:Label text=" to get premission." />
+			<mx:Label text=" to get permission." />
 		</mx:HBox>
 		
 		<mx:Label id="welcomeMessage" />
