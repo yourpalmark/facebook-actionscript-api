@@ -5,6 +5,7 @@ package com.facebook.data {
 		
 		public var name:String;
 		public var year:String;
+		public var degree:String;
 		public var concentrations:Array;
 		
 		public function FacebookEducationInfo() {

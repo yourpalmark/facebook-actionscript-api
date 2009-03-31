@@ -103,8 +103,8 @@ package com.facebook.utils {
 				fbUser.birthday = userProperties..ns::birthday.toString();
 			}
 
-			if (userProperties..ns::sex) {
-				fbUser.sex = userProperties.sex.toString();
+			if (userProperties.ns::sex) {
+				fbUser.sex = userProperties.ns::sex.toString();
 			}
 			
 			if (userProperties..ns::political) {
@@ -120,26 +120,30 @@ package com.facebook.utils {
 			}
 
 			// RELATIONSHIP
-			if (userProperties..ns::meeting_sex) {
+			if (userProperties.ns::meeting_sex) {
 				fbUser.meeting_sex = [];
-				for each (var sex:XML in userProperties..ns::meeting_sex.sex) {
-					fbUser.meeting_sex.push(sex.toString());
+				var meeting_sex:XMLList = userProperties.ns::meeting_sex.children();;
+				var l:Number = meeting_sex.length();
+				for (var i:Number=0;i<l;i++) {
+					fbUser.meeting_sex.push(meeting_sex[i].toString());
 				}
 			}
 			
-			if (userProperties..ns::meeting_for) {
+			if (userProperties.ns::meeting_for) {
 				fbUser.meeting_for = [];
-				for each (var seeking:XML in userProperties..ns::meeting_for.seeking) {
-					fbUser.meeting_for.push(seeking.toString())
+				var meeting_for:XMLList = userProperties.ns::meeting_for.children();
+				l = meeting_for.length();
+				for(i =0;i<l;i++){
+					fbUser.meeting_for.push(meeting_for[i].toString());
 				}
 			}
 			
-			if (userProperties..ns::relationship_status) {
-				fbUser.relationship_status = userProperties.relationship_status.toString();
+			if (userProperties.ns::relationship_status) {
+				fbUser.relationship_status = userProperties.ns::relationship_status.toString();
 			}
 
-			if (userProperties..ns::significant_other_id) {
-				fbUser.significant_other_id = parseInt(userProperties..ns::significant_other_id);
+			if (userProperties.ns::significant_other_id) {
+				fbUser.significant_other_id = parseInt(userProperties.ns::significant_other_id);
 			}
 
 			// LOCATION
@@ -203,8 +207,8 @@ package com.facebook.utils {
 				fbUser.hs2_name = userProperties..ns::hs_info.hs2_name.toString();
 			}
 
-			if (userProperties..ns::grad_year) {
-				fbUser.grad_year = userProperties..ns::hs_info.grad_year.toString();
+			if (userProperties.ns::grad_year) {
+				fbUser.grad_year = userProperties.ns::hs_info.grad_year.toString();
 			}
 
 			if (userProperties..ns::hs1_id) {
@@ -217,10 +221,12 @@ package com.facebook.utils {
 			
 			if (userProperties..ns::education_history) {
 				fbUser.education_history = [];
-				for each (var e:Object in userProperties..ns::education_history) {
+				var education_history:XMLList = userProperties..ns::education_info;
+				for each (var e:Object in education_history) {
 					var educationInfo:FacebookEducationInfo = new FacebookEducationInfo();
-					educationInfo.name = e.name;
-					educationInfo.year = e.year;
+					educationInfo.name = e.ns::name;
+					educationInfo.year = e.ns::year;
+					educationInfo.degree = e.ns::degree;
 					educationInfo.concentrations = [];
 
 					for each (var c:XML in e.concentration) {
@@ -240,16 +246,16 @@ package com.facebook.utils {
 	
 					workInfo.location = new FacebookLocation();
 					
-					workInfo.location.city = xWorkInfo.location.city;
-					workInfo.location.state = xWorkInfo.location.state;
-					workInfo.location.country = xWorkInfo.location.country;
-					workInfo.location.zip = xWorkInfo.location.zip;
+					workInfo.location.city = xWorkInfo.ns::location.city;
+					workInfo.location.state = xWorkInfo.ns::location.state;
+					workInfo.location.country = xWorkInfo.ns::location.country;
+					workInfo.location.zip = xWorkInfo.ns::location.zip;
 	
-					workInfo.company_name = xWorkInfo.company_name;
-					workInfo.description = xWorkInfo.description;
-					workInfo.position = xWorkInfo.position;
-					workInfo.start_date = FacebookDataUtils.formatDate(xWorkInfo.start_date);
-					workInfo.end_date = FacebookDataUtils.formatDate(xWorkInfo.end_date);
+					workInfo.company_name = xWorkInfo.ns::company_name;
+					workInfo.description = xWorkInfo.ns::description;
+					workInfo.position = xWorkInfo.ns::position;
+					workInfo.start_date = FacebookDataUtils.formatDate(xWorkInfo.ns::start_date);
+					workInfo.end_date = FacebookDataUtils.formatDate(xWorkInfo.ns::end_date);
 					
 					fbUser.work_history.push( workInfo );
 				}
