@@ -24,7 +24,7 @@ package com.facebook.utils {
 			}
 			
 			if (userProperties.name) { 
-				fbUser.name = userProperties..ns::name.toString(); 
+				fbUser.name = userProperties.ns::name.toString(); 
 			}
 			
 			if (userProperties..ns::first_name) { 
@@ -53,12 +53,12 @@ package com.facebook.utils {
 			}
 
 			// STATUS
-			if (userProperties..ns::status) {
-				var status:XML = userProperties..ns::status[0];
+			if (userProperties.ns::status[0]) {
+				var status:XML = userProperties.ns::status[0];
 				var statusData:StatusData = new StatusData();
 				
-				statusData.message = status..ns::message.toString();
-				statusData.time = FacebookDataUtils.formatDate(status..ns::time.toString());
+				statusData.message = String(status.ns::message);
+				statusData.time = FacebookDataUtils.formatDate(String(status.ns::time));
 				fbUser.status = statusData;
 			}
 			
@@ -69,10 +69,10 @@ package com.facebook.utils {
 				for each (var xNetwork:* in affilications) {
 					var fbNetwork:FacebookNetwork = new FacebookNetwork();
 					fbNetwork.nid = parseInt( xNetwork.ns::nid );
-					fbNetwork.name = xNetwork.ns::name.toString();
-					fbNetwork.type = xNetwork.ns::type.toString();
-					fbNetwork.status = xNetwork.ns::status.toString();
-					fbNetwork.year = xNetwork.ns::year.toString();
+					fbNetwork.name = String(xNetwork.ns::name);
+					fbNetwork.type = String(xNetwork.ns::type);
+					fbNetwork.status = String(xNetwork.ns::status);
+					fbNetwork.year = String(xNetwork.ns::year);
 					fbUser.affiliations.push(fbNetwork);
 				}
 			}
@@ -80,10 +80,10 @@ package com.facebook.utils {
 			// HOMETOWN
 			if (userProperties..ns::hometown_location) {
 				fbUser.hometown_location = new FacebookLocation();
-				fbUser.hometown_location.city = userProperties..ns::hometown_location.city.toString();
-				fbUser.hometown_location.state = userProperties..ns::hometown_location.state.toString();
-				fbUser.hometown_location.country = userProperties..ns::hometown_location.country.toString();
-				fbUser.hometown_location.zip = userProperties..ns::hometown_location.zip.toString();
+				fbUser.hometown_location.city = String(userProperties..ns::hometown_location.city);
+				fbUser.hometown_location.state = String(userProperties..ns::hometown_location.state);
+				fbUser.hometown_location.country = String(userProperties..ns::hometown_location.country);
+				fbUser.hometown_location.zip = String(userProperties..ns::hometown_location.zip);
 			}
 			
 			// MISC DETAILS
