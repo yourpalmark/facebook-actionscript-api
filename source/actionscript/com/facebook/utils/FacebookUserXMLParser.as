@@ -37,13 +37,13 @@ package com.facebook.utils {
 			if (userProperties..ns::pic_big) {
 				fbUser.pic_big = userProperties..ns::pic_big.toString();
 			}
-
+			
 			if (userProperties..ns::pic_square) {
 				fbUser.pic_square = userProperties..ns::pic_square.toString();
 			}
-
+			
 			if (userProperties..ns::pic) {
-				fbUser.pic = userProperties.pic.toString();
+				fbUser.pic = userProperties.ns::pic.toString();
 			}
 
 			// STATUS
