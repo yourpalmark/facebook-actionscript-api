@@ -6,8 +6,6 @@
 	
 	<mx:Script>
 		<![CDATA[
-			import mx.effects.Blur;
-			import mx.core.UIComponent;
 			import com.facebook.data.users.GetInfoData;
 			import com.facebook.commands.photos.UploadPhoto;
 			import mx.managers.DragManager;
@@ -25,9 +23,6 @@
 			import com.facebook.data.users.HasAppPermissionValues;
 			import com.facebook.commands.users.HasAppPermission;
 			import mx.controls.Alert;
-			import mx.managers.PopUpManager;
-			import mx.containers.Panel;
-			import mx.controls.Image;
 			
 			import com.facebook.Facebook;
 			import com.facebook.commands.batch.BatchRun;
@@ -38,59 +33,39 @@
 			import com.facebook.events.FacebookEvent;
 			import com.facebook.net.FacebookCall;
 			import com.facebook.session.DesktopSession;
-			import com.facebook.utils.EmailHashUtil;
-			
-			import flash.display.Sprite;
-			import flash.display.StageScaleMode;
-			import flash.text.TextField;
-			import flash.text.TextFieldAutoSize;
-			import flash.text.TextFormat;
 			
 			protected var fb:Facebook;
 			protected var desktopSession:DesktopSession;
-			protected var dialog:Panel;
 			protected var ad:AlbumData;
 			protected var fileStream:FileStream;
 			protected var defaultAlbum:Boolean;
-			protected var prompt:Alert;
 			protected var uploadPhoto:UploadPhoto
 			
 			[Embed (source="assets/drag_icon.png")]
 			[Bindable]
 			public var dragTargetImage:Class;
 			
-			protected var fbUserId:String;
-			
 			/**
 			 * Create your own application keys at http://www.facebook.com/home.php#/developers/createapp.php
 			 */
-			protected static var API_KEY:String = 'YOUR_API_KEY';
-			protected static var SECRET_KEY:String = 'YOUR_SECRET_KEY';
+			protected static var API_KEY:String = 'API_KEY';
+			protected static var SECRET_KEY:String = 'SECRET_KEY';
 			
 			protected function init():void {
+				addEventListener(NativeDragEvent.NATIVE_DRAG_ENTER, onDragEnter, false, 0, true);
+				addEventListener(NativeDragEvent.NATIVE_DRAG_DROP, onDragDrop, false, 0, true);
+				
 				//Create an instance of Facebook
 				fb = new Facebook();
-				fb.addEventListener(FacebookEvent.WAITING_FOR_LOGIN, onWaitingForLogin);
-				fb.addEventListener(FacebookEvent.CONNECT, onFacebookConnect);
+				fb.addEventListener(FacebookEvent.CONNECT, onFacebookConnect, false, 0, true);
 				defaultAlbum = false;
 			
 				fileStream = new FileStream();
-				prompt = new Alert();
 				//Create what session you wish to work with.
 				desktopSession = new DesktopSession(API_KEY, SECRET_KEY);
 				
 				//Start the session with Facebook
 				fb.startSession(desktopSession);
-				
-				dialog = new Panel();
-			}
-			
-			/**
-			 * Called after we receive the auth token from Facebook (for DesktopSession)
-			 * 
-			 */
-			protected function onWaitingForLogin(event:FacebookEvent):void {
-			
 			}
 			
 			/**
@@ -112,12 +87,9 @@
 			 */
 			protected function onFacebookConnect(event:FacebookEvent):void {
 				if (event.success) {
-					(event.data as GetSessionData).session_key;
-					(event.data as GetSessionData).secret;
-					
+
 					//Store off the users id, for later use.
-					fbUserId = (event.data as GetSessionData).uid; 
-					
+					var fbUserId:String = (event.data as GetSessionData).uid; 
 					
 					//Take advantage of the batch api here, to make multiple calls at once.
 					var batch:BatchCollection = new BatchCollection();
@@ -156,11 +128,12 @@
 					
 					var user:FacebookUser = getInfoResult.userCollection.getItemAt(0) as FacebookUser;
 					welcomeMessage.text = 'Hello ' + user.first_name;
-					
+					if (user.current_location && user.current_location.city) {
+						welcomeMessage.text = welcomeMessage.text + ' from ' + user.current_location.city;
+					}
 					albumsList.dataProvider = getAlbumsResult.albumCollection.toArray();
 					
-					this.addEventListener(NativeDragEvent.NATIVE_DRAG_ENTER, onDragEnter, false, 0, true);
-					this.addEventListener(NativeDragEvent.NATIVE_DRAG_DROP, onDragDrop, false, 0, true);
+					
 				}
 			}
 			
@@ -179,6 +152,7 @@
 			protected function askForExtPerms():void {
 				fb.grantExtendedPermission(ExtendedPermissionValues.PHOTO_UPLOAD);
 			}
+			
 			/**
 			 * Handler when user drags and image over the target.
 			 * Will determine to accept drop or not.
@@ -225,7 +199,7 @@
 			protected function addImageToStage(path:String, fileInfo:File):void {
 				if (getPlatform() == 'MAC') {
 					dragTarget.source = 'file://' + path;
-				}else {
+				} else {
 					dragTarget.source = path;
 				}
 				dragTarget.visible = false;
@@ -251,14 +225,14 @@
                 var imageData:ByteArray = new ByteArray();
                 fileStream.readBytes(imageData);
                 
-                if (albumsList.prompt == 'Select an Album' && albumsList.selectedItem == null) {
+                if (albumsList.selectedIndex == -1) {
 					defaultAlbum = true;
 				}
                
                 if (!defaultAlbum) {
                 	Alert.show("You are uploading to album: " + ad.name,'Photo upload' ,Alert.OK, this, onUploadComplete);
                 	uploadPhoto = fb.post(new UploadPhoto(imageData, ad.aid, fileInfo.name+ ' : ' + new Date().getTime(),null)) as UploadPhoto;
-                }else {
+                } else {
                 	Alert.show("You are uploading to the applications default album.");
                 	uploadPhoto = fb.post(new UploadPhoto(imageData)) as UploadPhoto;
                 }
@@ -272,7 +246,7 @@
 			
 			/**
 			 * Changes the selected album.
-			 */ 
+			 */
 			protected function onAlbumChange(event:Event):void {
 				ad = event.target.selectedItem as AlbumData;
 				defaultAlbum = false;
