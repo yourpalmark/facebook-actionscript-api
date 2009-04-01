@@ -104,6 +104,7 @@ package com.facebook {
 		 * to your application. This permission allows your application to access a user's profile even if the
 		 * user is offline or does not have an active session. 
 		 * </p>
+		 * @see com.facebook.data.auth.ExtendedPermissionValues
 		 * @see http://wiki.developers.facebook.com/index.php/Extended_permissions
 		 */
 		public function grantExtendedPermission(perm:String):void {

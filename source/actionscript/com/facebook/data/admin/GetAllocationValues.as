@@ -1,10 +1,14 @@
-/**
- * Values for admin.getAllocation command
- * As defined in http://wiki.developers.facebook.com/index.php/Admin.getAllocation, Feb 3, 2009
- * 
- */
 package com.facebook.data.admin {
 	
+	/**
+ 	 * Enumeration class for possible values of the <code>integration_point_name</code> parameter of the admin.getAllocation command.
+ 	 * The constants in this class represent the various integration points that can be queried by the
+ 	 * admin.getAllocation command. Select one of these constants to send as the <code>integration_point_name</code>
+ 	 * parameter of the admin.getAllocation command.
+ 	 * 
+ 	 * @see com.facebook.commands.admin.GetAllocation
+ 	 * @see http://wiki.developers.facebook.com/index.php/Admin.getAllocation
+ 	 */
 	[Bindable]
 	public class GetAllocationValues {
 		

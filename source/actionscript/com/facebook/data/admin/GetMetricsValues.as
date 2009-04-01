@@ -5,6 +5,15 @@
  */
 package com.facebook.data.admin {
 	
+	/**
+ 	 * Enumeration class for possible values of the <code>metrics</code> parameter of the admin.getMetrics command.
+ 	 * The constants in this class represent the various metrics that can be queried by the
+ 	 * admin.getMetrics command. The <code>metrics</code> parameter is an Array, so more than one constant
+ 	 * from this class may be included in a single call to admin.getMetrics.
+ 	 * 
+ 	 * @see com.facebook.commands.admin.GetMetrics
+ 	 * @see http://wiki.developers.facebook.com/index.php/Admin.getMetrics
+ 	 */
 	[Bindable]
 	public class GetMetricsValues {
 		

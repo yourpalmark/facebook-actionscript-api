@@ -1,10 +1,10 @@
-/**
- * ENUM Class for Facebook.grantExtendedPermission(), method
- * http://wiki.developers.facebook.com/index.php/UsageNotes/Forms#Prompting_a_User_for_an_Extended_Permission
- * Feb 18/09
- * 
- */
 package com.facebook.data.auth {
+	/**
+	 * Enumeration Class for the Facebook.grantExtendedPermission() method.
+	 * 
+	 * @see com.facebook.Facebook#grantExtendedPermission()
+	 * @see http://wiki.developers.facebook.com/index.php/UsageNotes/Forms#Prompting_a_User_for_an_Extended_Permission
+	 */
 	
 	[Bindable]
 	public class ExtendedPermissionValues {
