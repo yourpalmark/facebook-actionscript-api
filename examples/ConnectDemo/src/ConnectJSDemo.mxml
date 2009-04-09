@@ -21,7 +21,6 @@
 			protected const RSS_URL:String = 'http://blogs.adobe.com/index.xml';
 			
 			protected var connect:FacebookConnectUtil;
-			protected var sessionUtil:FacebookSessionUtil;
 			protected var jsSession:JSSession;
 			protected var facebook:Facebook;
 			
@@ -30,7 +29,7 @@
 				
 				facebook = new Facebook();
 				
-				jsSession = new JSSession('YOUR API KEY', this.loaderInfo.parameters.as_swf_name);
+				jsSession = new JSSession('YOUR_API_KEY', this.loaderInfo.parameters.as_swf_name);
 				facebook.startSession(jsSession);
 				
 				jsSession.addEventListener(FacebookEvent.CONNECT, onJSConnect);
@@ -70,7 +69,7 @@
 					var call:FacebookCall = facebook.post(new GetFriends());
 					call.addEventListener(FacebookEvent.COMPLETE, onFriendsLoad);
 				} else {
-					sessionUtil.login();
+					//Javascript will handle login here.
 				}
 			}
 			

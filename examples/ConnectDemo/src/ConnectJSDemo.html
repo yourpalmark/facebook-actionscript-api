@@ -12,10 +12,12 @@
 	<body>
 	
 		<script type="text/javascript">
-			FB_RequireFeatures(["Api"], function() { 
-				FB.Facebook.init('YOUR API KEY', 'xd_receiver.htm');
-				
-				FB.Facebook.apiClient.requireLogin(function(exception) {
+			FB_RequireFeatures(["Api"], function() {
+				FB.Facebook.init('YOUR_API_KEY', 'xd_receiver.htm');
+			});
+			
+			FB.Bootstrap.requireFeatures(["Connect"], function() {
+				FB.Connect.requireSession(function(exception) {
 					//define your flashVars
 					//the only one necessary is the name of your .swf 
 					//which should be the same as in your call to embedSWF()
@@ -27,10 +29,6 @@
 					var params = {wmode: "window"};
 					swfobject.embedSWF("ConnectJSDemo.swf", "flashContent", "100%", "100%", "9.0.0", "expressInstall.swf", flashVars, params);
 				});
-			});
-			
-			FB.Bootstrap.requireFeatures(["Connect"], function() {
-				FB.Connect.requireSession();
 			});
 			
 		</script>
