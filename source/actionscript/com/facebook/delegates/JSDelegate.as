@@ -77,7 +77,9 @@ package com.facebook.delegates {
 				data.result = result;
 				call.facebook_internal::handleResult(data);
 			} else {
-				call.facebook_internal::handleError(exception);
+				var error:FacebookError = new FacebookError();
+				error.rawResult = JSON.encode(exception);
+				call.facebook_internal::handleError(error);
 			}
 			delete externalInterfaceCalls[exCallId];
 		}
