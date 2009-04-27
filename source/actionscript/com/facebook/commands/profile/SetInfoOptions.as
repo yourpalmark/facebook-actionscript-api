@@ -17,8 +17,8 @@ package com.facebook.commands.profile {
 	public class SetInfoOptions extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'profile.setInfoOptions';
-		public static var SCHEMA:Array = ['field','options','format'];
+		public static const METHOD_NAME:String = 'profile.setInfoOptions';
+		public static const SCHEMA:Array = ['field','options','format'];
 		
 		public var field:String;
 		public var options:Array;

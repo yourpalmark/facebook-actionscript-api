@@ -21,8 +21,8 @@ package com.facebook.commands.data {
 	public class UndefineObjectProperty extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'data.undefineObjectProperty';
-		public static var SCHEMA:Array = ['obj_type', 'prop_name'];
+		public static const METHOD_NAME:String = 'data.undefineObjectProperty';
+		public static const SCHEMA:Array = ['obj_type', 'prop_name'];
 		
 		public var obj_type:String;
 		public var prop_name:String;

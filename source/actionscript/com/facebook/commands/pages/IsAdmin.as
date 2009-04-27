@@ -20,8 +20,8 @@ package com.facebook.commands.pages {
 	public class IsAdmin extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'pages.isAdmin';
-		public static var SCHEMA:Array = ['page_id', 'uid'];
+		public static const METHOD_NAME:String = 'pages.isAdmin';
+		public static const SCHEMA:Array = ['page_id', 'uid'];
 		
 		public var page_id:String;
 		public var uid:String;

@@ -18,8 +18,8 @@ package com.facebook.commands.users {
 	public class SetStatus extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'users.setStatus';
-		public static var SCHEMA:Array = ['status', 'clear', 'status_includes_verb', 'uid'];
+		public static const METHOD_NAME:String = 'users.setStatus';
+		public static const SCHEMA:Array = ['status', 'clear', 'status_includes_verb', 'uid'];
 		
 		public var status:String;
 		public var clear:Boolean;

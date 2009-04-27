@@ -14,8 +14,8 @@ package com.facebook.commands.admin {
 	public class SetAppProperties extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'admin.setAppProperties';
-		public static var SCHEMA:Array = ['properties'];
+		public static const METHOD_NAME:String = 'admin.setAppProperties';
+		public static const SCHEMA:Array = ['properties'];
 		
 		public var properties:Array;
 		

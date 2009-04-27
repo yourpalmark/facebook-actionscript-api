@@ -1,10 +1,11 @@
+/**
+ * ENUM Class for Facebook.grantExtendedPermission(), method
+ * http://wiki.developers.facebook.com/index.php/UsageNotes/Forms#Prompting_a_User_for_an_Extended_Permission
+ * Feb 18/09
+ * 
+ * Last Update - April 10/09
+ */
 package com.facebook.data.auth {
-	/**
-	 * Enumeration Class for the Facebook.grantExtendedPermission() method.
-	 * 
-	 * @see com.facebook.Facebook#grantExtendedPermission()
-	 * @see http://wiki.developers.facebook.com/index.php/UsageNotes/Forms#Prompting_a_User_for_an_Extended_Permission
-	 */
 	
 	[Bindable]
 	public class ExtendedPermissionValues {
@@ -19,5 +20,18 @@ package com.facebook.data.auth {
 		public static const SMS:String = 'sms';
 		public static const SHARE_ITEM:String = 'share_item';
 		
+		/**
+		 *  Lets your application post content, comments, and likes
+		 * 	to a user's proﬁle and in the streams of the user's friends. 
+		 * 
+		 */
+		public static const PUBLISH_STREAM:String = 'publish_stream';
+		
+		/**
+		 * Permission is similar to republish_stream,
+		 * but is subject to Storable_Information policies on storing user informaion.  
+		 * 
+		 */
+		public static const READ_STREAM:String = 'read_stream';
 	}
 }

@@ -28,7 +28,11 @@ package com.facebook.utils {
 			if (userProperties..ns::last_name) { 
 				fbUser.last_name = userProperties..ns::last_name.toString(); 
 			}
-				
+			
+			if (userProperties..ns::profile_url) { 
+				fbUser.profile_url = userProperties..ns::profile_url.toString(); 
+			}
+			
 			// PICTURE
 			if (userProperties..ns::pic_small) {
 				fbUser.pic_small = userProperties..ns::pic_small.toString();
@@ -37,12 +41,12 @@ package com.facebook.utils {
 			if (userProperties..ns::pic_big) {
 				fbUser.pic_big = userProperties..ns::pic_big.toString();
 			}
-			
+
 			if (userProperties..ns::pic_square) {
 				fbUser.pic_square = userProperties..ns::pic_square.toString();
 			}
-			
-			if (userProperties..ns::pic) {
+
+			if (userProperties.ns::pic) {
 				fbUser.pic = userProperties.ns::pic.toString();
 			}
 

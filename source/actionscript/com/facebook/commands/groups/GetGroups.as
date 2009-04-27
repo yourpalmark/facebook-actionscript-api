@@ -21,8 +21,8 @@ package com.facebook.commands.groups {
 	public class GetGroups extends FacebookCall {		
 
 		
-		public static var METHOD_NAME:String = 'groups.get';
-		public static var SCHEMA:Array = ['gids','uid'];
+		public static const METHOD_NAME:String = 'groups.get';
+		public static const SCHEMA:Array = ['gids','uid'];
 		
 		public var gids:Array;
 		public var uid:String;

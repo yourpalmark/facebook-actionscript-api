@@ -19,8 +19,8 @@ package com.facebook.commands.auth {
 	public class GetSession extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'auth.getSession';
-		public static var SCHEMA:Array = ['auth_token'];
+		public static const METHOD_NAME:String = 'auth.getSession';
+		public static const SCHEMA:Array = ['auth_token'];
 		
 		public var auth_token:String;
 		

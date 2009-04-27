@@ -13,8 +13,8 @@ package com.facebook.commands.profile {
 	public class ProfileGetInfo extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'profile.getInfo';
-		public static var SCHEMA:Array = ['uid'];
+		public static const METHOD_NAME:String = 'profile.getInfo';
+		public static const SCHEMA:Array = ['uid'];
 		
 		public var uid:String;
 		

@@ -20,8 +20,8 @@ package com.facebook.commands.groups {
 	public class GetGroupMembers extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'groups.getMembers';
-		public static var SCHEMA:Array = ['gid'];
+		public static const METHOD_NAME:String = 'groups.getMembers';
+		public static const SCHEMA:Array = ['gid'];
 		
 		public var gid:String;
 		
@@ -31,6 +31,9 @@ package com.facebook.commands.groups {
 			this.gid = gid;
 		}
 		
-		override facebook_internal function initialize():void {			applySchema(SCHEMA, gid);			super.facebook_internal::initialize();		}	
+		override facebook_internal function initialize():void {
+			applySchema(SCHEMA, gid);
+			super.facebook_internal::initialize();
+		}	
 	}
 }

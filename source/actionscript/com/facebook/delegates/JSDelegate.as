@@ -1,5 +1,6 @@
 package com.facebook.delegates {
 	
+	import com.adobe.serialization.json.JSON;
 	import com.facebook.data.JSONResultData;
 	import com.facebook.errors.FacebookError;
 	import com.facebook.facebook_internal;

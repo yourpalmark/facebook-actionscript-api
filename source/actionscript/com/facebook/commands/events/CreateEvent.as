@@ -20,8 +20,8 @@ package com.facebook.commands.events {
 	public class CreateEvent extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'events.create';
-		public static var SCHEMA:Array = ['event_info'];
+		public static const METHOD_NAME:String = 'events.create';
+		public static const SCHEMA:Array = ['event_info'];
 		
 		public var event_info:CreateEventData;
 		

@@ -18,8 +18,8 @@ package com.facebook.commands.users {
 	public class IsAppUser extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'users.isAppUser';
-		public static var SCHEMA:Array = ['uid'];
+		public static const METHOD_NAME:String = 'users.isAppUser';
+		public static const SCHEMA:Array = ['uid'];
 		
 		public var uid:String;
 		

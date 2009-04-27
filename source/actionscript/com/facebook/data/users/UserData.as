@@ -3,7 +3,7 @@ package com.facebook.data.users {
 	[Bindable]
 	public class UserData {
 		
-		public var uid:Number;
+		public var uid:String;
 		public var affiations:AffiliationCollection;
 		public var first_name:String;
 		public var last_name:String;

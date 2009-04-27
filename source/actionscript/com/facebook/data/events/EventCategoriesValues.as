@@ -1,9 +1,10 @@
+/**
+ * http://wiki.developers.facebook.com/index.php/Event_Categories
+ * Feb 18/09
+ */
+
 package com.facebook.data.events {
 	
-	/**
-	 * 
-	 * @see http://wiki.developers.facebook.com/index.php/Event_Categories
-	 */
 	[Bindable]
 	public class EventCategoriesValues {
 		

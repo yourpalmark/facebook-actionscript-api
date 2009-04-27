@@ -14,8 +14,8 @@ package com.facebook.commands.users {
 	public class GetLoggedInUser extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'users.getLoggedInUser';
-		public static var SCHEMA:Array = [];
+		public static const METHOD_NAME:String = 'users.getLoggedInUser';
+		public static const SCHEMA:Array = [];
 		
 		public function GetLoggedInUser() {
 			super(METHOD_NAME);

@@ -17,8 +17,8 @@ package com.facebook.commands.fql {
 	public class FqlQuery extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'fql.query';
-		public static var SCHEMA:Array = ['query'];
+		public static const METHOD_NAME:String = 'fql.query';
+		public static const SCHEMA:Array = ['query'];
 		
 		public var query:String;
 		
@@ -28,6 +28,9 @@ package com.facebook.commands.fql {
 			this.query = query;
 		}
 		
-		override facebook_internal function initialize():void {			applySchema(SCHEMA, this.query);			super.facebook_internal::initialize();		}
+		override facebook_internal function initialize():void {
+			applySchema(SCHEMA, this.query);
+			super.facebook_internal::initialize();
+		}
 	}
 }

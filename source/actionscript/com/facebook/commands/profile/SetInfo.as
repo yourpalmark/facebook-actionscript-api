@@ -21,8 +21,8 @@ package com.facebook.commands.profile {
 	public class SetInfo extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'profile.setInfo';
-		public static var SCHEMA:Array = ['title','type','items','uid','format'];
+		public static const METHOD_NAME:String = 'profile.setInfo';
+		public static const SCHEMA:Array = ['title','type','items','uid','format'];
 		
 		public var title:String;
 		public var type:Number;

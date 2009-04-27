@@ -22,8 +22,8 @@ package com.facebook.commands.pages {
 	public class GetPageInfo extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'pages.getInfo';
-		public static var SCHEMA:Array = ['fields', 'page_ids','uid','type'];
+		public static const METHOD_NAME:String = 'pages.getInfo';
+		public static const SCHEMA:Array = ['fields', 'page_ids','uid','type'];
 		
 		public var fields:Array;
 		public var page_ids:Array;

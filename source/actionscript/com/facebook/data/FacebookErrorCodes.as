@@ -1,10 +1,10 @@
+/**
+ * ENUM class that defines all the possible error codes returned from the Facebook API
+ * As described in http://wiki.developers.facebook.com/index.php/Error_codes
+ * 
+ */
 package com.facebook.data {
 	
-	/**
-	 * An enumeration class that defines all the possible error codes returned from the Facebook API.
-	 * 
-	 * @see http://wiki.developers.facebook.com/index.php/Error_codes
-	 */
 	[Bindable]
 	public class FacebookErrorCodes {
 		

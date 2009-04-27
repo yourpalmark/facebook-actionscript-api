@@ -6,7 +6,7 @@ package com.facebook.data.users {
 	[Bindable]
 	public class FacebookUser extends FacebookData {
 		
-		public var uid:Number;
+		public var uid:String;
 		
 		public var isLoggedInUser:Boolean;
 		
@@ -63,6 +63,8 @@ package com.facebook.data.users {
 		public var wall_count:int;
 		
 		public var work_history:Array;
+		
+		public var profile_url:String;
 
 		public var friends:Array;
 		

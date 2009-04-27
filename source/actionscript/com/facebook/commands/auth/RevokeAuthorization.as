@@ -17,8 +17,8 @@ package com.facebook.commands.auth {
 	public class RevokeAuthorization extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'auth.revokeAuthorization';
-		public static var SCHEMA:Array = ['user'];
+		public static const METHOD_NAME:String = 'auth.revokeAuthorization';
+		public static const SCHEMA:Array = ['user'];
 		
 		public var user:String;
 		

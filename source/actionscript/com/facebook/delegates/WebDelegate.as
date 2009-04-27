@@ -124,6 +124,8 @@ package com.facebook.delegates {
 			
 			req.data = call.args;
 			
+			//trace(req.url + '?' + unescape(call.args.toString()));
+			
 			loader.dataFormat = URLLoaderDataFormat.TEXT;
 			loader.load(req);
 		}

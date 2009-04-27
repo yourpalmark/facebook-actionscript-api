@@ -17,8 +17,8 @@ package com.facebook.commands.auth {
 	public class PromoteSession extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'auth.promoteSession';
-		public static var SCHEMA:Array = [];
+		public static const METHOD_NAME:String = 'auth.promoteSession';
+		public static const SCHEMA:Array = [];
 		
 		public function PromoteSession() {
 			super(METHOD_NAME);

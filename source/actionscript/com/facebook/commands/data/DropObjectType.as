@@ -19,8 +19,8 @@ package com.facebook.commands.data {
 	public class DropObjectType extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'data.dropObjectType';
-		public static var SCHEMA:Array = ['obj_type'];
+		public static const METHOD_NAME:String = 'data.dropObjectType';
+		public static const SCHEMA:Array = ['obj_type'];
 		
 		public var obj_type:String;
 		

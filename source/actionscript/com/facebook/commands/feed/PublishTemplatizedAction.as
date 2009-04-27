@@ -19,8 +19,8 @@ package com.facebook.commands.feed {
 	public class PublishTemplatizedAction extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'feed.publishTemplatizedAction';
-		public static var SCHEMA:Array = ['title_template', 'title_data', 'body_template', 'body_data', 'body_general', 'page_actor_id', 'image_1', 'image_1_link', 'image_2', 'image_2_link', 'image_3', 'image_3_link', 'image_4', 'image_4_link', 'target_ids'];
+		public static const METHOD_NAME:String = 'feed.publishTemplatizedAction';
+		public static const SCHEMA:Array = ['title_template', 'title_data', 'body_template', 'body_data', 'body_general', 'page_actor_id', 'image_1', 'image_1_link', 'image_2', 'image_2_link', 'image_3', 'image_3_link', 'image_4', 'image_4_link', 'target_ids'];
 		
 		public var title_template:String;
 		public var title_data:Object;

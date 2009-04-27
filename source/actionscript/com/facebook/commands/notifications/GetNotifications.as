@@ -17,8 +17,8 @@ package com.facebook.commands.notifications {
 	public class GetNotifications extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'notifications.get';
-		public static var SCHEMA:Array = [];
+		public static const METHOD_NAME:String = 'notifications.get';
+		public static const SCHEMA:Array = [];
 		
 		public function GetNotifications() {
 			super(METHOD_NAME);

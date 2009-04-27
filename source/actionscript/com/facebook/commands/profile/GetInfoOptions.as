@@ -13,8 +13,8 @@ package com.facebook.commands.profile {
 	public class GetInfoOptions extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'profile.getInfoOptions';
-		public static var SCHEMA:Array = ['field'];
+		public static const METHOD_NAME:String = 'profile.getInfoOptions';
+		public static const SCHEMA:Array = ['field'];
 		
 		public var field:String;
 	

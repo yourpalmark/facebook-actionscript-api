@@ -17,8 +17,8 @@ package com.facebook.commands.auth {
 	public class CreateToken extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'auth.createToken';
-		public static var SCHEMA:Array = [];
+		public static const METHOD_NAME:String = 'auth.createToken';
+		public static const SCHEMA:Array = [];
 		
 		public function CreateToken() {
 			super(METHOD_NAME);

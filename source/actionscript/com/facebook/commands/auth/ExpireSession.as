@@ -17,8 +17,8 @@ package com.facebook.commands.auth {
 	public class ExpireSession extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'auth.expireSession';
-		public static var SCHEMA:Array = [];
+		public static const METHOD_NAME:String = 'auth.expireSession';
+		public static const SCHEMA:Array = [];
 		
 		public function ExpireSession() {
 			super(METHOD_NAME);

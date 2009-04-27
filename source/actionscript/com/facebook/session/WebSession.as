@@ -49,6 +49,7 @@ package com.facebook.session {
 		protected var _secret:String;
 		/** @private */
 		protected var _session_key:String;
+		/** @private */
 		facebook_internal var _uid:String;
 		/** @private */
 		protected var _expires:Date;

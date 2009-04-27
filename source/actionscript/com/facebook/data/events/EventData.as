@@ -3,7 +3,7 @@ package com.facebook.data.events {
 	[Bindable]
 	public class EventData {
 		
-		public var eid:Number;
+		public var eid:String;
 		public var nid:Number;
 		
 		public var name:String;

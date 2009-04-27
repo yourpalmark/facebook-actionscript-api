@@ -23,8 +23,8 @@ package com.facebook.commands.photos {
 	public class GetTags extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'photos.getTags';
-		public static var SCHEMA:Array = ['pids'];
+		public static const METHOD_NAME:String = 'photos.getTags';
+		public static const SCHEMA:Array = ['pids'];
 		
 		public var pids:Array;
 		

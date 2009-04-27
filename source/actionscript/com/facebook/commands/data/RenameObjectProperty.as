@@ -21,8 +21,8 @@ package com.facebook.commands.data {
 	public class RenameObjectProperty extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'data.renameObjectProperty';
-		public static var SCHEMA:Array = ['obj_type', 'prop_name', 'new_name'];
+		public static const METHOD_NAME:String = 'data.renameObjectProperty';
+		public static const SCHEMA:Array = ['obj_type', 'prop_name', 'new_name'];
 		
 		public var obj_type:String;
 		public var prop_name:String;

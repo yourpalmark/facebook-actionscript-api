@@ -6,6 +6,7 @@ package com.facebook.delegates {
 	public class DesktopDelegate extends WebDelegate {
 
 		public function DesktopDelegate(call:FacebookCall, session:DesktopSession) {
+			
 			super(call, session);
 		}
 		

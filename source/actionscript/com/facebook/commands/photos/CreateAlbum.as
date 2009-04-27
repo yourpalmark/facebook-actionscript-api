@@ -18,8 +18,8 @@ package com.facebook.commands.photos {
 	public class CreateAlbum extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'photos.createAlbum';
-		public static var SCHEMA:Array = ['name','location','description','visible','uid'];
+		public static const METHOD_NAME:String = 'photos.createAlbum';
+		public static const SCHEMA:Array = ['name','location','description','visible','uid'];
 		
 		public var name:String;
 		public var location:String;

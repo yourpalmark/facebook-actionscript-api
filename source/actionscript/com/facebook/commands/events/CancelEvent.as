@@ -17,8 +17,8 @@ package com.facebook.commands.events {
 	public class CancelEvent extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'events.cancel';
-		public static var SCHEMA:Array = ['eid', 'cancel_message'];
+		public static const METHOD_NAME:String = 'events.cancel';
+		public static const SCHEMA:Array = ['eid', 'cancel_message'];
 		
 		public var eid:String;
 		public var cancel_message:String;

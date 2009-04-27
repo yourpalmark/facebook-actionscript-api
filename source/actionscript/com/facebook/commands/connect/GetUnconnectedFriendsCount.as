@@ -18,8 +18,8 @@ package com.facebook.commands.connect {
 	public class GetUnconnectedFriendsCount extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'connect.getUnconnectedFriendsCount';
-		public static var SCHEMA:Array = [];
+		public static const METHOD_NAME:String = 'connect.getUnconnectedFriendsCount';
+		public static const SCHEMA:Array = [];
 		
 		public function GetUnconnectedFriendsCount() {
 			super(METHOD_NAME);

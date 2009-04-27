@@ -66,6 +66,8 @@ package com.facebook.data {
 	import com.facebook.data.photos.PhotoData;
 	import com.facebook.data.photos.PhotoTagCollection;
 	import com.facebook.data.photos.TagData;
+	import com.facebook.data.status.GetStatusData;
+	import com.facebook.data.status.Status;
 	import com.facebook.data.users.AffiliationCollection;
 	import com.facebook.data.users.AffiliationData;
 	import com.facebook.data.users.FacebookUser;
@@ -75,11 +77,12 @@ package com.facebook.data {
 	import com.facebook.data.users.UserCollection;
 	import com.facebook.data.users.UserData;
 	import com.facebook.errors.FacebookError;
+	import com.facebook.utils.FacebookStreamXMLParser;
 	import com.facebook.utils.FacebookUserXMLParser;
+	import com.facebook.utils.FacebookXMLParserUtils;
 	import com.facebook.utils.IFacebookResultParser;
 	
 	import flash.events.ErrorEvent;
-	import flash.net.URLVariables;
 	
 	public class XMLDataParser implements IFacebookResultParser {
 		
@@ -106,8 +109,8 @@ package com.facebook.data {
 					result = parseGetMetrics(xml); break;
 				case 'auth.getSession':
 					result = new GetSessionData();
-					(result as GetSessionData).expires = toDate(xml.fb_namespace::expires);
-					(result as GetSessionData).uid = toStringValue(xml.fb_namespace::uid[0]);
+					(result as GetSessionData).expires = FacebookXMLParserUtils.toDate(xml.fb_namespace::expires);
+					(result as GetSessionData).uid = FacebookXMLParserUtils.toStringValue(xml.fb_namespace::uid[0]);
 					(result as GetSessionData).session_key = xml.fb_namespace::session_key.toString();
 					(result as GetSessionData).secret = String(xml.fb_namespace::secret);
 					break;
@@ -139,9 +142,9 @@ package com.facebook.data {
 				case 'data.createObject':
 				case 'data.setHashValue':
 				case 'connect.getUnconnectedFriendsCount':
-				case 'feed.registerTemplateBundle': // SD take a second look at the return type
+				case 'feed.registerTemplateBundle':
 					result = new NumberResultData();
-					(result as NumberResultData).value = toNumber(xml); break;
+					(result as NumberResultData).value = FacebookXMLParserUtils.toNumber(xml); break;
 				case 'notifications.get':
 					result = parseGetNotifications(xml); break;
 				case 'feed.getRegisteredTemplateBundleByID':
@@ -194,11 +197,15 @@ package com.facebook.data {
 				case 'fbml.setRefHandle':
 				case 'data.setUserPreferences':
 				case 'data.defineObjectProperty':
+				case 'photos.addTag':
+				case 'stream.addLike':
+				case 'stream.removeLike':
+				case 'stream.removeComment':
 					result = new BooleanResultData();
-					(result as BooleanResultData).value = toBoolean(xml); break;
+					(result as BooleanResultData).value = FacebookXMLParserUtils.toBoolean(xml); break;
 				case 'feed.publishUserAction':
 					result = new BooleanResultData();
-					(result as BooleanResultData).value = toBoolean(xml.children()[0]);
+					(result as BooleanResultData).value = FacebookXMLParserUtils.toBoolean(xml.children()[0]);
 					break;
 				case 'notifications.sendEmail':
 					result = parseSendEmail(xml); break;
@@ -233,7 +240,15 @@ package com.facebook.data {
 				case 'connect.unregisterUsers':
 				case 'connect.registerUsers':
 					result = new ArrayResultData();
-					(result as ArrayResultData).arrayResult = toArray(xml); break;
+					(result as ArrayResultData).arrayResult = FacebookXMLParserUtils.toArray(xml); break;
+				case 'status.get':
+					result = parseGetStatus(xml); break;
+				case 'stream.get':
+					result = FacebookStreamXMLParser.createStream(xml, fb_namespace); break;
+				case 'stream.getComments':
+					result = FacebookStreamXMLParser.createGetCommentsData(xml, fb_namespace); break;
+				case 'stream.getFilters':
+					result = FacebookStreamXMLParser.createStreamFilterCollection(xml, fb_namespace); break;
 				case 'auth.createToken':
 				case 'events.create':
 				case 'links.post':
@@ -245,16 +260,38 @@ package com.facebook.data {
 				case 'data.getUserPreference':
 				case 'profile.setFBML':
 				case 'users.getLoggedInUser':
-					result = new StringResultData();
-					(result as StringResultData).value = toStringValue(xml);
-					break;
+				case 'stream.addComment':
 				default:
-					throw new Error('methodName ' + methodName + ' cannot be found.');
+					result = new StringResultData();
+					(result as StringResultData).value = FacebookXMLParserUtils.toStringValue(xml);
+					break;
 			}
 			
 			result.rawResult = data;
-			
 			return result;
+		}
+		
+		protected function parseGetStatus(xml:XML):GetStatusData {
+			var gsd:GetStatusData =  new GetStatusData();
+			var status:Array = [];
+			
+			var children:XMLList = xml.children();
+			var l:uint = children.length();
+			for (var i:uint=0;i<l;i++) {
+				var nodes:XMLList = children[i].children();
+				var stausNode:Status = new Status();
+				stausNode.uid = FacebookXMLParserUtils.toStringValue(nodes[0]);
+				stausNode.status_id = FacebookXMLParserUtils.toStringValue(nodes[1]);
+				stausNode.time = FacebookXMLParserUtils.toDate(nodes[2]);
+				stausNode.source = FacebookXMLParserUtils.toStringValue(nodes[3]);
+				stausNode.message = FacebookXMLParserUtils.toStringValue(nodes[4]);
+				
+				status.push(stausNode);
+			}
+			
+			gsd.status = status;
+			
+			return gsd;
 		}
 		
 		protected function parseGetInfo(xml:XML):GetInfoData {
@@ -341,8 +378,8 @@ package com.facebook.data {
 				noteData.note_id = note.fb_namespace::note_id;
 				noteData.title = note.fb_namespace::title;
 				noteData.content = note.fb_namespace::content;
-				noteData.created_time = toDate(note.fb_namespace::created_time);
-				noteData.updated_time = toDate(note.fb_namespace::updated_time);
+				noteData.created_time = FacebookXMLParserUtils.toDate(note.fb_namespace::created_time);
+				noteData.updated_time = FacebookXMLParserUtils.toDate(note.fb_namespace::updated_time);
 				noteData.uid = note.fb_namespace::uid;
 				notesCollection.addItem(noteData);
 			}
@@ -388,7 +425,7 @@ package com.facebook.data {
 				getTemplate(tempBundle.fb_namespace::full_story_template, templateCollection);
 			
 				templateCollection.template_bundle_id = tempBundle.fb_namespace::template_bundle_id;
-				templateCollection.time_created = toDate(tempBundle.fb_namespace::time_created);
+				templateCollection.time_created = FacebookXMLParserUtils.toDate(tempBundle.fb_namespace::time_created);
 			}
 			
 			bundleData.bundleCollection = templateCollection;
@@ -414,7 +451,7 @@ package com.facebook.data {
 			getTemplate(xml.fb_namespace::short_story_templates, templateCollection);
 			getTemplate(xml.fb_namespace::full_story_template, templateCollection);
 			templateCollection.template_bundle_id = xml.fb_namespace::template_bundle_id;
-			templateCollection.time_created = toDate(xml.fb_namespace::time_created);
+			templateCollection.time_created = FacebookXMLParserUtils.toDate(xml.fb_namespace::time_created);
 			
 			getTemplateData.templateCollection = templateCollection;
 			
@@ -444,7 +481,7 @@ package com.facebook.data {
 			var metrixCollection:MetricsDataCollection = new MetricsDataCollection();
 			for each(var metrix:* in xml..fb_namespace::metrics) {
 				var metrixData:MetricsData = new MetricsData();
-				metrixData.end_time = toDate(metrix.fb_namespace::end_time);
+				metrixData.end_time = FacebookXMLParserUtils.toDate(metrix.fb_namespace::end_time);
 				metrixData.active_users = metrix.fb_namespace::active_users;
 				metrixData.canvas_page_views = metrix.fb_namespace::canvas_page_views;
 				metrixCollection.addItem(metrixData);
@@ -456,16 +493,16 @@ package com.facebook.data {
 		
 		protected function parseSendEmail(xml:XML):ArrayResultData {
 			var arr:ArrayResultData = new ArrayResultData();
-			arr.arrayResult = toArray(xml);
+			arr.arrayResult = FacebookXMLParserUtils.toArray(xml);
 			return arr;
 		}
 		
 		protected function parseGetMembers(xml:XML):GetMembersData {
 			var getMembersData:GetMembersData = new GetMembersData();
-			getMembersData.attending = toUIDArray(xml..fb_namespace::attending[0]);
-			getMembersData.unsure = toUIDArray(xml..fb_namespace::unsure[0]);
-			getMembersData.declined = toUIDArray(xml..fb_namespace::declined[0]);
-			getMembersData.not_replied = toUIDArray(xml..fb_namespace::not_replied[0]);
+			getMembersData.attending = FacebookXMLParserUtils.toUIDArray(xml..fb_namespace::attending[0]);
+			getMembersData.unsure = FacebookXMLParserUtils.toUIDArray(xml..fb_namespace::unsure[0]);
+			getMembersData.declined = FacebookXMLParserUtils.toUIDArray(xml..fb_namespace::declined[0]);
+			getMembersData.not_replied = FacebookXMLParserUtils.toUIDArray(xml..fb_namespace::not_replied[0]);
 			
 			return getMembersData;
 		}
@@ -500,10 +537,10 @@ package com.facebook.data {
 				eventData.description = event.fb_namespace::description;
 				eventData.event_type = event.fb_namespace::event_type;
 				eventData.event_subtype = event.fb_namespace::event_subtype;
-				eventData.start_time = toDate(event.fb_namespace::start_time);
-				eventData.end_time = toDate(event.fb_namespace::end_time);
+				eventData.start_time = FacebookXMLParserUtils.toDate(event.fb_namespace::start_time);
+				eventData.end_time = FacebookXMLParserUtils.toDate(event.fb_namespace::end_time);
 				eventData.creator = event.fb_namespace::end_time;
-				eventData.update_time = toDate(event.fb_namespace::update_time);
+				eventData.update_time = FacebookXMLParserUtils.toDate(event.fb_namespace::update_time);
 				eventData.location = event.fb_namespace::location;
 				eventData.venue = getVenueData(event.fb_namespace::venue);
 				eventCollection.addItem(eventData);
@@ -544,13 +581,13 @@ package com.facebook.data {
 			ad.cover_pid = xml.fb_namespace::cover_pid;
 			ad.owner = xml.fb_namespace::owner;
 			ad.name = xml.fb_namespace::name;
-			ad.created = toDate(xml.fb_namespace::created);
-			ad.modified = toDate(xml.fb_namespace::modified);
+			ad.created = FacebookXMLParserUtils.toDate(xml.fb_namespace::created);
+			ad.modified = FacebookXMLParserUtils.toDate(xml.fb_namespace::modified);
 			ad.description = xml.fb_namespace::description;
 			ad.location = xml.fb_namespace::location;
 			ad.link = xml.fb_namespace::link;
 			ad.size = xml.fb_namespace::size;
-			
+			ad.visible = xml.fb_namespace::visible;
 			getCreateAlbum.albumData  = ad;
 			
 			return getCreateAlbum;
@@ -568,7 +605,7 @@ package com.facebook.data {
 				photoData.src_big = photo.fb_namespace::src_big;
 				photoData.src_small = photo.fb_namespace::src_small;
 				photoData.caption = photo.fb_namespace::caption;
-				photoData.created = toDate(photo.fb_namespace::created);
+				photoData.created = FacebookXMLParserUtils.toDate(photo.fb_namespace::created);
 				photoCollection.addPhoto(photoData);
 			}
 			getPhotosData.photoCollection = photoCollection;
@@ -578,23 +615,7 @@ package com.facebook.data {
 		
 		protected function parseGetAlbums(xml:XML):GetAlbumsData {
 			var getAlbumsData:GetAlbumsData = new GetAlbumsData();
-			var albumCollection:AlbumCollection = new AlbumCollection();
-			for each(var singleAlbum:* in xml..fb_namespace::album) {
-				var albumData:AlbumData = new AlbumData();
-				albumData.aid = toStringValue(singleAlbum.fb_namespace::aid[0]);
-				albumData.cover_pid = toStringValue(singleAlbum.fb_namespace::cover_pid[0]);
-				albumData.owner = singleAlbum.fb_namespace::owner;
-				albumData.name = singleAlbum.fb_namespace::name;
-				albumData.created = toDate(singleAlbum.fb_namespace::created);
-				albumData.modified = toDate(singleAlbum.fb_namespace::modified);
-				albumData.description = singleAlbum.fb_namespace::description;
-				albumData.location = singleAlbum.fb_namespace::location;
-				albumData.link = singleAlbum.fb_namespace::link;
-				albumData.size = singleAlbum.fb_namespace::size;
-				albumData.visible = singleAlbum.fb_namespace::visible;
-				albumCollection.addAlbum(albumData);
-			}
-			getAlbumsData.albumCollection = albumCollection;
+			getAlbumsData.albumCollection = FacebookXMLParserUtils.createAlbumCollection(xml, fb_namespace);
 			return getAlbumsData;
 		}
 		
@@ -609,7 +630,7 @@ package com.facebook.data {
 				tagData.subject = photoTag.fb_namespace::subject;
 				tagData.xcoord = photoTag.fb_namespace::xcoord;
 				tagData.ycoord = photoTag.fb_namespace::ycoord;
-				tagData.created = toDate(photoTag.fb_namespace::created);
+				tagData.created = FacebookXMLParserUtils.toDate(photoTag.fb_namespace::created);
 				photoTagCollection.addPhotoTag(tagData);
 			}
 			
@@ -641,7 +662,7 @@ package com.facebook.data {
 				pageInfoData.genre = parseGener(page.fb_namespace::genre[0]);
 				pageInfoData.record_label = page.fb_namespace::record_label;
 				pageInfoData.influences = page.fb_namespace::influences;
-				pageInfoData.has_added_app = toBoolean(page.fb_namespace::has_added_app[0]);
+				pageInfoData.has_added_app = FacebookXMLParserUtils.toBoolean(page.fb_namespace::has_added_app[0]);
 				pageInfoData.founded = page.fb_namespace::founded;
 				pageInfoData.company_overview = page.fb_namespace::company_overview;
 				pageInfoData.mission = page.fb_namespace::mission;
@@ -666,16 +687,16 @@ package com.facebook.data {
 		protected function parseGener(xml:XML):GenreData {
 			var genreData:GenreData = new GenreData();
 			for each(var genre:* in xml) {
-				genreData.dance = toBoolean(genre.dance);
-				genreData.party = toBoolean(genre.party);
-				genreData.relax = toBoolean(genre.dance);
-				genreData.talk = toBoolean(genre.relax);
-				genreData.think = toBoolean(genre.dance);
-				genreData.workout = toBoolean(genre.think);
-				genreData.sing = toBoolean(genre.sing);
-				genreData.intimate = toBoolean(genre.intimate);
-				genreData.raunchy = toBoolean(genre.raunchy);
-				genreData.headphones = toBoolean(genre.headphones);
+				genreData.dance = FacebookXMLParserUtils.toBoolean(genre.dance);
+				genreData.party = FacebookXMLParserUtils.toBoolean(genre.party);
+				genreData.relax = FacebookXMLParserUtils.toBoolean(genre.dance);
+				genreData.talk = FacebookXMLParserUtils.toBoolean(genre.relax);
+				genreData.think = FacebookXMLParserUtils.toBoolean(genre.dance);
+				genreData.workout = FacebookXMLParserUtils.toBoolean(genre.think);
+				genreData.sing = FacebookXMLParserUtils.toBoolean(genre.sing);
+				genreData.intimate = FacebookXMLParserUtils.toBoolean(genre.intimate);
+				genreData.raunchy = FacebookXMLParserUtils.toBoolean(genre.raunchy);
+				genreData.headphones = FacebookXMLParserUtils.toBoolean(genre.headphones);
 			}
 			
 			return genreData;
@@ -683,20 +704,21 @@ package com.facebook.data {
 		}
 		
 		protected function parseFacebookPhoto(xml:XML):FacebookPhoto {
+			
 			var fbPhoto:FacebookPhoto = new FacebookPhoto();
-			fbPhoto.pid = toStringValue(xml.fb_namespace::pid[0]);
-			fbPhoto.aid = toStringValue(xml.fb_namespace::aid[0]);
-			fbPhoto.owner = toNumber(xml.fb_namespace::owner[0]);
-			fbPhoto.src = toStringValue(xml.fb_namespace::src[0]);
-			fbPhoto.src_big = toStringValue(xml.fb_namespace::src_big[0]);
-			fbPhoto.src_small = toStringValue(xml.fb_namespace::src_small[0]);
-			fbPhoto.link = toStringValue(xml.fb_namespace::link[0]);
-			fbPhoto.caption = toStringValue(xml.fb_namespace::caption[0]);
+			fbPhoto.pid = FacebookXMLParserUtils.toStringValue(xml.fb_namespace::pid[0]);
+			fbPhoto.aid = FacebookXMLParserUtils.toStringValue(xml.fb_namespace::aid[0]);
+			fbPhoto.owner = FacebookXMLParserUtils.toNumber(xml.fb_namespace::owner[0]);
+			fbPhoto.src = FacebookXMLParserUtils.toStringValue(xml.fb_namespace::src[0]);
+			fbPhoto.src_big = FacebookXMLParserUtils.toStringValue(xml.fb_namespace::src_big[0]);
+			fbPhoto.src_small = FacebookXMLParserUtils.toStringValue(xml.fb_namespace::src_small[0]);
+			fbPhoto.link = FacebookXMLParserUtils.toStringValue(xml.fb_namespace::link[0]);
+			fbPhoto.caption = FacebookXMLParserUtils.toStringValue(xml.fb_namespace::caption[0]);
 			return fbPhoto;
 		}
 		
 		protected function parseGetAppUsersData(xml:XML):GetAppUserData {
-			var uids:Array = toUIDArray(xml);
+			var uids:Array = FacebookXMLParserUtils.toUIDArray(xml);
 			var appUserData:GetAppUserData = new GetAppUserData();
 			appUserData.uids = uids;
 			return appUserData;
@@ -720,16 +742,16 @@ package com.facebook.data {
 				notificationCollection.addItem(pokesData);
 			}
 			
-			for each(var share:* in xml.fb_namespace::pokes) {
+			for each(var share:* in xml.fb_namespace::shares) {
 				var shareData:NotificationShareData = new NotificationShareData();
 				shareData.unread = share.fb_namespace::unread;
 				shareData.most_recent = share.fb_namespace::most_recent;
 				notificationCollection.addItem(shareData);
 			}
 			
-			getNotificationData.friendsRequests = toUIDArray(xml.fb_namespace::friend_requests[0]);
-			getNotificationData.group_invites = toUIDArray(xml.fb_namespace::group_invites[0]);
-			getNotificationData.event_invites = toUIDArray(xml.fb_namespace::event_invites[0]);
+			getNotificationData.friendsRequests = FacebookXMLParserUtils.toUIDArray(xml.fb_namespace::friend_requests[0]);
+			getNotificationData.group_invites = FacebookXMLParserUtils.toUIDArray(xml.fb_namespace::group_invites[0]);
+			getNotificationData.event_invites = FacebookXMLParserUtils.toUIDArray(xml.fb_namespace::event_invites[0]);
 			
 			getNotificationData.notificationCollection = notificationCollection;
 			
@@ -740,10 +762,10 @@ package com.facebook.data {
 		protected function parseGetGroupMembers(xml:XML):GetMemberData {
 			var getMembersData:GetMemberData = new GetMemberData();
 			
-			getMembersData.members = toUIDArray(xml.fb_namespace::members[0]);
-			getMembersData.admins = toUIDArray(xml.fb_namespace::admins[0]);
-			getMembersData.officers = toUIDArray(xml.fb_namespace::officers[0]);
-			getMembersData.notReplied = toUIDArray(xml.fb_namespace::not_replied[0]);
+			getMembersData.members = FacebookXMLParserUtils.toUIDArray(xml.fb_namespace::members[0]);
+			getMembersData.admins = FacebookXMLParserUtils.toUIDArray(xml.fb_namespace::admins[0]);
+			getMembersData.officers = FacebookXMLParserUtils.toUIDArray(xml.fb_namespace::officers[0]);
+			getMembersData.notReplied = FacebookXMLParserUtils.toUIDArray(xml.fb_namespace::not_replied[0]);
 			
 			return getMembersData;
 		}
@@ -765,7 +787,7 @@ package com.facebook.data {
 				groupDataVO.pic_big = group.fb_namespace::pic_big;
 				groupDataVO.pic_small = group.fb_namespace::pic_small;
 				groupDataVO.creator = group.fb_namespace::creator;
-				groupDataVO.update_time = toDate(group.fb_namespace::update_time);
+				groupDataVO.update_time = FacebookXMLParserUtils.toDate(group.fb_namespace::update_time);
 				groupDataVO.office = group.fb_namespace::office;
 				groupDataVO.website = group.fb_namespace::website; 
 				groupDataVO.venue = group.fb_namespace::venue;
@@ -797,7 +819,7 @@ package com.facebook.data {
 				var friendData:FriendsData = new FriendsData();
 				friendData.uid1 = friend.fb_namespace::uid1;
 				friendData.uid2 = friend.fb_namespace::uid2;
-				friendData.are_friends = toBoolean(friend.fb_namespace::are_friends);
+				friendData.are_friends = FacebookXMLParserUtils.toBoolean(friend.fb_namespace::are_friends);
 				friendsCollection.addItem(friendData);
 			}
 			areFriendsData.friendsCollection = friendsCollection;
@@ -818,7 +840,7 @@ package com.facebook.data {
 		
 		protected function getVenueData(xml:XMLList):VenueData {
 			var venue:VenueData = new VenueData();
-			venue.street = xml.fb_namespace::name;
+			venue.street = xml.fb_namespace::street;
 			venue.city = xml.fb_namespace::city;
 			venue.state = xml.fb_namespace::state;
 			venue.country = xml.fb_namespace::country;
@@ -888,10 +910,9 @@ package com.facebook.data {
 				if (xml.localName() == 'error_response') {
 					error = new FacebookError();
 					error.rawResult = result;
-					
 					error.errorCode = Number(xml.fb_namespace::error_code);
 					error.errorMsg = xml.fb_namespace::error_msg;
-					error.requestArgs = xmlToUrlVariables(xml..arg);
+					error.requestArgs = FacebookXMLParserUtils.xmlToUrlVariables(xml..arg);
 				}
 				
 				return error;
@@ -904,49 +925,6 @@ package com.facebook.data {
 			}
 			
 			return error;
-		}
-		
-		protected function toArray(value:XML):Array {
-			if (value == null) { return null; }
-			return value.toString().split(',');
-		}
-		
-		protected function toNumber(value:XML):Number{
-			if (value == null) { return NaN; }
-			return Number(value.toString());
-		}
-		
-		protected function toStringValue(value:XML):String {
-			if (value == null) { return null; }
-			return value.toString();
-		}
-		
-		protected function toDate(value:String):Date {
-			if (value == null) { return null; }
-			var startDate:String = value;
-			while (startDate.length < 13) { startDate = startDate + '0'; }
-			
-			var newDate:Date = new Date(Number(startDate));
-			return newDate;
-		}
-		
-		protected function toBoolean(value:XML):Boolean {
-			if (value == null) { return false; } 
-			return value.toString() == '1';
-		}
-		
-		protected function toUIDArray(xml:XML):Array {
-			var arr:Array =  [];
-			if (xml == null) { return arr; }
-			
-			var uids:XMLList = xml.children();
-			var l:uint = uids.length();
-			
-			for (var i:uint = 0;i<l;i++) {
-				arr.push(toNumber(uids[i]));
-			}
-			
-			return arr;
 		}
 		
 		public function createFacebookError(p_error:Object, p_result:String):FacebookError {
@@ -962,15 +940,5 @@ package com.facebook.data {
 			return error;
 		}
 		
-		public function xmlToUrlVariables(p_xml:XMLList):URLVariables {
-			var vars:URLVariables = new URLVariables();
-			
-			for each(var xml:XML in p_xml) {
-				vars[xml.key.valueOf()] = xml.value.valueOf(); 
-			}
-			
-			return vars;
-		}
-
 	}
 }

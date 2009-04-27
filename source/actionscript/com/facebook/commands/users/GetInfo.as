@@ -14,8 +14,8 @@ package com.facebook.commands.users {
 	public class GetInfo extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'users.getInfo';
-		public static var SCHEMA:Array = ['uids', 'fields'];
+		public static const METHOD_NAME:String = 'users.getInfo';
+		public static const SCHEMA:Array = ['uids', 'fields'];
 		
 		public var uids:Array;
 		public var fields:Array;

@@ -19,8 +19,8 @@ package com.facebook.commands.admin {
 	public class GetMetrics extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'admin.getMetrics';
-		public static var SCHEMA:Array = ['start_time', 'end_time', 'period', 'metrics'];
+		public static const METHOD_NAME:String = 'admin.getMetrics';
+		public static const SCHEMA:Array = ['start_time', 'end_time', 'period', 'metrics'];
 		
 		public var start_time:Date;
 		public var end_time:Date;

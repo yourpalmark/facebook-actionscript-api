@@ -18,8 +18,8 @@ package com.facebook.commands.data {
 	public class GetUserPreference extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'data.getUserPreference';
-		public static var SCHEMA:Array = ['pref_id'];
+		public static const METHOD_NAME:String = 'data.getUserPreference';
+		public static const SCHEMA:Array = ['pref_id'];
 		
 		public var pref_id:Number;
 		public var value:String;

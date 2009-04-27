@@ -20,8 +20,8 @@ package com.facebook.commands.events {
 	public class EditEvent extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'events.edit';
-		public static var SCHEMA:Array = ['eid', 'event_info'];
+		public static const METHOD_NAME:String = 'events.edit';
+		public static const SCHEMA:Array = ['eid', 'event_info'];
 		
 		public var eid:String;
 		public var event_info:EditEventData;

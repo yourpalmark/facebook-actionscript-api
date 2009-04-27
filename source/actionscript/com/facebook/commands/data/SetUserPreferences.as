@@ -20,8 +20,8 @@ package com.facebook.commands.data {
 	public class SetUserPreferences extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'data.setUserPreferences';
-		public static var SCHEMA:Array = ['map', 'replace'];
+		public static const METHOD_NAME:String = 'data.setUserPreferences';
+		public static const SCHEMA:Array = ['map', 'replace'];
 		
 		public var map:NameValueCollection;
 		public var replace:Boolean;

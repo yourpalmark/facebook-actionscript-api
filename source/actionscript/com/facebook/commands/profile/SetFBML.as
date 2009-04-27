@@ -13,8 +13,8 @@ package com.facebook.commands.profile {
 	public class SetFBML extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'profile.setFBML';
-		public static var SCHEMA:Array = ['markup','uid','profile','mobile_profile','profile_main'];
+		public static const METHOD_NAME:String = 'profile.setFBML';
+		public static const SCHEMA:Array = ['markup','uid','profile','mobile_profile','profile_main'];
 		
 		public var markup:String;
 		public var uid:String;

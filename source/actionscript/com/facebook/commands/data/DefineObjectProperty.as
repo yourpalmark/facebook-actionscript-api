@@ -20,8 +20,8 @@ package com.facebook.commands.data {
 	public class DefineObjectProperty extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'data.defineObjectProperty';
-		public static var SCHEMA:Array = ['obj_type', 'prop_name', 'prop_type'];
+		public static const METHOD_NAME:String = 'data.defineObjectProperty';
+		public static const SCHEMA:Array = ['obj_type', 'prop_name', 'prop_type'];
 		
 		public var obj_type:String;
 		public var prop_name:String;

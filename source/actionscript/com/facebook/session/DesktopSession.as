@@ -36,7 +36,6 @@ package com.facebook.session {
 			}
 		}
 		
-		
 		override public function verifySession():void {
 			if (_session_key) {
 				var call:FacebookCall = new GetLoggedInUser();

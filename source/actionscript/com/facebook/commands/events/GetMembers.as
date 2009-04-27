@@ -18,8 +18,8 @@ package com.facebook.commands.events {
 	public class GetMembers extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'events.getMembers';
-		public static var SCHEMA:Array = ['eid'];
+		public static const METHOD_NAME:String = 'events.getMembers';
+		public static const SCHEMA:Array = ['eid'];
 		
 		public var eid:String;
 		

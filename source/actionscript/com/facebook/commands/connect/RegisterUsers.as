@@ -20,8 +20,8 @@ package com.facebook.commands.connect {
 	public class RegisterUsers extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'connect.registerUsers';
-		public static var SCHEMA:Array = ['accounts'];
+		public static const METHOD_NAME:String = 'connect.registerUsers';
+		public static const SCHEMA:Array = ['accounts'];
 		
 		public var accounts:ConnectAccountMapCollection;
 		

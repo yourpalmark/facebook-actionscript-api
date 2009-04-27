@@ -20,8 +20,8 @@ package com.facebook.commands.data {
 	public class CreateObjectType extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'data.createObjectType';
-		public static var SCHEMA:Array = ['name'];
+		public static const METHOD_NAME:String = 'data.createObjectType';
+		public static const SCHEMA:Array = ['name'];
 		
 		public var name:String;
 		

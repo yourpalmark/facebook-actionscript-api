@@ -13,8 +13,8 @@ package com.facebook.commands.users {
 	public class HasAppPermission extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'users.hasAppPermission';
-		public static var SCHEMA:Array = ['ext_perm', 'uid'];
+		public static const METHOD_NAME:String = 'users.hasAppPermission';
+		public static const SCHEMA:Array = ['ext_perm', 'uid'];
 		
 		public var ext_perm:String;
 		public var uid:String;

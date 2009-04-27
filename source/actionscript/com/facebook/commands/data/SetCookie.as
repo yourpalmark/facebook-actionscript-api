@@ -20,8 +20,8 @@ package com.facebook.commands.data {
 	public class SetCookie extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'data.setCookie';
-		public static var SCHEMA:Array = ['uid','name', 'value', 'expires', 'path'];
+		public static const METHOD_NAME:String = 'data.setCookie';
+		public static const SCHEMA:Array = ['uid','name', 'value', 'expires', 'path'];
 		
 		public var uid:String;
 		public var name:String;

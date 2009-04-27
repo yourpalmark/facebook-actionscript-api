@@ -23,8 +23,8 @@ package com.facebook.commands.batch {
 	public class BatchRun extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'batch.run';
-		public static var SCHEMA:Array = ['method_feed', 'serial_only'];
+		public static const METHOD_NAME:String = 'batch.run';
+		public static const SCHEMA:Array = ['method_feed', 'serial_only'];
 		
 		public var method_feed:BatchCollection;
 		public var serial_only:Boolean;

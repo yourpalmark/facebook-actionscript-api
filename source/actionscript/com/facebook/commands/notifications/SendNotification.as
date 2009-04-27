@@ -19,8 +19,8 @@ package com.facebook.commands.notifications {
 	public class SendNotification extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'notifications.send';
-		public static var SCHEMA:Array = ['to_ids','notification','type'];
+		public static const METHOD_NAME:String = 'notifications.send';
+		public static const SCHEMA:Array = ['to_ids','notification','type'];
 		
 		public var to_ids:Array;
 		public var notification:String;

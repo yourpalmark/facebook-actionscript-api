@@ -14,8 +14,8 @@ package com.facebook.commands.photos {
 	public class UploadPhoto extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'photos.upload';
-		public static var SCHEMA:Array = ['data', 'aid', 'caption', 'uid'];
+		public static const METHOD_NAME:String = 'photos.upload';
+		public static const SCHEMA:Array = ['data', 'aid', 'caption', 'uid'];
 		
 		public var data:Object;
 		public var aid:String;

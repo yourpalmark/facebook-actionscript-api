@@ -20,8 +20,8 @@ package com.facebook.commands.data {
 	public class RenameObjectType extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'data.renameObjectType';
-		public static var SCHEMA:Array = ['obj_type', 'new_name'];
+		public static const METHOD_NAME:String = 'data.renameObjectType';
+		public static const SCHEMA:Array = ['obj_type', 'new_name'];
 		
 		public var obj_type:String;
 		public var new_name:String;

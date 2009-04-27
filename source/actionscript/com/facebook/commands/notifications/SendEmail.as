@@ -19,8 +19,8 @@ package com.facebook.commands.notifications {
 	public class SendEmail extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'notifications.sendEmail';
-		public static var SCHEMA:Array = ['recipients', 'subject', 'text', 'subject'];
+		public static const METHOD_NAME:String = 'notifications.sendEmail';
+		public static const SCHEMA:Array = ['recipients', 'subject', 'text', 'subject'];
 		
 		public var recipients:Array;
 		public var subject:String;

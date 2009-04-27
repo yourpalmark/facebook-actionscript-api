@@ -17,8 +17,8 @@ package com.facebook.commands.data {
 	public class GetAssociationDefinition extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'data.getAssociationDefinition';
-		public static var SCHEMA:Array = ['name'];
+		public static const METHOD_NAME:String = 'data.getAssociationDefinition';
+		public static const SCHEMA:Array = ['name'];
 		
 		public var name:String;
 		

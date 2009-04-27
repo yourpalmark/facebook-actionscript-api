@@ -22,8 +22,8 @@ package com.facebook.commands.photos {
 	public class GetPhotos extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'photos.get';
-		public static var SCHEMA:Array = ['subj_id','aid','pids'];
+		public static const METHOD_NAME:String = 'photos.get';
+		public static const SCHEMA:Array = ['subj_id','aid','pids'];
 		
 		protected var subj_id:String;
 		protected var aid:String;

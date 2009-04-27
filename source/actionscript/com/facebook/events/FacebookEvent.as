@@ -11,6 +11,7 @@ package com.facebook.events {
 		public static const WAITING_FOR_LOGIN:String = "waitingForLogin";
 		public static const VERIFYING_SESSION:String = "verifyingSession";
 		public static const CONNECT:String = "connect";
+		public static const LOGOUT:String = "logout";
 		
 		/**
 		 * Public access for data returned from the Facebook API. 

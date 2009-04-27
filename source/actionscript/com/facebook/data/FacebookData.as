@@ -1,6 +1,8 @@
 package com.facebook.data {
 	
-	public class FacebookData {
+	import flash.events.EventDispatcher;
+	
+	public class FacebookData extends EventDispatcher {
 		
 		public var rawResult:String;
 		

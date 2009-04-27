@@ -20,8 +20,8 @@ package com.facebook.commands.livemessage {
 	public class SendLiveMessage extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'liveMessage.send';
-		public static var SCHEMA:Array = ['recipient', 'event_name', 'message'];
+		public static const METHOD_NAME:String = 'liveMessage.send';
+		public static const SCHEMA:Array = ['recipient', 'event_name', 'message'];
 		
 		public var recipient:String;
 		public var event_name:String;

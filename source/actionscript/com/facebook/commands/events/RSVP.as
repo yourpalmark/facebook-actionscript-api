@@ -20,8 +20,8 @@ package com.facebook.commands.events {
 	public class RSVP extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'events.rsvp';
-		public static var SCHEMA:Array = ['eid', 'rsvp_status'];
+		public static const METHOD_NAME:String = 'events.rsvp';
+		public static const SCHEMA:Array = ['eid', 'rsvp_status'];
 		
 		public var eid:String;
 		public var rsvp_status:String;

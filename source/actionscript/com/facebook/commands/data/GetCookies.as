@@ -19,8 +19,8 @@ package com.facebook.commands.data {
 	public class GetCookies extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'data.getCookies';
-		public static var SCHEMA:Array = ['uid', 'name'];
+		public static const METHOD_NAME:String = 'data.getCookies';
+		public static const SCHEMA:Array = ['uid', 'name'];
 		
 		public var uid:String;
 		public var name:String;

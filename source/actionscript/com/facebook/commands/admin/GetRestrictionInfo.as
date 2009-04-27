@@ -14,8 +14,8 @@ package com.facebook.commands.admin {
 	public class GetRestrictionInfo extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'admin.getRestrictionInfo';
-		public static var SCHEMA:Array = [];
+		public static const METHOD_NAME:String = 'admin.getRestrictionInfo';
+		public static const SCHEMA:Array = [];
 		
 		public function GetRestrictionInfo() {
 			super(METHOD_NAME);

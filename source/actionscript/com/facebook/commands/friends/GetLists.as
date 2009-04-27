@@ -17,8 +17,8 @@ package com.facebook.commands.friends {
 	public class GetLists extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'friends.getLists';
-		public static var SCHEMA:Array = [];
+		public static const METHOD_NAME:String = 'friends.getLists';
+		public static const SCHEMA:Array = [];
 		
 		public function GetLists() {
 			super(METHOD_NAME);

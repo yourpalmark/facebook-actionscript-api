@@ -4,6 +4,9 @@ package com.facebook.delegates {
 	import com.adobe.images.PNGEncoder;
 	import com.facebook.commands.photos.UploadPhoto;
 	import com.facebook.commands.photos.UploadPhotoTypes;
+	import com.facebook.data.FacebookErrorReason;
+	import com.facebook.errors.FacebookError;
+	import com.facebook.facebook_internal;
 	import com.facebook.net.FacebookCall;
 	import com.facebook.session.WebSession;
 	import com.facebook.utils.PlayerUtils;
@@ -11,15 +14,15 @@ package com.facebook.delegates {
 	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
-	import flash.events.DataEvent;
 	import flash.events.Event;
 	import flash.net.FileReference;
 	import flash.net.URLLoaderDataFormat;
 	import flash.net.URLRequest;
 	import flash.net.URLRequestMethod;
 	import flash.utils.ByteArray;
-	import flash.utils.getQualifiedClassName;
-
+	
+	use namespace facebook_internal;
+	
 	public class WebImageUploadDelegate extends WebDelegate {
 		
 		protected var ba:ByteArray = new ByteArray();
@@ -37,7 +40,7 @@ package com.facebook.delegates {
 				throw new TypeError('Uploading FileReference with Player 9 is unsupported.  Use either an BitmapData or ByteArray.');
 			}
 			
-			if (imageData is Bitmap) {  imageData = (imageData as Bitmap).bitmapData; }
+			if (imageData is Bitmap) { imageData = (imageData as Bitmap).bitmapData; }
 			if (PlayerUtils.majorVersion == 10 && imageData is FileReference) {
 				//When using player 10 and FileReference we can just grab the raw ByteArray data from it.
 				data = (imageData as FileReference)['load'](); //Bracket access so this complies in Flash 9.
@@ -53,7 +56,7 @@ package com.facebook.delegates {
 						var jpegEncoder:JPGEncoder = new JPGEncoder((call as UploadPhoto).uploadQuality);
 						ba = jpegEncoder.encode(imageData as BitmapData); break;
 					case UploadPhotoTypes.PNG:
-						ba =  PNGEncoder.encode(imageData as BitmapData); break;
+						ba = PNGEncoder.encode(imageData as BitmapData); break;
 				}
 				uploadByteArray(ba);
 			} else {
@@ -70,7 +73,8 @@ package com.facebook.delegates {
 			}
 			
 			//Add in the image data.
-			postReq.writeFileData("fn"+call.args['call_id']+".jpg", bytes); 
+			var ext:String = (call as UploadPhoto).uploadType == UploadPhotoTypes.JPEG?'jpeg':'png';
+			postReq.writeFileData("fn"+call.args['call_id']+"."+ext, bytes); 
 			postReq.close();
 			
 			var urlreq:URLRequest = new URLRequest();
@@ -83,7 +87,7 @@ package com.facebook.delegates {
 			loader.dataFormat = URLLoaderDataFormat.BINARY;
 			loader.load(urlreq);
 			
-			connectTimer.start()
+			connectTimer.start();
 		}
 		
 		protected function onImageLoaded(p_event:Event):void {
@@ -91,9 +95,18 @@ package com.facebook.delegates {
 			uploadByteArray(fileRef['data']);
 		}
 		
-		protected function onUploadComplete(event:DataEvent):void {
-			handleResult(event.data);
+		override protected function onDataComplete(p_event:Event):void {
+			var ba:ByteArray = p_event.target.data as ByteArray;
+			if (ba == null) { //Hopefully should never get here.
+				var error:FacebookError = new FacebookError();
+				call.handleError(error);
+				clean();
+			} else {
+				var result:String = ba.readUTFBytes(ba.length);
+				ba.length = 0;
+				ba = null;
+				handleResult(result);
+			}
 		}
-		
 	}
 }

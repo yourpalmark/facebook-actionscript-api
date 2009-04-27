@@ -19,8 +19,8 @@ package com.facebook.commands.connect {
 	public class UnregisterUsers extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'connect.unregisterUsers';
-		public static var SCHEMA:Array = ['email_hashes'];
+		public static const METHOD_NAME:String = 'connect.unregisterUsers';
+		public static const SCHEMA:Array = ['email_hashes'];
 		
 		public var email_hashes:Array;
 		

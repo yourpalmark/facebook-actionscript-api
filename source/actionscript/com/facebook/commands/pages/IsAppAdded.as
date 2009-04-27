@@ -18,8 +18,8 @@ package com.facebook.commands.pages {
 	public class IsAppAdded extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'pages.isAppAdded';
-		public static var SCHEMA:Array = ['page_id'];
+		public static const METHOD_NAME:String = 'pages.isAppAdded';
+		public static const SCHEMA:Array = ['page_id'];
 		
 		public var page_id:String;
 		

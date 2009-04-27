@@ -9,7 +9,7 @@ package com.facebook.data.events {
 
 		
 
-		public var eid:Number;
+		public var eid:String;
 
 		public var nid:Number;
 
@@ -65,7 +65,7 @@ package com.facebook.data.events {
 
 		
 
-		public function FacebookEventData(eid:Number):void {
+		public function FacebookEventData(eid:String):void {
 
 			this.eid = eid;
 

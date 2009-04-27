@@ -21,8 +21,8 @@ package com.facebook.commands.friends {
 	public class AreFriends extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'friends.areFriends';
-		public static var SCHEMA:Array = ['uids1', 'uids2','format'];
+		public static const METHOD_NAME:String = 'friends.areFriends';
+		public static const SCHEMA:Array = ['uids1', 'uids2','format'];
 		
 		public var uids1:Array;
 		public var uids2:Array;

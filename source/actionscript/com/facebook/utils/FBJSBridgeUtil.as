@@ -43,7 +43,7 @@ package com.facebook.utils {
 				receiveConnection.addEventListener(AsyncErrorEvent.ASYNC_ERROR, onReceiveError, false, 0, true);
 				receiveConnection.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onReceiveError, false, 0, true);
 				receiveConnection.addEventListener(StatusEvent.STATUS, onReceiveStatus, false, 0, true);
-				receiveConnection.client = {asFunction:function(...rest) { asFunction(rest); }};
+				receiveConnection.client = {asFunction:function(...rest):void { asFunction(rest); }};
     			
 				try {
 					receiveConnection.connect(fb_fbjs_connection);

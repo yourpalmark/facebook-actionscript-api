@@ -17,8 +17,8 @@ package com.facebook.commands.admin {
 	public class GetAllocation extends FacebookCall {
 
 		
-		public static var METHOD_NAME:String = 'admin.getAllocation';
-		public static var SCHEMA:Array = ['integration_point_name'];
+		public static const METHOD_NAME:String = 'admin.getAllocation';
+		public static const SCHEMA:Array = ['integration_point_name'];
 		
 		public var integration_point_name:String;
 		public var user:String;

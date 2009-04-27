@@ -17,8 +17,8 @@ package com.facebook.commands.links {
 	public class PostLink extends FacebookCall {
 
 
-		public static var METHOD_NAME:String = 'links.post';
-		public static var SCHEMA:Array = ['uid','url','comment'];
+		public static const METHOD_NAME:String = 'links.post';
+		public static const SCHEMA:Array = ['uid','url','comment'];
 
 		public var uid:String;
 		public var url:String;

@@ -18,7 +18,7 @@ package com.facebook {
 	 * Facebook session, but also to session management methods, such as logging
 	 * in, starting, posting commands, refreshing, and logging out of a session. 
 	 * The Facebook class also provides access to application-level management
-	 * methods that ask users to authorize or grant extended permissions to your application.
+	 * methods that ask users for normal and extended permissions for your application.
 	 * 
 	 * @see http://code.google.com/p/facebook-actionscript-api/
 	 * @see com.facebook.session
@@ -68,10 +68,6 @@ package com.facebook {
 		 * @see http://wiki.developers.facebook.com/index.php/User_ID
 		 */
 		public function get uid():String { return _currentSession ? this._currentSession.uid : null; }
-		/**
-		 * The Facebook API version. This value is currently hard-coded in this library as "1.0" and is
-		 * not gathered from the Facebook server.
-		 */
 		public function get api_version():String  { return _currentSession ? this._currentSession.api_version : null; }
 		
 		public function startSession(session:IFacebookSession):void {
@@ -94,7 +90,6 @@ package com.facebook {
 			} else {
 				throw new Error("Cannot post a call; no session has been set.");
 			}
-			
 			return call;
 		}
 		
@@ -104,11 +99,10 @@ package com.facebook {
 		 * to your application. This permission allows your application to access a user's profile even if the
 		 * user is offline or does not have an active session. 
 		 * </p>
-		 * @see com.facebook.data.auth.ExtendedPermissionValues
 		 * @see http://wiki.developers.facebook.com/index.php/Extended_permissions
 		 */
 		public function grantExtendedPermission(perm:String):void {
-			navigateToURL(new URLRequest('http://www.facebook.com/authorize.php?api_key='+api_key+'&v=1'+api_version+'&ext_perm='+perm), '_blank');
+			navigateToURL(new URLRequest('http://www.facebook.com/authorize.php?api_key='+api_key+'&v='+api_version+'&ext_perm='+perm), '_blank');
 		}
 		
 		/**
@@ -129,7 +123,9 @@ package com.facebook {
 		 * 
 		 */
 		public function logout():void {
-			post(new ExpireSession());
+			var call:ExpireSession = new ExpireSession();
+			call.addEventListener(FacebookEvent.COMPLETE, onLoggedOut, false, 0, true);
+			post(call);
 		}
 		
 		public function refreshSession():void {
@@ -138,6 +134,7 @@ package com.facebook {
 		
 		/**
 		 * Helper function.  Called when the connection is ready.
+		 * 
 		 */
 		protected function onSessionConnected(event:FacebookEvent):void {
 			var session:IFacebookSession = event.target as IFacebookSession;
@@ -147,6 +144,14 @@ package com.facebook {
 		protected function onWaitingForLogin(event:FacebookEvent):void {
 			waiting_for_login = true;
 			dispatchEvent(new FacebookEvent(FacebookEvent.WAITING_FOR_LOGIN));
+		}
+		
+		protected function onLoggedOut(event:FacebookEvent):void {
+			if (event.success == true) {
+				_currentSession.session_key = null;
+			}
+			
+			dispatchEvent(new FacebookEvent(FacebookEvent.LOGOUT, false, false, event.success, event.data, event.error));
 		}
 		
 	}
