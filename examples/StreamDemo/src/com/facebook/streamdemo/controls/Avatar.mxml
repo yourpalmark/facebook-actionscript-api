@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="50" height="50">
+	<mx:Script>
+		<![CDATA[
+			
+			protected var _source:*;
+			
+			[Bindable]
+			public function set source(value:*):void {
+				_source = value;
+				actualAvatar.source = _source;
+				if (_source == null || _source == '') {
+					actualAvatar.content.width = 0;
+					onAvatarInit();
+				}
+			}
+			public function get source():* { return _source; }
+			
+			[Bindable]
+			public var previewSource:Class;
+			
+			protected function onAvatarInit():void {
+				if (actualAvatar.content.width != 0) {
+					actualAvatar.visible = true;
+					noAvatar.visible = false;
+				} else {
+					actualAvatar.visible = false;
+					noAvatar.visible = true;
+				}
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:Image id="noAvatar" source="{previewSource}" />
+	<mx:Image id="actualAvatar" scaleContent="true" width="{width}" height="{height}" visible="false" init="onAvatarInit()" />
+	
+</mx:Canvas>

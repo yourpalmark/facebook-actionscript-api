@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	preinitialize="onPreInit()" layout="vertical" width="275"
+	verticalAlign="middle" horizontalAlign="center" styleName="msgPanel"
+	 horizontalScrollPolicy="off" verticalScrollPolicy="off"
+	 >
+	 
+	<mx:Script>
+		<![CDATA[
+			import mx.events.MoveEvent;
+			import mx.events.ResizeEvent;
+			import mx.events.IndexChangedEvent;
+			import mx.containers.Canvas;
+			import mx.events.CloseEvent;
+			import mx.controls.Text;
+			import mx.events.FlexEvent;
+			import mx.core.WindowedApplication;
+			import mx.core.Application;
+			
+			public static const OK:uint = 2;
+			public static const CANCEL:uint = 4;
+			public static const MESSAGE:uint = 8;
+			
+			protected static var _instance:MessageWindow;
+			
+			protected var _title:String;
+			protected var _body:String;
+			protected var _flags:uint;
+			protected var _closeHandler:Function;
+			
+			protected var modal:Canvas;
+			
+			protected var closeReason:uint;
+			
+			protected var showTimer:Timer;
+			
+			protected var _parent:DisplayObjectContainer;
+			
+			protected var startTime:Number;
+			protected var _canHide:Boolean;
+			protected var _minShowTime:int;
+			
+			public static function set parent(value:DisplayObjectContainer):void {
+				getInstance().setParent(value);
+			}
+			protected function setParent(value:DisplayObjectContainer):void {
+				_parent = value;
+				_parent.addEventListener(ResizeEvent.RESIZE, reposistionWindow, false, 0, true);
+				_parent.addEventListener(MoveEvent.MOVE, reposistionWindow, false, 0, true);
+			}
+			
+			public static function show(body:String = "", title:String = "", flags:uint = 8, closeHandler:Function = null, minShowTime:int = 3000):void { getInstance().show(body, title, flags, closeHandler, minShowTime); }
+			protected function show(body:String = "", title:String = "", flags:uint = 8, closeHandler:Function = null, minShowTime:int = 3000):void {
+				_body = body;
+				_title = title;
+				_flags = flags;
+				_closeHandler = closeHandler;
+				_minShowTime = minShowTime;
+				
+				if (showTimer == null) {
+					onPreInit();
+				}
+				
+				if (flags & MESSAGE) {
+					_canHide = true;
+					if (_minShowTime != -1) {
+						showTimer.delay = _minShowTime;
+						showTimer.reset();
+						showTimer.start();
+					} else {
+						showTimer.stop();
+					}
+				} else {
+					showTimer.stop();
+				}
+				
+				_parent.addChild(this);
+				
+				if (!initialized) {
+					addEventListener(FlexEvent.CREATION_COMPLETE, onInit, false, 0, true);
+				} else {
+					doShow();
+				}
+			}
+			
+			protected function reposistionWindow(event:Event):void {
+		 		var modalPaddingTop:Number = 53;
+		 		var modalPaddingBottom:Number = 15;
+		 		
+			 	if (_parent && _parent.contains(this)) {
+					this.x = _parent.width - this.width >> 1;
+					this.y = _parent.height - this.height >> 1;
+			 	}
+			 	
+			 	if (modal && _parent) {
+			 		modal.width = _parent.width;
+					modal.height = _parent.height - modalPaddingTop - modalPaddingBottom - 2;
+					
+					modal.x = _parent.x;
+					modal.y = _parent.y + modalPaddingTop;
+			 	}
+			 }
+			
+			protected function onPreInit():void {
+				showTimer = new Timer(0, 1);
+				showTimer.addEventListener(TimerEvent.TIMER, onShowComplete, false, 0, true);
+			}
+			
+			protected function onInit(event:FlexEvent):void {
+				doShow();
+			}
+			
+			public static function hide(closeHandler:Function = null):void { getInstance().hide(closeHandler); }
+			protected function hide(closeHandler:Function = null):void {
+				if (closeHandler != null) {
+					_closeHandler = closeHandler;
+				}
+				attemptHide();
+			}
+			
+			protected function attemptHide():void {
+				if (showTimer.running) {
+					_canHide = true;
+				} else {
+					doHide();
+				}
+			}
+			
+			protected function onShowComplete(event:TimerEvent):void {
+				if (_canHide) {
+					doHide();
+				} else {
+					_canHide = true;
+				}
+			}
+			
+			protected function doHide():void {
+				if (_parent.contains(this)) {
+					_parent.removeChild(this);
+				}
+				
+				if (modal && _parent.contains(modal)) {
+					_parent.removeChild(modal);
+				}
+				
+				_canHide = false;
+				
+				if (_closeHandler != null) {
+					_closeHandler(new CloseEvent(CloseEvent.CLOSE, false, false, closeReason));
+				}
+				
+				closeReason = MESSAGE;
+			}
+			
+			protected function doShow():void {
+				bodyText.text = _body;
+				title = _title;
+				
+				if (_flags & MESSAGE) {
+					cancelBtn.visible = false;
+					cancelBtn.includeInLayout = false;
+					
+					okBtn.visible = false;
+					okBtn.includeInLayout = false;
+				} else {
+					okBtn.visible = (_flags & OK) != 0;
+					okBtn.includeInLayout = (_flags & OK) != 0;
+					
+					cancelBtn.visible = (_flags & CANCEL) != 0;
+					cancelBtn.includeInLayout = (_flags & CANCEL) != 0;
+				}
+				
+				if (modal == null) {
+					modal = new Canvas();
+					modal.setStyle('backgroundColor', 0x333333);
+					modal.setStyle('backgroundAlpha', .5);
+					modal.mouseEnabled = true;
+					modal.mouseChildren = false;
+					modal.mouseFocusEnabled = true;
+				}
+				
+				reposistionWindow(null);
+				
+				_parent.addChild(modal);
+				_parent.addChild(this);
+			}
+			
+			protected static function getInstance():MessageWindow {
+				if (_instance == null) { _instance = new MessageWindow(); }
+				return _instance;
+			}
+			
+			protected function doClose(type:uint):void {
+				closeReason = type;
+				attemptHide();
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:Text id="bodyText" width="275" styleName="msgPanelBody" selectable="false" textAlign="left" paddingTop='10' paddingLeft='10' paddingRight = '10' paddingBottom='30'/>
+	<mx:VBox verticalGap="0" height ='100%' width='100%' >
+		<mx:Spacer height = '100%'/>
+		<mx:HBox id="buttonsBox" width="100%" horizontalAlign="right" horizontalGap = '0'>
+			<mx:Button id="okBtn" label="Okay" click="doClose(OK)" styleName='msgBtn' height='18'/>
+			<mx:Spacer width = '2'/>
+			<mx:Button id="cancelBtn" label="Cancel" click="doClose(CANCEL)" styleName='msgBtn' height='18'/>
+			<mx:Spacer width = '3'/>
+		</mx:HBox>
+		<mx:Spacer height = '3'/>
+	</mx:VBox>
+	
+</mx:Panel>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+* Visit www.gskinner.com/blog for documentation, updates and more free code.
+*
+* Copyright (c) 2009 Grant Skinner
+* 
+* Permission is hereby granted, free of charge, to any person
+* obtaining a copy of this software and associated documentation
+* files (the "Software"), to deal in the Software without
+* restriction, including without limitation the rights to use,
+* copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the
+* Software is furnished to do so, subject to the following
+* conditions:
+* 
+* The above copyright notice and this permission notice shall be
+* included in all copies or substantial portions of the Software.
+* 
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+* OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+* NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+* HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+* WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+* OTHER DEALINGS IN THE SOFTWARE.
+**/
+-->
+<mx:Window
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	windowComplete="onWindowComplete(event)"
+	minWidth = '124' width="124" height="100%"
+	layout="horizontal" systemChrome="none" showFlexChrome="false" resizable = "false" type="utility"
+	transparent = "true" alwaysInFront="true" alpha = '0'
+	>
+	
+	<mx:Script>
+		<![CDATA[
+		
+			import com.gskinner.utils.CallLater;
+			import mx.core.Application;
+			
+			protected var _winX:int;
+			protected var _snapSide:String = "";
+			
+			public function get mainCanvas():Canvas {
+				return strip;
+			}
+			
+			protected function onWindowComplete(p_event:Event):void {
+				strip.addEventListener(MouseEvent.ROLL_OVER, onMouseOver, false, 0, true);
+			}
+			
+			protected function onMouseOver(p_event:MouseEvent):void {
+				Application.application.nativeApplication.activate(Application.application.nativeWindow);
+			}
+			
+			public function show(p_x:int, p_snapSide:String):void {
+				_winX = p_x;
+				_snapSide = p_snapSide;
+				CallLater.call(doShow, 2); // two frame delay to allow flex controls to reposition and validate
+			}
+			
+			protected function doShow():void {
+				strip.x = (_snapSide == ScreenEdgeState.LEFT) ? -1 : 113;
+				nativeWindow.x = (_snapSide == ScreenEdgeState.LEFT) ? _winX - 1 : _winX + 1;
+				alpha = 0.75;
+			}
+			
+			public function hide():void {
+				alpha = 0.01;
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:HBox width='100%' height='100%'>
+		<mx:Canvas id='strip' backgroundColor='#3B5998' width="12" height="100%" x="116"/>
+	</mx:HBox>
+	
+</mx:Window>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbstractToastWindow xmlns="com.gskinner.toast.view.*" xmlns:mx="http://www.adobe.com/2006/mxml"
+					 showGripper="false" showStatusBar="false" showTitleBar="false"
+					 verticalScrollPolicy="off" horizontalScrollPolicy="off" type="lightweight"
+					 alwaysInFront="true" systemChrome="none" resizable="false" layout="absolute"
+					 cornerRadius="0" transparent="true" showFlexChrome="false" xmlns:local="*"
+					 xmlns:controls="com.facebook.streamdemo.controls.*"
+					 >
+	<mx:Script>
+		<![CDATA[
+			import com.facebook.streamdemo.ui.Assets;
+			import com.facebook.streamdemo.data.NotificationChangeData;
+			import com.chewtinfoil.utils.DateUtils;
+				
+			override protected function drawContent():void {
+				if (_notificationData) {
+					notificationTitle.text =  _notificationData.content;
+					
+					var changeData:NotificationChangeData = (_notificationData.data as NotificationChangeData); 
+					
+					var iconClass:Class;
+					
+					switch (changeData.type) {
+						case NotificationChangeData.MESSAGE: iconClass = Assets.mailIcon; break;
+						case NotificationChangeData.NOTIFICATION: iconClass = Assets.notificationIcon; break;
+						case NotificationChangeData.POKE: iconClass = Assets.pokesIcon; break;
+						case NotificationChangeData.REQUEST: iconClass = Assets.friendRequesticon; break;
+					}
+					
+					notificationIcon.icon = iconClass;
+					notificationIcon.label = changeData.count + '';
+				}
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:Canvas id="notificationBox" backgroundColor="0xD8DFEA" width="{windowWidth-5}" height="{windowHeight-5}" x="0" y="0"  filters="{[new DropShadowFilter(3,45,0x000000,1, 3, 3, 0.50, BitmapFilterQuality.LOW)]}" borderStyle="solid" borderColor="0xBDC7D8" borderThickness="1"/>
+		<mx:HBox id="contentBox" width="100%" height="100%" horizontalGap="0" paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
+			<controls:NotificationIcon id="notificationIcon" />
+			<mx:VBox id="contentSection" width="100%" height="100%" paddingTop="13" verticalGap="1">
+				<mx:Text id="notificationTitle" selectable="false" width="{contentSection.width - 20}" styleName="toastWindowText" color="0x3B5998" />
+			</mx:VBox>
+		</mx:HBox>
+</AbstractToastWindow>

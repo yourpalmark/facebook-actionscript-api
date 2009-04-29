@@ -1,0 +1,187 @@
+<!--
+  Copyright Facebook Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+ -->
+<!-- This is a content renderer.
+     Every NileRenderer that contains more than a status update
+     has exactly one content renderer.  -->
+<!-- This internal dialog class is built to frame in
+     Facebook authorization pages.
+     It's functionally abstract.
+     FBAuthDialog and FBPermDialog are concrete implementations.
+     It has no internal graphical elements
+     other than an HTML element and a loading animation.
+     Although it could be extended for other purposes.
+     It has a hide() and show() function.
+     It dispatches SHOWING, SHOWN, CLOSING, CLOSED.
+     It autoresizes to the content it's displaying. -->
+<display:WindowBase xmlns:mx="http://www.adobe.com/2006/mxml"
+                    xmlns:display="fb.display.*"
+                    width="510"
+                    creationComplete="creationComplete(event)"
+                    close="hide()" >
+  <mx:Canvas width="100%"
+             height="100%" >
+    <mx:HTML id="htmlWindow"
+             visible="false"
+             width="100%"
+             locationChange="htmlLocationChange(event)"
+             updateComplete="htmlComplete(event)" />
+    <mx:HBox id="loadingAnimation"
+             visible="false"
+             styleName="dialogLoadingIndicator">
+      <mx:Label text="Connecting to Facebook" />
+      <display:LoadAnimation width="20"
+                             height="100%" />
+    </mx:HBox>
+  </mx:Canvas>
+  <mx:Script><![CDATA[
+    import fb.FBConnect;
+    import fb.FBEvent;
+
+    import flash.events.Event;
+    import flash.events.TimerEvent;
+
+    import mx.controls.HTML;
+    import mx.events.FlexEvent;
+
+    private static const MINIMUM_HEIGHT:int = 8;
+
+    public static const FacebookURL:String =
+      "http://www.facebook.com";
+    public static const NextPath:String = FacebookURL +
+      "/connect/login_success.html";
+
+    private static var result:* = false;
+
+    private static const TimeoutDelay:int = 20000;
+    private static var reloadTimer:Timer = new Timer(TimeoutDelay);
+
+    protected var location:String;
+    protected var extraParams:Object = {
+      v:"1.0",
+      fbconnect:true,
+      nochrome:true,
+      connect_display:"popup",
+      display:"popup"
+    };
+
+    // Called when initialized
+    private function creationComplete(event:FlexEvent):void {
+      // Make sure to listen to timer
+      reloadTimer.addEventListener(TimerEvent.TIMER, timedOut);
+    }
+
+    // Shows the dialog in the center of the app.
+    // You should probably set location before calling this.
+    // And perhaps extraParams as well.
+    public function show():void {
+      // If any listener to SHOWING calls preventDefault()
+      // Then we stop.
+      var showingEvent:FBEvent = new FBEvent(FBEvent.SHOWING);
+      dispatchEvent(showingEvent);
+      if (showingEvent.isDefaultPrevented()) return;
+
+      // Pop us up onto the screen and center ourself
+      open();
+
+      // We wait to set our html location until after addPopUp
+      //   to ensure all our graphical elements are initialized.
+      setHTMLWindowLocation();
+		
+      dispatchEvent(new FBEvent(FBEvent.SHOWN));
+    }
+
+    public function hide(a_result:* = false):void {
+      // If any listener to CLOSING calls preventDefault()
+      // Then we don't close.
+      var closingEvent:FBEvent = new FBEvent(FBEvent.CLOSING);
+      dispatchEvent(closingEvent);
+      if (closingEvent.isDefaultPrevented()) return;
+
+      // No need to keep loading whatever we're loading
+      htmlWindow.cancelLoad();
+
+      // Cache away our result
+      result = a_result;
+
+      // Remove ourselves from display
+      close();
+	
+      // Dispatch that we're closed
+      dispatchEvent(new FBEvent(FBEvent.CLOSED, result));
+
+      // Clear out our location
+      htmlWindow.location = '';
+    }
+
+    private function timedOut(event:TimerEvent):void {
+      htmlWindow.reload();
+    }
+
+    protected function setHTMLWindowLocation():void {
+      // Build our full url location
+      var full_location:String = FacebookURL + location +
+        "?api_key=" + FBConnect.api_key;
+      for (var key:String in extraParams) {
+        full_location += "&" + key + "=" + extraParams[key];
+      }
+      htmlWindow.location = full_location;
+    }
+
+    // We listen to location changes to track success / failure.
+    // Intended to be overridden by subclasses
+    // The subclass should determine if the Dialog's job is done
+    //   And then call hide() handing it a result parameter.
+    //   hide() will then dispatch that result with an FBEvent.CLOSED
+    protected function htmlLocationChange(event:Event):void {
+      if (!htmlWindow || htmlWindow.location == '' || closed) return;
+
+      // If an htmlLocationChange doesn't fire eventually
+      // then we'll reload
+      reloadTimer.start();
+    }
+
+    // Called when the size of our html has changed, so we resize/recenter
+    private function htmlComplete(event:Event):void {
+      // We got data, so stop thinking we're timed out.
+      reloadTimer.stop();
+
+      if (!htmlWindow || htmlWindow.location == '' || closed) return;
+
+      if (htmlWindow.loaded) showHTML();
+    }
+
+    // Utility to call when html is ready and we need to
+    // recenter and make ourselves look proper with html
+    protected function showHTML():void {
+      if (closed || !nativeWindow) return
+      if (htmlWindow.contentHeight < MINIMUM_HEIGHT)
+        transition();
+      else {
+        loadingAnimation.visible = false;
+        htmlWindow.visible = true;
+        height = htmlWindow.contentHeight;
+      }
+    }
+
+    // Utility to call when transitioning between pages.
+    // Recenters self and shows the loading animation
+    protected function transition():void {
+      if (closed) return;
+      htmlWindow.visible = false;
+      loadingAnimation.visible = true;
+    }
+  ]]></mx:Script>
+</display:WindowBase>

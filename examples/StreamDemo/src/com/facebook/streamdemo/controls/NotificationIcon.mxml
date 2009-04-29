@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	toolTip="{label + toolTipText}" width="26" height="30" mouseChildren="false"
+	>
+	
+	<mx:Script>
+		<![CDATA[
+			import com.facebook.streamdemo.ui.Assets;
+		
+			[Bindable]
+			public var toolTipText:String;
+			
+		]]>
+	</mx:Script>
+	<mx:Image id="imgIcon" source="{icon}" y="11" x="8" height='30' />
+	<mx:Canvas visible="{label != '0'}" height='30'>
+		<mx:Image source="{Assets.notificationCount}"  height='30' />
+		<mx:Label y="-1" width="100%" text="{label}" styleName="notificationCount"/>
+	</mx:Canvas>
+</mx:Canvas>

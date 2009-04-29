@@ -1,0 +1,165 @@
+<!--
+/**
+* Visit www.gskinner.com/blog for documentation, updates and more free code.
+*
+* Copyright (c) 2009 Grant Skinner
+* 
+* Permission is hereby granted, free of charge, to any person
+* obtaining a copy of this software and associated documentation
+* files (the "Software"), to deal in the Software without
+* restriction, including without limitation the rights to use,
+* copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the
+* Software is furnished to do so, subject to the following
+* conditions:
+* 
+* The above copyright notice and this permission notice shall be
+* included in all copies or substantial portions of the Software.
+* 
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+* OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+* NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+* HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+* WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+* OTHER DEALINGS IN THE SOFTWARE.
+**/
+
+-->
+<mx:Window xmlns:mx="http://www.adobe.com/2006/mxml"
+		   showGripper="false" showStatusBar="false" showTitleBar="false"
+		   verticalScrollPolicy="off" horizontalScrollPolicy="off" type="lightweight"
+		   alwaysInFront="true" systemChrome="none" resizable="false" layout="absolute"
+		   cornerRadius="0" transparent="true" showFlexChrome="false"
+		   creationComplete="configUI()" xmlns:local="*"
+		   >
+		
+		<mx:Script>
+			<![CDATA[
+				import com.gskinner.toast.data.NotificationData;
+				import com.chewtinfoil.utils.DateUtils;
+				import com.gskinner.toast.events.ToastEvent;
+				import com.gskinner.toast.ToastManager;
+				import com.gskinner.motion.GTween;
+				
+				public var ignoreTick:Boolean = true;
+				public var timeToLive:uint;
+				
+				protected var toastTween:GTween;
+				protected var animate:Boolean;
+				protected var windowWidth:Number;
+				protected var windowHeight:Number;
+				protected var _notificationData:NotificationData;
+				
+				public function show():void {
+					toastTween.setProperties({alpha:1});
+		            toastTween.addEventListener(Event.COMPLETE, onToastShown, false, 0, true);
+		            toastTween.play();
+				}
+				
+				public function set notificationData(value:NotificationData):void {
+					_notificationData = value;
+					invalidateProperties();
+				}
+				
+				public function closeWindow(p_animate:Boolean=true):void {
+					animate = p_animate;
+					close();
+				}
+				
+				override public function close():void {
+					if (animate) {
+						if (toastTween == null) { 
+							return; 
+						}
+						if (toastTween.state == GTween.TWEEN){
+							closeNotification.enabled = false;
+							return; 
+						}
+						
+						toastTween.setProperties({alpha:0});
+			            toastTween.addEventListener(Event.COMPLETE, onToastHidden, false, 0, true);
+			            toastTween.play();
+			  		} else {
+			  			super.close();
+			  		}
+				}
+				
+				override public function set width(value:Number):void {
+					windowWidth = value + 5;
+					super.width = windowWidth;
+				}
+				
+				override public function set height(value:Number):void {
+					windowHeight = value + 5;
+					super.height = windowHeight;
+				}
+				
+				protected function configUI():void {
+					ToastManager.getInstance().addEventListener(ToastEvent.TICK, onTick, false, 0, true);
+					toastTween = new GTween(this, 0.30, {}, {autoPlay: false});
+					closeNotification.addEventListener(MouseEvent.MOUSE_UP, onCloseToast, false, 0, true);
+				}
+				
+				override protected function commitProperties():void {
+					super.commitProperties();
+					
+					if (_notificationData) {
+						notificationTitle.text =  _notificationData.content;
+						
+						var changeData:NotificationChangeData = (_notificationData.data as NotificationChangeData); 
+						var iconClass:Class;
+						
+						
+						if (!changeData) { return; }
+						
+						switch (changeData.type) {
+							case NotificationChangeData.MESSAGE: iconClass = Assets.mailIcon; break;
+							case NotificationChangeData.NOTIFICATION: iconClass = Assets.notificationIcon; break;
+							case NotificationChangeData.POKE: iconClass = Assets.pokesIcon; break;
+							case NotificationChangeData.REQUEST: iconClass = Assets.friendRequesticon; break;
+						}
+						
+						notificationIcon.icon = iconClass;
+						notificationIcon.label = changeData.count + '';
+					}
+				}
+				
+				protected function onCloseToast(p_event:MouseEvent):void {
+					closeWindow();
+				}
+				
+				protected function onToastShown(p_event:Event):void {
+					toastTween.removeEventListener(Event.COMPLETE, onToastShown);
+					dispatchEvent(new Event(Event.COMPLETE, true, false));
+				}
+				
+				protected function onToastHidden(p_event:Event):void {
+					toastTween.removeEventListener(Event.COMPLETE, onToastHidden);
+					super.close();
+				}
+				
+				protected function onTick(p_event:ToastEvent):void {
+					if (!ignoreTick) { 
+						timeToLive--;
+						if (timeToLive == 0) {
+							ignoreTick = true;
+							closeWindow();
+						}
+					}
+				}
+				
+			]]>
+		</mx:Script>
+		
+		<mx:Canvas backgroundColor="0xD8DFEA" width="{windowWidth-5}" height="{windowHeight-5}" x="0" y="0"  filters="{[new DropShadowFilter(3,45,0x000000,1, 3, 3, 0.50, BitmapFilterQuality.LOW)]}" borderStyle="solid" borderColor="0xBDC7D8" borderThickness="1"/>
+		<mx:HBox width="100%" height="100%" horizontalGap="0" paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
+			<local:NotificationIcon id="notificationIcon" />
+			<mx:VBox id="contentSection" width="100%" height="100%" paddingTop="13" verticalGap="1">
+				<mx:Text id="notificationTitle" selectable="false" width="{contentSection.width - 20}" styleName="toastWindowText" color="0x3B5998" />
+			</mx:VBox>
+			
+		</mx:HBox>
+		<mx:Button id="closeNotification" useHandCursor="true" buttonMode="true" top="2" right="7" paddingLeft="0" paddingRight="0" paddingBottom="0" paddingTop="0" label="X" toolTip="Close" styleName="nullButtonStyles" color="0xb1bdd6" /> 	
+</mx:Window>

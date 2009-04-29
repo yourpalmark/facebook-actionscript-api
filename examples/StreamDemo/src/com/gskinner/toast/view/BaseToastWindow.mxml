@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+* Visit www.gskinner.com/blog for documentation, updates and more free code.
+*
+* Copyright (c) 2009 Grant Skinner
+* 
+* Permission is hereby granted, free of charge, to any person
+* obtaining a copy of this software and associated documentation
+* files (the "Software"), to deal in the Software without
+* restriction, including without limitation the rights to use,
+* copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the
+* Software is furnished to do so, subject to the following
+* conditions:
+* 
+* The above copyright notice and this permission notice shall be
+* included in all copies or substantial portions of the Software.
+* 
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+* OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+* NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+* HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+* WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+* OTHER DEALINGS IN THE SOFTWARE.
+**/
+-->
+<AbstractToastWindow xmlns="com.gskinner.toast.view.*" xmlns:mx="http://www.adobe.com/2006/mxml"
+					 showGripper="false" showStatusBar="false" showTitleBar="false"
+					 verticalScrollPolicy="off" horizontalScrollPolicy="off" type="lightweight"
+					 alwaysInFront="true" systemChrome="none" resizable="false" layout="absolute"
+					 cornerRadius="0" transparent="true" showFlexChrome="false"
+					 >
+	<mx:Script>
+		<![CDATA[
+			override protected function drawContent():void {
+				if (notificationTitle) {
+					notificationTitle.text = _notificationData.content;
+				}
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:Canvas id="notificationBox" backgroundColor="0xD8DFEA" width="{windowWidth-5}" height="{windowHeight-5}" x="0" y="0"  filters="{[new DropShadowFilter(3,45,0x000000,1, 3, 3, 0.50, BitmapFilterQuality.LOW)]}" borderStyle="solid" borderColor="0xBDC7D8" borderThickness="1"/>
+		<mx:Box width="100%" height="100%" horizontalGap="0" paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5">
+			<mx:Text id="notificationTitle" text="Title" selectable="false" width="{notificationBox.width - 20}" styleName="toastWindowText" color="0x3B5998" />
+		</mx:Box>
+</AbstractToastWindow>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HBox
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:views="com.adobe.facebooknotifier.views.*"
+	xmlns:controls="com.adobe.facebooknotifier.controls.*"
+	xmlns:local="*" verticalAlign="top"
+	creationComplete="init()"
+	horizontalGap="-1"
+	xmlns:controls1="com.facebook.streamdemo.controls.*"
+	>
+	
+	<mx:Script>
+		<![CDATA[
+			import com.facebook.streamdemo.ui.Assets;
+			import com.facebook.streamdemo.dialogs.NotificationUpdateWindow;
+			import com.facebook.streamdemo.events.StreamEvent;
+			import com.facebook.streamdemo.controls.NotificationIcon;
+			import com.facebook.streamdemo.data.NotificationChangeData;
+			import com.chewtinfoil.utils.StringUtils;
+			import com.gskinner.toast.data.NotificationData;
+			import com.gskinner.toast.ToastManager;
+			import com.facebook.net.FacebookCall;
+			import com.facebook.commands.notifications.GetNotifications;
+			import com.facebook.Facebook;
+			import com.facebook.events.FacebookEvent;
+			
+			import com.facebook.data.notifications.NotificationCollection;
+			import com.facebook.data.notifications.NotificationShareData;
+			import com.facebook.data.notifications.NotificationPokeData;
+			import com.facebook.data.notifications.NotificationMessageData;
+			import com.facebook.data.notifications.GetNotificationData;
+			
+			import flash.net.navigateToURL;
+			
+			protected const NOTIFICATION_TEXT:String = 'You have {value} new notifications.';
+			protected const MESSAGE_TEXT:String = 'You have {value} new messages.';
+			protected const POKE_TEXT:String = 'You have {value} new pokes.';
+			protected const REQUEST_TEXT:String = 'You have {value} new friend requests.';
+			
+			protected var facebook:Facebook;
+			protected var getNotificationsCall:GetNotifications;
+			
+			protected var lastNotificationCount:uint = 0;
+			protected var lastMessageCount:uint = 0;
+			protected var lastPokeCount:uint = 0;
+			protected var lastRequestCount:uint = 0;
+			
+			public function close():void {
+				//Save prefs, or do shutdown stuff here.
+			}
+			
+			public function show(facebook:Facebook):void {
+				this.facebook = facebook;
+				refresh();
+			}
+			
+			public function refresh():void {
+				if (getNotificationsCall != null) { getNotificationsCall.delegate.close(); }
+				
+				getNotificationsCall = new GetNotifications();
+				getNotificationsCall.addEventListener(FacebookEvent.COMPLETE, onNotificationsComplete, false, 0, true);
+				facebook.post(getNotificationsCall);
+			}
+			
+			protected function init():void {
+				notification.icon = Assets.notificationIcon;
+				mail.icon = Assets.mailIcon;
+				request.icon = Assets.friendRequesticon;
+				pokes.icon = Assets.pokesIcon;
+			}
+			
+			protected function onNotificationsComplete(event:FacebookEvent):void {
+				if (event.success == false) {
+					//Error, but just ignore it here.
+					return;
+				}
+				var result:Object = event.data;
+				var list:NotificationCollection = result.notificationCollection as NotificationCollection;
+				var messageData:NotificationMessageData = list.getItemAt(0) as NotificationMessageData;
+				var pokeData:NotificationPokeData = list.getItemAt(1) as NotificationPokeData;
+				var shareData:NotificationShareData = list.getItemAt(2)  as NotificationShareData;
+				
+				var currentNotificationCount:uint = result.notificationCollection.length;
+				var currentMessageCount:uint = messageData.unread;
+				
+				var currentPokeCount:uint = pokeData.unread;
+				var currentRequestCount:uint = result.friendsRequests.length;
+				
+				var notificationData:NotificationChangeData;
+				var now:Date = new Date();
+				
+				if (currentNotificationCount > lastNotificationCount) {
+					notificationData = new NotificationChangeData();
+					notificationData.time = now;
+					notificationData.count = currentNotificationCount - lastNotificationCount;
+					notificationData.type = NotificationChangeData.NOTIFICATION;
+					ToastManager.addNotification(new NotificationData(StringUtils.supplant(NOTIFICATION_TEXT, {value:currentNotificationCount-lastNotificationCount}), notificationData), 3, 166, 60, new NotificationUpdateWindow());
+				}
+				
+				if (currentMessageCount > lastMessageCount) {
+					notificationData = new NotificationChangeData();
+					notificationData.time = now;
+					notificationData.count = currentMessageCount - lastMessageCount;
+					notificationData.type = NotificationChangeData.MESSAGE;
+					ToastManager.addNotification(new NotificationData(StringUtils.supplant(MESSAGE_TEXT, {value:currentMessageCount-lastMessageCount}), notificationData), 3, 166, 80, new NotificationUpdateWindow());
+				}
+				
+				if (currentPokeCount > lastPokeCount) {
+					notificationData = new NotificationChangeData();
+					notificationData.time = now;
+					notificationData.count = currentPokeCount - lastPokeCount;
+					notificationData.type = NotificationChangeData.POKE;
+					ToastManager.addNotification(new NotificationData(StringUtils.supplant(POKE_TEXT, {value:currentPokeCount-lastPokeCount}), notificationData), 3, 166, 60, new NotificationUpdateWindow());
+
+				}
+				
+				if (currentRequestCount > lastRequestCount) {
+					notificationData = new NotificationChangeData();
+					notificationData.time = now;
+					notificationData.count = currentRequestCount - lastRequestCount;
+					notificationData.type = NotificationChangeData.REQUEST;
+					ToastManager.addNotification(new NotificationData(StringUtils.supplant(REQUEST_TEXT, {value:currentRequestCount-lastRequestCount}), notificationData), 3, 166, 60, new NotificationUpdateWindow());
+
+				}
+				
+				notification.label = currentNotificationCount+'';
+				mail.label = currentMessageCount+'';
+				request.label =  currentRequestCount+ '';
+				pokes.label = currentPokeCount + '';
+				
+				lastRequestCount = currentRequestCount;
+				lastPokeCount = currentPokeCount;
+				lastMessageCount = currentMessageCount;
+				lastNotificationCount = currentNotificationCount;
+			}
+			
+			protected function showPokes():void {
+				showURL('http://www.facebook.com/pokes.php');
+			}
+			
+			protected function showInbox():void {
+				showURL('http://www.facebook.com/home.php#/inbox/');
+			}
+			
+			protected function showNotifications():void {
+				showURL('http://www.facebook.com/notifications.php');
+			}
+			
+			protected function showRequests():void {
+				showURL('http://www.facebook.com/reqs.php?friend');
+			}
+			
+			protected function showURL(url:String):void {
+				navigateToURL(new URLRequest(url));
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<controls1:NotificationIcon id="notification" toolTipText=" notifications." label="0" click="showNotifications()" buttonMode="true" useHandCursor="true"/>
+	<controls1:NotificationIcon id="mail" label="0" toolTipText=" inbox messages." click="showInbox()" buttonMode="true" useHandCursor="true"/>
+	<controls1:NotificationIcon id="request" label="0" toolTipText=" friend requests." click="showRequests()" buttonMode="true" useHandCursor="true"/>
+	<controls1:NotificationIcon id="pokes" label="0" toolTipText=" pokes." click="showPokes()" buttonMode="true" useHandCursor="true"/>
+	
+</mx:HBox>
