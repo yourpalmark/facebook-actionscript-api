@@ -66,6 +66,7 @@
 			
 			protected function onJSConnect(event:FacebookEvent):void {
 				if (event.success) {
+					jsSession.
 					var call:FacebookCall = facebook.post(new GetFriends());
 					call.addEventListener(FacebookEvent.COMPLETE, onFriendsLoad);
 				} else {
