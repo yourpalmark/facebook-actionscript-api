@@ -36,7 +36,7 @@ package com.facebook.data.friends {
 	[Bindable]
 	public class GetListsData extends FacebookData {
 		
-		public var friendsListCollection:FriendsCollection;
+		public var lists:Array;
 		
 		public function GetListsData() {
 			super();

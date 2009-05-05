@@ -86,7 +86,6 @@ package com.facebook.data {
 	import com.facebook.data.pages.GetPageInfoData;
 	import com.facebook.data.pages.PageInfoCollection;
 	import com.facebook.data.pages.PageInfoData;
-	import com.facebook.data.photos.AlbumCollection;
 	import com.facebook.data.photos.AlbumData;
 	import com.facebook.data.photos.FacebookPhoto;
 	import com.facebook.data.photos.GetAlbumsData;
@@ -540,14 +539,15 @@ package com.facebook.data {
 		
 		protected function parseGetLists(xml:XML):GetListsData {
 			var getListData:GetListsData = new GetListsData();
-			var friendsListCollection:FriendsCollection = new FriendsCollection();
+			var friendsLists:Array = [];
 			for each(var list:* in xml..fb_namespace::friendlist) {
 				var listData:ListsData = new ListsData();
 				listData.flid = list.fb_namespace::flid;
 				listData.name = list.fb_namespace::name;
-				friendsListCollection.addItem(listData);
+				friendsLists.push(listData);
 			}
-			getListData.friendsListCollection = friendsListCollection;
+			
+			getListData.lists = friendsLists;
 			return getListData;
 		}
 		
