@@ -58,6 +58,13 @@ package com.facebook.net {
 		public var session:IFacebookSession;
 		public var success:Boolean = false;
 		
+		/**
+		 * Set this if you do-not want to pass a session.
+		 * For example set to false if you want to use friends.get to load another users friends.
+		 * 
+		 */
+		public var useSession:Boolean = true;
+		
 		public function FacebookCall(method:String="no_method_required", args:URLVariables=null) {
 			this.method = method;
 			this.args = args != null ? args : new URLVariables();

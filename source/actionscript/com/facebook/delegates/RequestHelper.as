@@ -63,7 +63,7 @@ package com.facebook.delegates {
 				call.facebook_internal::setRequestArgument("api_key", session.api_key);
 			}
 			
-			if (session.session_key != null) {
+			if (session.session_key != null && call.useSession) {
 				call.facebook_internal::setRequestArgument("session_key", session.session_key);
 			}
 			
