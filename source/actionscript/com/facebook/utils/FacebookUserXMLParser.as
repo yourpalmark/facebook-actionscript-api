@@ -32,7 +32,6 @@
 package com.facebook.utils {
 	
 	import com.facebook.data.FacebookEducationInfo;
-	import com.facebook.data.FacebookLocation;
 	import com.facebook.data.FacebookNetwork;
 	import com.facebook.data.FacebookWorkInfo;
 	import com.facebook.data.users.FacebookUser;
@@ -59,7 +58,7 @@ package com.facebook.utils {
 						fbUser[localName] = createAffiliations(userNode.children(), ns); break;
 					case 'hometown_location':
 					case 'current_location':
-						fbUser[localName] = createLocation(userNode, ns); break;
+						fbUser[localName] = FacebookXMLParserUtils.createLocation(userNode, ns); break;
 					case 'profile_update_time':
 						fbUser[localName] = FacebookDataUtils.formatDate(userNode.toString()); break;
 					case 'hs_info':
@@ -88,11 +87,12 @@ package com.facebook.utils {
 					//Flat Array parsing
 					case 'meeting_sex':
 					case 'meeting_for':
+					case 'email_hashes':
 						fbUser[localName] = toArray(userNode, ns); break;
 					
 					//Default everthing else to a String
 					default:
-						if (localName in fbUser) {
+						if (localName in fbUser) { //Check to make sure this isn't a new or un-supported property.
 							fbUser[localName] = String(userNode);
 						}
 				}
@@ -106,13 +106,8 @@ package com.facebook.utils {
 			
 			for each (var xWorkInfo:Object in xml) {
 				var workInfo:FacebookWorkInfo = new FacebookWorkInfo();
-
-				workInfo.location = new FacebookLocation();
 				
-				workInfo.location.city = String(xWorkInfo.ns::location.city);
-				workInfo.location.state = String(xWorkInfo.ns::location.state);
-				workInfo.location.country = String(xWorkInfo.ns::location.country);
-				workInfo.location.zip = String(xWorkInfo.ns::location.zip);
+				workInfo.location = FacebookXMLParserUtils.createLocation(xWorkInfo.ns::location[0], ns);
 				
 				workInfo.company_name = String(xWorkInfo.ns::company_name);
 				
@@ -156,14 +151,6 @@ package com.facebook.utils {
 			return arr;
 		}
 		
-		protected static function createLocation(xml:XML, ns:Namespace):FacebookLocation {
-			var hometown_location:FacebookLocation = new FacebookLocation();
-			hometown_location.city = String(xml.ns::city);
-			hometown_location.state = String(xml.ns::state);
-			hometown_location.country = String(xml.ns::country);
-			hometown_location.zip = String(xml.ns::zip);
-			return hometown_location;
-		}
 		
 		protected static function createAffiliations(affilications:XMLList, ns:Namespace):Array {
 			var arr:Array = [];

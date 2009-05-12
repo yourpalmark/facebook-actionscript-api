@@ -30,6 +30,8 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package com.facebook.data.events {
+	import com.facebook.data.FacebookLocation;
+	
 	
 	[Bindable]
 	public class EventData {
@@ -51,7 +53,7 @@ package com.facebook.data.events {
 		public var host:String;
 		public var creator:Number;
 		public var location:String;
-		public var venue:VenueData;
+		public var venue:FacebookLocation;
 
 		public var start_time:Date;
 		public var end_time:Date;

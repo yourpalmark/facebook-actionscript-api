@@ -72,7 +72,8 @@ package com.facebook.data.users {
 		public var timezone:int;
 		public var current_location:FacebookLocation;
 		public var hometown_location:FacebookLocation;
-
+		
+		public var hs_info:String;
 		public var hs1_name:String;
 		public var hs2_name:String;
 		public var grad_year:String;
@@ -96,8 +97,14 @@ package com.facebook.data.users {
 		public var work_history:Array;
 		
 		public var profile_url:String;
-
-		public var friends:Array;
+		
+		public var proxied_email:String;
+		public var pic_square_with_logo:String;
+		public var pic_small_with_logo:String;
+		public var pic_with_logo:String;
+		public var pic_big_with_logo:String;
+		public var locale:String; 
+		public var email_hashes:Array;
 		
  		public function FacebookUser():void {
 			super();

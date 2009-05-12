@@ -30,6 +30,8 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package com.facebook.data.groups {
+	import com.facebook.data.FacebookLocation;
+	
 	
 	[Bindable]
 	public class GroupData {
@@ -48,7 +50,7 @@ package com.facebook.data.groups {
 		public var update_time:Date;
 		public var office:String;
 		public var website:String
-		public var venue:XMLList;
+		public var venue:FacebookLocation;
 		public var privacy:String;
 		
 		public function GroupData() {

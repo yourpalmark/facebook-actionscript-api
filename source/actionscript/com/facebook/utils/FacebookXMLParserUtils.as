@@ -30,6 +30,7 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package com.facebook.utils {
+	import com.facebook.data.FacebookLocation;
 	import com.facebook.data.photos.AlbumCollection;
 	import com.facebook.data.photos.AlbumData;
 	
@@ -99,6 +100,17 @@ package com.facebook.utils {
 			}
 			
 			return vars;
+		}
+		
+		public static function createLocation(xml:XML, ns:Namespace):FacebookLocation {
+			var location:FacebookLocation = new FacebookLocation();
+			if (xml == null) { return location; }
+			
+			location.city = String(xml.ns::city);
+			location.state = String(xml.ns::state);
+			location.country = String(xml.ns::country);
+			location.zip = String(xml.ns::zip);
+			return location;
 		}
 		
 		public static function createAlbumCollection(xml:XML, ns:Namespace):AlbumCollection {

@@ -52,7 +52,6 @@ package com.facebook.data {
 	import com.facebook.data.events.EventData;
 	import com.facebook.data.events.GetEventsData;
 	import com.facebook.data.events.GetMembersData;
-	import com.facebook.data.events.VenueData;
 	import com.facebook.data.fbml.AbstractTagData;
 	import com.facebook.data.fbml.ContainerTagData;
 	import com.facebook.data.fbml.GetCustomTagsData;
@@ -573,7 +572,7 @@ package com.facebook.data {
 				eventData.creator = event.fb_namespace::end_time;
 				eventData.update_time = FacebookXMLParserUtils.toDate(event.fb_namespace::update_time);
 				eventData.location = event.fb_namespace::location;
-				eventData.venue = getVenueData(event.fb_namespace::venue);
+				eventData.venue = FacebookXMLParserUtils.createLocation(event.fb_namespace::venue[0], fb_namespace);
 				eventCollection.addItem(eventData);
 			}
 			getEventsData.eventCollection = eventCollection;
@@ -718,16 +717,16 @@ package com.facebook.data {
 		protected function parseGener(xml:XML):GenreData {
 			var genreData:GenreData = new GenreData();
 			for each(var genre:* in xml) {
-				genreData.dance = FacebookXMLParserUtils.toBoolean(genre.dance);
-				genreData.party = FacebookXMLParserUtils.toBoolean(genre.party);
-				genreData.relax = FacebookXMLParserUtils.toBoolean(genre.dance);
-				genreData.talk = FacebookXMLParserUtils.toBoolean(genre.relax);
-				genreData.think = FacebookXMLParserUtils.toBoolean(genre.dance);
-				genreData.workout = FacebookXMLParserUtils.toBoolean(genre.think);
-				genreData.sing = FacebookXMLParserUtils.toBoolean(genre.sing);
-				genreData.intimate = FacebookXMLParserUtils.toBoolean(genre.intimate);
-				genreData.raunchy = FacebookXMLParserUtils.toBoolean(genre.raunchy);
-				genreData.headphones = FacebookXMLParserUtils.toBoolean(genre.headphones);
+				genreData.dance = FacebookXMLParserUtils.toBoolean(genre.dance[0]);
+				genreData.party = FacebookXMLParserUtils.toBoolean(genre.party[0]);
+				genreData.relax = FacebookXMLParserUtils.toBoolean(genre.dance[0]);
+				genreData.talk = FacebookXMLParserUtils.toBoolean(genre.relax[0]);
+				genreData.think = FacebookXMLParserUtils.toBoolean(genre.dance[0]);
+				genreData.workout = FacebookXMLParserUtils.toBoolean(genre.think[0]);
+				genreData.sing = FacebookXMLParserUtils.toBoolean(genre.sing[0]);
+				genreData.intimate = FacebookXMLParserUtils.toBoolean(genre.intimate[0]);
+				genreData.raunchy = FacebookXMLParserUtils.toBoolean(genre.raunchy[0]);
+				genreData.headphones = FacebookXMLParserUtils.toBoolean(genre.headphones[0]);
 			}
 			
 			return genreData;
@@ -821,7 +820,8 @@ package com.facebook.data {
 				groupDataVO.update_time = FacebookXMLParserUtils.toDate(group.fb_namespace::update_time);
 				groupDataVO.office = group.fb_namespace::office;
 				groupDataVO.website = group.fb_namespace::website; 
-				groupDataVO.venue = group.fb_namespace::venue;
+				trace('group.fb_namespace::venue: ', group.fb_namespace::venue);
+				groupDataVO.venue = FacebookXMLParserUtils.createLocation(group.fb_namespace::venue[0], fb_namespace);
 				groupDataVO.privacy = group.fb_namespace::privacy;
 				groupCollection.addGroup(groupDataVO);
 			}
@@ -867,15 +867,6 @@ package com.facebook.data {
 			var data:GetAllocationData = new GetAllocationData();
 			data.allocationLimit = Number(result.toString());
 			return data;
-		}
-		
-		protected function getVenueData(xml:XMLList):VenueData {
-			var venue:VenueData = new VenueData();
-			venue.street = xml.fb_namespace::street;
-			venue.city = xml.fb_namespace::city;
-			venue.state = xml.fb_namespace::state;
-			venue.country = xml.fb_namespace::country;
-			return venue;
 		}
 		
 		protected function getAffiliation(xml:XML):AffiliationCollection {

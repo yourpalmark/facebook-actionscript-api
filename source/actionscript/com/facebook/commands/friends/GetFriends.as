@@ -54,7 +54,7 @@ package com.facebook.commands.friends {
 		public var flid:String;
 		public var uid:String;
 		
-		public function GetFriends(flid:String=null,uid:String=null) {
+		public function GetFriends(flid:String=null, uid:String=null) {
 			super(METHOD_NAME);
 			
 			this.flid = flid;
