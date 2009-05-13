@@ -684,7 +684,7 @@ package com.facebook.data {
 				pageInfoData.pic_large = page.fb_namespace::pic_large;
 				pageInfoData.type = page.fb_namespace:: type;
 				pageInfoData.website = page.fb_namespace::website;
-				pageInfoData.location = page.fb_namespace::location;
+				pageInfoData.location = FacebookXMLParserUtils.createLocation(page.fb_namespace::location[0], fb_namespace);
 				pageInfoData.hours = page.fb_namespace::hours;
 				pageInfoData.band_members = page.fb_namespace::band_members;
 				pageInfoData.bio = page.fb_namespace::bio;

@@ -30,6 +30,8 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package com.facebook.data.pages {
+	import com.facebook.data.FacebookLocation;
+	
 	
 	[Bindable]
 	public class PageInfoData {
@@ -42,7 +44,7 @@ package com.facebook.data.pages {
 		public var pic_large:String;
 		public var type:String;
 		public var website:String;
-		public var location:String;
+		public var location:FacebookLocation;
 		public var hours:String;
 		public var band_members:String;
 		public var bio:String;
