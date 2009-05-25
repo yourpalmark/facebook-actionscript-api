@@ -689,7 +689,7 @@ package com.facebook.data {
 				pageInfoData.band_members = page.fb_namespace::band_members;
 				pageInfoData.bio = page.fb_namespace::bio;
 				pageInfoData.hometown = page.fb_namespace::hometown;
-				pageInfoData.genre = parseGener(page.fb_namespace::genre[0]);
+				pageInfoData.genre = FacebookXMLParserUtils.toStringValue(page.fb_namespace::genre[0]);
 				pageInfoData.record_label = page.fb_namespace::record_label;
 				pageInfoData.influences = page.fb_namespace::influences;
 				pageInfoData.has_added_app = FacebookXMLParserUtils.toBoolean(page.fb_namespace::has_added_app[0]);
@@ -712,25 +712,6 @@ package com.facebook.data {
 			}
 			getPageInfoData.pageInfoCollection = pageInfoCollection;
 			return getPageInfoData;
-		}
-		
-		protected function parseGener(xml:XML):GenreData {
-			var genreData:GenreData = new GenreData();
-			for each(var genre:* in xml) {
-				genreData.dance = FacebookXMLParserUtils.toBoolean(genre.dance[0]);
-				genreData.party = FacebookXMLParserUtils.toBoolean(genre.party[0]);
-				genreData.relax = FacebookXMLParserUtils.toBoolean(genre.dance[0]);
-				genreData.talk = FacebookXMLParserUtils.toBoolean(genre.relax[0]);
-				genreData.think = FacebookXMLParserUtils.toBoolean(genre.dance[0]);
-				genreData.workout = FacebookXMLParserUtils.toBoolean(genre.think[0]);
-				genreData.sing = FacebookXMLParserUtils.toBoolean(genre.sing[0]);
-				genreData.intimate = FacebookXMLParserUtils.toBoolean(genre.intimate[0]);
-				genreData.raunchy = FacebookXMLParserUtils.toBoolean(genre.raunchy[0]);
-				genreData.headphones = FacebookXMLParserUtils.toBoolean(genre.headphones[0]);
-			}
-			
-			return genreData;
-			
 		}
 		
 		protected function parseFacebookPhoto(xml:XML):FacebookPhoto {
@@ -820,7 +801,6 @@ package com.facebook.data {
 				groupDataVO.update_time = FacebookXMLParserUtils.toDate(group.fb_namespace::update_time);
 				groupDataVO.office = group.fb_namespace::office;
 				groupDataVO.website = group.fb_namespace::website; 
-				trace('group.fb_namespace::venue: ', group.fb_namespace::venue);
 				groupDataVO.venue = FacebookXMLParserUtils.createLocation(group.fb_namespace::venue[0], fb_namespace);
 				groupDataVO.privacy = group.fb_namespace::privacy;
 				groupCollection.addGroup(groupDataVO);

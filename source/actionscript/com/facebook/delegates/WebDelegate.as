@@ -170,7 +170,8 @@ package com.facebook.delegates {
 			loader.addEventListener(Event.OPEN, onOpen);
 		}
 		
-		protected function onHTTPStatus(p_event:HTTPStatusEvent):void { }
+		protected function onHTTPStatus(p_event:HTTPStatusEvent):void {
+		}
 		
 		protected function onOpen(p_event:Event):void {
 			connectTimer.stop();

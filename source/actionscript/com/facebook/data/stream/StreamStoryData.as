@@ -37,6 +37,7 @@ package com.facebook.data.stream {
 		public var post_id:String;
 		public var viewer_id:String;
 		public var source_id:String;
+		public var target_id:String;
 		public var type:uint;
 		public var actor_id:String;
 		public var message:String;

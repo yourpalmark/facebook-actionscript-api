@@ -39,11 +39,12 @@ package com.facebook.net {
 	import com.facebook.delegates.IFacebookCallDelegate;
 	import com.facebook.errors.FacebookError;
 	import com.facebook.events.FacebookEvent;
-	import com.facebook.facebook_internal;
 	import com.facebook.session.IFacebookSession;
 	
 	import flash.events.EventDispatcher;
 	import flash.net.URLVariables;
+	
+	import com.facebook.facebook_internal;
 	
 	use namespace facebook_internal;
 	

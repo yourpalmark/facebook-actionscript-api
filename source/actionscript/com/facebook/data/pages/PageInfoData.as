@@ -49,7 +49,7 @@ package com.facebook.data.pages {
 		public var band_members:String;
 		public var bio:String;
 		public var hometown:String;
-		public var genre:GenreData;
+		public var genre:String;
 		public var record_label:String;
 		public var influences:String;
 		public var has_added_app:Boolean;

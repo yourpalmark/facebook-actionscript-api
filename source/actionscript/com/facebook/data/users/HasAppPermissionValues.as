@@ -43,5 +43,6 @@ package com.facebook.data.users {
 		public static const RSVP_EVENT:String = 'rsvp_event';
 		public static const SMS:String = 'sms';
 		public static const SHARE_ITEM:String = 'share_item';
+		public static const PUBLISH_STREAM:String = 'publish_stream';
 	}
 }

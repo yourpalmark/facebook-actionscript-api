@@ -43,26 +43,25 @@ package com.facebook.commands.stream {
 	public class PublishPost extends FacebookCall {
 		
 		public static const METHOD_NAME:String = 'stream.publish';
-		public static const SCHEMA:Array = ['message', 'body', 'story_data', 'section_links'];
+		public static const SCHEMA:Array = ['message', 'attachment', 'action_links', 'target_id'];
 		
-		public var message:String
-		public var body:String
-		public var story_data:TemplateData
-		public var section_links:ActionLinkCollection
+		public var message:String;
+		public var attachment:Object;
+		public var action_links:Array;
+		public var target_id:String;
 		
-		public function PublishPost(message:String, body:String, story_data:TemplateData, section_links:ActionLinkCollection = null) {
+		public function PublishPost(message:String = null, attachment:Object = null, action_links:Array = null, target_id:String = null) {
 			super(METHOD_NAME);
 			
 			this.message = message;
-			this.body = body;
-			this.story_data = story_data
-			this.section_links = section_links;
+			this.attachment = attachment;
+			this.action_links = action_links;
+			this.target_id = target_id;
 		}
 		
 		override facebook_internal function initialize():void {
-			applySchema(SCHEMA, message, body, JSON.encode(story_data), FacebookDataUtils.toJSONValuesArray(section_links.toArray()));
+			applySchema(SCHEMA, message, JSON.encode(attachment), JSON.encode(action_links), target_id);
 			super.facebook_internal::initialize();
 		}
-		
 	}
 }
