@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" width="600" height="425" layout="absolute" creationComplete="init()">
+	<mx:Script>
+		<![CDATA[
+		import com.facebook.data.auth.ExtendedPermissionValues;
+		import com.facebook.Facebook;
+		import com.facebook.events.FacebookEvent;
+		import com.facebook.utils.DesktopSessionHelper;		
+		
+		public const API_KEY:String = 'YOUR_API_KEY';
+		
+		protected var facebook:Facebook;
+		protected var desktopHelper:DesktopSessionHelper;
+		
+		protected function init():void {
+			
+			desktopHelper = new DesktopSessionHelper();
+			desktopHelper.apiKey = API_KEY;
+			desktopHelper.addEventListener(FacebookEvent.CONNECT, onConnect, false, 0, true);
+			desktopHelper.addEventListener(FacebookEvent.LOGOUT, onLogout, false, 0, true);
+			desktopHelper.addEventListener(FacebookEvent.LOGIN_FAILURE, onLoginFailure, false, 0, true);
+			desktopHelper.addEventListener(FacebookEvent.ERROR, onError, false, 0, true);
+			desktopHelper.addEventListener(FacebookEvent.PERMISSIONS_LOADED, onPermissionsLoaded, false, 0, true);
+			desktopHelper.addEventListener(FacebookEvent.PERMISSION_STATUS, onPermissionStatus, false, 0, true);
+			desktopHelper.addEventListener(FacebookEvent.PERMISSION_CHANGE, onPermissionChange, false, 0, true);
+			
+			addEventListener(Event.CLOSING, onClosing, false, 0, true);
+			
+			list.dataProvider = ['email','offline_access','status_update','photo_upload','create_event','create_note','rsvp_event','sms','share_item','publish_stream','read_stream'];
+		}
+		
+		protected function login():void {
+			desktopHelper.login();
+		}
+		protected function logout():void {
+			desktopHelper.logout();
+			desktopHelper.shutdown();
+			close();
+		}
+		protected function hasPerm():void {
+			desktopHelper.hasPermission(list.selectedItem.toString(), checkFacebook.selected);
+		}
+		protected function checkPerm():void {
+			statusTxt.text += 'CHECK PERMISSION:' + list.selectedItem.toString() + ' : ' + desktopHelper.checkPermission(list.selectedItem.toString()) + '\n';
+		}
+		protected function grantPerms():void {
+			desktopHelper.grantPermissions(list.selectedItems);
+		}
+		protected function revokePerms():void {
+			desktopHelper.revokePermissions(list.selectedItems);
+		}
+		protected function onPermissionChange(event:FacebookEvent):void {
+			statusTxt.text += 'PERMISSION CHANGE: ' + event.permission + ' : ' + event.hasPermission + '\n'; 
+		}
+		protected function onPermissionStatus(event:FacebookEvent):void {
+			statusTxt.text += 'PERMISSION STATUS: ' + event.permission + ' : ' + event.hasPermission + '\n';
+		}
+		protected function onPermissionsLoaded(event:FacebookEvent):void {
+			statusTxt.text += 'PERMISSIONS LOADED \n';
+		}
+		protected function onError(event:FacebookEvent):void {
+			statusTxt.text += 'ERROR:' + event.error.errorMsg + ' : ' + event.error.errorEvent + '\n';
+		}
+		protected function onConnect(event:FacebookEvent):void {
+			statusTxt.text += 'ON CONNECT \n';
+		}
+		protected function onLogout(event:FacebookEvent):void {
+			statusTxt.text += 'LOGGED OUT \n';
+		}
+		protected function onLoginFailure(event:FacebookEvent):void {
+			statusTxt.text += 'LOGIN FAILURE \n';
+		}
+		protected function onClosing(event:Event):void {
+			desktopHelper.shutdown();
+		}
+		
+		]]>
+	</mx:Script>
+	<mx:VBox width="100%" height="100%">
+		<mx:Text width="100%" height="100%">
+			<mx:text>
+			Click 'Login' to login to facebook. Select a single permission in the list on the left and click 
+			'has Permission' or 'check Permission' to see if that permission is enabled. Check the 'checkFacebook' checkbox to 
+			fetch the permission value from the server, otherwise it will fetch it from a local cache populated when you're logged 
+			in or grant permissions. Select multiple permissions and click 'grant Permissions' to bring up the permission windows. 
+			Select multiple permissions and click 'revoke Permissions' to make calls to revoke extended permissions. 
+			If the demo is exited without logging out, then the session is stored and will reconnect next time the demo is started.
+			</mx:text>
+		</mx:Text>
+		<mx:HBox>
+			<mx:Button label="login" click="login()"/>
+			<mx:Button label="logout and exit" click="logout()"/>		
+		</mx:HBox>
+		<mx:HBox width="100%" height="100%">
+			<mx:List id="list" allowMultipleSelection="true" height="250" width="120"/>
+			<mx:VBox width="100%" height="100%">
+				<mx:HBox>
+					<mx:Button label="hasPermission" click="hasPerm()"/>
+					<mx:CheckBox id="checkFacebook" label="checkFacebook" />
+				</mx:HBox>
+				<mx:Button label="checkPermission" click="checkPerm()"/>
+				<mx:Button label="grantPermissions" click="grantPerms()"/>
+				<mx:Button label="revokePermissions" click="revokePerms()"/>
+				<mx:TextArea id="statusTxt" width="100%" height="100%"/>
+			</mx:VBox>
+		</mx:HBox>
+	</mx:VBox>
+</mx:WindowedApplication>

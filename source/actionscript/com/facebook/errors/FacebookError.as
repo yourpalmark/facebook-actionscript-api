@@ -35,14 +35,15 @@
 */
 package com.facebook.errors {
 	
+	import com.facebook.data.FacebookData;
+	
 	import flash.events.ErrorEvent;
 	import flash.net.URLVariables;
 	
-	public class FacebookError {
+	public class FacebookError extends FacebookData {
 		
 		public var error:Error;
 		public var errorEvent:ErrorEvent;
-		public var rawResult:String;
 		public var reason:String;
 		
 		//Data returned from the Service

@@ -52,6 +52,10 @@ package com.facebook.data.stream {
 		public function StreamMediaData() {
 			
 		}
+		
+		public function toString():String {
+			return ['type: ' + type, 'href: ' + href, 'src: ' + src, 'alt: ' + alt, 'photo: ' + photo, 'video: ' + video].join(': ');
+		}
 
 	}
 }

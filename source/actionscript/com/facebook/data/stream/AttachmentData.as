@@ -38,10 +38,12 @@ package com.facebook.data.stream {
 		public var title:String;
 		public var label:String;
 		public var text:String;
+		public var name:String;
 		public var body:String;
 		public var media:Array; //Array Of StreamMediaData
 		public var href:String;
 		public var caption:String;
+		public var description:String;
 		
 		public function AttachmentData() {
 			

@@ -1,3 +1,7 @@
+/**
+ * http://wiki.developers.facebook.com/index.php/Auth.revokeExtendedPermission
+ * Feb 18/09
+ */ 
 /*
   Copyright (c) 2009, Adobe Systems Incorporated
   All rights reserved.
@@ -29,56 +33,39 @@
   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package com.facebook.commands.photos {
+package com.facebook.commands.auth {
 	
-	import com.facebook.data.photos.FacebookPhoto;
 	import com.facebook.net.FacebookCall;
 	import com.facebook.facebook_internal;
 
 	use namespace facebook_internal;
-	
-	/**
-	 * The UploadPhoto class represents the public  
-      Facebook API known as Photos.upload.
-	 * @see http://wiki.developers.facebook.com/index.php/Photos.upload
-	 */
-	public class UploadPhoto extends FacebookCall {
 
+	/**
+	 * The RevokeExtendedPermission class represents the public  
+      Facebook API known as Auth.revokeExtendedPermission.
+	 * @see http://wiki.developers.facebook.com/index.php/Auth.revokeExtendedPermission
+	 */
+	public class RevokeExtendedPermission extends FacebookCall {
 		
-		public static const METHOD_NAME:String = 'photos.upload';
-		public static const SCHEMA:Array = ['data', 'aid', 'caption', 'uid'];
+		public static const METHOD_NAME:String = 'auth.revokeExtendedPermission';
+		public static const SCHEMA:Array = ['ext_perm', 'uid'];
 		
-		public var data:Object;
-		public var aid:String;
-		public var caption:String;
+		public var ext_perm:String;
 		public var uid:String;
 		
-		public var uploadedPhoto:FacebookPhoto;
-		
 		/**
-		 * Used to chnage type of Uploaded photos, used to automatically Convert BitmapData into an facebook supported Image.
-		 * @see UploadPhotoTypes
 		 * 
+		 * @param ext_perm @see ExtendedPermissionValues
 		 */
-		public var uploadType:String = UploadPhotoTypes.PNG;
-		
-		/**
-		 * Used to assign the quality to an UploadPhotoTypes.JPEG uploadType; 
-		 * 
-		 */
-		public var uploadQuality:uint = 80;
-		
-		public function UploadPhoto(data:Object=null, aid:String=null, caption:String=null, uid:String = null) {
+		public function RevokeExtendedPermission(ext_perm:String, uid:String=null) {
 			super(METHOD_NAME);
 			
-			this.data = data;
-			this.aid = aid;
-			this.caption = caption;
+			this.ext_perm = ext_perm;
 			this.uid = uid;
 		}
 		
 		override facebook_internal function initialize():void {
-			applySchema(SCHEMA, data, aid, caption, uid);
+			applySchema(SCHEMA, ext_perm, uid);
 			super.facebook_internal::initialize();
 		}
 	}

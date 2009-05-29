@@ -33,9 +33,9 @@ package com.facebook.data.stream {
 	
 	public class MediaTypes {
 		
-		public var LINK:String = 'link';
-		public var VIDEO:String = 'video';
-		public var PHOTO:String = 'photo';
+		public static const LINK:String = 'link';
+		public static const VIDEO:String = 'video';
+		public static const PHOTO:String = 'photo';
 		
 	}
 }

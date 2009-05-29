@@ -34,11 +34,27 @@ package com.facebook.data.photos {
 	[Bindable]
 	public class TagData {
 		
+		protected var _actualX:Number;
+		protected var _actualY:Number;
+		
 		public var pid:String;
 		public var subject:String;
 		public var tag_uid:String;
-		public var xcoord:Number;
-		public var ycoord:Number;
+		
+		//Facebook returns xcoord and ycoord when getting tags
+		//When sending tags facebook requires x & y.
+		//So just treat both values as the same
+		
+		public function set xcoord(value:Number):void { _actualX = value; }
+		public function set ycoord(value:Number):void { _actualY = value; }
+		public function set x(value:Number):void { _actualX = value; }
+		public function set y(value:Number):void { _actualY = value; }
+		
+		public function get xcoord():Number { return _actualX; }
+		public function get x():Number { return _actualX; }
+		public function get ycoord():Number { return _actualY; }
+		public function get y():Number { return _actualY; }
+		
 		public var tag_text:String;
 		public var created:Date;
 		

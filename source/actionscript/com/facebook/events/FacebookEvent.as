@@ -38,11 +38,17 @@ package com.facebook.events {
 
 	public class FacebookEvent extends Event {
 		
-		public static const COMPLETE:String = 'complete';
+		public static const COMPLETE:String = "complete";
 		public static const WAITING_FOR_LOGIN:String = "waitingForLogin";
 		public static const VERIFYING_SESSION:String = "verifyingSession";
 		public static const CONNECT:String = "connect";
 		public static const LOGOUT:String = "logout";
+		public static const LOGIN_SUCCESS:String = "loginSuccess";
+		public static const LOGIN_FAILURE:String = "loginFailure";
+		public static const PERMISSIONS_LOADED:String = "permissionsLoaded";
+		public static const PERMISSION_STATUS:String = "permissionStatus";
+		public static const PERMISSION_CHANGE:String = "permissionChanged";
+		public static const ERROR:String ="facebookEventError";
 		
 		/**
 		 * Public access for data returned from the Facebook API. 
@@ -51,11 +57,15 @@ package com.facebook.events {
 		public var success:Boolean;
 		public var data:FacebookData;
 		public var error:FacebookError;
+		public var permission:String;
+		public var hasPermission:Boolean;
 		
-		public function FacebookEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false, success:Boolean = false, data:FacebookData = null, error:FacebookError = null) {
+		public function FacebookEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false, success:Boolean=false, data:FacebookData=null, error:FacebookError=null, permission:String='', hasPermission:Boolean=false) {
 			this.success = success;
 			this.data = data;
 			this.error = error;
+			this.permission = permission;
+			this.hasPermission = hasPermission;
 			
 			super(type, bubbles, cancelable);
 		}

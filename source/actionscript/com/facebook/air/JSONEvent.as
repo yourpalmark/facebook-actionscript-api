@@ -29,57 +29,26 @@
   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package com.facebook.commands.photos {
+package com.facebook.air {
 	
-	import com.facebook.data.photos.FacebookPhoto;
-	import com.facebook.net.FacebookCall;
-	import com.facebook.facebook_internal;
+	import flash.events.Event;
 
-	use namespace facebook_internal;
-	
-	/**
-	 * The UploadPhoto class represents the public  
-      Facebook API known as Photos.upload.
-	 * @see http://wiki.developers.facebook.com/index.php/Photos.upload
-	 */
-	public class UploadPhoto extends FacebookCall {
-
+	public class JSONEvent extends Event {
 		
-		public static const METHOD_NAME:String = 'photos.upload';
-		public static const SCHEMA:Array = ['data', 'aid', 'caption', 'uid'];
+		public static const SUCCESS:String = 'success';
+		public static const FAILURE:String = 'failure';
 		
 		public var data:Object;
-		public var aid:String;
-		public var caption:String;
-		public var uid:String;
 		
-		public var uploadedPhoto:FacebookPhoto;
-		
-		/**
-		 * Used to chnage type of Uploaded photos, used to automatically Convert BitmapData into an facebook supported Image.
-		 * @see UploadPhotoTypes
-		 * 
-		 */
-		public var uploadType:String = UploadPhotoTypes.PNG;
-		
-		/**
-		 * Used to assign the quality to an UploadPhotoTypes.JPEG uploadType; 
-		 * 
-		 */
-		public var uploadQuality:uint = 80;
-		
-		public function UploadPhoto(data:Object=null, aid:String=null, caption:String=null, uid:String = null) {
-			super(METHOD_NAME);
-			
+		public function JSONEvent(type:String, data:Object=null, bubbles:Boolean=false, cancelable:Boolean=false) {
 			this.data = data;
-			this.aid = aid;
-			this.caption = caption;
-			this.uid = uid;
+			
+			super(type, bubbles, cancelable);
 		}
 		
-		override facebook_internal function initialize():void {
-			applySchema(SCHEMA, data, aid, caption, uid);
-			super.facebook_internal::initialize();
+		override public function clone():Event {
+			return new JSONEvent(type, data. bubbles, cancelable);
 		}
+		
 	}
 }

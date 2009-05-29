@@ -31,9 +31,11 @@
 */
 package com.facebook.utils {
 
+	import flash.events.EventDispatcher;
 	import flash.utils.Dictionary;
 	
-	public class FacebookArrayCollection {
+	[Bindable]
+	public class FacebookArrayCollection extends EventDispatcher {
 		
 		protected var _source:Array;
 		protected var hash:Dictionary;
@@ -126,7 +128,7 @@ package com.facebook.utils {
 	    	_source = [];
 	    }
 	    
-	    public function toString():String {
+	    override public function toString():String {
 	    	return _source.join(', ');
 	    }
 	    

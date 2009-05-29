@@ -53,7 +53,7 @@ package com.facebook.data.stream {
 		public static const POST_NOTE:uint = 80;
 		public static const RELATIONSHIP:uint = 19;
 		public static const TAG:uint = 20;
-		public static const VIDEO:uint = 21;
+		public static const VIDEO:uint = 128;
 		public static const YOU_TUBE:uint = 22;
 		public static const CONNECT_SHARE:uint = 237;
 		

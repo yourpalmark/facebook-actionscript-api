@@ -117,6 +117,7 @@ package com.facebook.utils {
 				ss.sourceXML = ssx;
 				var attachmentXML:XML = ssx.ns::attachment[0];
 				var attachment:AttachmentData = new AttachmentData();
+				attachment.name =  FacebookXMLParserUtils.toStringValue(attachmentXML.ns::name[0]);
 				attachment.text = FacebookXMLParserUtils.toStringValue(attachmentXML.ns::text[0]);
 				attachment.body = FacebookXMLParserUtils.toStringValue(attachmentXML.ns::body[0]);
 				attachment.icon = FacebookXMLParserUtils.toStringValue(attachmentXML.ns::icon[0]);
@@ -147,6 +148,7 @@ package com.facebook.utils {
 				ss.metadata = FacebookXMLParserUtils.nodeToObject(ssx.ns::metadata);
 				ss.message = FacebookXMLParserUtils.toStringValue(ssx.ns::message[0]);
 				ss.source_id = FacebookXMLParserUtils.toStringValue(ssx.ns::source_id[0]);
+				ss.target_id = FacebookXMLParserUtils.toStringValue(ssx.ns::target_id[0]);
 				ss.post_id = FacebookXMLParserUtils.toStringValue(ssx.ns::post_id[0]);
 				ss.updated_time = FacebookXMLParserUtils.toDate(ssx.ns::updated_time[0]);
 				ss.created_time = FacebookXMLParserUtils.toDate(ssx.ns::created_time[0]);
@@ -188,9 +190,10 @@ package com.facebook.utils {
 			for (var i:uint=0;i<l;i++) {
 				var mediaXML:XML = media[i];
 				var smd:StreamMediaData = new StreamMediaData();
+				smd.type = FacebookXMLParserUtils.toStringValue(mediaXML.ns::type[0]);
 				smd.alt = FacebookXMLParserUtils.toStringValue(mediaXML.ns::alt[0]);
 				smd.href = FacebookXMLParserUtils.toStringValue(mediaXML.ns::href[0]);
-				smd.src = FacebookXMLParserUtils.toStringValue(mediaXML.ns::source[0]);
+				smd.src = FacebookXMLParserUtils.toStringValue(mediaXML.ns::src[0]);
 				smd.video = createVideoMedia(mediaXML.ns::video[0], ns);
 				smd.photo = createPhotoMedia(mediaXML.ns::photo[0], ns);
 				arr.push(smd);
