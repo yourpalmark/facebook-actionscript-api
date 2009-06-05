@@ -52,6 +52,8 @@ package com.facebook.data.users {
 
 		public var sex:String;
 		public var birthday:String;
+		public var birthdayDate:Date;
+		
 		public var about_me:String;
 		public var activities:String;
 		public var affiliations:Array;

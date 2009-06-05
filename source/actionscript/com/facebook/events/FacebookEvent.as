@@ -48,6 +48,8 @@ package com.facebook.events {
 		public static const PERMISSIONS_LOADED:String = "permissionsLoaded";
 		public static const PERMISSION_STATUS:String = "permissionStatus";
 		public static const PERMISSION_CHANGE:String = "permissionChanged";
+		public static const LOGIN_WINDOW_SHOW:String = 'loginWindoShow';
+		public static const PERMISSIONS_WINDOW_SHOW:String = 'permissionsWindowShow';
 		public static const ERROR:String ="facebookEventError";
 		
 		/**

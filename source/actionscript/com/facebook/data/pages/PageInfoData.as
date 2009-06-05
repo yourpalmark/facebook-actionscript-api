@@ -30,11 +30,12 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package com.facebook.data.pages {
-	import com.facebook.data.FacebookLocation;
 	
+	import com.facebook.data.FacebookLocation;
+	import flash.events.EventDispatcher;
 	
 	[Bindable]
-	public class PageInfoData {
+	public class PageInfoData extends EventDispatcher {
 		
 		public var page_id:Number;
 		public var name:String;
@@ -70,7 +71,7 @@ package com.facebook.data.pages {
 		public var schedule:String;
 		
 		public function PageInfoData() {
-			
+			super();
 		}
 
 	}

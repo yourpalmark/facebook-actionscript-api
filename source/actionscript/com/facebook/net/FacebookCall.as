@@ -39,12 +39,11 @@ package com.facebook.net {
 	import com.facebook.delegates.IFacebookCallDelegate;
 	import com.facebook.errors.FacebookError;
 	import com.facebook.events.FacebookEvent;
+	import com.facebook.facebook_internal;
 	import com.facebook.session.IFacebookSession;
 	
 	import flash.events.EventDispatcher;
 	import flash.net.URLVariables;
-	
-	import com.facebook.facebook_internal;
 	
 	use namespace facebook_internal;
 	
@@ -58,6 +57,20 @@ package com.facebook.net {
 		public var delegate:IFacebookCallDelegate;
 		public var session:IFacebookSession;
 		public var success:Boolean = false;
+		
+		/**
+		 * Time before an Connect timeout occurs, in milliseconds. 
+		 * @default 8000
+		 * 
+		 */
+		public var connectTimeout:uint = 1000*8;
+		
+		/**
+		 * Time before an Load timeout occurs, in milliseconds. 
+		 * @default 8000
+		 * 
+		 */
+		public var loadTimeout:uint = 1000*30;
 		
 		/**
 		 * Set this if you do-not want to pass a session.

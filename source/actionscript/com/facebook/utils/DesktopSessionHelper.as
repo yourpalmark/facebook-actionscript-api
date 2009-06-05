@@ -36,6 +36,7 @@ package com.facebook.utils {
 	import com.facebook.air.JSONCall;
 	import com.facebook.air.JSONEvent;
 	import com.facebook.air.SessionData;
+	import com.facebook.commands.auth.ExpireSession;
 	import com.facebook.commands.auth.RevokeExtendedPermission;
 	import com.facebook.commands.users.GetLoggedInUser;
 	import com.facebook.commands.users.HasAppPermission;
@@ -57,7 +58,6 @@ package com.facebook.utils {
 	import flash.html.HTMLLoader;
 	import flash.net.SharedObject;
 	import flash.net.URLRequest;
-	import com.facebook.commands.auth.ExpireSession;
 	
 	public class DesktopSessionHelper extends EventDispatcher {
 		
@@ -222,6 +222,8 @@ package com.facebook.utils {
 				loginWin.x = parentWindow.x;
 				loginWin.y = parentWindow.y;
 			}
+			
+			dispatchEvent(new FacebookEvent(FacebookEvent.LOGIN_WINDOW_SHOW));
 		}
 		
 		protected function populateSessionData(sessionObj:Object):void {
@@ -301,6 +303,7 @@ package com.facebook.utils {
 				permissionWin.addEventListener(Event.CLOSE, onPermissionWinClose, false, 0, true);
 				permissionWin.askPermissions(queuedGrantPermissions, apiKey);
 				queuedGrantPermissions = [];
+				dispatchEvent(new FacebookEvent(FacebookEvent.PERMISSIONS_WINDOW_SHOW));
 			} else if(url.indexOf("result=not_logged_in") > -1){ //not logged in
 				showLogin();
 			}

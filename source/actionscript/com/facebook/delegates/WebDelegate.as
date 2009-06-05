@@ -83,11 +83,11 @@ package com.facebook.delegates {
 			
 			parser = new XMLDataParser();
 			
-			connectTimer = new Timer(1000*8, 1);
-			connectTimer.addEventListener(TimerEvent.TIMER_COMPLETE, onConnectTimeout);
+			connectTimer = new Timer(call.connectTimeout, 1);
+			connectTimer.addEventListener(TimerEvent.TIMER_COMPLETE, onConnectTimeout, false, 0, true);
 			
-			loadTimer = new Timer(1000*30, 1);
-			loadTimer.addEventListener(TimerEvent.TIMER_COMPLETE, onLoadTimeOut);
+			loadTimer = new Timer(call.loadTimeout, 1);
+			loadTimer.addEventListener(TimerEvent.TIMER_COMPLETE, onLoadTimeOut, false, 0, true);
 			
 			execute();
 		}
@@ -170,8 +170,7 @@ package com.facebook.delegates {
 			loader.addEventListener(Event.OPEN, onOpen);
 		}
 		
-		protected function onHTTPStatus(p_event:HTTPStatusEvent):void {
-		}
+		protected function onHTTPStatus(p_event:HTTPStatusEvent):void { }
 		
 		protected function onOpen(p_event:Event):void {
 			connectTimer.stop();
@@ -189,10 +188,12 @@ package com.facebook.delegates {
 		
 		// Event Handlers
 		protected function onDataComplete(p_event:Event):void {
+			//trace(_call.method, p_event);
 			handleResult(p_event.target.data as String);
 		}
 		
 		protected function onError(p_event:ErrorEvent):void {
+			//trace(_call.method, p_event);
 			clean();
 			
 			var fbError:FacebookError = parser.createFacebookError(p_event, loader.data); 
