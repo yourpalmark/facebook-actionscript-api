@@ -2,6 +2,9 @@
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" applicationComplete="init()">
 	<mx:Script>
 		<![CDATA[
+			import com.facebook.data.users.GetInfoData;
+			import com.facebook.session.WebSession;
+			import com.facebook.commands.auth.GetSession;
 			import com.facebook.commands.friends.GetFriends;
 			import com.facebook.commands.users.GetInfo;
 			import com.facebook.data.auth.ExtendedPermissionValues;
@@ -21,19 +24,18 @@
 			protected const RSS_URL:String = 'http://blogs.adobe.com/index.xml';
 			
 			protected var connect:FacebookConnectUtil;
-			protected var jsSession:JSSession;
 			protected var facebook:Facebook;
 			
 			protected function init():void {
 				connect = new FacebookConnectUtil(loaderInfo);
-				
 				facebook = new Facebook();
 				
-				jsSession = new JSSession('YOUR_API_KEY', this.loaderInfo.parameters.as_swf_name);
-				facebook.startSession(jsSession);
+				//Start a WebSession with the ss and session key passed in from Javascript
+				var webSession:WebSession = new WebSession('YOUR_API_KEY', loaderInfo.parameters.secret, loaderInfo.parameters.session_key);
+				facebook.startSession(webSession);
 				
-				jsSession.addEventListener(FacebookEvent.CONNECT, onJSConnect);
-				jsSession.verifySession();
+				webSession.addEventListener(FacebookEvent.CONNECT, onSessionConnect);
+				webSession.verifySession();
 				
 				//Add Events that come from each renderer. 
 				rssList.addEventListener('post', postToFacebook);
@@ -64,11 +66,12 @@
 				rssList.dataProvider = results;
 			}
 			
-			protected function onJSConnect(event:FacebookEvent):void {
+			protected function onSessionConnect(event:FacebookEvent):void {
 				if (event.success) {
-					jsSession.
 					var call:FacebookCall = facebook.post(new GetFriends());
 					call.addEventListener(FacebookEvent.COMPLETE, onFriendsLoad);
+					
+					facebook.post(call);
 				} else {
 					//Javascript will handle login here.
 				}
@@ -81,8 +84,13 @@
 					 * We limit to the top 100 for speed reasons, if you wish you can request all of your friends details.
 				 */
 				if (event.success) {	
-					var friends:Array = (event.data as JSONResultData).result as Array;
-					var call:GetInfo = new GetInfo(friends.slice(0, Math.min(friends.length, 100)), [GetInfoFieldValues.FIRST_NAME, GetInfoFieldValues.LAST_NAME]);
+					var friends:Array = (event.data as GetFriendsData).friends.source;
+					
+					var uids:Array = [];
+					for (var i:uint=0;i<friends.length;i++) {
+						uids.push(friends[i].uid);
+					}
+					var call:GetInfo = new GetInfo(uids.slice(0, Math.min(uids.length, 100)), [GetInfoFieldValues.FIRST_NAME, GetInfoFieldValues.LAST_NAME]);
 					call.addEventListener(FacebookEvent.COMPLETE, onFriendsGetInfo);
 					facebook.post(call);
 				} else {
@@ -94,7 +102,7 @@
 			protected function onFriendsGetInfo(event:FacebookEvent):void {
 				event.target.removeEventListener(FacebookEvent.COMPLETE, onFriendsGetInfo);
 				if (event.success) {
-					var dp:Array = (event.data as JSONResultData).result as Array;
+					var dp:Array = (event.data as GetInfoData).userCollection.source;
 					friendsList.dataProvider = dp;
 					
 					//Just select a random friend in the list to send a link to.
