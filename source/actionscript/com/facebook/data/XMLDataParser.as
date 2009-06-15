@@ -81,7 +81,6 @@ package com.facebook.data {
 	import com.facebook.data.notifications.NotificationMessageData;
 	import com.facebook.data.notifications.NotificationPokeData;
 	import com.facebook.data.notifications.NotificationShareData;
-	import com.facebook.data.pages.GenreData;
 	import com.facebook.data.pages.GetPageInfoData;
 	import com.facebook.data.pages.PageInfoCollection;
 	import com.facebook.data.pages.PageInfoData;
@@ -112,6 +111,7 @@ package com.facebook.data {
 	import com.facebook.utils.IFacebookResultParser;
 	
 	import flash.events.ErrorEvent;
+	import flash.utils.getTimer;
 	
 	public class XMLDataParser implements IFacebookResultParser {
 		
@@ -670,12 +670,14 @@ package com.facebook.data {
 		}
 		
 		protected function parsePageGetInfo(xml:XML):GetPageInfoData {
-			
 			var getPageInfoData:GetPageInfoData = new GetPageInfoData();
 			var pageInfoCollection:PageInfoCollection = new PageInfoCollection();
 			
-			for each(var page:* in xml.fb_namespace::page) {
+			var pages:XMLList = xml.fb_namespace::page;
+			
+			for each(var page:Object in pages) {
 				var pageInfoData:PageInfoData = new PageInfoData();
+				
 				pageInfoData.page_id = page.fb_namespace::page_id;
 				pageInfoData.name = page.fb_namespace::name;
 				pageInfoData.pic_small = page.fb_namespace::pic_small;
@@ -711,6 +713,7 @@ package com.facebook.data {
 				pageInfoCollection.addPageInfo(pageInfoData);
 			}
 			getPageInfoData.pageInfoCollection = pageInfoCollection;
+			
 			return getPageInfoData;
 		}
 		

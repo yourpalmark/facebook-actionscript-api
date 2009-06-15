@@ -69,12 +69,12 @@ package com.facebook.utils {
 			
 			if (receiveConnection == null) {
 				receiveConnection = new LocalConnection();
-				receiveConnection.allowInsecureDomain('*');
-				receiveConnection.allowDomain('*');
+				receiveConnection.allowInsecureDomain('apps.facebook.com', 'apps.*.facebook.com');
+				receiveConnection.allowDomain('apps.facebook.com', 'apps.*.facebook.com');
 				receiveConnection.addEventListener(AsyncErrorEvent.ASYNC_ERROR, onReceiveError, false, 0, true);
 				receiveConnection.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onReceiveError, false, 0, true);
 				receiveConnection.addEventListener(StatusEvent.STATUS, onReceiveStatus, false, 0, true);
-				receiveConnection.client = {asFunction:function(...rest):void { asFunction(rest); }};
+				receiveConnection.client = { asFunction : asFunction };
     			
 				try {
 					receiveConnection.connect(fb_fbjs_connection);
@@ -90,7 +90,7 @@ package com.facebook.utils {
 			execute();
 		}
 		
-		protected function asFunction(params:Array):void {
+		protected function asFunction(...params):void {
 			var data:FBJSData = new FBJSData();
 			data.results = params;
 			

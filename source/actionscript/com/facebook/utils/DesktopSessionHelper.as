@@ -78,8 +78,9 @@ package com.facebook.utils {
 											ExtendedPermissionValues.STATUS_UPDATE
 											];
 		
-		protected var facebook:Facebook;		
+		public var facebook:Facebook;		
 		public var sessionData:SessionData;
+		
 		protected var sessionSO:SharedObject;
 		protected var parentWindow:NativeWindow;
 		

@@ -48,17 +48,16 @@ package com.facebook.commands.admin {
 	 * @see http://wiki.developers.facebook.com/index.php/Admin.getMetrics
 	 */
 	public class GetMetrics extends FacebookCall {
-
 		
 		public static const METHOD_NAME:String = 'admin.getMetrics';
 		public static const SCHEMA:Array = ['start_time', 'end_time', 'period', 'metrics'];
 		
 		public var start_time:Date;
 		public var end_time:Date;
-		public var period:String;
+		public var period:uint;
 		public var metrics:Array;
 		
-		public function GetMetrics(start_time:Date, end_time:Date, period:String, metrics:Array) {
+		public function GetMetrics(start_time:Date, end_time:Date, period:uint, metrics:Array) {
 			super(METHOD_NAME);
 			
 			this.start_time = start_time;
