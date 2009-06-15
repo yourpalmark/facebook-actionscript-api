@@ -127,8 +127,6 @@ package com.facebook.delegates {
 				objectArgs[n] = call.args[n];
 			}
 			
-			Output.dump(objectArgs);
-			
 			var jsCall:String = "function " + bridgeCallFunctionName + "() { " + 
 				"FB.Facebook.apiClient.callMethod(\""+call.method+"\", "+JavascriptRequestHelper.formatURLVariables(call.args)+", " + 
 						"function(result, exception) {" + 
