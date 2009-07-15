@@ -44,6 +44,7 @@ package com.facebook.data.stream {
 		public var href:String;
 		public var caption:String;
 		public var description:String;
+		public var properties:Array;
 		
 		public function AttachmentData() {
 			

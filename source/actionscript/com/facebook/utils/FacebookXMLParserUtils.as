@@ -92,6 +92,30 @@ package com.facebook.utils {
 			return vars;
 		}
 		
+		public static function xmlListToObjectArray(xList:XMLList):Array {
+			var arr:Array = [];
+			if (xList == null) { return arr; }
+			
+			var l:uint = xList.length();
+			for (var i:uint=0;i<l;i++) {
+				arr.push(xmlToObject(xList[i]));
+			}
+			
+			return arr;
+		}
+		
+		public static function xmlToObject(p_xml:XML):Object {
+			var vars:Object = {};
+			var children:XMLList = p_xml.children();
+			var l:uint = children.length();
+			for (var i:uint=0;i<l;i++) {
+				var xml:XML = children[i];
+				vars[xml.localName()] = xml.toString(); 
+			}
+			
+			return vars;
+		}
+		
 		public static function nodeToObject(p_xml:XMLList):Object {
 			var vars:Object = {};
 			

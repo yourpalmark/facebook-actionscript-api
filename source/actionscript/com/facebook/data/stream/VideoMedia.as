@@ -36,6 +36,7 @@ package com.facebook.data.stream {
 		
 		public var display_url:String;
 		public var source_url:String;
+		public var preview_img:String;
 		public var owner:String;
 		public var permalink:String;
 		

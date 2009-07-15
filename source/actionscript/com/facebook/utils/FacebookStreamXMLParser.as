@@ -117,6 +117,7 @@ package com.facebook.utils {
 				ss.sourceXML = ssx;
 				var attachmentXML:XML = ssx.ns::attachment[0];
 				var attachment:AttachmentData = new AttachmentData();
+				
 				attachment.name =  FacebookXMLParserUtils.toStringValue(attachmentXML.ns::name[0]);
 				attachment.text = FacebookXMLParserUtils.toStringValue(attachmentXML.ns::text[0]);
 				attachment.body = FacebookXMLParserUtils.toStringValue(attachmentXML.ns::body[0]);
@@ -126,6 +127,8 @@ package com.facebook.utils {
 				attachment.title = FacebookXMLParserUtils.toStringValue(attachmentXML.ns::title[0]);
 				attachment.href = FacebookXMLParserUtils.toStringValue(attachmentXML.ns::href[0]);
 				attachment.caption = FacebookXMLParserUtils.toStringValue(attachmentXML.ns::caption[0]);
+				attachment.description = FacebookXMLParserUtils.toStringValue(attachmentXML.ns::description[0]);
+				attachment.properties = FacebookXMLParserUtils.xmlListToObjectArray(attachmentXML..ns::stream_property);
 				
 				ss.attachment = attachment;
 				
@@ -143,8 +146,8 @@ package com.facebook.utils {
 				likesData.href = FacebookXMLParserUtils.toStringValue(likesXML.ns::href[0]);
 				ss.likes = likesData;
 				
-				ss.attribution = FacebookXMLParserUtils.toStringValue(ssx.attribution[0]);
-				ss.app_id = FacebookXMLParserUtils.toStringValue(ssx.app_id[0]);
+				ss.attribution = FacebookXMLParserUtils.toStringValue(ssx.ns::attribution[0]);
+				ss.app_id = FacebookXMLParserUtils.toStringValue(ssx.ns::app_id[0]);
 				ss.metadata = FacebookXMLParserUtils.nodeToObject(ssx.ns::metadata);
 				ss.message = FacebookXMLParserUtils.toStringValue(ssx.ns::message[0]);
 				ss.source_id = FacebookXMLParserUtils.toStringValue(ssx.ns::source_id[0]);
@@ -209,6 +212,7 @@ package com.facebook.utils {
 			vm.owner = FacebookXMLParserUtils.toStringValue(value.ns::owner[0]);
 			vm.permalink = FacebookXMLParserUtils.toStringValue(value.ns::permalink[0]);
 			vm.source_url = FacebookXMLParserUtils.toStringValue(value.ns::source_url[0]);
+			vm.preview_img = FacebookXMLParserUtils.toStringValue(value.ns::preview_img[0]);
 			return vm;
 		}
 		
