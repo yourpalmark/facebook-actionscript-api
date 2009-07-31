@@ -53,9 +53,6 @@ package com.facebook.commands.sms {
 		public static const SCHEMA:Array = ['uid'];
 		
 		public var uid:String;
-		public var message:String;
-		public var session_id:int;
-		public var req_session:Boolean;
 		
 		public function CanSendSMS(uid:String = null) { 
 			super(METHOD_NAME);
