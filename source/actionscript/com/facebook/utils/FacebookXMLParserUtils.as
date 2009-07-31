@@ -134,6 +134,8 @@ package com.facebook.utils {
 			location.state = String(xml.ns::state);
 			location.country = String(xml.ns::country);
 			location.zip = String(xml.ns::zip);
+			location.street = String(xml.ns::street);
+			
 			return location;
 		}
 		

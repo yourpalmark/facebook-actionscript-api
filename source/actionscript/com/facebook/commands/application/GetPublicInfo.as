@@ -58,16 +58,16 @@ package com.facebook.commands.application {
 			if (application_id == null && application_api_key==null && application_canvas_name==null) {
 				throw new Error("You must specify exactly one of application_id, application_api_key or application_canvas_name.");
 			}
-			
-			if (application_id == null && (application_api_key==null || application_canvas_name==null)) {
+							
+			if (application_id && !(application_api_key==null && application_canvas_name==null)) {
 				throw new Error("You must specify exactly one of application_id, application_api_key or application_canvas_name.");
 			}
-			
-			if (application_api_key == null && (application_id==null || application_canvas_name==null)) {
+						
+			if (application_api_key && !(application_id==null && application_canvas_name==null)) {
 				throw new Error("You must specify exactly one of application_id, application_api_key or application_canvas_name.");
 			}
-			
-			if (application_canvas_name == null && (application_id==null || application_api_key==null)) {
+						
+			if (application_canvas_name && !(application_id==null && application_api_key==null)) {
 				throw new Error("You must specify exactly one of application_id, application_api_key or application_canvas_name.");
 			}
 			

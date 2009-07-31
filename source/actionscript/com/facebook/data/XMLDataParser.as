@@ -230,6 +230,7 @@ package com.facebook.data {
 				case 'stream.addLike':
 				case 'stream.removeLike':
 				case 'stream.removeComment':
+				case 'sms.canSend':
 					result = new BooleanResultData();
 					(result as BooleanResultData).value = FacebookXMLParserUtils.toBoolean(xml); break;
 				case 'feed.publishUserAction':
