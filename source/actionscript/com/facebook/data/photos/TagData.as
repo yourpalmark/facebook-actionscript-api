@@ -37,6 +37,8 @@ package com.facebook.data.photos {
 		protected var _actualX:Number;
 		protected var _actualY:Number;
 		
+		protected var _actualText:String;
+		
 		public var pid:String;
 		public var subject:String;
 		public var tag_uid:String;
@@ -44,6 +46,7 @@ package com.facebook.data.photos {
 		//Facebook returns xcoord and ycoord when getting tags
 		//When sending tags facebook requires x & y.
 		//So just treat both values as the same
+		//Same for tag_text (sending), anf text (getting)
 		
 		public function set xcoord(value:Number):void { _actualX = value; }
 		public function set ycoord(value:Number):void { _actualY = value; }
@@ -55,7 +58,12 @@ package com.facebook.data.photos {
 		public function get ycoord():Number { return _actualY; }
 		public function get y():Number { return _actualY; }
 		
-		public var tag_text:String;
+		public function set tag_text(value:String):void { _actualText = value; }
+		public function get tag_text():String { return _actualText; }
+		
+		public function set text(value:String):void { _actualText = value; }
+		public function get text():String { return _actualText; }
+		
 		public var created:Date;
 		
 		public function TagData() {

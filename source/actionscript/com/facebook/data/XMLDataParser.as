@@ -655,8 +655,8 @@ package com.facebook.data {
 			var photoTagCollection:PhotoTagCollection = new PhotoTagCollection();
 			
 			for each(var photoTag:* in xml..fb_namespace::photo_tag) {
-				
 				var tagData:TagData = new TagData();
+				tagData.text = photoTag.fb_namespace::text;
 				tagData.pid = photoTag.fb_namespace::pid;
 				tagData.subject = photoTag.fb_namespace::subject;
 				tagData.xcoord = photoTag.fb_namespace::xcoord;
