@@ -103,8 +103,9 @@ package com.facebook.utils {
 		
 		protected static function parseWorkHistory(xml:XML, ns:Namespace):Array {
 			var work_history:Array = [];
+			var xList:XMLList = xml.children();
 			
-			for each (var xWorkInfo:Object in xml) {
+			for each (var xWorkInfo:Object in xList) {
 				var workInfo:FacebookWorkInfo = new FacebookWorkInfo();
 				
 				workInfo.location = FacebookXMLParserUtils.createLocation(xWorkInfo.ns::location[0], ns);
