@@ -42,10 +42,9 @@
 	
 	<mx:Script>
 		<![CDATA[
+			import com.facebook.data.stream.StreamStoryData;
+			import com.facebook.utils.DesktopSessionHelper;
 			import mx.events.PropertyChangeEvent;
-			import fb.FBSession;
-			import fb.FBConnect;
-			import fb.FBEvent;
 			import com.gskinner.screen.ScreenEdgeEvent;
 			import com.facebook.streamdemo.ui.Assets;
 			import com.facebook.data.batch.BatchResult;
@@ -107,6 +106,8 @@
 			
 			protected var screenEdgeHelper:ScreenEdgeHelper;
 			
+			protected var desktopHelper:DesktopSessionHelper;
+			
 			[Bindable]
 			protected var loggedInUser:FacebookUser;
 			
@@ -118,7 +119,7 @@
 				//Create some Stream and comment rows. To have them ready for the stream drawing.
 				var count:uint = 20;
 				while (count--) {
-					StreamRowPool.addRow(new StreamRow());
+					StreamRowPool.addRow(new StreamRow());					
 					CommentRowPool.addRow(new CommentRow());
 				}
 			}
@@ -179,9 +180,10 @@
 				facebook = new Facebook();
 				facebook.addEventListener(FacebookEvent.LOGOUT, onFacebookLogout, false, 0, true);
 				
-				FBConnect.dispatcher.addEventListener(FBEvent.STATUS_CHANGED, statusChanged, false, 0, true);
-				FBConnect.dispatcher.addEventListener(FBEvent.PERMISSION_CHANGED, permissionChanged, false, 0, true);
-				FBConnect.dispatcher.addEventListener(FBEvent.ALERT, applicationAlert, false, 0, true);
+				desktopHelper = new DesktopSessionHelper();
+				desktopHelper.apiKey = API_KEY;
+				desktopHelper.addEventListener(FacebookEvent.LOGIN_FAILURE, onLoginFailure, false, 0, true);
+				desktopHelper.addEventListener(FacebookEvent.PERMISSIONS_LOADED, onPermissionsLoaded, false, 0, true);
 				
 				userNameTxt.enabled = false;
 				
@@ -202,54 +204,25 @@
 				enableDragging(null);
 				setRefreshButtonState('update');
 				
-				//We use FBConnect to login.
-				FBConnect.init(API_KEY);
-				
-				// This function checks to see if we're already connected
-				statusChanged();
+				desktopHelper.login();
 			}
 			
-			protected function applicationAlert(event:FBEvent):void {
-				MessageWindow.show(event.data.text, 'Status', MessageWindow.MESSAGE, null, -1);
-			}
-			
-		    protected function statusChanged(event:Event = null):void {
-				if (FBConnect.status == FBConnect.Connected) {
-					connected();
-				} else if (FBConnect.status == FBConnect.NotLoggedIn) {
-					attemptLogin();	
-				}
-		    }
-		    
 		    protected function attemptLogin(event:Event = null):void {
-		    	FBConnect.requireSession();
-		    }
-		    
-		    protected function connected():void {
-				permissionChanged();
-		    }
-		
-		    // This function checks our permissions and calls requirePermission.
-		    // FBConnect.requirePermission(permission_name) is the way to
-		    //   acquire extended permissions.
-		    private function permissionChanged(event:FBEvent = null):void {
-				if (FBConnect.hasPermission(ExtendedPermissionValues.READ_STREAM) && FBConnect.hasPermission(ExtendedPermissionValues.PUBLISH_STREAM)) {
-					fullyAuthorized();
-		   	 	} else {
-		       		FBConnect.requirePermissions([ExtendedPermissionValues.READ_STREAM, ExtendedPermissionValues.PUBLISH_STREAM]);
-		      	}
-			}
+		    	desktopHelper.login();
+		    }		    
 			
 		    // Now fully authorized, we'll display our content
 		    // And begin polling.
 		    protected function fullyAuthorized():void {
-			    dsSession = new DesktopSession(API_KEY, FBConnect.session.secret, FBConnect.session.key);
+			    dsSession = new DesktopSession(API_KEY, desktopHelper.sessionData.secret, desktopHelper.sessionData.session_key);
 				facebook.startSession(dsSession);
 				
 				refreshBtn.enabled = true;
 				
 				notifierArea.show(facebook);
 				miniStream.show();
+				CommentRowPool.setDesktopHelper(desktopHelper);
+				StreamRowPool.setDesktopHelper(desktopHelper);
 				
 				onFriendsLoad(null); //Refresh logged in user
 				
@@ -282,7 +255,7 @@
 				switch (state) {
 					case 'login':
 						loginLogoutBtn.label = 'login';
-						loginLogoutBtn.addEventListener(MouseEvent.CLICK, statusChanged);
+						loginLogoutBtn.addEventListener(MouseEvent.CLICK, attemptLogin);
 						break;
 					case 'logout':
 						loginLogoutBtn.label = 'logout';
@@ -330,8 +303,8 @@
 				if (error.indexOf('Calls to stream have exceeded the rate of 100 calls per 600 seconds.') != -1) {
 					MessageWindow.show('Cannot refresh your Stream at this time, please try again later.', 'Error', MessageWindow.OK);
 				} else if (error.indexOf('stream requires the read_stream extended permission.') != -1) {
-					FBConnect.removePermission(ExtendedPermissionValues.READ_STREAM);
-					permissionChanged();
+					desktopHelper.revokePermissions([ExtendedPermissionValues.READ_STREAM]);
+					onPermissionsLoaded(null);
 				} else {
 					MessageWindow.show('Facebook has encountered an unknown error please try again later.', 'Error', MessageWindow.OK);
 				}
@@ -346,7 +319,7 @@
 				lastUpdateTxt.text = 'last updated: ' + DateUtils.toString(new Date(), 'h:mmtt').toLowerCase();
 				setRefreshButtonState('refresh');
 				
-				MessageWindow.hide();
+				MessageWindow.hide(); 
 			}
 			
 			protected function onNetworkChange(event:NetStatusEvent=null):void {
@@ -369,7 +342,7 @@
 			}
 			
 			protected function onLoggedInUserChange(event:PropertyChangeEvent):void {
-				loggedInUser = FriendsModel.getFriend(String(FBConnect.session.uid));
+				loggedInUser = FriendsModel.getFriend(desktopHelper.sessionData.uid);
 				if (loggedInUser != null) {
 					userNameTxt.enabled = loggedInUser.profile_url != null;
 					userNameTxt.label = loggedInUser.name;
@@ -455,8 +428,8 @@
 			}
 			
 			protected function shutdown():void {
-				//Tell FBConnect to close any open windows, and prevent opening new ones. 
-				FBConnect.shutdown();
+				//Close any open windows, and prevent opening new ones. 
+				desktopHelper.shutdown();
 				
 				//Hide any open Toast windows.
 				ToastManager.closeAll();
@@ -495,7 +468,7 @@
 			}
 			
 			protected function onFacebookLogout(event:FacebookEvent):void {
-				FBConnect.logout();
+				desktopHelper.logout();
 				MessageWindow.show('You have been logged out of Facebook. To use this application you must be logged in.  To login again, click Okay.', 'Logged Out', MessageWindow.OK, attemptLogin);
 				setLoginLogoutBtnState('login');
 			}
@@ -512,6 +485,17 @@
 				navigateToURL(new URLRequest('http://www.adobe.com/products/air/'));
 			}
 			
+			protected function onLoginFailure(event:FacebookEvent):void {
+				desktopHelper.login();
+			}
+			
+			protected function onPermissionsLoaded(event:FacebookEvent):void {
+				if (desktopHelper.checkPermission(ExtendedPermissionValues.READ_STREAM) && desktopHelper.checkPermission(ExtendedPermissionValues.PUBLISH_STREAM)) {
+		      		fullyAuthorized();
+		      	} else {
+		      		desktopHelper.grantPermissions([ExtendedPermissionValues.READ_STREAM, ExtendedPermissionValues.PUBLISH_STREAM]);
+		      	}
+			}
 		]]>
 	</mx:Script>
 	

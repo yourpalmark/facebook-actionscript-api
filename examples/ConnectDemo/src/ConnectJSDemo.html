@@ -13,9 +13,9 @@
 	
 		<script type="text/javascript">
 			FB_RequireFeatures(["Api"], function() {
-				FB.Facebook.init('YOUR_API_KEY', 'xd_receiver.htm');	
+				FB.Facebook.init('YOUR_API_KEY', 'xd_receiver.htm');				
 			});
-			
+								
 			FB.Bootstrap.requireFeatures(["Connect"], function() {
 				FB.Connect.requireSession(function(exception) {
 					//define your flashVars
@@ -32,7 +32,7 @@
 					};
 					
 					//create your instance of your .swf
-					var params = {wmode: "window"};
+					var params = {wmode: "transparent"}; //wmode must be transparent or else ajax windows will not show up over swf
 					swfobject.embedSWF("ConnectJSDemo.swf", "flashContent", "100%", "100%", "9.0.0", "expressInstall.swf", flashVars, params);
 				});
 			});

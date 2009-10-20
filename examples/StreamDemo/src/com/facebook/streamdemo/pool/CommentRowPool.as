@@ -34,11 +34,13 @@ package com.facebook.streamdemo.pool {
 	import com.facebook.data.stream.PostCommentData;
 	import com.facebook.data.users.FacebookUser;
 	import com.facebook.streamdemo.controls.CommentRow;
+	import com.facebook.utils.DesktopSessionHelper;
 	
 	public class CommentRowPool {
 		
 		protected static var _instance:CommentRowPool;
 		protected static var _canInit:Boolean = false;
+		protected static var _desktopHelper:DesktopSessionHelper;
 		
 		protected var avilableRows:Array;
 		
@@ -58,6 +60,7 @@ package com.facebook.streamdemo.pool {
 			}
 			
 			row.setModel(data, user);
+			if (_desktopHelper != null) { row.desktopHelper = _desktopHelper; }
 			
 			return row;
 		}
@@ -65,6 +68,10 @@ package com.facebook.streamdemo.pool {
 		public static function addRow(row:CommentRow):void { getInstance().addRow(row); }
 		protected function addRow(row:CommentRow):void {
 			avilableRows.push(row);
+		}
+		
+		public static function setDesktopHelper(helper:DesktopSessionHelper):void {
+			_desktopHelper = helper;
 		}
 		
 		protected static function getInstance():CommentRowPool {

@@ -18,7 +18,7 @@
 		
 		public const API_KEY:String = 'YOUR_API_KEY';
 		
-		public var allPermissions:Array = ['email','offline_access','status_update','photo_upload','create_event','create_note','rsvp_event','sms','share_item','publish_stream','read_stream'];
+		public var allPermissions:Array = ['email','offline_access','status_update','photo_upload','create_event','create_note','rsvp_event','sms','share_item','publish_stream','read_stream','read_mailbox','video_upload','create_listing'];
 		
 		//UI elements
 		public var permList:List;

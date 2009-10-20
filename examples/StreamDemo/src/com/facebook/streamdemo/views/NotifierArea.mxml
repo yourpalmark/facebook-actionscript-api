@@ -111,11 +111,15 @@
 				var pokeData:NotificationPokeData = list.getItemAt(1) as NotificationPokeData;
 				var shareData:NotificationShareData = list.getItemAt(2)  as NotificationShareData;
 				
-				var currentNotificationCount:uint = result.notificationCollection.length;
 				var currentMessageCount:uint = messageData.unread;
-				
 				var currentPokeCount:uint = pokeData.unread;
+				var currentShareCount:uint = shareData.unread;
+				
 				var currentRequestCount:uint = result.friendsRequests.length;
+				var currentGroupCount:uint = result.group_invites.length;
+				var currentEventCount:uint = result.event_invites.length;
+				
+				var currentNotificationCount:uint = currentRequestCount + currentGroupCount + currentEventCount + currentMessageCount + currentPokeCount + currentShareCount;
 				
 				var notificationData:NotificationChangeData;
 				var now:Date = new Date();

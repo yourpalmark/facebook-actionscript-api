@@ -32,12 +32,14 @@
 package com.facebook.streamdemo.pool {
 	import com.facebook.streamdemo.controls.StreamRow;
 	import com.facebook.streamdemo.data.StreamData;
+	import com.facebook.utils.DesktopSessionHelper;
 	
 	
 	public class StreamRowPool {
 		
 		protected static var _instance:StreamRowPool;
 		protected static var _canInit:Boolean = false;
+		protected static var _desktopHelper:DesktopSessionHelper;
 		
 		protected var avilableRows:Array;
 		
@@ -57,6 +59,7 @@ package com.facebook.streamdemo.pool {
 			}
 			
 			row.setModel(data);
+			if (_desktopHelper != null) { row.desktopHelper = _desktopHelper; } //EC: testing
 			
 			return row;
 		}
@@ -64,6 +67,10 @@ package com.facebook.streamdemo.pool {
 		public static function addRow(data:StreamRow):void { getInstance().addRow(data); }
 		public function addRow(row:StreamRow):void {
 			avilableRows.push(row);
+		}
+		
+		public static function setDesktopHelper(helper:DesktopSessionHelper):void {
+			_desktopHelper = helper;
 		}
 		
 		protected static function getInstance():StreamRowPool {

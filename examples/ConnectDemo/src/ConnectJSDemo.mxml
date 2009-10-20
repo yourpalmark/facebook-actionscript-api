@@ -25,13 +25,14 @@
 			
 			protected var connect:FacebookConnectUtil;
 			protected var facebook:Facebook;
+			protected var loader:URLLoader;
 			
 			protected function init():void {
 				connect = new FacebookConnectUtil(loaderInfo);
 				facebook = new Facebook();
 				
 				//Start a WebSession with the ss and session key passed in from Javascript
-				var webSession:WebSession = new WebSession('YOUR_API_KEY', loaderInfo.parameters.secret, loaderInfo.parameters.session_key);
+				var webSession:WebSession = new WebSession('YOUR_API_KEY', loaderInfo.parameters.secret, loaderInfo.parameters.session_key);				
 				facebook.startSession(webSession);
 				
 				webSession.addEventListener(FacebookEvent.CONNECT, onSessionConnect);
@@ -50,18 +51,18 @@
 				
 				friendsList.labelFunction = formatFriendsLabel;
 				
-				rssService.url = RSS_URL;
-				rssService.send();
+				loader = new URLLoader(new URLRequest(RSS_URL));
+				loader.addEventListener(Event.COMPLETE, onLoadComplete, false, 0, true);
 			}
-			
-			protected function onServiceResult():void {
-				if (rssService.lastResult == null) {
+			protected function onLoadComplete(event:Event):void {
+				if (loader.data == null) {
 					rssList.dataProvider = [];
 					Alert.show('Error loading RSS feed.');
 					return;
 				}
 				
-				var results:XMLList = rssService.lastResult..item;
+				var xml:XML = XML(loader.data);
+				var results:XMLList = xml..item;
 				if (results.length() == 0) { rssList.dataProvider = []; return; }
 				rssList.dataProvider = results;
 			}
@@ -146,7 +147,6 @@
 		]]>
 	</mx:Script>
 	
-	<mx:HTTPService id="rssService" result="onServiceResult()" resultFormat="e4x" />
 	<mx:HBox width="{resultsList.width}">
 		<mx:HBox width="100%" paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5" borderColor="0x0" borderThickness="1" borderStyle="solid">
 			<mx:Text width="325" selectable="false" text="Using Facebook Connect you can enable extended permissions for the logged in user. Select a permission value from the list and click showPermissionDialog()" />

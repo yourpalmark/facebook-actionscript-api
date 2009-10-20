@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="640" height="480" creationComplete="init()">
+	<mx:Script>
+		<![CDATA[
+			import com.facebook.commands.video.UploadVideo;
+			import com.facebook.data.StringResultData;
+			import com.facebook.data.auth.ExtendedPermissionValues;
+			import com.facebook.events.FacebookEvent;
+			import com.facebook.utils.DesktopSessionHelper;
+			
+			import flash.net.FileFilter;
+			
+			import mx.managers.CursorManager;
+			
+			public const API_KEY:String = 'YOUR_API_KEY';
+			public const SECRET_KEY:String = 'YOUR_SECRET_KEY';
+			
+			public const VIDEO_TYPES:String = '3g2; *.3gp; *.3gpp; *.asf; *.avi; *.flv; *.m4v; *.mkv; *.mov; *.mp4; *.mpe; *.mpeg; *.mpeg4; *.mpg; *.nsv; *.ogm; *.qt; *.vob; *.wmv';
+
+			protected var desktopHelper:DesktopSessionHelper;
+			protected var file:File;
+			protected var fileFilter:FileFilter;
+
+			protected function init():void {
+				desktopHelper = new DesktopSessionHelper(API_KEY);
+				desktopHelper.addEventListener(FacebookEvent.PERMISSIONS_LOADED, onPermissionsLoaded);
+				desktopHelper.addEventListener(FacebookEvent.LOGIN_FAILURE, onLoginFailure, false, 0, true);
+				desktopHelper.addEventListener(FacebookEvent.ERROR, onError, false, 0, true);
+
+				file = new File();
+				file.addEventListener(Event.SELECT, onFileSelect);
+			
+				fileFilter = new FileFilter("Video", VIDEO_TYPES);
+				
+				textArea.text = 'Click "Browse" button to select a video file, and "Upload" to upload it to your profile';
+			}
+
+			protected function onPermissionsLoaded(event:FacebookEvent):void {
+				if (desktopHelper.checkPermission(ExtendedPermissionValues.VIDEO_UPLOAD)) {
+					browseBtn.enabled = true;					
+				} else {
+					desktopHelper.grantPermissions([ExtendedPermissionValues.VIDEO_UPLOAD]);
+				}
+			}
+
+			protected function onLoginFailure(event:FacebookEvent):void {
+				textArea.text = event.toString();
+			}
+
+			protected function onError(event:FacebookEvent):void {
+				textArea.text = event.toString();
+			}
+
+			protected function onCallComplete(event:FacebookEvent):void {
+				CursorManager.removeBusyCursor();
+
+				if (event.success) {
+					textArea.text = (event.data as StringResultData).value;
+				} else {
+					textArea.text = event.toString();
+				}
+			}
+
+			protected function onFileSelect(event:Event):void {
+				browseFld.text = file.name;
+				videoDisplay.source = file.nativePath;
+				uploadBtn.enabled = true;
+			}
+
+			protected function browse():void {
+				file.browseForOpen('Video', [fileFilter]);
+			}
+
+			protected function upload():void {
+				CursorManager.setBusyCursor();
+								
+				var call:UploadVideo = new UploadVideo(file.extension, file, titleFld.text, descFld.text);
+				call.addEventListener(FacebookEvent.COMPLETE, onCallComplete, false, 0, true);
+				desktopHelper.facebook.post(call);
+			}
+
+			protected function clear():void {
+				videoDisplay.source = '';
+				textArea.text = '';
+				browseFld.text = '';
+				uploadBtn.enabled = false;
+			}
+			
+			protected function replay():void {
+				videoDisplay.stop();
+				videoDisplay.play();
+			}
+		]]>
+	</mx:Script>
+	<mx:VideoDisplay id="videoDisplay" width="320" height="240" x="10" y="10" click="replay()"/>
+
+	<mx:Form right="0" y="0">
+		<mx:FormItem label="Title">
+			<mx:TextInput id="titleFld" width="200"/>
+		</mx:FormItem>
+		<mx:FormItem label="Description">
+			<mx:TextArea id="descFld" width="200" height="150"/>
+		</mx:FormItem>
+	</mx:Form>
+
+	<mx:TextInput left="10" y="260" id="browseFld" width="320"/>
+
+	<mx:Button x="340" y="260" id="browseBtn" label="Browse" click="browse()" enabled="false"/>
+
+	<mx:Button right="10" y="200" id="uploadBtn" label="Upload" click="upload()" enabled="false"/>
+
+	<mx:Button right="10" y="260" label="Clear" click="clear()"/>
+
+	<mx:TextArea x="10" bottom="10" id="textArea" width="620" height="150" />
+
+</mx:WindowedApplication>

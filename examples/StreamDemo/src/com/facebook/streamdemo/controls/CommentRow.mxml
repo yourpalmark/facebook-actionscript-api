@@ -39,7 +39,9 @@
 	>
 	<mx:Script>
 		<![CDATA[
-			import fb.FBConnect;
+			import com.facebook.air.SessionData;
+			import com.facebook.utils.DesktopSessionHelper;
+			import flash.events.Event;
 			import com.facebook.data.auth.ExtendedPermissionValues;
 			import com.facebook.errors.FacebookError;
 			import com.facebook.data.BooleanResultData;
@@ -70,12 +72,18 @@
 			[Bindable]
 			protected var _user:FacebookUser;
 			
+			protected var _desktopHelper:DesktopSessionHelper;
+			
+			public function set desktopHelper(value:DesktopSessionHelper):void {
+				_desktopHelper = value;
+			}
+			
 			public function setModel(value:PostCommentData, user:FacebookUser):void {
 				comment = value;
 				_user = user;
 				_user.addEventListener(PropertyChangeEvent.PROPERTY_CHANGE, onUserChange, false, 0, true);
-				commentsHasChanged = true;
-			}
+				commentsHasChanged = true;								
+			}			
 			
 			protected function onUserChange(event:PropertyChangeEvent):void {
 				if (event.property == 'name') {
@@ -88,7 +96,7 @@
 				
 				if (commentsHasChanged) {
 					description.text = comment.text;
-					removeBtn.visible = comment.fromid == String(FBConnect.session.uid);
+					removeBtn.visible = comment.fromid == _desktopHelper.sessionData.uid;
 					commentsHasChanged = false;
 				}
 				
@@ -124,7 +132,7 @@
 			
 			protected function onConfirmCommentDelete(event:CloseEvent):void {
 				if (event.detail == MessageWindow.OK) {
-					StreamModel.removeComment(comment.id, String(FBConnect.session.uid));
+					StreamModel.removeComment(comment.id, _desktopHelper.sessionData.uid);
 					StreamModel.getInstance().addEventListener(StreamEvent.COMMENT_REMOVED, onCommentRemoved);
 				}
 			}
@@ -142,7 +150,7 @@
 			
 			protected function showPerms(event:CloseEvent):void {
 				if (event.detail == MessageWindow.OK) {
-					FBConnect.requirePermissions([ExtendedPermissionValues.PUBLISH_STREAM]);
+					_desktopHelper.grantPermissions([ExtendedPermissionValues.PUBLISH_STREAM]);
 				}
 			}
 			

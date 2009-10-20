@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<application xmlns="http://ns.adobe.com/air/application/1.5">
+<application xmlns="http://ns.adobe.com/air/application/1.5.2">
 
 <!-- Adobe AIR Application Descriptor File Template.
 
 	Specifies parameters for identifying, installing, and launching AIR applications.
 
-	xmlns - The Adobe AIR namespace: http://ns.adobe.com/air/application/1.5
+	xmlns - The Adobe AIR namespace: http://ns.adobe.com/air/application/1.5.2
 			The last segment of the namespace specifies the version 
 			of the AIR runtime required for this application to run.
 			
@@ -14,17 +14,17 @@
 -->
 
 	<!-- The application identifier string, unique to this application. Required. -->
-	<id>Stream</id>
+	<id>VideoUploader-AIRDemo</id>
 
 	<!-- Used as the filename for the application. Required. -->
-	<filename>Stream</filename>
+	<filename>VideoUploader_AIRDemo</filename>
 
 	<!-- The name that is displayed in the AIR application installer. 
 	     May have multiple values for each language. See samples or xsd schema file. Optional. -->
-	<name>Facebook Stream API Demo</name>
+	<name>VideoUploader_AIRDemo</name>
 
 	<!-- An application version designator (such as "v1", "2.5", or "Alpha 1"). Required. -->
-	<version>1.0</version>
+	<version>v1</version>
 
 	<!-- Description, displayed in the AIR application installer.
 	     May have multiple values for each language. See samples or xsd schema file. Optional. -->
@@ -36,17 +36,17 @@
 	<!-- Settings for the application's initial window. Required. -->
 	<initialWindow>
 		<!-- The main SWF or HTML file of the application. Required. -->
-		<!-- Note: In Flex Builder, the SWF reference is set automatically. -->
-		<content>[This value will be overwritten by Flex Builder in the output app.xml]</content>
+		<!-- Note: In Flash Builder, the SWF reference is set automatically. -->
+		<content>[This value will be overwritten by Flash Builder in the output app.xml]</content>
 		
 		<!-- The title of the main window. Optional. -->
 		<!-- <title></title> -->
 
 		<!-- The type of system chrome to use (either "standard" or "none"). Optional. Default standard. -->
-		<systemChrome>none</systemChrome>
+		<!-- <systemChrome></systemChrome> -->
 
 		<!-- Whether the window is transparent. Only applicable when systemChrome is none. Optional. Default false. -->
-	<transparent>true</transparent>
+		<!-- <transparent></transparent> -->
 
 		<!-- Whether the window is initially visible. Optional. Default false. -->
 		<!-- <visible></visible> -->
@@ -58,7 +58,7 @@
 		<!-- <maximizable></maximizable> -->
 
 		<!-- Whether the user can resize the window. Optional. Default true. -->
-		<resizable>true</resizable>
+		<!-- <resizable></resizable> -->
 
 		<!-- The window's initial width. Optional. -->
 		<!-- <width></width> -->
@@ -72,11 +72,11 @@
 		<!-- The window's initial y position. Optional. -->
 		<!-- <y></y> -->
 
-		<!-- The window's minimum size, specified as a width/height pair, such as "400 200". Optional. 
-		<minSize>460 120</minSize>
-		-->
+		<!-- The window's minimum size, specified as a width/height pair, such as "400 200". Optional. -->
+		<!-- <minSize></minSize> -->
+
 		<!-- The window's initial maximum size, specified as a width/height pair, such as "1600 1200". Optional. -->
-		<maxSize>600 800</maxSize>
+		<!-- <maxSize></maxSize> -->
 	</initialWindow>
 
 	<!-- The subpath of the standard default installation location to use. Optional. -->
@@ -101,7 +101,7 @@
 	
 	<!-- Whether the application can be launched when the user clicks a link in a web browser.
 	Optional. Default false. -->
-	<!--  --><allowBrowserInvocation>true</allowBrowserInvocation>
+	<!-- <allowBrowserInvocation></allowBrowserInvocation> -->
 
 	<!-- Listing of file types for which the application can register. Optional. -->
 	<!-- <fileTypes> -->
@@ -122,13 +122,12 @@
 			<!-- <contentType></contentType> -->
 			
 			<!-- The icon to display for the file type. Optional. -->
-			<!--  -->
-			<icon>
-				<image16x16>appIcons/appIcon_16.png</image16x16>
-				<image32x32>appIcons/appIcon_32.png</image32x32>
-				<image48x48>appIcons/appIcon_48.png</image48x48>
-				<image128x128>appIcons/appIcon_128.png</image128x128>
-			</icon>
+			<!-- <icon>
+				<image16x16></image16x16>
+				<image32x32></image32x32>
+				<image48x48></image48x48>
+				<image128x128></image128x128>
+			</icon> -->
 			
 		<!-- </fileType> -->
 	<!-- </fileTypes> -->

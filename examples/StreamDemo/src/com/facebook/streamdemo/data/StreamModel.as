@@ -45,8 +45,6 @@ package com.facebook.streamdemo.data {
 	import com.facebook.utils.FacebookDataUtils;
 	import com.gskinner.toast.data.NotificationData;
 	
-	import fb.FBConnect;
-	
 	import flash.events.EventDispatcher;
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
@@ -157,7 +155,7 @@ package com.facebook.streamdemo.data {
 			var nowString:String = FacebookDataUtils.toDateString(now);
 			var lastWeekString:String = FacebookDataUtils.toDateString(lastWeek);
 			
-			getStreamCall = new GetStream(String(FBConnect.session.uid), null, lastWeek, now, 20);
+			getStreamCall = new GetStream(facebook.uid, null, lastWeek, now, 20);
 			getStreamCall.addEventListener(FacebookEvent.COMPLETE, onGetStream, false, 0, true);
 			facebook.post(getStreamCall);
 			

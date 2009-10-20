@@ -41,7 +41,7 @@
 	
 	<mx:Script>
 		<![CDATA[
-			import fb.FBConnect;
+			import com.facebook.utils.DesktopSessionHelper;
 			import com.facebook.errors.FacebookError;
 			import com.facebook.data.BooleanResultData;
 			import com.facebook.data.StringResultData;
@@ -80,6 +80,12 @@
 			
 			// this is the content of an entry (name, link, message)
 			protected static const LABEL_TEMPLATE:String = '<a href="event:{profileUrl}">{actor}</a><span class="content"> {title}</span>';
+			
+			protected var _desktopHelper:DesktopSessionHelper;
+			
+			public function set desktopHelper(value:DesktopSessionHelper):void {
+				_desktopHelper = value;
+			}
 			
 			public function setModel(value:StreamData):void {
 				streamData = value;
@@ -233,11 +239,11 @@
 			}
 			
 			protected function addCommentRow(id:String):void {
-				var user:FacebookUser = FriendsModel.getFriend(String(FBConnect.session.uid));
+				var user:FacebookUser = FriendsModel.getFriend(_desktopHelper.sessionData.uid);
 				var comment:PostCommentData = new PostCommentData();
 				comment.time = new Date();
 				comment.id = id;
-				comment.fromid = String(FBConnect.session.uid);
+				comment.fromid = _desktopHelper.sessionData.uid;
 				comment.text = commentsTxt.text;
 				
 				var row:CommentRow = CommentRowPool.getRow(comment, user);
@@ -288,14 +294,14 @@
 			}
 			
 			protected function submitComment():void {
-				if (FBConnect.hasPermission(ExtendedPermissionValues.PUBLISH_STREAM) == false) {
+				if (_desktopHelper.checkPermission(ExtendedPermissionValues.PUBLISH_STREAM) == false) {
 					askForPerms();
 				} else {
 					var story:StreamStoryData = (streamData.data as StreamStoryData);
 					StreamModel.getInstance().addEventListener(StreamEvent.COMMENT_ADDED, onCommentAdded);
 					StreamModel.addComment(story.post_id, commentsTxt.text);
 					spinner.visible = true;
-				}
+				} 
 			}
 			
 			protected function onCommentAdded(event:StreamEvent):void {
@@ -316,7 +322,7 @@
 			
 			protected function handleEditStreamError(fbError:FacebookError):void {
 				if (fbError.errorCode == 200) {
-					FBConnect.removePermission(ExtendedPermissionValues.PUBLISH_STREAM);
+					_desktopHelper.revokePermissions([ExtendedPermissionValues.PUBLISH_STREAM]);
 					askForPerms();
 				} else {
 					MessageWindow.show('Error adding comment.', 'Error', MessageWindow.OK);
@@ -324,7 +330,7 @@
 			}
 			
 			protected function askForPerms():void {
-				FBConnect.requirePermissions([ExtendedPermissionValues.PUBLISH_STREAM]);
+				_desktopHelper.grantPermissions([ExtendedPermissionValues.PUBLISH_STREAM]);
 			}
 			
 			protected function showYouLike(show:Boolean):void {
@@ -349,7 +355,7 @@
 			}
 			
 			protected function addLike():void {
-				if (FBConnect.hasPermission(ExtendedPermissionValues.PUBLISH_STREAM) == false) {
+				if (_desktopHelper.checkPermission(ExtendedPermissionValues.PUBLISH_STREAM) == false) {
 					askForPerms();
 				} else {
 					var story:StreamStoryData = (streamData.data as StreamStoryData);
@@ -378,13 +384,13 @@
 			}
 			
 			protected function removeLike():void {
-				if (FBConnect.hasPermission(ExtendedPermissionValues.PUBLISH_STREAM) == false) {
+				if (_desktopHelper.checkPermission(ExtendedPermissionValues.PUBLISH_STREAM) == false) {
 					askForPerms();
 				} else {
 					var story:StreamStoryData = (streamData.data as StreamStoryData);
 					StreamModel.getInstance().addEventListener(StreamEvent.LIKE_REMOVED, onLikeRemoved)
 					StreamModel.unlikeStory(story.post_id);
-				}
+				} 
 			}
 			
 			protected function onLikeRemoved(event:StreamEvent):void {

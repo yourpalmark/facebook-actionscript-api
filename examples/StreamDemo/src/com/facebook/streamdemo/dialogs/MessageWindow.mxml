@@ -147,7 +147,11 @@
 				if (closeHandler != null) {
 					_closeHandler = closeHandler;
 				}
-				attemptHide();
+				
+				if (showTimer == null) {
+					onPreInit();
+					attemptHide();
+				}
 			}
 			
 			protected function attemptHide():void {
