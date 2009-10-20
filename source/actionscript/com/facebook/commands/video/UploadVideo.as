@@ -1,6 +1,6 @@
 /**
- * http://wiki.developers.facebook.com/index.php/Auth.revokeExtendedPermission
- * Feb 18/09
+ * http://wiki.developers.facebook.com/index.php/Video.uploadVideo
+ * September 22/09
  */ 
 /*
   Copyright (c) 2009, Adobe Systems Incorporated
@@ -33,39 +33,61 @@
   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package com.facebook.commands.auth {
+package com.facebook.commands.video {
 	
-	import com.facebook.net.FacebookCall;
 	import com.facebook.facebook_internal;
+	import com.facebook.net.FacebookCall;
+	import com.facebook.net.IUploadVideo;
 
 	use namespace facebook_internal;
-
+	
 	/**
-	 * The RevokeExtendedPermission class represents the public  
-      Facebook API known as Auth.revokeExtendedPermission.
-	 * @see http://wiki.developers.facebook.com/index.php/Auth.revokeExtendedPermission
+	 * The UploadVideo class represents the public  
+      Facebook API known as Video.upload.
+	 * @see http://wiki.developers.facebook.com/index.php/Video.upload
 	 */
-	public class RevokeExtendedPermission extends FacebookCall {
+	public class UploadVideo extends FacebookCall implements IUploadVideo {
+
+		public static const METHOD_NAME:String = 'video.upload';
+		public static const SCHEMA:Array = ['data', 'title', 'description'];
+		public static var TIMEOUT:Number = 300000; //default 5 min timeout
 		
-		public static const METHOD_NAME:String = 'auth.revokeExtendedPermission';
-		public static const SCHEMA:Array = ['perm', 'uid'];
+		protected var _data:Object;
+		protected var _title:String;
+		protected var _description:String;
 		
-		public var perm:String;
-		public var uid:String;
+		protected var _ext:String;
+		
+		public function set data(value:Object):void { _data = value; }
+		public function get data():Object { return _data; }
+		
+		public function set title(value:String):void { _title = value; }
+		public function get title():String { return _title; }
 		
 		/**
+		 * Used to set type of Uploaded videos.
+		 * @see UploadVideoTypes
 		 * 
-		 * @param perm @see ExtendedPermissionValues
 		 */
-		public function RevokeExtendedPermission(perm:String, uid:String=null) {
+		public function set ext(value:String):void { _ext = value; }
+		public function get ext():String { return _ext; }
+		
+		public function set description(value:String):void { _description = value; }
+		public function get description():String { return _description; }
+		
+		public function UploadVideo(ext:String, data:Object, title:String = null, description:String = null) {
 			super(METHOD_NAME);
+						
+			connectTimeout = TIMEOUT;
 			
-			this.perm = perm;
-			this.uid = uid;
+			this.ext = ext;
+			this.data = data;			
+			this.title = title;
+			this.description = description;
 		}
 		
 		override facebook_internal function initialize():void {
-			applySchema(SCHEMA, perm, uid);
+			applySchema(SCHEMA, data, title, description);
 			super.facebook_internal::initialize();
 		}
 	}

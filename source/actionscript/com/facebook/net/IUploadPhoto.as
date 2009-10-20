@@ -1,7 +1,3 @@
-/**
- * http://wiki.developers.facebook.com/index.php/Auth.revokeExtendedPermission
- * Feb 18/09
- */ 
 /*
   Copyright (c) 2009, Adobe Systems Incorporated
   All rights reserved.
@@ -33,40 +29,18 @@
   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package com.facebook.commands.auth {
+
+package com.facebook.net {
 	
-	import com.facebook.net.FacebookCall;
-	import com.facebook.facebook_internal;
-
-	use namespace facebook_internal;
-
-	/**
-	 * The RevokeExtendedPermission class represents the public  
-      Facebook API known as Auth.revokeExtendedPermission.
-	 * @see http://wiki.developers.facebook.com/index.php/Auth.revokeExtendedPermission
-	 */
-	public class RevokeExtendedPermission extends FacebookCall {
+	public interface IUploadPhoto {
+		function get uploadType():String;
+		function set uploadType(value:String):void;
 		
-		public static const METHOD_NAME:String = 'auth.revokeExtendedPermission';
-		public static const SCHEMA:Array = ['perm', 'uid'];
+		function get uploadQuality():uint;
+		function set uploadQuality(value:uint):void;
 		
-		public var perm:String;
-		public var uid:String;
-		
-		/**
-		 * 
-		 * @param perm @see ExtendedPermissionValues
-		 */
-		public function RevokeExtendedPermission(perm:String, uid:String=null) {
-			super(METHOD_NAME);
-			
-			this.perm = perm;
-			this.uid = uid;
-		}
-		
-		override facebook_internal function initialize():void {
-			applySchema(SCHEMA, perm, uid);
-			super.facebook_internal::initialize();
-		}
+		function get data():Object;
+		function set data(value:Object):void;
 	}
+	
 }

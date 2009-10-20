@@ -1,6 +1,6 @@
 /**
- * http://wiki.developers.facebook.com/index.php/Auth.revokeExtendedPermission
- * Feb 18/09
+ * http://wiki.developers.facebook.com/index.php/Comments.remove
+ * September 18, 2009
  */ 
 /*
   Copyright (c) 2009, Adobe Systems Incorporated
@@ -33,39 +33,36 @@
   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package com.facebook.commands.auth {
+package com.facebook.commands.comments {
 	
-	import com.facebook.net.FacebookCall;
 	import com.facebook.facebook_internal;
-
+	import com.facebook.net.FacebookCall;
+	
 	use namespace facebook_internal;
-
+	
 	/**
-	 * The RevokeExtendedPermission class represents the public  
-      Facebook API known as Auth.revokeExtendedPermission.
-	 * @see http://wiki.developers.facebook.com/index.php/Auth.revokeExtendedPermission
+	 * The RemoveComments class represents the public  
+      Facebook API known as Comments.remove.
+	 * @see http://wiki.developers.facebook.com/index.php/Comments.remove
 	 */
-	public class RevokeExtendedPermission extends FacebookCall {
+	public class RemoveComments extends FacebookCall {
+
 		
-		public static const METHOD_NAME:String = 'auth.revokeExtendedPermission';
-		public static const SCHEMA:Array = ['perm', 'uid'];
+		public static const METHOD_NAME:String = 'comments.remove';
+		public static const SCHEMA:Array = ['xid','comment_id'];
 		
-		public var perm:String;
-		public var uid:String;
+		public var xid:String;
+		public var commentID:String;
 		
-		/**
-		 * 
-		 * @param perm @see ExtendedPermissionValues
-		 */
-		public function RevokeExtendedPermission(perm:String, uid:String=null) {
+		public function RemoveComments(xid:String, commentID:String) {
 			super(METHOD_NAME);
 			
-			this.perm = perm;
-			this.uid = uid;
+			this.xid = xid;
+			this.commentID = commentID;
 		}
 		
 		override facebook_internal function initialize():void {
-			applySchema(SCHEMA, perm, uid);
+			applySchema(SCHEMA, xid, commentID);
 			super.facebook_internal::initialize();
 		}
 	}

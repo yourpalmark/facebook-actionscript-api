@@ -47,7 +47,7 @@ package com.facebook.views {
 		public static const DEFAULT_HEIGHT:Number = 480;
 		public static const PADDING:Number = 20;
 		
-		protected var html:HTMLLoader;
+		protected var _html:HTMLLoader;
 		protected var distractor:Distractor;
 		protected var urlVars:URLVariables;
 		protected var req:URLRequest;
@@ -69,31 +69,32 @@ package com.facebook.views {
 			height = DEFAULT_HEIGHT;
 			
 			//html loader
-			html = new HTMLLoader();
-			stage.addChild(html);			
-			html.addEventListener(Event.COMPLETE, onComplete, false, 0, true);
-			html.addEventListener(Event.LOCATION_CHANGE, onLocationChange, false, 0, true);			
+			_html = new HTMLLoader();
+			stage.addChild(_html);			
+			_html.addEventListener(Event.COMPLETE, onComplete, false, 0, true);
+			_html.addEventListener(Event.LOCATION_CHANGE, onLocationChange, false, 0, true);			
 			
 			//distractor
 			distractor = new Distractor();			
-			stage.addChild(distractor);
-			/* distractor.text = "Please Wait";
-			distractor.x = width - distractor.width >> 1;
-			distractor.y = height - distractor.height >> 1;	 */					
+			stage.addChild(distractor);					
 			
 			urlVars = new URLVariables();
 			req = new URLRequest();
 			req.data = urlVars;
 		}
 		
+		public function get html():HTMLLoader {
+			return _html;
+		}
+		
 		protected function onComplete(event:Event):void {
 			distractor.visible = false; //also removes the ENTER_FRAME listener on the distractor
-			html.width = DEFAULT_WIDTH;
-			html.height = DEFAULT_HEIGHT;
+			_html.width = DEFAULT_WIDTH;
+			_html.height = DEFAULT_HEIGHT;
 		}
 		
 		protected function onLocationChange(event:Event):void {
-			html.width = html.height = 0;
+			_html.width = _html.height = 0;
 			distractor.visible = true;
 		}
 		

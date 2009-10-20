@@ -31,13 +31,16 @@
 */
 package com.facebook.session {
 	
-	import com.facebook.commands.photos.UploadPhoto;
 	import com.facebook.delegates.IFacebookCallDelegate;
+	import com.facebook.delegates.VideoUploadDelegate;
 	import com.facebook.delegates.WebDelegate;
 	import com.facebook.delegates.WebImageUploadDelegate;
 	import com.facebook.events.FacebookEvent;
-	import com.facebook.net.FacebookCall;
 	import com.facebook.facebook_internal;
+	import com.facebook.net.FacebookCall;
+	import com.facebook.net.IUploadPhoto;
+	import com.facebook.net.IUploadVideo;
+	
 	import flash.events.EventDispatcher;
 
 	/**
@@ -73,6 +76,9 @@ package com.facebook.session {
 	 */
 	public class WebSession extends EventDispatcher implements IFacebookSession {
 		
+		public static const REST_URL:String = "http://api.facebook.com/restserver.php";
+		public static const VIDEO_URL:String = "http://api-video.facebook.com/restserver.php";
+		
 		/** @private */
 		protected var _api_key:String; 
 		
@@ -89,7 +95,7 @@ package com.facebook.session {
 		/** @private */
 		protected var _is_connected:Boolean = false;
 		/** @private */
-		protected var _rest_url:String = "http://api.facebook.com/restserver.php";
+		protected var _rest_url:String = REST_URL;
 		
 		/**
 		 * The URL of the login page a user will be directed to (for desktop applications)
@@ -162,10 +168,15 @@ package com.facebook.session {
 		}
 		
 		public function post(call:FacebookCall):IFacebookCallDelegate {
-			if (call.method == UploadPhoto.METHOD_NAME) {
+			rest_url = REST_URL; //reset the rest_url to default. (video uses a different one);
+			
+			if (call is IUploadPhoto) {
 				return new WebImageUploadDelegate(call, this);
+			} else if (call is IUploadVideo) {
+				rest_url = VIDEO_URL; //video uploads need to hit this url
+				return new VideoUploadDelegate(call, this);
 			} else {
-				return new WebDelegate(call, this);
+				return new WebDelegate(call, this); 
 			}
 		}
 		

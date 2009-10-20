@@ -72,7 +72,7 @@ package com.facebook.utils {
 			writeLineBreak();
 		}
 		
-		public function writeFileData(filename:String, fileData:ByteArray):void {
+		public function writeFileData(filename:String, fileData:ByteArray, contentType:String):void {
 			var bytes:String;
 			
 			writeBoundary();
@@ -87,7 +87,7 @@ package com.facebook.utils {
 			writeQuotationMark();
 			writeLineBreak();
 			
-			bytes = 'Content-Type: image/jpg';
+			bytes = contentType;
 			for (i=0; i<bytes.length; i++) {
 				postData.writeByte(bytes.charCodeAt(i));
 			}

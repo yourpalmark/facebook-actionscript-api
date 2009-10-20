@@ -1,6 +1,6 @@
 /**
- * http://wiki.developers.facebook.com/index.php/Auth.revokeExtendedPermission
- * Feb 18/09
+ * http://wiki.developers.facebook.com/index.php/Status.set
+ * September 21/09
  */ 
 /*
   Copyright (c) 2009, Adobe Systems Incorporated
@@ -33,39 +33,35 @@
   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package com.facebook.commands.auth {
+package com.facebook.commands.status {
 	
 	import com.facebook.net.FacebookCall;
 	import com.facebook.facebook_internal;
-
+	
 	use namespace facebook_internal;
-
+	
 	/**
-	 * The RevokeExtendedPermission class represents the public  
-      Facebook API known as Auth.revokeExtendedPermission.
-	 * @see http://wiki.developers.facebook.com/index.php/Auth.revokeExtendedPermission
+	 * The SetStatus class represents the public  
+      Facebook API known as Status.set.
+	 * @see http://wiki.developers.facebook.com/index.php/Status.set
 	 */
-	public class RevokeExtendedPermission extends FacebookCall {
+	public class SetStatus extends FacebookCall {
+
+		public static const METHOD_NAME:String = 'Status.set';
+		public static const SCHEMA:Array = ['status', 'uid'];
 		
-		public static const METHOD_NAME:String = 'auth.revokeExtendedPermission';
-		public static const SCHEMA:Array = ['perm', 'uid'];
-		
-		public var perm:String;
+		public var status:String;
 		public var uid:String;
 		
-		/**
-		 * 
-		 * @param perm @see ExtendedPermissionValues
-		 */
-		public function RevokeExtendedPermission(perm:String, uid:String=null) {
+		public function SetStatus(status:String = null, uid:String = null) {
 			super(METHOD_NAME);
 			
-			this.perm = perm;
+			this.status = status;
 			this.uid = uid;
 		}
 		
 		override facebook_internal function initialize():void {
-			applySchema(SCHEMA, perm, uid);
+			applySchema(SCHEMA, status, uid);
 			super.facebook_internal::initialize();
 		}
 	}

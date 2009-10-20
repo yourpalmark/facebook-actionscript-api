@@ -1,6 +1,6 @@
 /**
- * http://wiki.developers.facebook.com/index.php/Auth.revokeExtendedPermission
- * Feb 18/09
+ * http://wiki.developers.facebook.com/index.php/Notifications.markRead
+ * September 18/09
  */ 
 /*
   Copyright (c) 2009, Adobe Systems Incorporated
@@ -33,39 +33,37 @@
   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package com.facebook.commands.auth {
+package com.facebook.commands.notifications {
 	
-	import com.facebook.net.FacebookCall;
 	import com.facebook.facebook_internal;
-
+	import com.facebook.net.FacebookCall;
+	import com.facebook.utils.FacebookDataUtils;
+	
 	use namespace facebook_internal;
-
+	
 	/**
-	 * The RevokeExtendedPermission class represents the public  
-      Facebook API known as Auth.revokeExtendedPermission.
-	 * @see http://wiki.developers.facebook.com/index.php/Auth.revokeExtendedPermission
+	 * The MarkRead class represents the public  
+      Facebook API known as Notifications.markRead.
+         * <p>This class represents a Facebook API that requires a session key, whether the API is called
+      by a web session or a desktop session.</p>
+	 * @see http://wiki.developers.facebook.com/index.php/Category:Session_Required_API
+	 * @see http://wiki.developers.facebook.com/index.php/Notifications.markRead
 	 */
-	public class RevokeExtendedPermission extends FacebookCall {
+	public class MarkRead extends FacebookCall {
+
+		public static const METHOD_NAME:String = 'notifications.markRead';
+		public static const SCHEMA:Array = ['notification_ids'];
 		
-		public static const METHOD_NAME:String = 'auth.revokeExtendedPermission';
-		public static const SCHEMA:Array = ['perm', 'uid'];
+		public var notification_ids:Array;
 		
-		public var perm:String;
-		public var uid:String;
-		
-		/**
-		 * 
-		 * @param perm @see ExtendedPermissionValues
-		 */
-		public function RevokeExtendedPermission(perm:String, uid:String=null) {
+		public function MarkRead(notification_ids:Array) {
 			super(METHOD_NAME);
 			
-			this.perm = perm;
-			this.uid = uid;
+			this.notification_ids = notification_ids;
 		}
 		
 		override facebook_internal function initialize():void {
-			applySchema(SCHEMA, perm, uid);
+			applySchema(SCHEMA, FacebookDataUtils.toArrayString(notification_ids));
 			super.facebook_internal::initialize();
 		}
 	}

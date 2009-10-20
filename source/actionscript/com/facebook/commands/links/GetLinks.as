@@ -1,6 +1,6 @@
 /**
- * http://wiki.developers.facebook.com/index.php/Auth.revokeExtendedPermission
- * Feb 18/09
+ * http://wiki.developers.facebook.com/index.php/Links.get
+ * September 18, 2009
  */ 
 /*
   Copyright (c) 2009, Adobe Systems Incorporated
@@ -33,39 +33,39 @@
   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package com.facebook.commands.auth {
+package com.facebook.commands.links {
 	
 	import com.facebook.net.FacebookCall;
+	import com.facebook.utils.FacebookDataUtils;
 	import com.facebook.facebook_internal;
-
+	
 	use namespace facebook_internal;
-
+	
 	/**
-	 * The RevokeExtendedPermission class represents the public  
-      Facebook API known as Auth.revokeExtendedPermission.
-	 * @see http://wiki.developers.facebook.com/index.php/Auth.revokeExtendedPermission
+	 * The GetLinks class represents the public  
+      Facebook API known as Links.get.
+	 * @see http://wiki.developers.facebook.com/index.php/Link.get
 	 */
-	public class RevokeExtendedPermission extends FacebookCall {
+	public class GetLinks extends FacebookCall {
+
 		
-		public static const METHOD_NAME:String = 'auth.revokeExtendedPermission';
-		public static const SCHEMA:Array = ['perm', 'uid'];
+		public static const METHOD_NAME:String = 'links.get';
+		public static const SCHEMA:Array = ['uid', 'link_ids', 'limit'];
 		
-		public var perm:String;
 		public var uid:String;
+		public var link_ids:Array;
+		public var limit:String;
 		
-		/**
-		 * 
-		 * @param perm @see ExtendedPermissionValues
-		 */
-		public function RevokeExtendedPermission(perm:String, uid:String=null) {
+		public function GetLinks(uid:String = null, link_ids:Array = null, limit:String = null) {
 			super(METHOD_NAME);
 			
-			this.perm = perm;
 			this.uid = uid;
+			this.link_ids = link_ids;
+			this.limit = limit;
 		}
 		
 		override facebook_internal function initialize():void {
-			applySchema(SCHEMA, perm, uid);
+			applySchema(SCHEMA, uid, FacebookDataUtils.toArrayString(link_ids), limit);
 			super.facebook_internal::initialize();
 		}
 	}

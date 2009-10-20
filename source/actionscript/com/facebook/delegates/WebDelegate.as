@@ -138,7 +138,7 @@ package com.facebook.delegates {
 			
 			RequestHelper.formatRequest(call);
 			
-			//Have a seperate method so sub classes can overrdie this if need be (WebImageUploadDelegate, is an example)
+			//Have a seperate method so sub classes can override this if need be (WebImageUploadDelegate, is an example)
 			sendRequest();
 			
 			connectTimer.start();

@@ -249,8 +249,6 @@ package com.facebook.data {
 					result = parseGetEvent(xml); break;
 				case 'events.getMembers':
 					result = parseGetMembers(xml); break;
-				case 'fql.query':
-					result = new FacebookData(); break;
 				case 'photos.createAlbum':
 					result = parseCreateAlbum(xml); break;
 				case 'photos.get': 

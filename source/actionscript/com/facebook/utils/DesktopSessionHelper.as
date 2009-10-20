@@ -51,6 +51,7 @@ package com.facebook.utils {
 	import com.facebook.views.PermissionWindow;
 	
 	import flash.display.NativeWindow;
+	import flash.display.Stage;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.IOErrorEvent;
@@ -65,18 +66,20 @@ package com.facebook.utils {
 		public var loginWin:LoginWindow;
 		public var permissionWin:PermissionWindow;
 		
-		public var allPermissions:Array = [ ExtendedPermissionValues.CREATE_EVENT, 
-											ExtendedPermissionValues.CREATE_NOTE,
-											ExtendedPermissionValues.EMAIL,
+		public var allPermissions:Array = [ ExtendedPermissionValues.EMAIL,
+											ExtendedPermissionValues.READ_MAILBOX,
 											ExtendedPermissionValues.OFFLINE_ACCESS,
+											ExtendedPermissionValues.STATUS_UPDATE,
 											ExtendedPermissionValues.PHOTO_UPLOAD,
-											ExtendedPermissionValues.PUBLISH_STREAM,
-											ExtendedPermissionValues.READ_STREAM,
+											ExtendedPermissionValues.VIDEO_UPLOAD,
+											ExtendedPermissionValues.CREATE_EVENT,
+											ExtendedPermissionValues.CREATE_NOTE,
 											ExtendedPermissionValues.RSVP_EVENT,
-											ExtendedPermissionValues.SHARE_ITEM,
 											ExtendedPermissionValues.SMS,
-											ExtendedPermissionValues.STATUS_UPDATE
-											];
+											ExtendedPermissionValues.SHARE_ITEM,
+											ExtendedPermissionValues.CREATE_LISTING,
+											ExtendedPermissionValues.PUBLISH_STREAM,
+											ExtendedPermissionValues.READ_STREAM ];
 		
 		public var facebook:Facebook;		
 		public var sessionData:SessionData;
@@ -213,7 +216,7 @@ package com.facebook.utils {
 		}
 		
 		protected function showLogin():void {
-			loginWin = new LoginWindow(); 
+			loginWin = new LoginWindow();
 			loginWin.addEventListener(FacebookEvent.LOGIN_SUCCESS, onLoginSuccess, false, 0, true);
 			loginWin.addEventListener(FacebookEvent.LOGIN_FAILURE, onLoginFailure, false, 0, true)
 			

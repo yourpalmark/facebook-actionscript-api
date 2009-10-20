@@ -36,7 +36,6 @@
 */
 package com.facebook.data {
 	
-	[Bindable]
 	public class FacebookErrorCodes {
 		
 		public static const SERVER_ERROR:Number = -1; //Defines a server error from Flash. 

@@ -1,6 +1,6 @@
 /**
- * http://wiki.developers.facebook.com/index.php/Auth.revokeExtendedPermission
- * Feb 18/09
+ * http://wiki.developers.facebook.com/index.php/Message.getThreadsInFolder
+ * September 21/09
  */ 
 /*
   Copyright (c) 2009, Adobe Systems Incorporated
@@ -33,39 +33,39 @@
   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package com.facebook.commands.auth {
+package com.facebook.commands.message {
 	
 	import com.facebook.net.FacebookCall;
 	import com.facebook.facebook_internal;
-
+	
 	use namespace facebook_internal;
-
+	
 	/**
-	 * The RevokeExtendedPermission class represents the public  
-      Facebook API known as Auth.revokeExtendedPermission.
-	 * @see http://wiki.developers.facebook.com/index.php/Auth.revokeExtendedPermission
+	 * The GetThreadsInFolder class represents the public  
+      Facebook API known as Message.getThreadsInFolder.
+	 * @see http://wiki.developers.facebook.com/index.php/Message.getThreadsInFolder
 	 */
-	public class RevokeExtendedPermission extends FacebookCall {
+	public class GetThreadsInFolder extends FacebookCall {
+
+		public static const METHOD_NAME:String = 'Message.getThreadsInFolder';
+		public static const SCHEMA:Array = ['folder_id', 'uid', 'limit', 'offset'];
 		
-		public static const METHOD_NAME:String = 'auth.revokeExtendedPermission';
-		public static const SCHEMA:Array = ['perm', 'uid'];
-		
-		public var perm:String;
+		public var folder_id:String;
 		public var uid:String;
+		public var limit:String;
+		public var offset:String;
 		
-		/**
-		 * 
-		 * @param perm @see ExtendedPermissionValues
-		 */
-		public function RevokeExtendedPermission(perm:String, uid:String=null) {
+		public function GetThreadsInFolder(folder_id:String = null, uid:String = null, limit:String = null, offset:String = null) {
 			super(METHOD_NAME);
 			
-			this.perm = perm;
+			this.folder_id = folder_id;
 			this.uid = uid;
+			this.limit = limit;
+			this.offset = offset;
 		}
 		
 		override facebook_internal function initialize():void {
-			applySchema(SCHEMA, perm, uid);
+			applySchema(SCHEMA, folder_id, uid, limit, offset);
 			super.facebook_internal::initialize();
 		}
 	}

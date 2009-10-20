@@ -1,6 +1,6 @@
 /**
- * http://wiki.developers.facebook.com/index.php/Auth.revokeExtendedPermission
- * Feb 18/09
+ * http://wiki.developers.facebook.com/index.php/Comments.add
+ * September 17, 2009
  */ 
 /*
   Copyright (c) 2009, Adobe Systems Incorporated
@@ -33,39 +33,44 @@
   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package com.facebook.commands.auth {
+package com.facebook.commands.comments {
 	
 	import com.facebook.net.FacebookCall;
 	import com.facebook.facebook_internal;
 
 	use namespace facebook_internal;
-
+	
 	/**
-	 * The RevokeExtendedPermission class represents the public  
-      Facebook API known as Auth.revokeExtendedPermission.
-	 * @see http://wiki.developers.facebook.com/index.php/Auth.revokeExtendedPermission
+	 * The AddComments class represents the public  
+      Facebook API known as Comments.add.
+	 * @see http://wiki.developers.facebook.com/index.php/Comments.add
 	 */
-	public class RevokeExtendedPermission extends FacebookCall {
+	public class AddComments extends FacebookCall {
+
 		
-		public static const METHOD_NAME:String = 'auth.revokeExtendedPermission';
-		public static const SCHEMA:Array = ['perm', 'uid'];
+		public static const METHOD_NAME:String = 'comments.add';
+		public static const SCHEMA:Array = ['xid','text','uid','title','url','publish_to_stream'];
 		
-		public var perm:String;
+		public var xid:String;
+		public var text:String;
 		public var uid:String;
+		public var title:String;
+		public var url:String;
+		public var publish_to_stream:Boolean;
 		
-		/**
-		 * 
-		 * @param perm @see ExtendedPermissionValues
-		 */
-		public function RevokeExtendedPermission(perm:String, uid:String=null) {
+		public function AddComments(xid:String, text:String, uid:String = null, title:String = null, url:String = null, publish_to_stream:Boolean = false) {
 			super(METHOD_NAME);
 			
-			this.perm = perm;
+			this.xid = xid;
+			this.text = text;
 			this.uid = uid;
+			this.title = title;
+			this.url = url;
+			this.publish_to_stream = publish_to_stream;
 		}
 		
 		override facebook_internal function initialize():void {
-			applySchema(SCHEMA, perm, uid);
+			applySchema(SCHEMA, xid, text, uid, title, url, publish_to_stream);
 			super.facebook_internal::initialize();
 		}
 	}

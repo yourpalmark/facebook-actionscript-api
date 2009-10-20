@@ -36,9 +36,11 @@
 package com.facebook.commands.events {
 	
 	import com.adobe.serialization.json.JSON;
+	import com.facebook.commands.photos.UploadPhotoTypes;
 	import com.facebook.data.events.CreateEventData;
 	import com.facebook.facebook_internal;
 	import com.facebook.net.FacebookCall;
+	import com.facebook.net.IUploadPhoto;
 	import com.facebook.utils.FacebookDataUtils;
 
 	use namespace facebook_internal;
@@ -48,19 +50,34 @@ package com.facebook.commands.events {
       Facebook API known as Events.create.
 	 * @see http://wiki.developers.facebook.com/index.php/Events.create
 	 */
-	public class CreateEvent extends FacebookCall {
+	public class CreateEvent extends FacebookCall implements IUploadPhoto {
 
 		
 		public static const METHOD_NAME:String = 'events.create';
-		public static const SCHEMA:Array = ['event_info'];
+		public static const SCHEMA:Array = ['event_info', 'data'];
 		
 		public var event_info:CreateEventData;
 		
-		public function CreateEvent(event_info:CreateEventData) {
+		protected var _data:Object;
+		protected var _uploadType:String = UploadPhotoTypes.PNG;
+		protected var _uploadQuality:uint = 80;		
+		
+		public function CreateEvent(event_info:CreateEventData, data:Object) {
 			super(METHOD_NAME);
 			
 			this.event_info = event_info;
+			this.data = data;
 		}
+		
+		public function get data():Object { return _data; }
+		public function set data(value:Object):void { _data = value; }
+		
+		public function get uploadType():String { return _uploadType; }
+		public function set uploadType(value:String):void { _uploadType = value; }
+		
+		public function get uploadQuality():uint { return _uploadQuality; }
+		public function set uploadQuality(value:uint):void { _uploadQuality = value; }
+		
 		
 		override facebook_internal function initialize():void {
 			
@@ -71,7 +88,7 @@ package com.facebook.commands.events {
 				o[n] = value;
 			}
 			
-			applySchema(SCHEMA, JSON.encode(o));
+			applySchema(SCHEMA, JSON.encode(o), data);
 			super.facebook_internal::initialize();
 		}
 	}

@@ -1,7 +1,7 @@
 /**
- * http://wiki.developers.facebook.com/index.php/Auth.revokeExtendedPermission
- * Feb 18/09
- */ 
+ * http://wiki.developers.facebook.com/index.php/Admin.getBannedUsers
+ * September 17/09
+ */
 /*
   Copyright (c) 2009, Adobe Systems Incorporated
   All rights reserved.
@@ -33,39 +33,35 @@
   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package com.facebook.commands.auth {
+package com.facebook.commands.admin {
 	
-	import com.facebook.net.FacebookCall;
+	import com.adobe.serialization.json.JSON;
 	import com.facebook.facebook_internal;
-
+	import com.facebook.net.FacebookCall;
+	
 	use namespace facebook_internal;
-
+	
 	/**
-	 * The RevokeExtendedPermission class represents the public  
-      Facebook API known as Auth.revokeExtendedPermission.
-	 * @see http://wiki.developers.facebook.com/index.php/Auth.revokeExtendedPermission
+	 * The GetBannedUsers class represents the public  
+      Facebook API known as Admin.getBannedUsers.
+	 * @see http://wiki.developers.facebook.com/index.php/Admin.getBannedUsers
 	 */
-	public class RevokeExtendedPermission extends FacebookCall {
+	public class GetBannedUsers extends FacebookCall {
 		
-		public static const METHOD_NAME:String = 'auth.revokeExtendedPermission';
-		public static const SCHEMA:Array = ['perm', 'uid'];
 		
-		public var perm:String;
-		public var uid:String;
+		public static const METHOD_NAME:String = 'admin.getBannedUsers';
+		public static const SCHEMA:Array = ['uids'];
 		
-		/**
-		 * 
-		 * @param perm @see ExtendedPermissionValues
-		 */
-		public function RevokeExtendedPermission(perm:String, uid:String=null) {
+		public var uids:Array;
+		
+		public function GetBannedUsers(uids:Array = null) {
 			super(METHOD_NAME);
 			
-			this.perm = perm;
-			this.uid = uid;
+			this.uids = uids;
 		}
 		
 		override facebook_internal function initialize():void {
-			applySchema(SCHEMA, perm, uid);
+			applySchema(SCHEMA, JSON.encode(uids));
 			super.facebook_internal::initialize();
 		}
 	}

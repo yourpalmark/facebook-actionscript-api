@@ -30,6 +30,7 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package com.facebook.data.admin {
+	import com.facebook.data.FacebookData;
 	
 	[Bindable]
 	public class MetricsData {

@@ -33,20 +33,23 @@ package com.facebook.session {
 	
 	import com.facebook.commands.auth.CreateToken;
 	import com.facebook.commands.auth.GetSession;
-	import com.facebook.commands.photos.UploadPhoto;
 	import com.facebook.commands.users.GetLoggedInUser;
 	import com.facebook.data.StringResultData;
 	import com.facebook.data.auth.GetSessionData;
 	import com.facebook.delegates.DesktopDelegate;
 	import com.facebook.delegates.IFacebookCallDelegate;
+	import com.facebook.delegates.VideoUploadDelegate;
 	import com.facebook.delegates.WebImageUploadDelegate;
 	import com.facebook.errors.FacebookError;
 	import com.facebook.events.FacebookEvent;
 	import com.facebook.facebook_internal;
 	import com.facebook.net.FacebookCall;
+	import com.facebook.net.IUploadPhoto;
 	
 	import flash.net.URLRequest;
 	import flash.net.navigateToURL;
+	import com.facebook.commands.events.CreateEvent;
+	import com.facebook.net.IUploadVideo;
 	
 	public class DesktopSession extends WebSession implements IFacebookSession {
 		
@@ -114,10 +117,15 @@ package com.facebook.session {
 		override public function get waiting_for_login():Boolean { return _waiting_for_login; }
 
 		override public function post(call:FacebookCall):IFacebookCallDelegate {
-			if (call.method == UploadPhoto.METHOD_NAME) {
+			rest_url = REST_URL; //reset the rest_url to default
+			
+			if (call is IUploadPhoto) {
 				return new WebImageUploadDelegate(call, this);
+			} else if (call is IUploadVideo) {
+				rest_url = VIDEO_URL; //video uploads need to hit this url
+				return new VideoUploadDelegate(call, this);
 			} else {
-				return new DesktopDelegate(call, this);
+				return new DesktopDelegate(call, this); 
 			}
 		}
 		
@@ -164,7 +172,6 @@ package com.facebook.session {
 				facebook_internal::_uid = result.uid;
 				this._session_key = result.session_key;
 				this._expires = result.expires;
-				
 				
 				// Change Serect Key (if a new one exists).
 				this._secret = result.secret == null || result.secret == ''?this._secret:result.secret;

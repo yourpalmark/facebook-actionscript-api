@@ -1,6 +1,6 @@
 /**
- * http://wiki.developers.facebook.com/index.php/Auth.revokeExtendedPermission
- * Feb 18/09
+ * http://wiki.developers.facebook.com/index.php/Video.getUploadLimits
+ * September 21/09
  */ 
 /*
   Copyright (c) 2009, Adobe Systems Incorporated
@@ -33,40 +33,22 @@
   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package com.facebook.commands.auth {
+package com.facebook.commands.video {
 	
 	import com.facebook.net.FacebookCall;
-	import com.facebook.facebook_internal;
-
-	use namespace facebook_internal;
-
+	
 	/**
-	 * The RevokeExtendedPermission class represents the public  
-      Facebook API known as Auth.revokeExtendedPermission.
-	 * @see http://wiki.developers.facebook.com/index.php/Auth.revokeExtendedPermission
+	 * The GetUploadLimits class represents the public  
+      Facebook API known as Video.getUploadLimits.
+	 * @see http://wiki.developers.facebook.com/index.php/Video.getUploadLimits
 	 */
-	public class RevokeExtendedPermission extends FacebookCall {
+	public class GetUploadLimits extends FacebookCall {
+
+		public static const METHOD_NAME:String = 'video.getUploadLimits';
+		public static const SCHEMA:Array = [];
 		
-		public static const METHOD_NAME:String = 'auth.revokeExtendedPermission';
-		public static const SCHEMA:Array = ['perm', 'uid'];
-		
-		public var perm:String;
-		public var uid:String;
-		
-		/**
-		 * 
-		 * @param perm @see ExtendedPermissionValues
-		 */
-		public function RevokeExtendedPermission(perm:String, uid:String=null) {
+		public function GetUploadLimits() {
 			super(METHOD_NAME);
-			
-			this.perm = perm;
-			this.uid = uid;
-		}
-		
-		override facebook_internal function initialize():void {
-			applySchema(SCHEMA, perm, uid);
-			super.facebook_internal::initialize();
 		}
 	}
 }

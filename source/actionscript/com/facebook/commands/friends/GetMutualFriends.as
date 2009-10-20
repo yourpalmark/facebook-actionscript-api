@@ -1,7 +1,7 @@
 /**
- * http://wiki.developers.facebook.com/index.php/Auth.revokeExtendedPermission
- * Feb 18/09
- */ 
+ * http://wiki.developers.facebook.com/index.php/Friends.getMutualFriends
+ * September 18/09; 
+ */
 /*
   Copyright (c) 2009, Adobe Systems Incorporated
   All rights reserved.
@@ -33,39 +33,36 @@
   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package com.facebook.commands.auth {
+package com.facebook.commands.friends {
 	
 	import com.facebook.net.FacebookCall;
 	import com.facebook.facebook_internal;
 
 	use namespace facebook_internal;
-
+	
 	/**
-	 * The RevokeExtendedPermission class represents the public  
-      Facebook API known as Auth.revokeExtendedPermission.
-	 * @see http://wiki.developers.facebook.com/index.php/Auth.revokeExtendedPermission
+	 * The GetMutualFriends class represents the public  
+      Facebook API known as Friends.getMutualFriends.
+	 * @see http://wiki.developers.facebook.com/index.php/Friends.getMutualFriends
 	 */
-	public class RevokeExtendedPermission extends FacebookCall {
+	public class GetMutualFriends extends FacebookCall {
+
 		
-		public static const METHOD_NAME:String = 'auth.revokeExtendedPermission';
-		public static const SCHEMA:Array = ['perm', 'uid'];
+		public static const METHOD_NAME:String = 'friends.getMutualFriends';
+		public static const SCHEMA:Array = ['target_uid', 'source_uid'];
 		
-		public var perm:String;
-		public var uid:String;
+		public var target_uid:String;
+		public var source_uid:String;
 		
-		/**
-		 * 
-		 * @param perm @see ExtendedPermissionValues
-		 */
-		public function RevokeExtendedPermission(perm:String, uid:String=null) {
+		public function GetMutualFriends(target_uid:String, source_uid:String = null) {
 			super(METHOD_NAME);
 			
-			this.perm = perm;
-			this.uid = uid;
+			this.target_uid = target_uid;
+			this.source_uid = source_uid;
 		}
 		
 		override facebook_internal function initialize():void {
-			applySchema(SCHEMA, perm, uid);
+			applySchema(SCHEMA, target_uid, source_uid);
 			super.facebook_internal::initialize();
 		}
 	}

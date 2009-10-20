@@ -1,7 +1,3 @@
-/**
- * http://wiki.developers.facebook.com/index.php/Auth.revokeExtendedPermission
- * Feb 18/09
- */ 
 /*
   Copyright (c) 2009, Adobe Systems Incorporated
   All rights reserved.
@@ -33,40 +29,33 @@
   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package com.facebook.commands.auth {
+package com.facebook.commands.video {
 	
-	import com.facebook.net.FacebookCall;
-	import com.facebook.facebook_internal;
-
-	use namespace facebook_internal;
-
 	/**
-	 * The RevokeExtendedPermission class represents the public  
-      Facebook API known as Auth.revokeExtendedPermission.
-	 * @see http://wiki.developers.facebook.com/index.php/Auth.revokeExtendedPermission
+	 * @see http://wiki.developers.facebook.com/index.php/Video.upload
 	 */
-	public class RevokeExtendedPermission extends FacebookCall {
+	
+	public class UploadVideoTypes {
 		
-		public static const METHOD_NAME:String = 'auth.revokeExtendedPermission';
-		public static const SCHEMA:Array = ['perm', 'uid'];
-		
-		public var perm:String;
-		public var uid:String;
-		
-		/**
-		 * 
-		 * @param perm @see ExtendedPermissionValues
-		 */
-		public function RevokeExtendedPermission(perm:String, uid:String=null) {
-			super(METHOD_NAME);
-			
-			this.perm = perm;
-			this.uid = uid;
-		}
-		
-		override facebook_internal function initialize():void {
-			applySchema(SCHEMA, perm, uid);
-			super.facebook_internal::initialize();
-		}
+		public static const _3G2:String = '3g2'; //Mobile Video
+		public static const _3GP:String = '3gp'; //Mobile Video
+		public static const _3GPP:String = '3gpp'; //Mobile Video
+		public static const ASF:String = 'asf'; //Windows Media Video
+		public static const AVI:String = 'avi'; //AVI Video
+		public static const FLV:String = 'flv'; //Flash Video
+		public static const M4V:String = 'm4v'; //MPEG-4 Video
+		public static const MKV:String = 'mkv'; //Matroska Format
+		public static const MOV:String = 'mov'; //QuickTime Movie
+		public static const MP4:String = 'mp4'; //MPEG-4 Video
+		public static const MPE:String = 'mpe'; //MPEG Video
+		public static const MPEG:String = 'mpeg'; //MPEG Video
+		public static const MPEG4:String = 'mpeg4'; //MPEG-4 Video
+		public static const MPG:String = 'mpg'; //MPEG Video
+		public static const MSV:String = 'nsv'; //Nullsoft Video
+		public static const OGM:String = 'ogm'; //Ogg Format
+		public static const QT:String = 'qt'; //QuickTime Movie
+		public static const VOB:String = 'vob'; //DVD Video
+		public static const WMV:String = 'wmv'; //Windows Media Video 
+
 	}
 }

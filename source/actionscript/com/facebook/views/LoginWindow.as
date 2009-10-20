@@ -34,7 +34,7 @@ package com.facebook.views {
 	import com.facebook.events.FacebookEvent;
 	
 	import flash.events.Event;
-	import flash.net.URLRequest;
+	import flash.html.HTMLLoader;
 	
 	public class LoginWindow extends BaseWindow {
 		
@@ -44,7 +44,7 @@ package com.facebook.views {
 		
 		public var sessionParams:String;
 	
-		public function LoginWindow(){ 
+		public function LoginWindow(){
 			super();
 			
 			urlVars.next = SUCCESS_PATH;
