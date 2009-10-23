@@ -60,7 +60,7 @@ package com.facebook.commands.stream {
 		}
 		
 		override facebook_internal function initialize():void {
-			applySchema(SCHEMA, message, JSON.encode(attachment), JSON.encode(action_links), target_id);
+			applySchema(SCHEMA, message, attachment != null ? JSON.encode(attachment) : null, action_links != null ? JSON.encode(action_links) : null, target_id);
 			super.facebook_internal::initialize();
 		}
 	}
