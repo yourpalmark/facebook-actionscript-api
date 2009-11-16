@@ -31,8 +31,8 @@
 */
 package com.facebook.commands.notes {
 	
-	import com.facebook.net.FacebookCall;
 	import com.facebook.facebook_internal;
+	import com.facebook.net.FacebookCall;
 
 	use namespace facebook_internal;
 
@@ -45,22 +45,20 @@ package com.facebook.commands.notes {
 
 		
 		public static const METHOD_NAME:String = 'notes.delete';
-		public static const SCHEMA:Array = ['title','content','uid'];
+		public static const SCHEMA:Array = ['note_id','uid'];
 		
-		public var title:String;
-		public var content:String;
+		public var note_id:String;
 		public var uid:String;
 		
-		public function DeleteNotes(title:String, content:String, uid:String='') {
+		public function DeleteNotes(note_id:String,uid:String=null) {
 			super(METHOD_NAME);
 			
-			this.title = title;
-			this.content = content;
+			this.note_id = note_id;
 			this.uid = uid;
 		}
 		
 		override facebook_internal function initialize():void {
-			applySchema(SCHEMA, title, content, uid);
+			applySchema(SCHEMA, note_id, uid);
 			super.facebook_internal::initialize();
 		}
 	}

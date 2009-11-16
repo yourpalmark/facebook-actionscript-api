@@ -49,20 +49,26 @@ package com.facebook.commands.comments {
 
 		
 		public static const METHOD_NAME:String = 'comments.remove';
-		public static const SCHEMA:Array = ['xid','comment_id'];
+		public static const SCHEMA:Array = ['comment_id','xid','object_id'];
 		
+		public var comment_id:String;
 		public var xid:String;
-		public var commentID:String;
+		public var object_id:String;
 		
-		public function RemoveComments(xid:String, commentID:String) {
+		public function RemoveComments(comment_id:String, xid:String = null, object_id:String = null) {
 			super(METHOD_NAME);
 			
+			if (xid == null && object_id == null) {
+				throw new Error("xid or object_id is required");
+			}
+			
+			this.comment_id = comment_id;
 			this.xid = xid;
-			this.commentID = commentID;
+			this.object_id = object_id;
 		}
 		
 		override facebook_internal function initialize():void {
-			applySchema(SCHEMA, xid, commentID);
+			applySchema(SCHEMA, comment_id, xid, object_id);
 			super.facebook_internal::initialize();
 		}
 	}

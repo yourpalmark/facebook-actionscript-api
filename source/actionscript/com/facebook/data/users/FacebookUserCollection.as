@@ -44,7 +44,7 @@ package com.facebook.data.users {
 			addItem(user);
 		}
 		
-		public function getUserById(uid:int):FacebookUser {
+		public function getUserById(uid:String):FacebookUser {
 			return findItemByProperty('uid', uid) as FacebookUser;
 		}
 		

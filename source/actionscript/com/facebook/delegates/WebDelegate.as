@@ -48,22 +48,17 @@ package com.facebook.delegates {
 	import flash.events.HTTPStatusEvent;
 	import flash.events.IOErrorEvent;
 	import flash.events.SecurityErrorEvent;
-	import flash.events.TimerEvent;
 	import flash.net.FileReference;
 	import flash.net.URLLoader;
 	import flash.net.URLLoaderDataFormat;
 	import flash.net.URLRequest;
 	import flash.net.URLRequestMethod;
-	import flash.utils.Timer;
 	
 	use namespace facebook_internal;
 	
 	public class WebDelegate extends EventDispatcher implements IFacebookCallDelegate {
 		
 		protected var parser:XMLDataParser;
-		
-		protected var connectTimer:Timer;
-		protected var loadTimer:Timer;
 		
 		protected var _call:FacebookCall;
 		protected var _session:WebSession;
@@ -83,12 +78,6 @@ package com.facebook.delegates {
 			
 			parser = new XMLDataParser();
 			
-			connectTimer = new Timer(call.connectTimeout, 1);
-			connectTimer.addEventListener(TimerEvent.TIMER_COMPLETE, onConnectTimeout, false, 0, true);
-			
-			loadTimer = new Timer(call.loadTimeout, 1);
-			loadTimer.addEventListener(TimerEvent.TIMER_COMPLETE, onLoadTimeOut, false, 0, true);
-			
 			execute();
 		}
 		
@@ -96,34 +85,8 @@ package com.facebook.delegates {
 			try {
 				loader.close();
 			} catch (e:*) { }
-			
-			connectTimer.stop();
-			loadTimer.stop();
 		}
 		
-		protected function onConnectTimeout(p_event:TimerEvent):void {
-			var fbError:FacebookError = new FacebookError();
-			fbError.errorCode = FacebookErrorCodes.SERVER_ERROR;
-			fbError.reason = FacebookErrorReason.CONNECT_TIMEOUT;
-			_call.handleError(fbError);
-			dispatchEvent(new FacebookEvent(FacebookEvent.COMPLETE, false, false, false, null, fbError));
-			
-			loadTimer.stop();
-			close()
-		}
-		
-		protected function onLoadTimeOut(p_event:TimerEvent):void {
-			connectTimer.stop();
-			
-			close();
-			
-			var fbError:FacebookError = new FacebookError();
-			fbError.errorCode = FacebookErrorCodes.SERVER_ERROR;
-			fbError.reason = FacebookErrorReason.LOAD_TIMEOUT;
-			_call.handleError(fbError);
-			dispatchEvent(new FacebookEvent(FacebookEvent.COMPLETE, false, false, false, null, fbError));
-		}
-
 		protected function execute():void {
 			if (call == null) { throw new Error('No call defined.'); }
 			
@@ -140,8 +103,6 @@ package com.facebook.delegates {
 			
 			//Have a seperate method so sub classes can override this if need be (WebImageUploadDelegate, is an example)
 			sendRequest();
-			
-			connectTimer.start();
 		}
 		
 		protected function sendRequest():void {
@@ -167,15 +128,9 @@ package com.facebook.delegates {
 			loader.addEventListener(HTTPStatusEvent.HTTP_STATUS, onHTTPStatus);
 			loader.addEventListener(IOErrorEvent.IO_ERROR, onError);
 			loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, onError);
-			loader.addEventListener(Event.OPEN, onOpen);
 		}
 		
 		protected function onHTTPStatus(p_event:HTTPStatusEvent):void { }
-		
-		protected function onOpen(p_event:Event):void {
-			connectTimer.stop();
-			loadTimer.start();
-		}
 		
 		/**
 		 * Add arguments here that might be class session-type specific
@@ -218,15 +173,11 @@ package com.facebook.delegates {
 		}
 		
 		protected function clean():void {
-			connectTimer.stop();
-			loadTimer.stop();
-			
 			if (loader == null) { return; }
 			
 			loader.removeEventListener(Event.COMPLETE, onDataComplete);
 			loader.removeEventListener(IOErrorEvent.IO_ERROR, onError);
 			loader.removeEventListener(SecurityErrorEvent.SECURITY_ERROR, onError);
-			loader.removeEventListener(Event.OPEN, onOpen);
 		}
 	}
 }

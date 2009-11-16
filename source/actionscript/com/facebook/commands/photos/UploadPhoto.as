@@ -78,7 +78,7 @@ package com.facebook.commands.photos {
 		public function get uploadQuality():uint { return _uploadQuality; }
 		public function set uploadQuality(value:uint):void { _uploadQuality = value; }
 		
-		public function UploadPhoto(data:Object, aid:String=null, caption:String=null, uid:String = null) {
+		public function UploadPhoto(data:Object, aid:String = null, caption:String = null, uid:String = null) {
 			super(METHOD_NAME);
 			
 			this.data = data;

@@ -44,18 +44,20 @@ package com.facebook.commands.stream {
 	public class RemovePost extends FacebookCall {
 		
 		public static const METHOD_NAME:String = 'stream.remove';
-		public static const SCHEMA:Array = ['post_id'];
+		public static const SCHEMA:Array = ['post_id', 'uid'];
 		
 		public var post_id:String
+		public var uid:String;
 		
-		public function RemovePost(post_id:String) {
+		public function RemovePost(post_id:String, uid:String = null) {
 			super(METHOD_NAME);
 			
 			this.post_id = post_id;
+			this.uid = uid;
 		}
 		
 		override facebook_internal function initialize():void {
-			applySchema(SCHEMA, post_id);
+			applySchema(SCHEMA, post_id, uid);
 			
 			super.facebook_internal::initialize();
 		}

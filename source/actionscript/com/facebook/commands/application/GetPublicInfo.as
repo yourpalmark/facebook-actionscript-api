@@ -31,8 +31,8 @@
 */
 package com.facebook.commands.application {
 	
-	import com.facebook.net.FacebookCall;
 	import com.facebook.facebook_internal;
+	import com.facebook.net.FacebookCall;
 	
 	use namespace facebook_internal;
 
@@ -55,19 +55,11 @@ package com.facebook.commands.application {
 		public function GetPublicInfo(application_id:String=null, application_api_key:String=null, application_canvas_name:String=null) {
 			super(METHOD_NAME);
 			
-			if (application_id == null && application_api_key==null && application_canvas_name==null) {
-				throw new Error("You must specify exactly one of application_id, application_api_key or application_canvas_name.");
-			}
-							
-			if (application_id && !(application_api_key==null && application_canvas_name==null)) {
-				throw new Error("You must specify exactly one of application_id, application_api_key or application_canvas_name.");
-			}
-						
-			if (application_api_key && !(application_id==null && application_canvas_name==null)) {
-				throw new Error("You must specify exactly one of application_id, application_api_key or application_canvas_name.");
-			}
-						
-			if (application_canvas_name && !(application_id==null && application_api_key==null)) {
+			var hasId:Boolean = application_id != null;
+			var hasKey:Boolean = application_api_key != null;
+			var hasName:Boolean = application_canvas_name != null;
+			
+			if ((hasId && hasKey) || (hasId && hasName) || (hasKey && hasName)) {
 				throw new Error("You must specify exactly one of application_id, application_api_key or application_canvas_name.");
 			}
 			

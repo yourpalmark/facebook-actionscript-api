@@ -57,12 +57,11 @@ package com.facebook.commands.events {
 		public static const SCHEMA:Array = ['event_info', 'data'];
 		
 		public var event_info:CreateEventData;
-		
 		protected var _data:Object;
 		protected var _uploadType:String = UploadPhotoTypes.PNG;
 		protected var _uploadQuality:uint = 80;		
 		
-		public function CreateEvent(event_info:CreateEventData, data:Object) {
+		public function CreateEvent(event_info:CreateEventData, data:Object = null) {
 			super(METHOD_NAME);
 			
 			this.event_info = event_info;

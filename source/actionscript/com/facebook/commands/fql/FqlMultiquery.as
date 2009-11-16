@@ -51,20 +51,24 @@ package com.facebook.commands.fql {
 		public static const METHOD_NAME:String = 'fql.multiquery';
 		public static const SCHEMA:Array = ['queries'];
 		
-		public var queries:Object;
+		public var queries:String;
 		
+<<<<<<< .mine
 		/**
 		 * @param queries Hash of fql query strings.
 		 * 
 		 */
 		public function FqlMultiquery(queries:Object) {
+=======
+		public function FqlMultiquery(querySet:Object) {
+>>>>>>> .r172
 			super(METHOD_NAME);
 			
-			this.queries = queries;
+			queries = JSON.encode(querySet);
 		}
 		
 		override facebook_internal function initialize():void {
-			applySchema(SCHEMA, JSON.encode(queries));
+			applySchema(SCHEMA, queries);
 			super.facebook_internal::initialize();
 		}
 	}

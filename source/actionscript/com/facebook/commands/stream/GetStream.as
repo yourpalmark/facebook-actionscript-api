@@ -54,7 +54,8 @@ filter_key: String (optional)
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package com.facebook.commands.stream {
-	
+		
+	import com.adobe.serialization.json.JSON;
 	import com.facebook.facebook_internal;
 	import com.facebook.net.FacebookCall;
 	import com.facebook.utils.FacebookDataUtils;
@@ -64,7 +65,7 @@ package com.facebook.commands.stream {
 	public class GetStream extends FacebookCall {
 		
 		public static const METHOD_NAME:String = 'stream.get';
-		public static const SCHEMA:Array = ['viewer_id', 'source_ids', 'start_time', 'end_time', 'limit', 'filter_key'];
+		public static const SCHEMA:Array = ['viewer_id', 'source_ids', 'start_time', 'end_time', 'limit', 'filter_key', 'metadata'];
 		
 		public var viewer_id:String;
 		public var source_ids:Array;
@@ -72,20 +73,22 @@ package com.facebook.commands.stream {
 		public var end_time:Date;
 		public var limit:uint;
 		public var filter_key:String;
+		public var metadata:Array;
 		
-		public function GetStream(viewer_id:String, source_ids:Array = null, start_time:Date = null, end_time:Date = null, limit:uint = 30, filter_key:String = null) {
+		public function GetStream(viewer_id:String = null, source_ids:Array = null, start_time:Date = null, end_time:Date = null, limit:uint = 30, filter_key:String = null, metadata:Array = null) {
+			super(METHOD_NAME);
+			
 			this.viewer_id = viewer_id;
 			this.source_ids = source_ids;
 			this.start_time = start_time;
 			this.end_time = end_time;
 			this.limit = limit;
 			this.filter_key = filter_key;
-			
-			super(METHOD_NAME);
+			this.metadata = metadata;
 		}
 		
 		override facebook_internal function initialize():void {
-			applySchema(SCHEMA, viewer_id, FacebookDataUtils.toArrayString(source_ids), FacebookDataUtils.toDateString(start_time), FacebookDataUtils.toDateString(end_time), limit, filter_key);
+			applySchema(SCHEMA, viewer_id, FacebookDataUtils.toArrayString(source_ids), FacebookDataUtils.toDateString(start_time), FacebookDataUtils.toDateString(end_time), limit, filter_key, FacebookDataUtils.toArrayString(metadata));
 			super.facebook_internal::initialize();
 		}
 		

@@ -44,7 +44,7 @@ package com.facebook.commands.status {
 		public var uid:String;
 		public var limit:uint;
 		
-		public function GetStatus(uid:String, limit:uint = 100) {
+		public function GetStatus(uid:String = null, limit:uint = 100) {
 			this.uid = uid;
 			this.limit = limit;
 			

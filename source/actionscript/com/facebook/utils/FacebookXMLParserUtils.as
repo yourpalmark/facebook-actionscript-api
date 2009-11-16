@@ -154,6 +154,9 @@ package com.facebook.utils {
 				albumData.link = singleAlbum.ns::link;
 				albumData.size = singleAlbum.ns::size;
 				albumData.visible = singleAlbum.ns::visible;
+				albumData.modified_major = FacebookXMLParserUtils.toDate(singleAlbum.ns::modified_major);
+				albumData.edit_link = singleAlbum.ns::edit_link;
+				albumData.type = singleAlbum.ns::type;
 				albumCollection.addAlbum(albumData);
 			}
 			

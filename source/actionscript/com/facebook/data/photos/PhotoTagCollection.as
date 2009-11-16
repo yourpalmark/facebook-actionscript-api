@@ -37,7 +37,7 @@ package com.facebook.data.photos {
 	public class PhotoTagCollection extends FacebookArrayCollection {
 		
 		public function PhotoTagCollection(source:Array=null) {
-			super(null, TagData);
+			super(source, TagData);
 		}
 		
 		public function addPhotoTag(tagData:TagData):void {

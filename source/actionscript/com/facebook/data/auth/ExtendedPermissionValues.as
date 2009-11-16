@@ -3,6 +3,7 @@
  * http://wiki.developers.facebook.com/index.php/UsageNotes/Forms#Prompting_a_User_for_an_Extended_Permission
  * Feb 18/09
  * 
+ * Last Update - April 10/09
  */
 /*
   Copyright (c) 2009, Adobe Systems Incorporated
@@ -37,6 +38,7 @@
 */
 package com.facebook.data.auth {
 	
+	[Bindable]
 	public class ExtendedPermissionValues {
 		
 		public static const EMAIL:String = 'email';

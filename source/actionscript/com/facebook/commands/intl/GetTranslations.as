@@ -50,10 +50,6 @@ package com.facebook.commands.intl {
 		public static const METHOD_NAME:String = 'intl.getTranslations';
 		public static const SCHEMA:Array = ['locale', 'all'];
 		
-		/**
-		 * @see http://wiki.developers.facebook.com/index.php/Facebook_Locales
-		 * 
-		 */
 		public var locale:String;
 		public var all:Boolean;
 		

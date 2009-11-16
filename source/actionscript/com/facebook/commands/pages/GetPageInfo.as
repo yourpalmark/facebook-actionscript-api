@@ -54,26 +54,22 @@ package com.facebook.commands.pages {
 
 		
 		public static const METHOD_NAME:String = 'pages.getInfo';
-		public static const SCHEMA:Array = ['fields', 'page_ids','uid','type'];
+		public static const SCHEMA:Array = ['fields', 'page_ids','uid'];
 		
 		public var fields:Array;
 		public var page_ids:Array;
 		public var uid:String;
-		public var type:String;
 		
-		public var pages:Array;
-		
-		public function GetPageInfo(fields:Array, page_ids:Array=null, uid:String=null, type:String=null) {
+		public function GetPageInfo(fields:Array, page_ids:Array=null, uid:String=null) {
 			super(METHOD_NAME);
 			
 			this.fields = fields;
 			this.page_ids = page_ids;
 			this.uid = uid;
-			this.type = type;
 		}
 		
 		override facebook_internal function initialize():void {
-			applySchema(SCHEMA, FacebookDataUtils.toArrayString(fields), FacebookDataUtils.toArrayString(page_ids), uid, type);
+			applySchema(SCHEMA, FacebookDataUtils.toArrayString(fields), FacebookDataUtils.toArrayString(page_ids), uid);
 			super.facebook_internal::initialize();
 		}
 	}

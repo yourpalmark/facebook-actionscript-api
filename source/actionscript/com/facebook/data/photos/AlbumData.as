@@ -45,6 +45,9 @@ package com.facebook.data.photos {
 		public var link:String;
 		public var size:Number;
 		public var visible:String; 
+		public var modified_major:Date;
+		public var edit_link:String;
+		public var type:String;
 		
 		public function AlbumData() {
 			

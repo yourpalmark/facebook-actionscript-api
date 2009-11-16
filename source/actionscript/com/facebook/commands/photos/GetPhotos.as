@@ -36,9 +36,9 @@
 */
 package com.facebook.commands.photos {
 	
+	import com.facebook.facebook_internal;
 	import com.facebook.net.FacebookCall;
 	import com.facebook.utils.FacebookDataUtils;
-	import com.facebook.facebook_internal;
 
 	use namespace facebook_internal;
 
@@ -60,8 +60,12 @@ package com.facebook.commands.photos {
 		protected var aid:String;
 		protected var pids:Array;
 		
-		public function GetPhotos(subj_id:String='',aid:String="",pids:Array=null) {
+		public function GetPhotos(subj_id:String=null,aid:String=null,pids:Array=null) {
 			super(METHOD_NAME);
+			
+			if (subj_id == null && aid == null && pids == null) {
+				throw new Error("Include at least one of subj_id, aid, or pids");
+			}
 			
 			this.subj_id = subj_id;
 			this.aid = aid;

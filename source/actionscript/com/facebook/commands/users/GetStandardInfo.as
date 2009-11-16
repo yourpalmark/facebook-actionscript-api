@@ -51,22 +51,20 @@ package com.facebook.commands.users {
 
 		
 		public static const METHOD_NAME:String = 'users.getStandardInfo';
-		public static const SCHEMA:Array = ['uids','fields','format'];
+		public static const SCHEMA:Array = ['uids','fields'];
 		
 		public var uids:Array;
 		public var fields:Array;
-		public var format:String;
 		
-		public function GetStandardInfo(uids:Array, fields:Array, format:String='') {
+		public function GetStandardInfo(uids:Array, fields:Array) {
 			super(METHOD_NAME);
 			
 			this.uids = uids;
 			this.fields = fields;
-			this.format = format;
 		}
 		
 		override facebook_internal function initialize():void {
-			this.applySchema(SCHEMA, uids, FacebookDataUtils.toArrayString(fields), format);
+			applySchema(SCHEMA, FacebookDataUtils.toArrayString(uids), FacebookDataUtils.toArrayString(fields));
 			super.facebook_internal::initialize();
 		}
 	}

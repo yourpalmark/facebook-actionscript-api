@@ -50,7 +50,6 @@ package com.facebook.commands.video {
 
 		public static const METHOD_NAME:String = 'video.upload';
 		public static const SCHEMA:Array = ['data', 'title', 'description'];
-		public static var TIMEOUT:Number = 300000; //default 5 min timeout
 		
 		protected var _data:Object;
 		protected var _title:String;
@@ -65,7 +64,7 @@ package com.facebook.commands.video {
 		public function get title():String { return _title; }
 		
 		/**
-		 * Used to set type of Uploaded videos.
+		 * Used to change type of Uploaded videos.
 		 * @see UploadVideoTypes
 		 * 
 		 */
@@ -78,8 +77,6 @@ package com.facebook.commands.video {
 		public function UploadVideo(ext:String, data:Object, title:String = null, description:String = null) {
 			super(METHOD_NAME);
 						
-			connectTimeout = TIMEOUT;
-			
 			this.ext = ext;
 			this.data = data;			
 			this.title = title;

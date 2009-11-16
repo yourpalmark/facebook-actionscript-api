@@ -87,7 +87,7 @@ package com.facebook.utils {
 			if (result) {
 				var data:FacebookData = new FacebookData();
 				data.rawResult = result as String;
-				call.facebook_internal::handelResult(data);
+				call.facebook_internal::handleResult(data);
 			} else {
 				var error:FacebookError = new FacebookError();
 				error.rawResult = exception as String;

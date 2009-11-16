@@ -49,20 +49,26 @@ package com.facebook.commands.comments {
 
 		
 		public static const METHOD_NAME:String = 'comments.add';
-		public static const SCHEMA:Array = ['xid','text','uid','title','url','publish_to_stream'];
+		public static const SCHEMA:Array = ['text','xid','object_id','uid','title','url','publish_to_stream'];
 		
-		public var xid:String;
 		public var text:String;
+		public var xid:String;
+		public var object_id:String;
 		public var uid:String;
 		public var title:String;
 		public var url:String;
 		public var publish_to_stream:Boolean;
 		
-		public function AddComments(xid:String, text:String, uid:String = null, title:String = null, url:String = null, publish_to_stream:Boolean = false) {
+		public function AddComments(text:String, xid:String = null, object_id:String = null, uid:String = null, title:String = null, url:String = null, publish_to_stream:Boolean = false) {
 			super(METHOD_NAME);
 			
-			this.xid = xid;
+			if (xid == null && object_id == null) {
+				throw new Error("xid or object_id is required");
+			}
+			
 			this.text = text;
+			this.xid = xid;
+			this.object_id = object_id;
 			this.uid = uid;
 			this.title = title;
 			this.url = url;
@@ -70,7 +76,7 @@ package com.facebook.commands.comments {
 		}
 		
 		override facebook_internal function initialize():void {
-			applySchema(SCHEMA, xid, text, uid, title, url, publish_to_stream);
+			applySchema(SCHEMA, text, xid, object_id, uid, title, url, publish_to_stream);
 			super.facebook_internal::initialize();
 		}
 	}

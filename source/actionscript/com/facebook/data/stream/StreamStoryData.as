@@ -54,6 +54,9 @@ package com.facebook.data.stream {
 		
 		public var privacy:String;
 		public var filter_key:String;
+		public var permalink:String;
+		public var is_hidden:Boolean;
+		public var action_links:Array; //of ActionLinksData
 		
 		public var sourceXML:XML;
 		

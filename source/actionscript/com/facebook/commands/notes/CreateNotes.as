@@ -31,8 +31,8 @@
 */
 package com.facebook.commands.notes {
 	
-	import com.facebook.net.FacebookCall;
 	import com.facebook.facebook_internal;
+	import com.facebook.net.FacebookCall;
 
 	use namespace facebook_internal;
 
@@ -45,22 +45,22 @@ package com.facebook.commands.notes {
 
 		
 		public static const METHOD_NAME:String = 'notes.create';
-		public static const SCHEMA:Array = ['uid','title','content'];
+		public static const SCHEMA:Array = ['title','content','uid'];
 		
-		public var uid:String;
 		public var title:String;
 		public var content:String;
+		public var uid:String;
 		
-		public function CreateNotes(uid:String, title:String, content:String) {
+		public function CreateNotes(title:String, content:String, uid:String=null) {
 			super(METHOD_NAME);
 			
-			this.uid = uid;
 			this.title = title;
 			this.content = content;
+			this.uid = uid;
 		}
 		
 		override facebook_internal function initialize():void {
-			applySchema(SCHEMA, uid, title, content);
+			applySchema(SCHEMA, title, content, uid);
 			super.facebook_internal::initialize();
 		}
 	}

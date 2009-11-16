@@ -36,7 +36,7 @@ package com.facebook.data.admin {
 	[Bindable]
 	public class GetAppPropertiesData extends FacebookData {
 		
-		public var appProperties:Array;
+		public var appProperties:Object;
 		
 		public function GetAppPropertiesData() {
 			super();

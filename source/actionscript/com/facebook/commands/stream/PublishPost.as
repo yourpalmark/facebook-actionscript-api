@@ -32,11 +32,8 @@
 package com.facebook.commands.stream {
 	
 	import com.adobe.serialization.json.JSON;
-	import com.facebook.data.feed.ActionLinkCollection;
-	import com.facebook.data.feed.TemplateData;
 	import com.facebook.facebook_internal;
 	import com.facebook.net.FacebookCall;
-	import com.facebook.utils.FacebookDataUtils;
 	
 	use namespace facebook_internal;
 
@@ -60,7 +57,9 @@ package com.facebook.commands.stream {
 		}
 		
 		override facebook_internal function initialize():void {
-			applySchema(SCHEMA, message, attachment != null ? JSON.encode(attachment) : null, action_links != null ? JSON.encode(action_links) : null, target_id);
+			var parsedLinks:String = JSON.encode(action_links);
+			applySchema(SCHEMA, message, JSON.encode(attachment), parsedLinks!='null'?parsedLinks:null, target_id);
+			
 			super.facebook_internal::initialize();
 		}
 	}

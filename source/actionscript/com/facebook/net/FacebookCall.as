@@ -63,14 +63,14 @@ package com.facebook.net {
 		 * @default 8000
 		 * 
 		 */
-		public var connectTimeout:uint = 1000*8;
+		//public var connectTimeout:uint = 1000*8;
 		
 		/**
 		 * Time before an Load timeout occurs, in milliseconds. 
 		 * @default 8000
 		 * 
 		 */
-		public var loadTimeout:uint = 1000*30;
+		//public var loadTimeout:uint = 1000*30;
 		
 		/**
 		 * Set this if you do-not want to pass a session.

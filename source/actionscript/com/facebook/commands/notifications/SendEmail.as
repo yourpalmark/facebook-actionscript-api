@@ -36,9 +36,9 @@
 */
 package com.facebook.commands.notifications {
 	
+	import com.facebook.facebook_internal;
 	import com.facebook.net.FacebookCall;
 	import com.facebook.utils.FacebookDataUtils;
-	import com.facebook.facebook_internal;
 
 	use namespace facebook_internal;
 	
@@ -51,15 +51,19 @@ package com.facebook.commands.notifications {
 
 		
 		public static const METHOD_NAME:String = 'notifications.sendEmail';
-		public static const SCHEMA:Array = ['recipients', 'subject', 'text', 'subject'];
+		public static const SCHEMA:Array = ['recipients', 'subject', 'text', 'fbml'];
 		
 		public var recipients:Array;
 		public var subject:String;
 		public var text:String;
 		public var fbml:String;
 		
-		public function SendEmail(recipients:Array, subject:String, text:String, fbml:String) { 
+		public function SendEmail(recipients:Array, subject:String, text:String=null, fbml:String=null) { 
 			super(METHOD_NAME);
+			
+			if (text == null && fbml == null) {
+				throw new Error("Must specify text or fbml string");
+			}
 			
 			this.recipients = recipients;
 			this.subject = subject;

@@ -49,18 +49,26 @@ package com.facebook.commands.comments {
 
 		
 		public static const METHOD_NAME:String = 'comments.get';
-		public static const SCHEMA:Array = ['xid'];
+		public static const SCHEMA:Array = ['xid','object_id', 'post_id'];
 		
 		public var xid:String;
+		public var object_id:String;
+		public var post_id:String;
 		
-		public function GetComments(xid:String) {
+		public function GetComments(xid:String = null, object_id:String = null, post_id:String = null) {
 			super(METHOD_NAME);
 			
+			if (xid == null && object_id == null && post_id == null) {
+				throw new Error("xid, post_id, or object_id is required");
+			}
+			
 			this.xid = xid;
+			this.object_id = object_id;
+			this.post_id = post_id;
 		}
 		
 		override facebook_internal function initialize():void {
-			applySchema(SCHEMA, xid);
+			applySchema(SCHEMA, xid, object_id, post_id);
 			super.facebook_internal::initialize();
 		}
 	}

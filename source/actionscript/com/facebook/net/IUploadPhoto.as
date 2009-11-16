@@ -31,7 +31,6 @@
 */
 
 package com.facebook.net {
-	
 	public interface IUploadPhoto {
 		function get uploadType():String;
 		function set uploadType(value:String):void;
@@ -42,5 +41,4 @@ package com.facebook.net {
 		function get data():Object;
 		function set data(value:Object):void;
 	}
-	
 }

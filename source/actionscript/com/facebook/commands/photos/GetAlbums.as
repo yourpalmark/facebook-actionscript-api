@@ -59,7 +59,7 @@ package com.facebook.commands.photos {
 		public var uid:String;
 		public var aids:Array;
 		
-		public function GetAlbums(uid:String='', aids:Array=null) {
+		public function GetAlbums(uid:String=null, aids:Array=null) {
 			
 			super(METHOD_NAME);
 			

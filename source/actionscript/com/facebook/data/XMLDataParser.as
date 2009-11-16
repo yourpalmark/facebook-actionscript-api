@@ -111,7 +111,6 @@ package com.facebook.data {
 	import com.facebook.utils.IFacebookResultParser;
 	
 	import flash.events.ErrorEvent;
-	import flash.utils.getTimer;
 	
 	public class XMLDataParser implements IFacebookResultParser {
 		
@@ -249,6 +248,13 @@ package com.facebook.data {
 					result = parseGetEvent(xml); break;
 				case 'events.getMembers':
 					result = parseGetMembers(xml); break;
+<<<<<<< .mine
+=======
+				case 'fql.multiquery':
+					result = new FacebookData(); break;
+				case 'fql.query':
+					result = new FacebookData(); break;
+>>>>>>> .r172
 				case 'photos.createAlbum':
 					result = parseCreateAlbum(xml); break;
 				case 'photos.get': 
@@ -306,15 +312,15 @@ package com.facebook.data {
 			var children:XMLList = xml.children();
 			var l:uint = children.length();
 			for (var i:uint=0;i<l;i++) {
-				var nodes:XMLList = children[i].children();
-				var stausNode:Status = new Status();
-				stausNode.uid = FacebookXMLParserUtils.toStringValue(nodes[0]);
-				stausNode.status_id = FacebookXMLParserUtils.toStringValue(nodes[1]);
-				stausNode.time = FacebookXMLParserUtils.toDate(nodes[2]);
-				stausNode.source = FacebookXMLParserUtils.toStringValue(nodes[3]);
-				stausNode.message = FacebookXMLParserUtils.toStringValue(nodes[4]);
+				var statusXML:XML = children[i];
+				var statusNode:Status = new Status();
+				statusNode.uid = FacebookXMLParserUtils.toStringValue(statusXML.fb_namespace::uid[0]);
+				statusNode.status_id = FacebookXMLParserUtils.toStringValue(statusXML.fb_namespace::status_id[0]);
+				statusNode.time = FacebookXMLParserUtils.toDate(statusXML.fb_namespace::time[0]);
+				statusNode.source = FacebookXMLParserUtils.toStringValue(statusXML.fb_namespace::source[0]);
+				statusNode.message = FacebookXMLParserUtils.toStringValue(statusXML.fb_namespace::message[0]);
 				
-				status.push(stausNode);
+				status.push(statusNode);
 			}
 			
 			gsd.status = status;
@@ -439,6 +445,7 @@ package com.facebook.data {
 			getPageInfoData.daily_active_users = xml.fb_namespace::daily_active_users;
 			getPageInfoData.weekly_active_users = xml.fb_namespace::weekly_active_users;
 			getPageInfoData.monthly_active_users = xml.fb_namespace::monthly_active_users;
+			getPageInfoData.description = xml.fb_namespace::description;
 			
 			return getPageInfoData;
 		}
@@ -493,7 +500,7 @@ package com.facebook.data {
 			for each(var user:* in xml..fb_namespace::user) {
 				var userData:UserData = new UserData();
 				userData.uid = user.fb_namespace::uid;
-				userData.affiations = getAffiliation(user.fb_namespace::affiliations);
+				userData.affiations = getAffiliation(XML(user.fb_namespace::affiliations.toXMLString())); //userData.affiations = getAffiliation(user.fb_namespace::affiliations);
 				userData.first_name = user.fb_namespace::first_name;
 				userData.last_name = user.fb_namespace::last_name;
 				userData.name = user.fb_namespace::name;
@@ -832,7 +839,7 @@ package com.facebook.data {
 				var friendData:FriendsData = new FriendsData();
 				friendData.uid1 = friend.fb_namespace::uid1;
 				friendData.uid2 = friend.fb_namespace::uid2;
-				friendData.are_friends = FacebookXMLParserUtils.toBoolean(friend.fb_namespace::are_friends);
+				friendData.are_friends = FacebookXMLParserUtils.toBoolean(XML(friend.fb_namespace::are_friends.toXMLString())); //friendData.are_friends = FacebookXMLParserUtils.toBoolean(friend.fb_namespace::are_friends);
 				friendsCollection.addItem(friendData);
 			}
 			areFriendsData.friendsCollection = friendsCollection;

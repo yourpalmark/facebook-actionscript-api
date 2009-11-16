@@ -31,12 +31,15 @@
 */
 package com.facebook.utils {
 	
+	import com.facebook.data.stream.ActionLinkData;
 	import com.facebook.data.stream.AttachmentData;
 	import com.facebook.data.stream.CommentsData;
+	import com.facebook.data.stream.FlashMedia;
 	import com.facebook.data.stream.GetCommentsData;
 	import com.facebook.data.stream.GetFiltersData;
 	import com.facebook.data.stream.GetStreamData;
 	import com.facebook.data.stream.LikesData;
+	import com.facebook.data.stream.MusicMedia;
 	import com.facebook.data.stream.PhotoMedia;
 	import com.facebook.data.stream.PostCommentData;
 	import com.facebook.data.stream.ProfileCollection;
@@ -161,6 +164,9 @@ package com.facebook.utils {
 				var privacy:XML = ssx.ns::privacy[0];
 				ss.privacy = FacebookXMLParserUtils.toStringValue(privacy.ns::value[0]);
 				ss.filter_key = FacebookXMLParserUtils.toStringValue(ssx.ns::filter_key[0]);
+				ss.permalink = FacebookXMLParserUtils.toStringValue(ssx.ns::permalink[0]);
+				ss.is_hidden = FacebookXMLParserUtils.toBoolean(ssx.ns::is_hidden[0]);
+				ss.action_links = createActionLinksArray(ssx.ns::action_links[0], ns);
 				
 				streamStories.addItem(ss);
 			}
@@ -199,6 +205,8 @@ package com.facebook.utils {
 				smd.src = FacebookXMLParserUtils.toStringValue(mediaXML.ns::src[0]);
 				smd.video = createVideoMedia(mediaXML.ns::video[0], ns);
 				smd.photo = createPhotoMedia(mediaXML.ns::photo[0], ns);
+				smd.flash = createFlashMedia(mediaXML.ns::swf[0], ns);
+				smd.music = createMusicMedia(mediaXML.ns::music[0], ns);
 				arr.push(smd);
 			}
 			
@@ -227,6 +235,25 @@ package com.facebook.utils {
 			return pm;
 		}
 		
+		protected static function createFlashMedia(value:XML, ns:Namespace):FlashMedia {
+			if (value == null) { return null; }
+			
+			var fm:FlashMedia = new FlashMedia();
+			fm.source_url = FacebookXMLParserUtils.toStringValue(value.ns::source_url[0]);
+			fm.preview_img = FacebookXMLParserUtils.toStringValue(value.ns::preview_img[0]);
+			return fm;
+		}
+		
+		protected static function createMusicMedia(value:XML, ns:Namespace):MusicMedia {
+			if (value == null) { return null; }
+			
+			var mm:MusicMedia= new MusicMedia();
+			mm.source_url = FacebookXMLParserUtils.toStringValue(value.ns::source_url[0]);
+			mm.artist = FacebookXMLParserUtils.toStringValue(value.ns::artist[0]);
+			mm.title= FacebookXMLParserUtils.toStringValue(value.ns::title[0]);
+			return mm; 
+		}
+		
 		protected static function createComments(source:XML, ns:Namespace):CommentsData {
 			var comments:CommentsData = new CommentsData();
 			 
@@ -234,9 +261,26 @@ package com.facebook.utils {
 			comments.can_post = FacebookXMLParserUtils.toBoolean(source.ns::can_post[0]);
 			comments.count = FacebookXMLParserUtils.toNumber(source.ns::count[0]);
 			
-			var postsXML:XMLList = source.ns::posts.children();
+			var postsXML:XMLList = source.ns::comment_list.children();
 			comments.posts = createCommentsArray(postsXML, ns);
 			return comments;
+		}
+		
+		protected static function createActionLinksArray(value:XML, ns:Namespace):Array {
+			if (value == null) { return null; }
+			
+			var arr:Array = [];
+			var links:XMLList = value.children();
+			var l:uint = links.length();
+			for (var i:uint=0;i<l;i++) {
+				var linkXML:XML = links[i];
+				var ald:ActionLinkData = new ActionLinkData();
+				ald.text = FacebookXMLParserUtils.toStringValue(linkXML.ns::text[0]);
+				ald.href = FacebookXMLParserUtils.toStringValue(linkXML.ns::href[0]);
+				arr.push(ald);
+			}
+			
+			return arr;
 		}
 
 	}

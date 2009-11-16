@@ -80,8 +80,6 @@ package com.facebook.delegates {
 			createURLLoader();
 			loader.dataFormat = URLLoaderDataFormat.BINARY;
 			loader.load(urlreq);
-			
-			connectTimer.start();
 		}
 		
 		protected function onFileRefComplete(p_event:Event):void {
@@ -91,10 +89,8 @@ package com.facebook.delegates {
 		
 		override protected function onDataComplete(p_event:Event):void {
 			var ba:ByteArray = p_event.target.data as ByteArray;
-			if (ba == null) { //Hopefully should never get here.
-				var error:FacebookError = new FacebookError();
-				call.handleError(error);								
-				clean();
+			if (ba == null) { 
+				super.onDataComplete(p_event);
 			} else {
 				var result:String = ba.readUTFBytes(ba.length);
 				ba.length = 0;

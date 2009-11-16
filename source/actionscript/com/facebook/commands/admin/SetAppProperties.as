@@ -31,9 +31,9 @@
 */
 package com.facebook.commands.admin {
 	
+	import com.adobe.serialization.json.JSON;
 	import com.facebook.facebook_internal;
 	import com.facebook.net.FacebookCall;
-	import com.facebook.utils.FacebookDataUtils;
 	
 	use namespace facebook_internal;
 
@@ -44,20 +44,19 @@ package com.facebook.commands.admin {
 	 */
 	public class SetAppProperties extends FacebookCall {
 
-		
 		public static const METHOD_NAME:String = 'admin.setAppProperties';
 		public static const SCHEMA:Array = ['properties'];
 		
-		public var properties:Array;
+		public var properties:Object;
 		
-		public function SetAppProperties(properties:Array) {
+		public function SetAppProperties(properties:Object) {
 			super(METHOD_NAME);
 		
 			this.properties = properties;
 		}
 		
 		override facebook_internal function initialize():void {
-			applySchema(SCHEMA, FacebookDataUtils.toArrayString(this.properties));
+			applySchema(SCHEMA, JSON.encode(this.properties));
 			super.facebook_internal::initialize();
 		}
 	}

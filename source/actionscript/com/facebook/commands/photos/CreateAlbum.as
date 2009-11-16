@@ -47,7 +47,6 @@ package com.facebook.commands.photos {
 	 * @see http://wiki.developers.facebook.com/index.php/Photos.createAlbum
 	 */
 	public class CreateAlbum extends FacebookCall {
-
 		
 		public static const METHOD_NAME:String = 'photos.createAlbum';
 		public static const SCHEMA:Array = ['name','location','description','visible','uid'];
@@ -58,7 +57,7 @@ package com.facebook.commands.photos {
 		public var visible:String;
 		public var uid:String;
 		
-		public function CreateAlbum(name:String, location:String="", description:String="", visible:String="", uid:String=null) {
+		public function CreateAlbum(name:String, location:String=null, description:String=null, visible:String=null, uid:String=null) {
 			super(METHOD_NAME);
 			
 			this.name = name;

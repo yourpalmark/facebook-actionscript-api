@@ -31,10 +31,6 @@
 */
 package com.facebook.commands.video {
 	
-	/**
-	 * @see http://wiki.developers.facebook.com/index.php/Video.upload
-	 */
-	
 	public class UploadVideoTypes {
 		
 		public static const _3G2:String = '3g2'; //Mobile Video

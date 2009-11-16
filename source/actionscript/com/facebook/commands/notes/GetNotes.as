@@ -52,7 +52,7 @@ package com.facebook.commands.notes {
 		
 		public var uid:String;
 		
-		public function GetNotes(uid:String='') {
+		public function GetNotes(uid:String = null) {
 			super(METHOD_NAME);
 			
 			this.uid = uid;

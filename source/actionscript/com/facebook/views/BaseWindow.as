@@ -76,7 +76,10 @@ package com.facebook.views {
 			
 			//distractor
 			distractor = new Distractor();			
-			stage.addChild(distractor);					
+			stage.addChild(distractor);
+			/* distractor.text = "Please Wait";
+			distractor.x = width - distractor.width >> 1;
+			distractor.y = height - distractor.height >> 1;	 */					
 			
 			urlVars = new URLVariables();
 			req = new URLRequest();

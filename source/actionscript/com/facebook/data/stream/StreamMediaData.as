@@ -48,13 +48,15 @@ package com.facebook.data.stream {
 		public var alt:String;
 		public var photo:PhotoMedia;
 		public var video:VideoMedia;
+		public var flash:FlashMedia;
+		public var music:MusicMedia;
 		
 		public function StreamMediaData() {
 			
 		}
 		
 		public function toString():String {
-			return ['type: ' + type, 'href: ' + href, 'src: ' + src, 'alt: ' + alt, 'photo: ' + photo, 'video: ' + video].join(': ');
+			return ['type: ' + type, 'href: ' + href, 'src: ' + src, 'alt: ' + alt, 'photo: ' + photo, 'video: ' + video, 'flash: ' + flash].join(': ');
 		}
 
 	}

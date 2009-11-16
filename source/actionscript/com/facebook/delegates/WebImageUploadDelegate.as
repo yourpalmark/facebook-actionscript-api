@@ -68,11 +68,17 @@ package com.facebook.delegates {
 			var data:ByteArray;
 			var urlReq:URLRequest = new URLRequest(_session.rest_url);
 			var imageData:Object = call.args.data;
+			
+			if (imageData == null) {
+				super.sendRequest(); //default to WebDelegate sendRequest() if there is no image data; support for optional images such as CreateEvent command
+				return;
+			}
+			
 			if (PlayerUtils.majorVersion == 9 && imageData is FileReference) {
 				throw new TypeError('Uploading FileReference with Player 9 is unsupported.  Use either an BitmapData or ByteArray.');
 			}
 			
-			if (imageData is Bitmap) { imageData = (imageData as Bitmap).bitmapData; }
+			if (imageData is Bitmap) { imageData = (imageData as Bitmap).bitmapData; }			
 			if (PlayerUtils.majorVersion == 10 && imageData is FileReference) {
 				//When using player 10 and FileReference we can just grab the raw ByteArray data from it.
 				data = (imageData as FileReference)['load'](); //Bracket access so this complies in Flash 9.

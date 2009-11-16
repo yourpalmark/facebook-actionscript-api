@@ -47,11 +47,6 @@ package com.facebook.delegates {
 			super(call, session);
 		}
 		
-		override protected function onOpen(p_event:Event) : void {
-			super.onOpen(p_event);
-			loadTimer.stop(); //prevents timeout since videos can take a long time to upload			
-		}
-		
 		override protected function getExt() : String {
 			return (call as UploadVideo).ext;
 		}
