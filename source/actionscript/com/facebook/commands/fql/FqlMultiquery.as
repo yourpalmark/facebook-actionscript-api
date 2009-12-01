@@ -53,15 +53,11 @@ package com.facebook.commands.fql {
 		
 		public var queries:String;
 		
-<<<<<<< .mine
 		/**
 		 * @param queries Hash of fql query strings.
 		 * 
 		 */
-		public function FqlMultiquery(queries:Object) {
-=======
 		public function FqlMultiquery(querySet:Object) {
->>>>>>> .r172
 			super(METHOD_NAME);
 			
 			queries = JSON.encode(querySet);

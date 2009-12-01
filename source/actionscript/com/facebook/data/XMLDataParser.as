@@ -248,13 +248,10 @@ package com.facebook.data {
 					result = parseGetEvent(xml); break;
 				case 'events.getMembers':
 					result = parseGetMembers(xml); break;
-<<<<<<< .mine
-=======
 				case 'fql.multiquery':
 					result = new FacebookData(); break;
 				case 'fql.query':
 					result = new FacebookData(); break;
->>>>>>> .r172
 				case 'photos.createAlbum':
 					result = parseCreateAlbum(xml); break;
 				case 'photos.get': 
