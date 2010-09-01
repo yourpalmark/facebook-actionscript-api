@@ -1,15 +1,1271 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- saved from url=(0014)about:internet --><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="../../../style.css" type="text/css" media="screen"><link rel="stylesheet" href="../../../print.css" type="text/css" media="print"><link rel="stylesheet" href="../../../override.css" type="text/css"><meta name="keywords" content="XMLDataParser,com.facebook.data.XMLDataParser,API_EC_BAD_IP,API_EC_DEPRECATED,API_EC_HOST_API,API_EC_HOST_UP,API_EC_METHOD,API_EC_PERMISSION_DENIED,API_EC_RATE,API_EC_SECURE,API_EC_SERVICE,API_EC_SUCCESS,API_EC_TOO_MANY_CALLS,API_EC_UNKNOWN,API_EC_VERSION,BATCH_RUN_RANGE_ERROR,CONNECT_TIMEOUT,DATA_INVALID_NAME_ERROR,LOAD_TIMEOUT,SERVER_ERROR,USER_PREFERENCE_ID_RANGE_ERROR,USER_PREFERENCE_VALUE_RANGE_ERROR,arrayResult,city,company_name,concentrations,country,degree,description,end_date,fb_namespace,location,name,name,nid,position,rawResult,result,results,start_date,state,status,street,type,value,value,value,year,year,zip,createFacebookError,createTagObject,getAffiliation,getTemplate,getVenueData,parseAreFriends,parseBatchRun,parseCreateAlbum,parseFacebookPhoto,parseGener,parseGetAlbums,parseGetAllocation,parseGetAppProperties,parseGetAppUsersData,parseGetCookies,parseGetCustomTags,parseGetEvent,parseGetFriends,parseGetGroupMembers,parseGetGroups,parseGetInfo,parseGetLists,parseGetMembers,parseGetMetrics,parseGetNotes,parseGetNotifications,parseGetObjectType,parseGetObjectTypes,parseGetPhotos,parseGetPublicInfo,parseGetRegisteredTemplateBundleByID,parseGetRegisteredTemplateBundles,parseGetStandardInfo,parseGetTags,parseGetUserPreferences,parsePageGetInfo,parseSendEmail,parse,responseNodeNameToMethodName,toArray,toBoolean,toDate,toNumber,toStringValue,toUIDArray,validateFacebookResponce,xmlToUrlVariables"><title>com.facebook.data.XMLDataParser</title></head><body><script language="javascript" type="text/javascript" src="../../../asdoc.js"></script><script language="javascript" type="text/javascript" src="../../../help.js"></script><script language="javascript" type="text/javascript" src="../../../cookies.js"></script><script language="javascript" type="text/javascript"><!--
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../../print.css" type="text/css" media="print">
+<meta content="XMLDataParser,com.facebook.data.XMLDataParser,fb_namespace,createFacebookError,createTagObject,getAffiliation,getTemplate,parse,parseAreFriends,parseBatchRun,parseCreateAlbum,parseFacebookPhoto,parseGetAlbums,parseGetAllocation,parseGetAppProperties,parseGetAppUsersData,parseGetCookies,parseGetCustomTags,parseGetEvent,parseGetFriends,parseGetGroupMembers,parseGetGroups,parseGetInfo,parseGetLists,parseGetMembers,parseGetMetrics,parseGetNotes,parseGetNotifications,parseGetObjectType,parseGetObjectTypes,parseGetPhotos,parseGetPublicInfo,parseGetRegisteredTemplateBundleByID,parseGetRegisteredTemplateBundles,parseGetStandardInfo,parseGetStatus,parseGetTags,parseGetUserPreferences,parsePageGetInfo,parseSendEmail,responseNodeNameToMethodName,validateFacebookResponce" name="keywords">
+<title>com.facebook.data.XMLDataParser</title>
+</head>
+<body>
+<script type="text/javascript" language="javascript" src="../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../cookies.js"></script><script type="text/javascript" language="javascript">
+<!--
 				asdocTitle = 'XMLDataParser - ActionScript 3.0 Client Library for Facebook Platform API';
 				var baseRef = '../../../';
 				window.onload = configPage;
 			--></script>
-<script type="text/javascript">
-			scrollToNameAnchor();
-		</script><table class="titleTable" cellpadding="0" cellspacing="0" id="titleTable" style="display:none"><tr><td class="titleTableTitle" align="left">ActionScript 3.0 Client Library for Facebook Platform API</td><td class="titleTableTopNav" align="right"><a href="../../../package-summary.html" onclick="loadClassListFrame('../../../all-classes.html')">All Packages</a>&nbsp;|&nbsp;<a href="../../../class-summary.html" onclick="loadClassListFrame('../../../all-classes.html')">All Classes</a>&nbsp;|&nbsp;<a href="../../../all-index-A.html" onclick="loadClassListFrame('../../../index-list.html')">Index</a>&nbsp;|&nbsp;<a id="framesLink1" href="../../../index.html?com/facebook/data/XMLDataParser.html&amp;com/facebook/data/class-list.html">Frames</a><a id="noFramesLink1" style="display:none" href="" onclick="parent.location=document.location"> No Frames </a></td><td class="titleTableLogo" align="right" rowspan="3"><img src="../../../images/logo.jpg" class="logoImage" alt=" Adobe Logo " title=" Adobe Logo "></td></tr><tr class="titleTableRow2"><td class="titleTableSubTitle" id="subTitle" align="left">XMLDataParser</td><td class="titleTableSubNav" id="subNav" align="right"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td></tr><tr class="titleTableRow3"><td colspan="3">&nbsp;</td></tr></table><script language="javascript" type="text/javascript" xml:space="preserve">
-				<!--
-				
-					if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("XMLDataParser"); titleBar_setSubNav(false,true,false	,false,false,false,true,false,false	,false,false,false,false,false);}	
-				-->
-			</script><div xmlns:fn="http://www.w3.org/2005/xpath-functions" class="MainContent"><table class="classHeaderTable" cellpadding="0" cellspacing="0"><tr><td class="classHeaderTableLabel">Package</td><td><a href="package-detail.html" onclick="javascript:loadClassListFrame('class-list.html')">com.facebook.data</a></td></tr><tr><td class="classHeaderTableLabel">Class</td><td class="classSignature">public  class  XMLDataParser</td></tr><tr><td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">XMLDataParser  <img src="../../../images/inherit-arrow.gif" title="Inheritance" alt="Inheritance" class="inheritArrow"> Object</td></tr><tr><td class="classHeaderTableLabel">Implements</td><td> <a href="../../../com/facebook/utils/IFacebookResultParser.html">IFacebookResultParser</a></td></tr></table><p></p><p></p><p></p><br/><hr></div><a name="propertySummary"></a><a name="protectedPropertySummary"></a><div class="summarySection"><div class="summaryTableTitle">Protected Properties</div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableProtectedProperty"><tr><th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#fb_namespace" class="signatureLink">fb_namespace</a> : Namespace<div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr></table></div><a name="methodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#XMLDataParser()" class="signatureLink">XMLDataParser</a>()</div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#createFacebookError()" class="signatureLink">createFacebookError</a>(p_error:Object, p_result:String):<a href="../../../com/facebook/errors/FacebookError.html">FacebookError</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parse()" class="signatureLink">parse</a>(data:String, methodName:String):<a href="../../../com/facebook/data/FacebookData.html">FacebookData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#validateFacebookResponce()" class="signatureLink">validateFacebookResponce</a>(result:String):<a href="../../../com/facebook/errors/FacebookError.html">FacebookError</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#xmlToUrlVariables()" class="signatureLink">xmlToUrlVariables</a>(p_xml:XMLList):URLVariables</div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr></table></div><a name="protectedMethodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Protected Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableProtectedMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#createTagObject()" class="signatureLink">createTagObject</a>(xml:XML, propList:Array):*</div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getAffiliation()" class="signatureLink">getAffiliation</a>(xml:XML):<a href="../../../com/facebook/data/users/AffiliationCollection.html">AffiliationCollection</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getTemplate()" class="signatureLink">getTemplate</a>(xml:XMLList, templateCollection:<a href="../../../com/facebook/data/feed/TemplateCollection.html">TemplateCollection</a>):void</div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#getVenueData()" class="signatureLink">getVenueData</a>(xml:XMLList):<a href="../../../com/facebook/data/events/VenueData.html">VenueData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseAreFriends()" class="signatureLink">parseAreFriends</a>(xml:XML):<a href="../../../com/facebook/data/friends/AreFriendsData.html">AreFriendsData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseBatchRun()" class="signatureLink">parseBatchRun</a>(xml:XML):<a href="../../../com/facebook/data/FacebookData.html">FacebookData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseCreateAlbum()" class="signatureLink">parseCreateAlbum</a>(xml:XML):<a href="../../../com/facebook/data/photos/GetCreateAlbumData.html">GetCreateAlbumData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseFacebookPhoto()" class="signatureLink">parseFacebookPhoto</a>(xml:XML):<a href="../../../com/facebook/data/photos/FacebookPhoto.html">FacebookPhoto</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseGener()" class="signatureLink">parseGener</a>(xml:XML):<a href="../../../com/facebook/data/pages/GenreData.html">GenreData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseGetAlbums()" class="signatureLink">parseGetAlbums</a>(xml:XML):<a href="../../../com/facebook/data/photos/GetAlbumsData.html">GetAlbumsData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseGetAllocation()" class="signatureLink">parseGetAllocation</a>(result:XML):<a href="../../../com/facebook/data/admin/GetAllocationData.html">GetAllocationData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseGetAppProperties()" class="signatureLink">parseGetAppProperties</a>(xml:XML):<a href="../../../com/facebook/data/admin/GetAppPropertiesData.html">GetAppPropertiesData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseGetAppUsersData()" class="signatureLink">parseGetAppUsersData</a>(xml:XML):<a href="../../../com/facebook/data/friends/GetAppUserData.html">GetAppUserData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseGetCookies()" class="signatureLink">parseGetCookies</a>(xml:XML):<a href="../../../com/facebook/commands/data/GetCookiesData.html">GetCookiesData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseGetCustomTags()" class="signatureLink">parseGetCustomTags</a>(xml:XML):<a href="../../../com/facebook/data/fbml/GetCustomTagsData.html">GetCustomTagsData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseGetEvent()" class="signatureLink">parseGetEvent</a>(xml:XML):<a href="../../../com/facebook/data/events/GetEventsData.html">GetEventsData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseGetFriends()" class="signatureLink">parseGetFriends</a>(xml:XML):<a href="../../../com/facebook/data/friends/GetFriendsData.html">GetFriendsData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseGetGroupMembers()" class="signatureLink">parseGetGroupMembers</a>(xml:XML):<a href="../../../com/facebook/data/groups/GetMemberData.html">GetMemberData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseGetGroups()" class="signatureLink">parseGetGroups</a>(xml:XML):<a href="../../../com/facebook/data/groups/GetGroupData.html">GetGroupData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseGetInfo()" class="signatureLink">parseGetInfo</a>(xml:XML):<a href="../../../com/facebook/data/users/GetInfoData.html">GetInfoData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseGetLists()" class="signatureLink">parseGetLists</a>(xml:XML):<a href="../../../com/facebook/data/friends/GetListsData.html">GetListsData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseGetMembers()" class="signatureLink">parseGetMembers</a>(xml:XML):<a href="../../../com/facebook/data/events/GetMembersData.html">GetMembersData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseGetMetrics()" class="signatureLink">parseGetMetrics</a>(xml:XML):<a href="../../../com/facebook/data/admin/GetMetricsData.html">GetMetricsData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseGetNotes()" class="signatureLink">parseGetNotes</a>(xml:XML):<a href="../../../com/facebook/data/notes/GetNotesData.html">GetNotesData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseGetNotifications()" class="signatureLink">parseGetNotifications</a>(xml:XML):<a href="../../../com/facebook/data/notifications/GetNotificationData.html">GetNotificationData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseGetObjectType()" class="signatureLink">parseGetObjectType</a>(xml:XML):<a href="../../../com/facebook/data/data/GetObjectTypeData.html">GetObjectTypeData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseGetObjectTypes()" class="signatureLink">parseGetObjectTypes</a>(xml:XML):<a href="../../../com/facebook/data/data/GetObjectTypesData.html">GetObjectTypesData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseGetPhotos()" class="signatureLink">parseGetPhotos</a>(xml:XML):<a href="../../../com/facebook/data/photos/GetPhotosData.html">GetPhotosData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseGetPublicInfo()" class="signatureLink">parseGetPublicInfo</a>(xml:XML):<a href="../../../com/facebook/data/application/GetPublicInfoData.html">GetPublicInfoData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseGetRegisteredTemplateBundleByID()" class="signatureLink">parseGetRegisteredTemplateBundleByID</a>(xml:XML):<a href="../../../com/facebook/data/feed/GetRegisteredTemplateBundleByIDData.html">GetRegisteredTemplateBundleByIDData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseGetRegisteredTemplateBundles()" class="signatureLink">parseGetRegisteredTemplateBundles</a>(xml:XML):<a href="../../../com/facebook/data/feed/GetRegisteredTemplateBundleData.html">GetRegisteredTemplateBundleData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseGetStandardInfo()" class="signatureLink">parseGetStandardInfo</a>(xml:XML):<a href="../../../com/facebook/data/users/GetStandardInfoData.html">GetStandardInfoData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseGetTags()" class="signatureLink">parseGetTags</a>(xml:XML):<a href="../../../com/facebook/data/photos/GetTagsData.html">GetTagsData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseGetUserPreferences()" class="signatureLink">parseGetUserPreferences</a>(xml:XML):<a href="../../../com/facebook/data/data/GetUserPreferencesData.html">GetUserPreferencesData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parsePageGetInfo()" class="signatureLink">parsePageGetInfo</a>(xml:XML):<a href="../../../com/facebook/data/pages/GetPageInfoData.html">GetPageInfoData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#parseSendEmail()" class="signatureLink">parseSendEmail</a>(xml:XML):<a href="../../../com/facebook/data/ArrayResultData.html">ArrayResultData</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#responseNodeNameToMethodName()" class="signatureLink">responseNodeNameToMethodName</a>(name:String):String</div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#toArray()" class="signatureLink">toArray</a>(value:XML):Array</div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#toBoolean()" class="signatureLink">toBoolean</a>(value:XML):Boolean</div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#toDate()" class="signatureLink">toDate</a>(value:String):Date</div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#toNumber()" class="signatureLink">toNumber</a>(value:XML):Number</div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#toStringValue()" class="signatureLink">toStringValue</a>(value:XML):String</div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#toUIDArray()" class="signatureLink">toUIDArray</a>(xml:XML):Array</div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">XMLDataParser</td></tr></table></div><script language="javascript" type="text/javascript"><!--
-										showHideInherited();
-										--></script><div class="MainContent"><div class="detailSectionHeader">Property Detail</div><a name="propertyDetail"></a><a name="fb_namespace"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">fb_namespace</td><td class="detailHeaderType">property</td></tr></table><div class="detailBody"><code>protected var fb_namespace:Namespace</code><p></p></div><a name="constructorDetail"></a><div class="detailSectionHeader">Constructor Detail</div><a name="XMLDataParser()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">XMLDataParser</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">Constructor</td></tr></table><div class="detailBody"><code>public function XMLDataParser()</code><p></p><br/><br/></div><a name="methodDetail"></a><div class="detailSectionHeader">Method Detail</div><a name="createFacebookError()"></a><a name="createFacebookError(Object,String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">createFacebookError</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td></tr></table><div class="detailBody"><code> public function createFacebookError(p_error:Object, p_result:String):<a href="../../../com/facebook/errors/FacebookError.html">FacebookError</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">p_error</span>:Object</code></td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">p_result</span>:String</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/errors/FacebookError.html">FacebookError</a></code></td></tr></table></div><a name="createTagObject()"></a><a name="createTagObject(XML,Array)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">createTagObject</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function createTagObject(xml:XML, propList:Array):*</code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">propList</span>:Array</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>*</code></td></tr></table></div><a name="getAffiliation()"></a><a name="getAffiliation(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getAffiliation</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function getAffiliation(xml:XML):<a href="../../../com/facebook/data/users/AffiliationCollection.html">AffiliationCollection</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/users/AffiliationCollection.html">AffiliationCollection</a></code></td></tr></table></div><a name="getTemplate()"></a><a name="getTemplate(XMLList,com.facebook.data.feed.TemplateCollection)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getTemplate</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function getTemplate(xml:XMLList, templateCollection:<a href="../../../com/facebook/data/feed/TemplateCollection.html">TemplateCollection</a>):void</code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XMLList</code></td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">templateCollection</span>:<a href="../../../com/facebook/data/feed/TemplateCollection.html">TemplateCollection</a></code></td></tr></table></p></div><a name="getVenueData()"></a><a name="getVenueData(XMLList)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">getVenueData</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function getVenueData(xml:XMLList):<a href="../../../com/facebook/data/events/VenueData.html">VenueData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XMLList</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/events/VenueData.html">VenueData</a></code></td></tr></table></div><a name="parse()"></a><a name="parse(String,String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parse</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function parse(data:String, methodName:String):<a href="../../../com/facebook/data/FacebookData.html">FacebookData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">data</span>:String</code></td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">methodName</span>:String</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/FacebookData.html">FacebookData</a></code></td></tr></table></div><a name="parseAreFriends()"></a><a name="parseAreFriends(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseAreFriends</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseAreFriends(xml:XML):<a href="../../../com/facebook/data/friends/AreFriendsData.html">AreFriendsData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/friends/AreFriendsData.html">AreFriendsData</a></code></td></tr></table></div><a name="parseBatchRun()"></a><a name="parseBatchRun(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseBatchRun</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseBatchRun(xml:XML):<a href="../../../com/facebook/data/FacebookData.html">FacebookData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/FacebookData.html">FacebookData</a></code></td></tr></table></div><a name="parseCreateAlbum()"></a><a name="parseCreateAlbum(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseCreateAlbum</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseCreateAlbum(xml:XML):<a href="../../../com/facebook/data/photos/GetCreateAlbumData.html">GetCreateAlbumData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/photos/GetCreateAlbumData.html">GetCreateAlbumData</a></code></td></tr></table></div><a name="parseFacebookPhoto()"></a><a name="parseFacebookPhoto(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseFacebookPhoto</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseFacebookPhoto(xml:XML):<a href="../../../com/facebook/data/photos/FacebookPhoto.html">FacebookPhoto</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/photos/FacebookPhoto.html">FacebookPhoto</a></code></td></tr></table></div><a name="parseGener()"></a><a name="parseGener(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseGener</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseGener(xml:XML):<a href="../../../com/facebook/data/pages/GenreData.html">GenreData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/pages/GenreData.html">GenreData</a></code></td></tr></table></div><a name="parseGetAlbums()"></a><a name="parseGetAlbums(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseGetAlbums</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseGetAlbums(xml:XML):<a href="../../../com/facebook/data/photos/GetAlbumsData.html">GetAlbumsData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/photos/GetAlbumsData.html">GetAlbumsData</a></code></td></tr></table></div><a name="parseGetAllocation()"></a><a name="parseGetAllocation(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseGetAllocation</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseGetAllocation(result:XML):<a href="../../../com/facebook/data/admin/GetAllocationData.html">GetAllocationData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">result</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/admin/GetAllocationData.html">GetAllocationData</a></code></td></tr></table></div><a name="parseGetAppProperties()"></a><a name="parseGetAppProperties(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseGetAppProperties</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseGetAppProperties(xml:XML):<a href="../../../com/facebook/data/admin/GetAppPropertiesData.html">GetAppPropertiesData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/admin/GetAppPropertiesData.html">GetAppPropertiesData</a></code></td></tr></table></div><a name="parseGetAppUsersData()"></a><a name="parseGetAppUsersData(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseGetAppUsersData</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseGetAppUsersData(xml:XML):<a href="../../../com/facebook/data/friends/GetAppUserData.html">GetAppUserData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/friends/GetAppUserData.html">GetAppUserData</a></code></td></tr></table></div><a name="parseGetCookies()"></a><a name="parseGetCookies(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseGetCookies</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseGetCookies(xml:XML):<a href="../../../com/facebook/commands/data/GetCookiesData.html">GetCookiesData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/commands/data/GetCookiesData.html">GetCookiesData</a></code></td></tr></table></div><a name="parseGetCustomTags()"></a><a name="parseGetCustomTags(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseGetCustomTags</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseGetCustomTags(xml:XML):<a href="../../../com/facebook/data/fbml/GetCustomTagsData.html">GetCustomTagsData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/fbml/GetCustomTagsData.html">GetCustomTagsData</a></code></td></tr></table></div><a name="parseGetEvent()"></a><a name="parseGetEvent(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseGetEvent</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseGetEvent(xml:XML):<a href="../../../com/facebook/data/events/GetEventsData.html">GetEventsData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/events/GetEventsData.html">GetEventsData</a></code></td></tr></table></div><a name="parseGetFriends()"></a><a name="parseGetFriends(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseGetFriends</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseGetFriends(xml:XML):<a href="../../../com/facebook/data/friends/GetFriendsData.html">GetFriendsData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/friends/GetFriendsData.html">GetFriendsData</a></code></td></tr></table></div><a name="parseGetGroupMembers()"></a><a name="parseGetGroupMembers(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseGetGroupMembers</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseGetGroupMembers(xml:XML):<a href="../../../com/facebook/data/groups/GetMemberData.html">GetMemberData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/groups/GetMemberData.html">GetMemberData</a></code></td></tr></table></div><a name="parseGetGroups()"></a><a name="parseGetGroups(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseGetGroups</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseGetGroups(xml:XML):<a href="../../../com/facebook/data/groups/GetGroupData.html">GetGroupData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/groups/GetGroupData.html">GetGroupData</a></code></td></tr></table></div><a name="parseGetInfo()"></a><a name="parseGetInfo(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseGetInfo</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseGetInfo(xml:XML):<a href="../../../com/facebook/data/users/GetInfoData.html">GetInfoData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/users/GetInfoData.html">GetInfoData</a></code></td></tr></table></div><a name="parseGetLists()"></a><a name="parseGetLists(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseGetLists</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseGetLists(xml:XML):<a href="../../../com/facebook/data/friends/GetListsData.html">GetListsData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/friends/GetListsData.html">GetListsData</a></code></td></tr></table></div><a name="parseGetMembers()"></a><a name="parseGetMembers(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseGetMembers</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseGetMembers(xml:XML):<a href="../../../com/facebook/data/events/GetMembersData.html">GetMembersData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/events/GetMembersData.html">GetMembersData</a></code></td></tr></table></div><a name="parseGetMetrics()"></a><a name="parseGetMetrics(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseGetMetrics</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseGetMetrics(xml:XML):<a href="../../../com/facebook/data/admin/GetMetricsData.html">GetMetricsData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/admin/GetMetricsData.html">GetMetricsData</a></code></td></tr></table></div><a name="parseGetNotes()"></a><a name="parseGetNotes(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseGetNotes</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseGetNotes(xml:XML):<a href="../../../com/facebook/data/notes/GetNotesData.html">GetNotesData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/notes/GetNotesData.html">GetNotesData</a></code></td></tr></table></div><a name="parseGetNotifications()"></a><a name="parseGetNotifications(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseGetNotifications</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseGetNotifications(xml:XML):<a href="../../../com/facebook/data/notifications/GetNotificationData.html">GetNotificationData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/notifications/GetNotificationData.html">GetNotificationData</a></code></td></tr></table></div><a name="parseGetObjectType()"></a><a name="parseGetObjectType(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseGetObjectType</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseGetObjectType(xml:XML):<a href="../../../com/facebook/data/data/GetObjectTypeData.html">GetObjectTypeData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/data/GetObjectTypeData.html">GetObjectTypeData</a></code></td></tr></table></div><a name="parseGetObjectTypes()"></a><a name="parseGetObjectTypes(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseGetObjectTypes</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseGetObjectTypes(xml:XML):<a href="../../../com/facebook/data/data/GetObjectTypesData.html">GetObjectTypesData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/data/GetObjectTypesData.html">GetObjectTypesData</a></code></td></tr></table></div><a name="parseGetPhotos()"></a><a name="parseGetPhotos(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseGetPhotos</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseGetPhotos(xml:XML):<a href="../../../com/facebook/data/photos/GetPhotosData.html">GetPhotosData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/photos/GetPhotosData.html">GetPhotosData</a></code></td></tr></table></div><a name="parseGetPublicInfo()"></a><a name="parseGetPublicInfo(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseGetPublicInfo</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseGetPublicInfo(xml:XML):<a href="../../../com/facebook/data/application/GetPublicInfoData.html">GetPublicInfoData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/application/GetPublicInfoData.html">GetPublicInfoData</a></code></td></tr></table></div><a name="parseGetRegisteredTemplateBundleByID()"></a><a name="parseGetRegisteredTemplateBundleByID(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseGetRegisteredTemplateBundleByID</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseGetRegisteredTemplateBundleByID(xml:XML):<a href="../../../com/facebook/data/feed/GetRegisteredTemplateBundleByIDData.html">GetRegisteredTemplateBundleByIDData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/feed/GetRegisteredTemplateBundleByIDData.html">GetRegisteredTemplateBundleByIDData</a></code></td></tr></table></div><a name="parseGetRegisteredTemplateBundles()"></a><a name="parseGetRegisteredTemplateBundles(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseGetRegisteredTemplateBundles</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseGetRegisteredTemplateBundles(xml:XML):<a href="../../../com/facebook/data/feed/GetRegisteredTemplateBundleData.html">GetRegisteredTemplateBundleData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/feed/GetRegisteredTemplateBundleData.html">GetRegisteredTemplateBundleData</a></code></td></tr></table></div><a name="parseGetStandardInfo()"></a><a name="parseGetStandardInfo(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseGetStandardInfo</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseGetStandardInfo(xml:XML):<a href="../../../com/facebook/data/users/GetStandardInfoData.html">GetStandardInfoData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/users/GetStandardInfoData.html">GetStandardInfoData</a></code></td></tr></table></div><a name="parseGetTags()"></a><a name="parseGetTags(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseGetTags</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseGetTags(xml:XML):<a href="../../../com/facebook/data/photos/GetTagsData.html">GetTagsData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/photos/GetTagsData.html">GetTagsData</a></code></td></tr></table></div><a name="parseGetUserPreferences()"></a><a name="parseGetUserPreferences(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseGetUserPreferences</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseGetUserPreferences(xml:XML):<a href="../../../com/facebook/data/data/GetUserPreferencesData.html">GetUserPreferencesData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/data/GetUserPreferencesData.html">GetUserPreferencesData</a></code></td></tr></table></div><a name="parsePageGetInfo()"></a><a name="parsePageGetInfo(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parsePageGetInfo</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parsePageGetInfo(xml:XML):<a href="../../../com/facebook/data/pages/GetPageInfoData.html">GetPageInfoData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/pages/GetPageInfoData.html">GetPageInfoData</a></code></td></tr></table></div><a name="parseSendEmail()"></a><a name="parseSendEmail(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">parseSendEmail</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function parseSendEmail(xml:XML):<a href="../../../com/facebook/data/ArrayResultData.html">ArrayResultData</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/data/ArrayResultData.html">ArrayResultData</a></code></td></tr></table></div><a name="responseNodeNameToMethodName()"></a><a name="responseNodeNameToMethodName(String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">responseNodeNameToMethodName</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function responseNodeNameToMethodName(name:String):String</code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">name</span>:String</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>String</code></td></tr></table></div><a name="toArray()"></a><a name="toArray(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">toArray</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function toArray(value:XML):Array</code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">value</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Array</code></td></tr></table></div><a name="toBoolean()"></a><a name="toBoolean(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">toBoolean</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function toBoolean(value:XML):Boolean</code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">value</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Boolean</code></td></tr></table></div><a name="toDate()"></a><a name="toDate(String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">toDate</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function toDate(value:String):Date</code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">value</span>:String</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Date</code></td></tr></table></div><a name="toNumber()"></a><a name="toNumber(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">toNumber</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function toNumber(value:XML):Number</code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">value</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Number</code></td></tr></table></div><a name="toStringValue()"></a><a name="toStringValue(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">toStringValue</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function toStringValue(value:XML):String</code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">value</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>String</code></td></tr></table></div><a name="toUIDArray()"></a><a name="toUIDArray(XML)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">toUIDArray</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> protected function toUIDArray(xml:XML):Array</code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>Array</code></td></tr></table></div><a name="validateFacebookResponce()"></a><a name="validateFacebookResponce(String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">validateFacebookResponce</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function validateFacebookResponce(result:String):<a href="../../../com/facebook/errors/FacebookError.html">FacebookError</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">result</span>:String</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/errors/FacebookError.html">FacebookError</a></code></td></tr></table></div><a name="xmlToUrlVariables()"></a><a name="xmlToUrlVariables(XMLList)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">xmlToUrlVariables</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function xmlToUrlVariables(p_xml:XMLList):URLVariables</code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">p_xml</span>:XMLList</code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code>URLVariables</code></td></tr></table></div><br/><br/><hr><br/><p></p><center class="copyright"><footer></footer><br/> </center></div></body></html><!--<br/> -->
+<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
+<tr>
+<td align="left" class="titleTableTitle">ActionScript 3.0 Client Library for Facebook Platform API</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../index-list.html')" href="../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../index.html?com/facebook/data/XMLDataParser.html&amp;com/facebook/data/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../images/logo.jpg"></td>
+</tr>
+<tr class="titleTableRow2">
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;XMLDataParser</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
+</tr>
+<tr class="titleTableRow3">
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript" language="javascript">
+<!--
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class XMLDataParser"); titleBar_setSubNav(false,true,false,false,false,false,true,false,false,false,false,false,false,false);}
+--></script>
+<div class="MainContent">
+<table cellspacing="0" cellpadding="0" class="classHeaderTable">
+<tr>
+<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">com.facebook.data</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class XMLDataParser</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Implements</td><td><a href="../utils/IFacebookResultParser.html">IFacebookResultParser</a></td>
+</tr>
+</table>
+<p></p>
+<p></p>
+<br>
+<hr>
+</div>
+<a name="propertySummary"></a><a name="protectedPropertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Properties</div>
+<table id="summaryTableProtectedProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#fb_namespace">fb_namespace</a> : Namespace<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+</table>
+</div>
+<a name="methodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Methods</div>
+<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#XMLDataParser()">XMLDataParser</a>()</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#createFacebookError()">createFacebookError</a>(p_error:Object, p_result:String):<a href="../errors/FacebookError.html">FacebookError</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parse()">parse</a>(data:String, methodName:String):<a href="../data/FacebookData.html">FacebookData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#validateFacebookResponce()">validateFacebookResponce</a>(result:String):<a href="../errors/FacebookError.html">FacebookError</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+</table>
+</div>
+<a name="protectedMethodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Methods</div>
+<table id="summaryTableProtectedMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#createTagObject()">createTagObject</a>(xml:XML, propList:Array):*</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#getAffiliation()">getAffiliation</a>(xml:XML):<a href="users/AffiliationCollection.html">AffiliationCollection</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#getTemplate()">getTemplate</a>(xml:XMLList, templateCollection:<a href="feed/TemplateCollection.html">TemplateCollection</a>):void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseAreFriends()">parseAreFriends</a>(xml:XML):<a href="friends/AreFriendsData.html">AreFriendsData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseBatchRun()">parseBatchRun</a>(xml:XML):<a href="../data/FacebookData.html">FacebookData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseCreateAlbum()">parseCreateAlbum</a>(xml:XML):<a href="photos/GetCreateAlbumData.html">GetCreateAlbumData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseFacebookPhoto()">parseFacebookPhoto</a>(xml:XML):<a href="photos/FacebookPhoto.html">FacebookPhoto</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseGetAlbums()">parseGetAlbums</a>(xml:XML):<a href="photos/GetAlbumsData.html">GetAlbumsData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseGetAllocation()">parseGetAllocation</a>(result:XML):<a href="admin/GetAllocationData.html">GetAllocationData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseGetAppProperties()">parseGetAppProperties</a>(xml:XML):<a href="admin/GetAppPropertiesData.html">GetAppPropertiesData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseGetAppUsersData()">parseGetAppUsersData</a>(xml:XML):<a href="friends/GetAppUserData.html">GetAppUserData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseGetCookies()">parseGetCookies</a>(xml:XML):<a href="../commands/data/GetCookiesData.html">GetCookiesData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseGetCustomTags()">parseGetCustomTags</a>(xml:XML):<a href="fbml/GetCustomTagsData.html">GetCustomTagsData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseGetEvent()">parseGetEvent</a>(xml:XML):<a href="events/GetEventsData.html">GetEventsData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseGetFriends()">parseGetFriends</a>(xml:XML):<a href="friends/GetFriendsData.html">GetFriendsData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseGetGroupMembers()">parseGetGroupMembers</a>(xml:XML):<a href="groups/GetMemberData.html">GetMemberData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseGetGroups()">parseGetGroups</a>(xml:XML):<a href="groups/GetGroupData.html">GetGroupData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseGetInfo()">parseGetInfo</a>(xml:XML):<a href="users/GetInfoData.html">GetInfoData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseGetLists()">parseGetLists</a>(xml:XML):<a href="friends/GetListsData.html">GetListsData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseGetMembers()">parseGetMembers</a>(xml:XML):<a href="events/GetMembersData.html">GetMembersData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseGetMetrics()">parseGetMetrics</a>(xml:XML):<a href="admin/GetMetricsData.html">GetMetricsData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseGetNotes()">parseGetNotes</a>(xml:XML):<a href="notes/GetNotesData.html">GetNotesData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseGetNotifications()">parseGetNotifications</a>(xml:XML):<a href="notifications/GetNotificationData.html">GetNotificationData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseGetObjectType()">parseGetObjectType</a>(xml:XML):<a href="data/GetObjectTypeData.html">GetObjectTypeData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseGetObjectTypes()">parseGetObjectTypes</a>(xml:XML):<a href="data/GetObjectTypesData.html">GetObjectTypesData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseGetPhotos()">parseGetPhotos</a>(xml:XML):<a href="photos/GetPhotosData.html">GetPhotosData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseGetPublicInfo()">parseGetPublicInfo</a>(xml:XML):<a href="application/GetPublicInfoData.html">GetPublicInfoData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseGetRegisteredTemplateBundleByID()">parseGetRegisteredTemplateBundleByID</a>(xml:XML):<a href="feed/GetRegisteredTemplateBundleByIDData.html">GetRegisteredTemplateBundleByIDData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseGetRegisteredTemplateBundles()">parseGetRegisteredTemplateBundles</a>(xml:XML):<a href="feed/GetRegisteredTemplateBundleData.html">GetRegisteredTemplateBundleData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseGetStandardInfo()">parseGetStandardInfo</a>(xml:XML):<a href="users/GetStandardInfoData.html">GetStandardInfoData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseGetStatus()">parseGetStatus</a>(xml:XML):<a href="status/GetStatusData.html">GetStatusData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseGetTags()">parseGetTags</a>(xml:XML):<a href="photos/GetTagsData.html">GetTagsData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseGetUserPreferences()">parseGetUserPreferences</a>(xml:XML):<a href="data/GetUserPreferencesData.html">GetUserPreferencesData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parsePageGetInfo()">parsePageGetInfo</a>(xml:XML):<a href="pages/GetPageInfoData.html">GetPageInfoData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#parseSendEmail()">parseSendEmail</a>(xml:XML):<a href="../data/ArrayResultData.html">ArrayResultData</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#responseNodeNameToMethodName()">responseNodeNameToMethodName</a>(name:String):String</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">XMLDataParser</td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" language="javascript">
+<!--
+showHideInherited();
+--></script>
+<div class="MainContent">
+<a name="propertyDetail"></a>
+<div class="detailSectionHeader">Property detail</div>
+<a name="fb_namespace"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">fb_namespace</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var fb_namespace:Namespace</code>
+</div>
+<a name="constructorDetail"></a>
+<div class="detailSectionHeader">Constructor detail</div>
+<a name="XMLDataParser()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">XMLDataParser</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function XMLDataParser()</code>
+</div>
+<a name="methodDetail"></a>
+<div class="detailSectionHeader">Method detail</div>
+<a name="createFacebookError()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">createFacebookError</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function createFacebookError(p_error:Object, p_result:String):<a href="../errors/FacebookError.html">FacebookError</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">p_error</span>:Object</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">p_result</span>:String</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../errors/FacebookError.html">FacebookError</a></code></td>
+</tr>
+</table>
+</div>
+<a name="createTagObject()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">createTagObject</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function createTagObject(xml:XML, propList:Array):*</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">propList</span>:Array</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>*</code></td>
+</tr>
+</table>
+</div>
+<a name="getAffiliation()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">getAffiliation</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function getAffiliation(xml:XML):<a href="users/AffiliationCollection.html">AffiliationCollection</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="users/AffiliationCollection.html">AffiliationCollection</a></code></td>
+</tr>
+</table>
+</div>
+<a name="getTemplate()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">getTemplate</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function getTemplate(xml:XMLList, templateCollection:<a href="feed/TemplateCollection.html">TemplateCollection</a>):void</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XMLList</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">templateCollection</span>:<a href="feed/TemplateCollection.html">TemplateCollection</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parse()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parse</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function parse(data:String, methodName:String):<a href="../data/FacebookData.html">FacebookData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">data</span>:String</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">methodName</span>:String</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../data/FacebookData.html">FacebookData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseAreFriends()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseAreFriends</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseAreFriends(xml:XML):<a href="friends/AreFriendsData.html">AreFriendsData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="friends/AreFriendsData.html">AreFriendsData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseBatchRun()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseBatchRun</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseBatchRun(xml:XML):<a href="../data/FacebookData.html">FacebookData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../data/FacebookData.html">FacebookData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseCreateAlbum()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseCreateAlbum</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseCreateAlbum(xml:XML):<a href="photos/GetCreateAlbumData.html">GetCreateAlbumData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="photos/GetCreateAlbumData.html">GetCreateAlbumData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseFacebookPhoto()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseFacebookPhoto</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseFacebookPhoto(xml:XML):<a href="photos/FacebookPhoto.html">FacebookPhoto</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="photos/FacebookPhoto.html">FacebookPhoto</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseGetAlbums()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseGetAlbums</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseGetAlbums(xml:XML):<a href="photos/GetAlbumsData.html">GetAlbumsData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="photos/GetAlbumsData.html">GetAlbumsData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseGetAllocation()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseGetAllocation</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseGetAllocation(result:XML):<a href="admin/GetAllocationData.html">GetAllocationData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">result</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="admin/GetAllocationData.html">GetAllocationData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseGetAppProperties()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseGetAppProperties</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseGetAppProperties(xml:XML):<a href="admin/GetAppPropertiesData.html">GetAppPropertiesData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="admin/GetAppPropertiesData.html">GetAppPropertiesData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseGetAppUsersData()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseGetAppUsersData</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseGetAppUsersData(xml:XML):<a href="friends/GetAppUserData.html">GetAppUserData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="friends/GetAppUserData.html">GetAppUserData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseGetCookies()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseGetCookies</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseGetCookies(xml:XML):<a href="../commands/data/GetCookiesData.html">GetCookiesData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../commands/data/GetCookiesData.html">GetCookiesData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseGetCustomTags()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseGetCustomTags</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseGetCustomTags(xml:XML):<a href="fbml/GetCustomTagsData.html">GetCustomTagsData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="fbml/GetCustomTagsData.html">GetCustomTagsData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseGetEvent()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseGetEvent</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseGetEvent(xml:XML):<a href="events/GetEventsData.html">GetEventsData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="events/GetEventsData.html">GetEventsData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseGetFriends()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseGetFriends</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseGetFriends(xml:XML):<a href="friends/GetFriendsData.html">GetFriendsData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="friends/GetFriendsData.html">GetFriendsData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseGetGroupMembers()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseGetGroupMembers</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseGetGroupMembers(xml:XML):<a href="groups/GetMemberData.html">GetMemberData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="groups/GetMemberData.html">GetMemberData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseGetGroups()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseGetGroups</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseGetGroups(xml:XML):<a href="groups/GetGroupData.html">GetGroupData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="groups/GetGroupData.html">GetGroupData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseGetInfo()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseGetInfo</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseGetInfo(xml:XML):<a href="users/GetInfoData.html">GetInfoData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="users/GetInfoData.html">GetInfoData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseGetLists()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseGetLists</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseGetLists(xml:XML):<a href="friends/GetListsData.html">GetListsData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="friends/GetListsData.html">GetListsData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseGetMembers()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseGetMembers</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseGetMembers(xml:XML):<a href="events/GetMembersData.html">GetMembersData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="events/GetMembersData.html">GetMembersData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseGetMetrics()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseGetMetrics</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseGetMetrics(xml:XML):<a href="admin/GetMetricsData.html">GetMetricsData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="admin/GetMetricsData.html">GetMetricsData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseGetNotes()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseGetNotes</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseGetNotes(xml:XML):<a href="notes/GetNotesData.html">GetNotesData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="notes/GetNotesData.html">GetNotesData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseGetNotifications()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseGetNotifications</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseGetNotifications(xml:XML):<a href="notifications/GetNotificationData.html">GetNotificationData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="notifications/GetNotificationData.html">GetNotificationData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseGetObjectType()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseGetObjectType</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseGetObjectType(xml:XML):<a href="data/GetObjectTypeData.html">GetObjectTypeData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="data/GetObjectTypeData.html">GetObjectTypeData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseGetObjectTypes()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseGetObjectTypes</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseGetObjectTypes(xml:XML):<a href="data/GetObjectTypesData.html">GetObjectTypesData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="data/GetObjectTypesData.html">GetObjectTypesData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseGetPhotos()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseGetPhotos</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseGetPhotos(xml:XML):<a href="photos/GetPhotosData.html">GetPhotosData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="photos/GetPhotosData.html">GetPhotosData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseGetPublicInfo()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseGetPublicInfo</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseGetPublicInfo(xml:XML):<a href="application/GetPublicInfoData.html">GetPublicInfoData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="application/GetPublicInfoData.html">GetPublicInfoData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseGetRegisteredTemplateBundleByID()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseGetRegisteredTemplateBundleByID</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseGetRegisteredTemplateBundleByID(xml:XML):<a href="feed/GetRegisteredTemplateBundleByIDData.html">GetRegisteredTemplateBundleByIDData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="feed/GetRegisteredTemplateBundleByIDData.html">GetRegisteredTemplateBundleByIDData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseGetRegisteredTemplateBundles()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseGetRegisteredTemplateBundles</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseGetRegisteredTemplateBundles(xml:XML):<a href="feed/GetRegisteredTemplateBundleData.html">GetRegisteredTemplateBundleData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="feed/GetRegisteredTemplateBundleData.html">GetRegisteredTemplateBundleData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseGetStandardInfo()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseGetStandardInfo</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseGetStandardInfo(xml:XML):<a href="users/GetStandardInfoData.html">GetStandardInfoData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="users/GetStandardInfoData.html">GetStandardInfoData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseGetStatus()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseGetStatus</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseGetStatus(xml:XML):<a href="status/GetStatusData.html">GetStatusData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="status/GetStatusData.html">GetStatusData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseGetTags()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseGetTags</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseGetTags(xml:XML):<a href="photos/GetTagsData.html">GetTagsData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="photos/GetTagsData.html">GetTagsData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseGetUserPreferences()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseGetUserPreferences</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseGetUserPreferences(xml:XML):<a href="data/GetUserPreferencesData.html">GetUserPreferencesData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="data/GetUserPreferencesData.html">GetUserPreferencesData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parsePageGetInfo()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parsePageGetInfo</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parsePageGetInfo(xml:XML):<a href="pages/GetPageInfoData.html">GetPageInfoData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="pages/GetPageInfoData.html">GetPageInfoData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="parseSendEmail()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">parseSendEmail</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function parseSendEmail(xml:XML):<a href="../data/ArrayResultData.html">ArrayResultData</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">xml</span>:XML</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../data/ArrayResultData.html">ArrayResultData</a></code></td>
+</tr>
+</table>
+</div>
+<a name="responseNodeNameToMethodName()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">responseNodeNameToMethodName</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function responseNodeNameToMethodName(name:String):String</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">name</span>:String</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>String</code></td>
+</tr>
+</table>
+</div>
+<a name="validateFacebookResponce()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">validateFacebookResponce</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function validateFacebookResponce(result:String):<a href="../errors/FacebookError.html">FacebookError</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">result</span>:String</code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../errors/FacebookError.html">FacebookError</a></code></td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<hr>
+<br>
+<p></p>
+<center class="copyright"> 
+</center>
+</div>
+</body>
+</html>
+<!-- -->

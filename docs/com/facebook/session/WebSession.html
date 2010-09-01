@@ -1,62 +1,452 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><!-- saved from url=(0014)about:internet --><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="../../../style.css" type="text/css" media="screen"><link rel="stylesheet" href="../../../print.css" type="text/css" media="print"><link rel="stylesheet" href="../../../override.css" type="text/css"><meta name="keywords" content="WebSession,com.facebook.session.WebSession,_api_key,_auth_token,_offline_access,_session_key,_uid,_waiting_for_login,api_key,api_key,api_key,api_version,api_version,api_version,as_swf_name,expires,expires,expires,is_connected,is_connected,is_connected,is_sessionless,loginRequest,login_url,rest_url,rest_url,rest_url,secret,secret,secret,session_key,session_key,session_key,uid,uid,uid,waiting_for_login,waiting_for_login,waiting_for_login,waiting_for_login,login,login,login,login,onConnectionError,onLogin,onVerifyLogin,onVerifyLogin,post,post,post,post,refreshSession,refreshSession,refreshSession,refreshSession,tokenCreated,validateSessionReply,verifySession,verifySession,verifySession,verifySession"><title>com.facebook.session.WebSession</title></head><body><script language="javascript" type="text/javascript" src="../../../asdoc.js"></script><script language="javascript" type="text/javascript" src="../../../help.js"></script><script language="javascript" type="text/javascript" src="../../../cookies.js"></script><script language="javascript" type="text/javascript"><!--
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../../print.css" type="text/css" media="print">
+<meta content="WebSession,com.facebook.session.WebSession,REST_URL,VIDEO_URL,login_url,api_key,api_version,expires,is_connected,rest_url,secret,session_key,uid,waiting_for_login,login,post,refreshSession,verifySession" name="keywords">
+<title>com.facebook.session.WebSession</title>
+</head>
+<body>
+<script type="text/javascript" language="javascript" src="../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../cookies.js"></script><script type="text/javascript" language="javascript">
+<!--
 				asdocTitle = 'WebSession - ActionScript 3.0 Client Library for Facebook Platform API';
 				var baseRef = '../../../';
 				window.onload = configPage;
 			--></script>
-<script type="text/javascript">
-			scrollToNameAnchor();
-		</script><table class="titleTable" cellpadding="0" cellspacing="0" id="titleTable" style="display:none"><tr><td class="titleTableTitle" align="left">ActionScript 3.0 Client Library for Facebook Platform API</td><td class="titleTableTopNav" align="right"><a href="../../../package-summary.html" onclick="loadClassListFrame('../../../all-classes.html')">All Packages</a>&nbsp;|&nbsp;<a href="../../../class-summary.html" onclick="loadClassListFrame('../../../all-classes.html')">All Classes</a>&nbsp;|&nbsp;<a href="../../../all-index-A.html" onclick="loadClassListFrame('../../../index-list.html')">Index</a>&nbsp;|&nbsp;<a id="framesLink1" href="../../../index.html?com/facebook/session/WebSession.html&amp;com/facebook/session/class-list.html">Frames</a><a id="noFramesLink1" style="display:none" href="" onclick="parent.location=document.location"> No Frames </a></td><td class="titleTableLogo" align="right" rowspan="3"><img src="../../../images/logo.jpg" class="logoImage" alt=" Adobe Logo " title=" Adobe Logo "></td></tr><tr class="titleTableRow2"><td class="titleTableSubTitle" id="subTitle" align="left">WebSession</td><td class="titleTableSubNav" id="subNav" align="right"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td></tr><tr class="titleTableRow3"><td colspan="3">&nbsp;</td></tr></table><script language="javascript" type="text/javascript" xml:space="preserve">
-				<!--
-				
-					if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("WebSession"); titleBar_setSubNav(false,true,false	,false,false,false,true,false,false	,false,false,false,false,false);}	
-				-->
-			</script><div xmlns:fn="http://www.w3.org/2005/xpath-functions" class="MainContent"><table class="classHeaderTable" cellpadding="0" cellspacing="0"><tr><td class="classHeaderTableLabel">Package</td><td><a href="package-detail.html" onclick="javascript:loadClassListFrame('class-list.html')">com.facebook.session</a></td></tr><tr><td class="classHeaderTableLabel">Class</td><td class="classSignature">public  class  WebSession</td></tr><tr><td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">WebSession  <img src="../../../images/inherit-arrow.gif" title="Inheritance" alt="Inheritance" class="inheritArrow"> flash.events.EventDispatcher</td></tr><tr><td class="classHeaderTableLabel">Implements</td><td> <a href="../../../com/facebook/session/IFacebookSession.html">IFacebookSession</a></td></tr><tr><td class="classHeaderTableLabel">Subclasses</td><td> <a href="../../../com/facebook/session/DesktopSession.html">DesktopSession</a></td></tr></table><p></p><p></p><p></p>
-	 The WebSession class represents a Facebook session that is conducted
-	 through a web browser using Flash Player. To create a Facebook
-	 session that is conducted through a desktop application (i.e. Adobe AIR),
-	 use the DesktopSession class instead.
-	 
-	 <p>Although a web session can be conducted by embedding your application's
-	 secret into your SWF file by including your application secret
-	 as the second argument to the WebSession constructor, this technique is not secure
-	 because your SWF file can be decompiled and your application secret would 
-	 then be exposed. </p>
-	              <p>Fortunately, Facebook offers a more secure technique that allows you to avoid 
-	 embedding your application secret into your SWF file. This alternative approach uses a
-	 session secret, which is separate from your application secret but provides
-	 similar functionality. Facebook sends a session secret for any active session
-	 of your application. This session secret is specific to both
-	 your application and the user, and allows your application to make Facebook
-	 API calls on behalf of that user. </p>
-	              <p>Currently, the only way to access this session secret is to use the FacebookSessionUtil
-	 class to create your web session instead of the WebSession class. The FacebookSessionUtil 
-	 class constructor looks for this session secret and if possible, creates an 
-	 instance of the WebSession class for you with the session secret instead of your
-	 application secret. Although
-	 you may see introductory tutorial examples that explicitly call the 
-	 WebSession constructor, you should generally opt for the more secure approach
-	 of calling the FacebookSessionUtil constructor instead.
-	 </p>
-	 
-	           <p></p><p><span class="classHeaderTableLabel">See also</span></p><div class="seeAlso"><a href="../../../com/facebook/utils/FacebookSessionUtil.html" target="">com.facebook.utils.FacebookSessionUtil</a><br/><a href="http://wiki.developers.facebook.com/index.php/Session_Secret" target="mm_external">http://wiki.developers.facebook.com/index.php/Session_Secret</a></div><br/><hr></div><a name="propertySummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Properties</div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableProperty"><tr><th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#api_key" class="signatureLink">api_key</a> : String<div class="summaryTableDescription">[read-only]  
-		 Your application's API key.</div></td><td class="summaryTableOwnerCol">WebSession</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#api_version" class="signatureLink">api_version</a> : String<div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">WebSession</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#expires" class="signatureLink">expires</a> : Date<div class="summaryTableDescription">[read-only] </div></td><td class="summaryTableOwnerCol">WebSession</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#is_connected" class="signatureLink">is_connected</a> : Boolean<div class="summaryTableDescription">[read-only] </div></td><td class="summaryTableOwnerCol">WebSession</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#login_url" class="signatureLink">login_url</a> : String = http://www.facebook.com/login.php<div class="summaryTableDescription">
-		 The URL of the login page a user will be directed to (for desktop applications)
-		 The default will work fine but you can set it to something else.</div></td><td class="summaryTableOwnerCol">WebSession</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#rest_url" class="signatureLink">rest_url</a> : String<div class="summaryTableDescription">
-		 The URL of the REST server that you will be using.</div></td><td class="summaryTableOwnerCol">WebSession</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#secret" class="signatureLink">secret</a> : String<div class="summaryTableDescription">
-		 Your application's secret.</div></td><td class="summaryTableOwnerCol">WebSession</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#session_key" class="signatureLink">session_key</a> : String<div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">WebSession</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#uid" class="signatureLink">uid</a> : String<div class="summaryTableDescription">[read-only] </div></td><td class="summaryTableOwnerCol">WebSession</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a href="#waiting_for_login" class="signatureLink">waiting_for_login</a> : Boolean<div class="summaryTableDescription">[read-only] </div></td><td class="summaryTableOwnerCol">WebSession</td></tr></table></div><a name="methodSummary"></a><div class="summarySection"><div class="summaryTableTitle">Public Methods </div><table cellspacing="0" cellpadding="3" class="summaryTable " id="summaryTableMethod"><tr><th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined By</th></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#WebSession()" class="signatureLink">WebSession</a>(api_key:String, ss:String, session_key:String = null)</div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">WebSession</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#login()" class="signatureLink">login</a>(offline_access:Boolean):void</div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">WebSession</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#post()" class="signatureLink">post</a>(call:<a href="../../../com/facebook/net/FacebookCall.html">FacebookCall</a>):<a href="../../../com/facebook/delegates/IFacebookCallDelegate.html">IFacebookCallDelegate</a></div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">WebSession</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#refreshSession()" class="signatureLink">refreshSession</a>():void</div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">WebSession</td></tr><tr class=""><td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><div class="summarySignature"><a href="#verifySession()" class="signatureLink">verifySession</a>():void</div><div class="summaryTableDescription"></div></td><td class="summaryTableOwnerCol">WebSession</td></tr></table></div><script language="javascript" type="text/javascript"><!--
-										showHideInherited();
-										--></script><div class="MainContent"><div class="detailSectionHeader">Property Detail</div><a name="propertyDetail"></a><a name="_uid"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">_uid</td><td class="detailHeaderType">property</td></tr></table><div class="detailBody"><code>facebook_internal var _uid:String</code><p></p></div><a name="propertyDetail"></a><a name="api_key"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">api_key</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>api_key:String</code>&nbsp;&nbsp;[read-only] <p></p><p></p><p> 
-		 Your application's API key.
-		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get api_key():String</code><br/></div><a name="propertyDetail"></a><a name="api_version"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">api_version</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>api_version:String</code><p></p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get api_version():String</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set api_version(value:String):void</code><br/></div><a name="propertyDetail"></a><a name="expires"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">expires</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>expires:Date</code>&nbsp;&nbsp;[read-only] <p></p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get expires():Date</code><br/></div><a name="propertyDetail"></a><a name="is_connected"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">is_connected</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>is_connected:Boolean</code>&nbsp;&nbsp;[read-only] <p></p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get is_connected():Boolean</code><br/></div><a name="propertyDetail"></a><a name="login_url"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">login_url</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>public var login_url:String = http://www.facebook.com/login.php</code><p></p><p></p><p>
-		 The URL of the login page a user will be directed to (for desktop applications)
-		 The default will work fine but you can set it to something else.
-		 </p></div><a name="propertyDetail"></a><a name="rest_url"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">rest_url</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>rest_url:String</code><p></p><p></p><p>
-		 The URL of the REST server that you will be using.
-		 The default value is "http://api.facebook.com/restserver.php".
-		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get rest_url():String</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set rest_url(value:String):void</code><br/></div><a name="propertyDetail"></a><a name="secret"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">secret</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>secret:String</code><p></p><p></p><p>
-		 Your application's secret. If you call the WebSession constructor
-		 manually, you must use your application's secret. However, Facebook 
-		 recommends that you use a more secure technique that involves a session
-		 secret. To use a session secret, use the FacebookSessionUtil
-		 class to create your web session.
-		 </p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get secret():String</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set secret(value:String):void</code><br/><p><span class="label">See also</span></p><div class="seeAlso"><a href="../../../com/facebook/utils/FacebookSessionUtil.html" target="">com.facebook.utils.FacebookSessionUtil</a><br/><a href="http://wiki.developers.facebook.com/index.php/Session_Secret" target="mm_external">http://wiki.developers.facebook.com/index.php/Session_Secret</a></div></div><a name="propertyDetail"></a><a name="session_key"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">session_key</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>session_key:String</code><p></p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get session_key():String</code><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function set session_key(value:String):void</code><br/></div><a name="propertyDetail"></a><a name="uid"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">uid</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>uid:String</code>&nbsp;&nbsp;[read-only] <p></p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get uid():String</code><br/></div><a name="propertyDetail"></a><a name="waiting_for_login"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">waiting_for_login</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code>waiting_for_login:Boolean</code>&nbsp;&nbsp;[read-only] <p></p><br/><span class="label"> Implementation </span><br/><code>&nbsp;&nbsp;&nbsp;&nbsp;public function get waiting_for_login():Boolean</code><br/></div><a name="constructorDetail"></a><div class="detailSectionHeader">Constructor Detail</div><a name="WebSession()"></a><a name="WebSession(String,String,String)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">WebSession</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">Constructor</td></tr></table><div class="detailBody"><code>public function WebSession(api_key:String, ss:String, session_key:String = null)</code><p></p><br/><br/><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">api_key</span>:String</code></td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">ss</span>:String</code></td></tr><tr><td class="paramSpacer">&nbsp;</td></tr><tr><td width="20px"></td><td><code><span class="label">session_key</span>:String</code> (default = <code>null</code>)<code></code></td></tr></table></div><a name="methodDetail"></a><div class="detailSectionHeader">Method Detail</div><a name="login()"></a><a name="login(Boolean)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">login</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td></tr></table><div class="detailBody"><code> public function login(offline_access:Boolean):void</code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">offline_access</span>:Boolean</code></td></tr></table></p></div><a name="post()"></a><a name="post(com.facebook.net.FacebookCall)"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">post</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function post(call:<a href="../../../com/facebook/net/FacebookCall.html">FacebookCall</a>):<a href="../../../com/facebook/delegates/IFacebookCallDelegate.html">IFacebookCallDelegate</a></code><p></p><p><span class="label"> Parameters </span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20px"></td><td><code><span class="label">call</span>:<a href="../../../com/facebook/net/FacebookCall.html">FacebookCall</a></code></td></tr></table></p><p></p><span class="label">Returns</span><table cellpadding="0" cellspacing="0" border="0"><tr><td width="20"></td><td><code><a href="../../../com/facebook/delegates/IFacebookCallDelegate.html">IFacebookCallDelegate</a></code></td></tr></table></div><a name="refreshSession()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">refreshSession</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function refreshSession():void</code><p></p></div><a name="verifySession()"></a><table class="detailHeader" cellpadding="0" cellspacing="0"><tr><td class="detailHeaderName">verifySession</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td></tr></table><div class="detailBody"><code> public function verifySession():void</code><p></p></div><br/><br/><hr><br/><p></p><center class="copyright"><footer></footer><br/> </center></div></body></html><!--<br/> -->
+<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
+<tr>
+<td align="left" class="titleTableTitle">ActionScript 3.0 Client Library for Facebook Platform API</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../index-list.html')" href="../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../index.html?com/facebook/session/WebSession.html&amp;com/facebook/session/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../images/logo.jpg"></td>
+</tr>
+<tr class="titleTableRow2">
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;WebSession</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a>&nbsp;| <a href="#constantSummary">Constants</a></td>
+</tr>
+<tr class="titleTableRow3">
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript" language="javascript">
+<!--
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class WebSession"); titleBar_setSubNav(true,true,false,false,false,false,true,false,false,false,false,false,false,false);}
+--></script>
+<div class="MainContent">
+<table cellspacing="0" cellpadding="0" class="classHeaderTable">
+<tr>
+<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">com.facebook.session</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class WebSession</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">WebSession <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../images/inherit-arrow.gif"> flash.events.EventDispatcher</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Implements</td><td><a href="IFacebookSession.html">IFacebookSession</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Subclasses</td><td><a href="../session/DesktopSession.html">DesktopSession</a></td>
+</tr>
+</table>
+<p></p>
+  The WebSession class represents a Facebook session that is conducted
+  through a web browser using Flash Player. To create a Facebook
+  session that is conducted through a desktop application (i.e. Adobe AIR),
+  use the DesktopSession class instead.
+    <p>Although a web session can be conducted by embedding your application's
+  secret into your SWF file by including your application secret
+  as the second argument to the WebSession constructor, this technique is not secure
+  because your SWF file can be decompiled and your application secret would 
+  then be exposed. </p>
+  <p>Fortunately, Facebook offers a more secure technique that allows you to avoid 
+  embedding your application secret into your SWF file. This alternative approach uses a
+  session secret, which is separate from your application secret but provides
+  similar functionality. Facebook sends a session secret for any active session
+  of your application. This session secret is specific to both
+  your application and the user, and allows your application to make Facebook
+  API calls on behalf of that user. </p>
+  <p>Currently, the only way to access this session secret is to use the FacebookSessionUtil
+  class to create your web session instead of the WebSession class. The FacebookSessionUtil 
+  class constructor looks for this session secret and if possible, creates an 
+  instance of the WebSession class for you with the session secret instead of your
+  application secret. Although
+  you may see introductory tutorial examples that explicitly call the 
+  WebSession constructor, you should generally opt for the more secure approach
+  of calling the FacebookSessionUtil constructor instead.
+  </p>
+  
+  <p></p>
+<p>
+<span class="classHeaderTableLabel">See also</span>
+</p>
+<div class="seeAlso">
+<a href="../utils/FacebookSessionUtil.html" target="">com.facebook.utils.FacebookSessionUtil</a>
+<br>
+<a href="http://wiki.developers.facebook.com/index.php/Session_Secret" target="mm_external">http://wiki.developers.facebook.com/index.php/Session_Secret</a>
+</div>
+<br>
+<hr>
+</div>
+<a name="propertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Properties</div>
+<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#api_key">api_key</a> : String<div class="summaryTableDescription">[read-only] 
+   Your application's API key.</div>
+</td><td class="summaryTableOwnerCol">WebSession</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#api_version">api_version</a> : String<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">WebSession</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#expires">expires</a> : Date<div class="summaryTableDescription">[read-only]</div>
+</td><td class="summaryTableOwnerCol">WebSession</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#is_connected">is_connected</a> : Boolean<div class="summaryTableDescription">[read-only]</div>
+</td><td class="summaryTableOwnerCol">WebSession</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#login_url">login_url</a> : String = "http://www.facebook.com/login.php"<div class="summaryTableDescription">
+   The URL of the login page a user will be directed to (for desktop applications)
+   The default will work fine but you can set it to something else.</div>
+</td><td class="summaryTableOwnerCol">WebSession</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#rest_url">rest_url</a> : String<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">WebSession</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#secret">secret</a> : String<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">WebSession</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#session_key">session_key</a> : String<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">WebSession</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#uid">uid</a> : String<div class="summaryTableDescription">[read-only]</div>
+</td><td class="summaryTableOwnerCol">WebSession</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#waiting_for_login">waiting_for_login</a> : Boolean<div class="summaryTableDescription">[read-only]</div>
+</td><td class="summaryTableOwnerCol">WebSession</td>
+</tr>
+</table>
+</div>
+<a name="methodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Methods</div>
+<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#WebSession()">WebSession</a>(api_key:String, ss:String, session_key:String = null)</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">WebSession</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#login()">login</a>(offline_access:Boolean):void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">WebSession</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#post()">post</a>(call:<a href="../net/FacebookCall.html">FacebookCall</a>):<a href="../delegates/IFacebookCallDelegate.html">IFacebookCallDelegate</a>
+</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">WebSession</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#refreshSession()">refreshSession</a>():void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">WebSession</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#verifySession()">verifySession</a>():void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">WebSession</td>
+</tr>
+</table>
+</div>
+<a name="constantSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Constants</div>
+<table id="summaryTableConstant" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Constant</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#REST_URL">REST_URL</a> : String = "http://api.facebook.com/restserver.php"<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">WebSession</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#VIDEO_URL">VIDEO_URL</a> : String = "http://api-video.facebook.com/restserver.php"<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">WebSession</td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" language="javascript">
+<!--
+showHideInherited();
+--></script>
+<div class="MainContent">
+<a name="propertyDetail"></a>
+<div class="detailSectionHeader">Property detail</div>
+<a name="api_key"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">api_key</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>api_key:String</code>&nbsp;&nbsp;[read-only]<p> 
+   Your application's API key.
+   </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get api_key():String</code>
+<br>
+</div>
+<a name="api_version"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">api_version</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>api_version:String</code>&nbsp;&nbsp;[read-write]<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get api_version():String</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set api_version(value:String):void</code>
+<br>
+</div>
+<a name="expires"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">expires</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>expires:Date</code>&nbsp;&nbsp;[read-only]<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get expires():Date</code>
+<br>
+</div>
+<a name="is_connected"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">is_connected</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>is_connected:Boolean</code>&nbsp;&nbsp;[read-only]<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get is_connected():Boolean</code>
+<br>
+</div>
+<a name="login_url"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">login_url</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var login_url:String = "http://www.facebook.com/login.php"</code><p>
+   The URL of the login page a user will be directed to (for desktop applications)
+   The default will work fine but you can set it to something else.
+   </p></div>
+<a name="rest_url"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">rest_url</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>rest_url:String</code>&nbsp;&nbsp;[read-write]<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get rest_url():String</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set rest_url(value:String):void</code>
+<br>
+</div>
+<a name="secret"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">secret</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>secret:String</code>&nbsp;&nbsp;[read-write]<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get secret():String</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set secret(value:String):void</code>
+<br>
+</div>
+<a name="session_key"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">session_key</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>session_key:String</code>&nbsp;&nbsp;[read-write]<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get session_key():String</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set session_key(value:String):void</code>
+<br>
+</div>
+<a name="uid"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">uid</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>uid:String</code>&nbsp;&nbsp;[read-only]<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get uid():String</code>
+<br>
+</div>
+<a name="waiting_for_login"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">waiting_for_login</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>waiting_for_login:Boolean</code>&nbsp;&nbsp;[read-only]<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get waiting_for_login():Boolean</code>
+<br>
+</div>
+<a name="constructorDetail"></a>
+<div class="detailSectionHeader">Constructor detail</div>
+<a name="WebSession()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">WebSession</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function WebSession(api_key:String, ss:String, session_key:String = null)</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">api_key</span>:String</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">ss</span>:String</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">session_key</span>:String</code> (default = <code>null</code>)<code></code></td>
+</tr>
+</table>
+</div>
+<a name="methodDetail"></a>
+<div class="detailSectionHeader">Method detail</div>
+<a name="login()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">login</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function login(offline_access:Boolean):void</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">offline_access</span>:Boolean</code></td>
+</tr>
+</table>
+</div>
+<a name="post()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">post</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function post(call:<a href="../net/FacebookCall.html">FacebookCall</a>):<a href="../delegates/IFacebookCallDelegate.html">IFacebookCallDelegate</a></code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">call</span>:<a href="../net/FacebookCall.html">FacebookCall</a></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../delegates/IFacebookCallDelegate.html">IFacebookCallDelegate</a></code></td>
+</tr>
+</table>
+</div>
+<a name="refreshSession()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">refreshSession</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function refreshSession():void</code>
+</div>
+<a name="verifySession()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">verifySession</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function verifySession():void</code>
+</div>
+<a name="constantDetail"></a>
+<div class="detailSectionHeader">Constant detail</div>
+<a name="REST_URL"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">REST_URL</td><td class="detailHeaderType">constant</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const REST_URL:String = "http://api.facebook.com/restserver.php"</code>
+</div>
+<a name="VIDEO_URL"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">VIDEO_URL</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const VIDEO_URL:String = "http://api-video.facebook.com/restserver.php"</code>
+</div>
+<br>
+<br>
+<hr>
+<br>
+<p></p>
+<center class="copyright"> 
+</center>
+</div>
+</body>
+</html>
+<!-- -->
