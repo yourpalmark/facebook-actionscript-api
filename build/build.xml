@@ -74,10 +74,6 @@
 			<arg line="-templates-path ${flex.asdoc.templates}" />
 			<arg line="-main-title ${docs.title}" />
 			<arg line="-window-title ${docs.title}" />
-			<arg line="-package com.adobe.crypto ${docs.package.com.adobe.crypto}" />
-			<arg line="-package com.adobe.images ${docs.package.com.adobe.images}" />
-			<arg line="-package com.adobe.serialization.json ${docs.package.com.adobe.serialization.json}" />
-			<arg line="-package com.adobe.utils ${docs.package.com.adobe.utils}" />
 			<arg line="-package com.facebook ${docs.package.com.facebook}" />
 			<arg line="-package com.facebook.commands.admin ${docs.package.com.facebook.commands.admin}" />
 			<arg line="-package com.facebook.commands.application ${docs.package.com.facebook.commands.application}" />
