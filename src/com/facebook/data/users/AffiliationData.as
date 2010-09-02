@@ -31,7 +31,6 @@
 */
 package com.facebook.data.users {
 	
-	[Bindable]
 	public class AffiliationData {
 		
 		public var nid:Number;

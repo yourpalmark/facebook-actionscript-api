@@ -38,7 +38,6 @@
 */
 package com.facebook.data.auth {
 	
-	[Bindable]
 	public class ExtendedPermissionValues {
 		
 		public static const EMAIL:String = 'email';

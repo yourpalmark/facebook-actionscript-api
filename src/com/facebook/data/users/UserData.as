@@ -31,7 +31,6 @@
 */
 package com.facebook.data.users {
 	
-	[Bindable]
 	public class UserData {
 		
 		public var uid:String;

@@ -31,7 +31,6 @@
 */
 package com.facebook.data.stream {
 	
-	[Bindable]
 	public class VideoMedia {
 		
 		public var display_url:String;

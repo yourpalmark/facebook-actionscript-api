@@ -31,7 +31,6 @@
 */
 package com.facebook.data.stream {
 	
-	[Bindable]
 	public class CommentsData {
 		
 		public var can_post:Boolean;

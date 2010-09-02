@@ -37,8 +37,7 @@ package com.facebook.data.photos {
 	
 	import com.facebook.data.FacebookData;
 	import com.facebook.data.users.FacebookUser;
-
-	[Bindable]
+	
 	public class FacebookPhoto extends FacebookData {
 
 		public var pid:String;

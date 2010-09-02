@@ -31,7 +31,6 @@
 */
 package com.facebook.data {
 	
-	[Bindable]
 	public class FacebookNetwork {
 		
 		public var nid:int;

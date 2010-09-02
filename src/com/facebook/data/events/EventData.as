@@ -32,8 +32,6 @@
 package com.facebook.data.events {
 	import com.facebook.data.FacebookLocation;
 	
-	
-	[Bindable]
 	public class EventData {
 		
 		public var eid:String;

@@ -38,7 +38,6 @@ package com.facebook.data.fbml {
 	
 	import com.facebook.data.fbml.AttributeCollection;
 	
-	[Bindable]
 	public class AbstractTagData {
 		
 		public var name:String;

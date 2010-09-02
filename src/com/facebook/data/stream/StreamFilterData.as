@@ -31,7 +31,6 @@
 */
 package com.facebook.data.stream {
 	
-	[Bindable]
 	public class StreamFilterData {
 		
 		public var uid:String;

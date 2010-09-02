@@ -31,7 +31,6 @@
 */
 package com.facebook.data {
 	
-	[Bindable]
 	public class FacebookEducationInfo {
 		
 		public var name:String;

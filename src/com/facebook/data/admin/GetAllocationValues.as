@@ -36,7 +36,6 @@
 */
 package com.facebook.data.admin {
 	
-	[Bindable]
 	public class GetAllocationValues {
 		
 		/**

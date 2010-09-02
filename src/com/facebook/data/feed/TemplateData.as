@@ -31,7 +31,6 @@
 */
 package com.facebook.data.feed {
 	
-	[Bindable]
 	public class TemplateData {
 		
 		public var template_title:String;

@@ -34,7 +34,6 @@ package com.facebook.data.stream {
 	import com.facebook.data.users.FacebookUserCollection;
 	import com.facebook.data.users.UserCollection;	
 	
-	[Bindable]
 	public class LikesData {
 		
 		public var href:String;

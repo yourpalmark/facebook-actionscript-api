@@ -34,7 +34,6 @@ package com.facebook.data.pages {
 	import com.facebook.data.FacebookLocation;
 	import flash.events.EventDispatcher;
 	
-	[Bindable]
 	public class PageInfoData extends EventDispatcher {
 		
 		public var page_id:Number;

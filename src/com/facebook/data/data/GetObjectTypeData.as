@@ -32,8 +32,7 @@
 package com.facebook.data.data {
 	
 	import com.facebook.data.FacebookData;
-
-	[Bindable]
+	
 	public class GetObjectTypeData extends FacebookData {
 		
 		public var name:String;

@@ -31,7 +31,6 @@
 */
 package com.facebook.data.feed {
 	
-	[Bindable]
 	public class ActionLinkData {
 		
 		public var text:String;

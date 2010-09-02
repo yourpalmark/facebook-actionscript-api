@@ -34,7 +34,6 @@ package com.facebook.utils {
 	import flash.events.EventDispatcher;
 	import flash.utils.Dictionary;
 	
-	[Bindable]
 	public class FacebookArrayCollection extends EventDispatcher {
 		
 		protected var _source:Array;

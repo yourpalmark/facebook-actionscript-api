@@ -37,7 +37,6 @@
 */
 package com.facebook.data.feed {
 	
-	[Bindable]
 	public class StorySizeValues {
 		
 		public static const ONE_LINE:uint = 1;

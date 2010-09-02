@@ -32,8 +32,7 @@
 package com.facebook.data.application {
 	
 	import com.facebook.data.FacebookData;
-
-	[Bindable]
+	
 	public class GetPublicInfoData extends FacebookData {
 		
 		public var app_id:String;

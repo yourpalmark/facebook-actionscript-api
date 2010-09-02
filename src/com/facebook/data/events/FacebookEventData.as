@@ -35,7 +35,6 @@ package com.facebook.data.events {
 	import com.facebook.data.users.FacebookUser;
 	import com.facebook.data.users.FacebookUserCollection;
 	
-	[Bindable]
 	public class FacebookEventData {
 
 		

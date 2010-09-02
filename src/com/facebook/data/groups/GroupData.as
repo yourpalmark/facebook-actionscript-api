@@ -32,8 +32,6 @@
 package com.facebook.data.groups {
 	import com.facebook.data.FacebookLocation;
 	
-	
-	[Bindable]
 	public class GroupData {
 		
 		public var gid:String;

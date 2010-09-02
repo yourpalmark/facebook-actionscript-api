@@ -31,7 +31,6 @@
 */
 package com.facebook.data.users {
 	
-	[Bindable]
 	public class HasAppPermissionValues {
 		
 		public static const EMAIL:String = 'email';

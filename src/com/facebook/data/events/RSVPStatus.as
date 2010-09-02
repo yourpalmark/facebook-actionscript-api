@@ -31,7 +31,6 @@
 */
 package com.facebook.data.events {
 	
-	[Bindable]
 	public class RSVPStatus {
 		
 		public static const ATTENDING:String = "attending";

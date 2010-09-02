@@ -31,7 +31,6 @@
 */
 package com.facebook.data.notifications {
 	
-	[Bindable]
 	public class NotificationShareData {
 		
 		public var unread:Number;

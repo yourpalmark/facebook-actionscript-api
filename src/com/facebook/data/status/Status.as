@@ -31,7 +31,6 @@
 */
 package com.facebook.data.status {
 	
-	[Bindable]
 	public class Status {
 		
 		public var uid:String;

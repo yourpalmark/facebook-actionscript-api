@@ -31,7 +31,6 @@
 */
 package com.facebook.data.fbml {
 	
-	[Bindable]
 	public class AttributeData {
 		
 		public var name:String;

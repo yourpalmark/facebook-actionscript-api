@@ -31,7 +31,6 @@
 */
 package com.facebook.data.data {
 	
-	[Bindable]
 	public class ObjectTypesData {
 		
 		public var name:String;

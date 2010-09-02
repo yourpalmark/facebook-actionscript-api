@@ -32,8 +32,7 @@
 package com.facebook.data.data {
 	
 	import com.facebook.data.FacebookData;
-
-	[Bindable]
+	
 	public class AssocInfoData {
 		
 		public var alias:String;

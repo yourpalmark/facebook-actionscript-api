@@ -36,7 +36,6 @@
 */
 package com.facebook.data.events {
 	
-	[Bindable]
 	public class EventCategoriesValues {
 		
 		public static const PARTY:Number = 1;//Party';

@@ -31,7 +31,6 @@
 */
 package com.facebook.data.events {
 	
-	[Bindable]
 	public class EventPrivacyTypeValues {
 		
 		public static const OPEN:String = 'OPEN'; // for an event open and visible to everyone.

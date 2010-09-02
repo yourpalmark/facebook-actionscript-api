@@ -33,7 +33,6 @@ package com.facebook.data.stream {
 	
 	import com.facebook.utils.FacebookArrayCollection;
 	
-	[Bindable]
 	public class ActionLinkCollection extends FacebookArrayCollection {
 		
 		public function ActionLinkCollection() {

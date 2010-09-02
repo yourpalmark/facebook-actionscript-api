@@ -32,8 +32,7 @@
 package com.facebook.data.notifications {
 	
 	import com.facebook.data.FacebookData;
-
-	[Bindable]
+	
 	public class GetNotificationData extends FacebookData {
 		
 		public var friendsRequests:Array;

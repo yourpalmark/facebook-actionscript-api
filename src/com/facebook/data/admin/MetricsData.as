@@ -32,7 +32,6 @@
 package com.facebook.data.admin {
 	import com.facebook.data.FacebookData;
 	
-	[Bindable]
 	public class MetricsData {
 		
 		public var end_time:Date;

@@ -31,7 +31,6 @@
 */
 package com.facebook.data.profile {
 	
-	[Bindable]
 	public class InfoFieldsData {
 		
 		public var field:String;

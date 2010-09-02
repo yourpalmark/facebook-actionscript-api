@@ -32,8 +32,7 @@
 package com.facebook.data.profile {
 	
 	import com.facebook.utils.FacebookArrayCollection;
-
-	[Bindable]
+	
 	public class InfoItemCollection extends FacebookArrayCollection {
 		
 		public function InfoItemCollection(source:Array=null) {

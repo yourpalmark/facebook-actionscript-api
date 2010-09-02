@@ -31,7 +31,6 @@
 */
 package com.facebook.data.notes {
 	
-	[Bindable]
 	public class NoteData {
 		
 		public var note_id:String;

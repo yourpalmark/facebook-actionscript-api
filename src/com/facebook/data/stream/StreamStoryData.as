@@ -31,7 +31,6 @@
 */
 package com.facebook.data.stream {
 	
-	[Bindable]
 	public class StreamStoryData {
 		
 		public var post_id:String;

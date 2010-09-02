@@ -32,8 +32,7 @@
 package com.facebook.data.groups {
 	
 	import com.facebook.utils.FacebookArrayCollection;
-
-	[Bindable]
+	
 	public class GroupCollection extends FacebookArrayCollection {
 		
 		public function GroupCollection() {

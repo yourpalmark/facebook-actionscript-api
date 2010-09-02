@@ -31,7 +31,6 @@
 */
 package com.facebook.data.friends {
 	
-	[Bindable]
 	public class FriendsData {
 		
 		public var uid1:Number;

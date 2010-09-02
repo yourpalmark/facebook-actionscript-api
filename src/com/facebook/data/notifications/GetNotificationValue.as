@@ -31,7 +31,6 @@
 */
 package com.facebook.data.notifications {
 	
-	[Bindable]
 	public class GetNotificationValue {
 		
 		public static const USER_TO_USER:String = 'user_to_user';

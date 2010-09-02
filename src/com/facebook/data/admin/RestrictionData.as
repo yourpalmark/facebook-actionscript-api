@@ -31,7 +31,6 @@
 */
 package com.facebook.data.admin {
 	
-	[Bindable]
 	public class RestrictionData {
 		
 		public var age:Number;

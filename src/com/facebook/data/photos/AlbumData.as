@@ -31,7 +31,6 @@
 */
 package com.facebook.data.photos {
 	
-	[Bindable]
 	public class AlbumData {
 		
 		public var aid:String;

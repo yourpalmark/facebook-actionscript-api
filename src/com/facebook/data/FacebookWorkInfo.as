@@ -30,8 +30,7 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package com.facebook.data {
-		
-	[Bindable]
+	
 	public class FacebookWorkInfo {
 		
 		public var location:FacebookLocation;

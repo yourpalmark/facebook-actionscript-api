@@ -31,7 +31,6 @@
 */
 package com.facebook.data.pages {
 	
-	[Bindable]
 	public class PageTypeValue {
 		
 		public static const APPLICATION:String = 'application';

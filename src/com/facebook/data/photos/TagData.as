@@ -31,7 +31,6 @@
 */
 package com.facebook.data.photos {
 	
-	[Bindable]
 	public class TagData {
 		
 		protected var _actualX:Number;

@@ -31,7 +31,6 @@
 */
 package com.facebook.data.data {
 	
-	[Bindable]
 	public class AssocTypeValue {
 		
 		public static const ONE_WAY:uint = 1;

@@ -33,7 +33,6 @@ package com.facebook.data.auth {
 	
 	import com.facebook.data.FacebookData;
 	
-	[Bindable]
 	public class GetSessionData extends FacebookData {
 		
 		public var session_key:String;

@@ -31,7 +31,6 @@
 */
 package com.facebook.data.photos {
 	
-	[Bindable]
 	public class PhotoVisibleValue {
 		
 		public static const FRIENDS:String = 'friends';

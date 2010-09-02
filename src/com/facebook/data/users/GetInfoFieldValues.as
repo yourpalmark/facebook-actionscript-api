@@ -36,7 +36,6 @@
 */
 package com.facebook.data.users {
 	
-	[Bindable]
 	public class GetInfoFieldValues {
 		
 		public static const ABOUT_ME:String = "about_me";

@@ -31,7 +31,6 @@
 */
 package com.facebook.data {
 	
-	[Bindable]
 	public class FacebookLocation extends FacebookData {
 		
 		public var street:String;

@@ -33,7 +33,6 @@ package com.facebook.data.users {
 	
 	import com.facebook.utils.FacebookArrayCollection;
 	
-	[Bindable]
 	public class FacebookUserCollection extends FacebookArrayCollection {
 		
 		public function FacebookUserCollection() {

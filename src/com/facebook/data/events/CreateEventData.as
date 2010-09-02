@@ -35,7 +35,6 @@ package com.facebook.data.events {
 	
 	use namespace facebook_internal;
 	
-	[Bindable]
 	public class CreateEventData {
 	
 	

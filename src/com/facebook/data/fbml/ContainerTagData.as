@@ -33,7 +33,6 @@ package com.facebook.data.fbml {
 	
 	import com.facebook.data.fbml.AttributeCollection;
 	
-	[Bindable]
 	public class ContainerTagData extends AbstractTagData {
 		
 		public var open_tag_fbml:String;

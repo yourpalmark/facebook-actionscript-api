@@ -33,7 +33,6 @@ package com.facebook.data.photos {
 	
 	import com.facebook.utils.FacebookArrayCollection;
 	
-	[Bindable]
 	public class AlbumCollection extends FacebookArrayCollection {
 		
 		public function AlbumCollection() {

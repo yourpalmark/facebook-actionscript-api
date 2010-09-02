@@ -33,7 +33,6 @@ package com.facebook.data.profile {
 	
 	import com.facebook.facebook_internal;
 	
-	[Bindable]
 	public class InfoItemData {
 		
 		public var label:String;

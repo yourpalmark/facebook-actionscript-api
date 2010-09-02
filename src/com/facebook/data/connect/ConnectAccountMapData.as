@@ -31,7 +31,6 @@
 */
 package com.facebook.data.connect {
 	
-	[Bindable]
 	public class ConnectAccountMapData {
 		
 		public var email_hash:String;

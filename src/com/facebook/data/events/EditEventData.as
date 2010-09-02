@@ -31,7 +31,6 @@
 */
 package com.facebook.data.events {
 	
-	[Bindable]
 	public class EditEventData {
 		
 		public var city:String;

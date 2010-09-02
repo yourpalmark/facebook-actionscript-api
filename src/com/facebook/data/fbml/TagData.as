@@ -31,7 +31,6 @@
 */
 package com.facebook.data.fbml {
 	
-	[Bindable]
 	public class TagData {
 		
 		public var name:String;

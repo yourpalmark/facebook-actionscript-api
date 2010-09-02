@@ -34,7 +34,6 @@ package com.facebook.data.users {
 	import com.facebook.data.FacebookData;
 	import com.facebook.data.FacebookLocation;
 	
-	[Bindable]
 	public class FacebookUser extends FacebookData {
 		
 		public var uid:String;

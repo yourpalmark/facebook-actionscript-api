@@ -31,7 +31,6 @@
 */
 package com.facebook.data.pages {
 	
-	[Bindable]
 	public class GenreData {
 		
 		public var dance:Boolean;

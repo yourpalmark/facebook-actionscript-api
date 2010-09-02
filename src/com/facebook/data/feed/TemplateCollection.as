@@ -32,8 +32,7 @@
 package com.facebook.data.feed {
 	
 	import com.facebook.utils.FacebookArrayCollection;
-
-	[Bindable]
+	
 	public class TemplateCollection extends FacebookArrayCollection {
 		
 		public var time_created:Date;

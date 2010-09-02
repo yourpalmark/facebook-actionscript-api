@@ -31,7 +31,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package com.facebook.data.stream {
 	
-	[Bindable]
 	public class FlashMedia {
 		
 		public var source_url:String;
