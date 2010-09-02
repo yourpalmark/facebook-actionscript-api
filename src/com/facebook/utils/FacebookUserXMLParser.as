@@ -90,6 +90,10 @@ package com.facebook.utils {
 					case 'email_hashes':
 						fbUser[localName] = toArray(userNode, ns); break;
 					
+					//Date parsing
+					case 'birthday_date':
+						fbUser[localName] = new Date(userNode.toString()); break;
+					
 					//Default everthing else to a String
 					default:
 						if (localName in fbUser) { //Check to make sure this isn't a new or un-supported property.

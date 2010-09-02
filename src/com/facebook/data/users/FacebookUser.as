@@ -29,12 +29,14 @@
   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package com.facebook.data.users {
-	
+package com.facebook.data.users
+{
 	import com.facebook.data.FacebookData;
 	import com.facebook.data.FacebookLocation;
 	
-	public class FacebookUser extends FacebookData {
+	public class FacebookUser extends FacebookData
+	{
+		public var rawUser:*;
 		
 		public var uid:String;
 		
@@ -51,7 +53,7 @@ package com.facebook.data.users {
 
 		public var sex:String;
 		public var birthday:String;
-		public var birthdayDate:Date;
+		public var birthday_date:Date;
 		
 		public var about_me:String;
 		public var activities:String;
@@ -107,7 +109,8 @@ package com.facebook.data.users {
 		public var locale:String; 
 		public var email_hashes:Array;
 		
- 		public function FacebookUser():void {
+ 		public function FacebookUser():void
+		{
 			super();
 		}
 		
