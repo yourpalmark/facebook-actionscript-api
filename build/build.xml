@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="FacebookLib" basedir="../" default="release">
+<project name="facebook-actionscript-api" basedir="../" default="release">
 	
 	<!-- Define variables/paths used in this build script -->
 	<property file="build/build.properties" />
