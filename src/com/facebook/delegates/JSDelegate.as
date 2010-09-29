@@ -32,6 +32,8 @@
 package com.facebook.delegates {
 	
 	import com.adobe.serialization.json.JSON;
+	import com.facebook.data.FacebookData;
+	import com.facebook.data.JSONDataParser;
 	import com.facebook.data.JSONResultData;
 	import com.facebook.errors.FacebookError;
 	import com.facebook.facebook_internal;
@@ -45,7 +47,11 @@ package com.facebook.delegates {
 	import flash.events.StatusEvent;
 	import flash.external.ExternalInterface;
 	
+	use namespace facebook_internal;
+	
 	public class JSDelegate extends EventDispatcher implements IFacebookCallDelegate {
+		
+		protected var parser:JSONDataParser;
 		
 		protected var _call:FacebookCall;
 		protected var _session:JSSession;
@@ -57,13 +63,15 @@ package com.facebook.delegates {
 			this.call = call;
 			this.session = session;
 			
+			parser = new JSONDataParser();
+			
 			execute();
 		}
 		
 		protected function onReceiveError(event:ErrorEvent):void {
 			var fbError:FacebookError = new FacebookError();
 			fbError.errorEvent = event;
-			call.facebook_internal::handleError(fbError);
+			call.handleError(fbError);
 		}
 		
 		protected function onReceiveStatus(event:StatusEvent):void {
@@ -71,7 +79,7 @@ package com.facebook.delegates {
 				case 'error':
 					var fbError:FacebookError = new FacebookError();
 					fbError.rawResult = event.level;
-					call.facebook_internal::handleError(fbError);
+					call.handleError(fbError);
 					break;
 				case 'warning':
 				case 'status':
@@ -88,11 +96,6 @@ package com.facebook.delegates {
 		public function close():void { }
 		
 		protected function execute():void {
-			var a:Array = [];
-			for each(var o:Object in call.args) {
-				a.push(o);
-			}
-			
 			externalInterfaceCalls[++externalInterfaceCallId] = call;
 			
 			var jsCall:String = buildCall();
@@ -101,19 +104,41 @@ package com.facebook.delegates {
 			ExternalInterface.call(jsCall);
 		}
 		
-		protected function postBridgeAsyncReply(result:Object, exception:Object, exCallId:uint):void {
+		protected function postBridgeAsyncReply(response:Object, exCallId:uint):void {
 			var call:FacebookCall = externalInterfaceCalls[exCallId];
 			
-			if (result) {
-				var data:JSONResultData = new JSONResultData();
-				data.result = result;
-				call.facebook_internal::handleResult(data);
-			} else {
-				var error:FacebookError = new FacebookError();
-				error.rawResult = JSON.encode(exception);
-				call.facebook_internal::handleError(error);
+			handleResult( call, response );
+			
+			if( call.coreMethod != "Event.subscribe" )
+			{
+				if( call.coreMethod == "Event.unsubscribe" )
+				{
+					for each( var fbExCallId:uint in externalInterfaceCalls )
+					{
+						var fbCall:FacebookCall = externalInterfaceCalls[fbExCallId];
+						if( fbCall.coreMethod == "Event.subscribe" && call[ "event" ] && fbCall[ "event" ] && call[ "event" ] == fbCall[ "event" ] )
+						{
+							delete externalInterfaceCalls[fbExCallId];
+						}
+					}
+				}
+				delete externalInterfaceCalls[exCallId];
 			}
-			delete externalInterfaceCalls[exCallId];
+		}
+		
+		protected function handleResult( call:FacebookCall, response:Object ):void
+		{
+			var error:FacebookError = parser.validateFacebookResponse( response );
+			
+			if( !error )
+			{
+				var data:FacebookData = parser.parse( response, call.coreMethod, call.method );
+				call.handleResult( data );
+			}
+			else
+			{
+				call.handleError( error );
+			}
 		}
 		
 		protected function buildCall():String {
@@ -121,18 +146,20 @@ package com.facebook.delegates {
 			
 			RequestHelper.formatRequest(call);
 			
-			var objectArgs:Object = {};
+			var callback:String = 	"function(response) {" + 
+										"document.getElementById('" + ( _session as JSSession ).as_swf_name + "').bridgeFacebookReply(response, " + externalInterfaceCallId + ")" + 
+									"}";
 			
-			for (var n:String in call.args) {
-				objectArgs[n] = call.args[n];
-			}
+			var args:String = JavascriptRequestHelper.formatURLVariables( call.args, call.schema, call.coreMethod );
+			
+			var params:String = call.cbIndex == 0 ? callback + ", " : "";
+			params += args;
+			params += call.cbIndex != 0 ? ", " + callback : "";
+			
+			var method:String = call.coreMethod ? call.coreMethod : "api";
 			
 			var jsCall:String = "function " + bridgeCallFunctionName + "() { " + 
-				"FB.Facebook.apiClient.callMethod(\""+call.method+"\", "+JavascriptRequestHelper.formatURLVariables(call.args)+", " + 
-						"function(result, exception) {" + 
-							"document." + (_session as JSSession).as_swf_name + ".bridgeFacebookReply(result, exception, "+externalInterfaceCallId+")" + 
-						"}" + 
-				");" + 
+				"FB." + method + "(" + params + ");" + 
 			"}";
 			
 			return jsCall;

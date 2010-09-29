@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<title>Facebook AS3 Graph API</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<script type="text/javascript" src="swfobject.js"></script>
+		<script type="text/javascript">
+			var flashvars = {};
+			var params = { allowscriptaccess: "always" };
+			var attributes = { id: "flashContent", name: "flashContent" };
+			swfobject.embedSWF( "${swf}.swf", "flashContent", "${width}", "${height}", "9.0.0", "expressInstall.swf", flashvars, params, attributes );
+		</script>
+	</head>
+	
+	<body>
+		<div id="fb-root"></div>
+		<script type="text/javascript">
+			window.fbAsyncInit = function()
+			{
+				FB.init(
+				{
+					appId : '360371753819',
+					status: true, // check login status
+					cookie: true, // enable cookies to allow the server to access the session
+					xfbml: true  // parse XFBML
+				} );
+			};
+			( function()
+			{
+				var e = document.createElement( 'script' );
+				e.type = 'text/javascript';
+				var protocol = document.location.protocol;
+				protocol = protocol == 'file:' ? 'http:' : protocol;
+				e.src = protocol + '//connect.facebook.net/en_US/all.js';
+				e.async = true;
+				document.getElementById( 'fb-root' ).appendChild( e );
+			}() );
+		</script>
+		
+		<div id="flashContent">
+			<h1>Alternative content</h1>
+			<p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
+		</div>
+	</body>
+</html>

@@ -47,10 +47,20 @@ package com.facebook.net {
 	
 	use namespace facebook_internal;
 	
+	/**
+	 * Dispatched when the call is complete.
+	 *
+	 * @eventType com.facebook.events.FacebookEvent.COMPLETE
+	 */
+	[Event( name="complete", type="com.facebook.events.FacebookEvent" )]
+	
 	public class FacebookCall extends EventDispatcher {
 		
 		public var args:URLVariables;
+		public var schema:Array;
 		public var method:String;
+		public var coreMethod:String;
+		public var cbIndex:int = -1;
 		
 		public var result:FacebookData;
 		public var error:FacebookError;
@@ -79,7 +89,7 @@ package com.facebook.net {
 		 */
 		public var useSession:Boolean = true;
 		
-		public function FacebookCall(method:String="no_method_required", args:URLVariables=null) {
+		public function FacebookCall(method:String=null, args:URLVariables=null) {
 			this.method = method;
 			this.args = args != null ? args : new URLVariables();
 		}
@@ -146,11 +156,12 @@ package com.facebook.net {
 			dispatchEvent(new FacebookEvent(FacebookEvent.COMPLETE, false, false, false, null, error));
 		}
 		
-		protected function applySchema(p_shema:Array, ...p_args:Array):void {
-			var l:uint = p_shema.length;
+		protected function applySchema(p_schema:Array, ...p_args:Array):void {
+			schema = p_schema.concat();
+			var l:uint = p_schema.length;
 			
 			for (var i:uint=0;i<l;i++) {
-				setRequestArgument(p_shema[i], p_args[i]);
+				setRequestArgument(p_schema[i], p_args[i]);
 			}
 		}
 

@@ -161,11 +161,11 @@ package com.facebook.delegates {
 		protected function handleResult(result:String):void {
 			clean();
 			
-			var error:FacebookError = parser.validateFacebookResponce(result);
+			var error:FacebookError = parser.validateFacebookResponse(result);
 			var fbData:FacebookData;
 			
 			if (error == null) {
-				fbData = parser.parse(result, call.method);
+				fbData = parser.parse(result, call.coreMethod, call.method);
 				call.handleResult(fbData);
 			} else {
 				call.handleError(error);

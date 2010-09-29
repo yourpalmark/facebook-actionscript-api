@@ -36,17 +36,26 @@ package com.facebook.utils {
 	
 	public class JavascriptRequestHelper {
 		
-		public static function formatURLVariables(urlVars:URLVariables):String {
-			var filter:Object = {method:true, sig:true, api_key:true, call_id:true};
-			
-			var hasParams:Boolean =  false;
-			var obj:Object = {};
-			for (var n:String in urlVars) {
-				if (filter[n]) { continue; }
-				hasParams = true;
-				obj[n] = urlVars[n];
+		public static function formatURLVariables(urlVars:URLVariables, schema:Array, coreMethod:String):String {
+			var formattedURLVars:String;
+			if( !coreMethod ) {
+				var filter:Object = getFilter( coreMethod );
+				
+				var hasParams:Boolean = false;
+				var obj:Object = {};
+				for (var n:String in urlVars) {
+					if (filter[n]) { continue; }
+					hasParams = true;
+					obj[n] = urlVars[n];
+				}
+				formattedURLVars = hasParams ? objectToString( obj ) : 'null';
 			}
-			return hasParams?objectToString(obj):'null';
+			else
+			{
+				var callParams:Array = urlVarsToParams( urlVars, schema, coreMethod );
+				formattedURLVars = callParams.length > 0 ? formatParams( callParams ) : 'null';
+			}
+			return formattedURLVars;
 		}
 		
 		public static function formatParams(params:Array):String {
@@ -74,7 +83,7 @@ package com.facebook.utils {
 			for (var n:String in obj) {
 				arr.push(n + ': ' + quote(obj[n]) + '');
 			}
-			return '{' + arr.join(', ') +' }';
+			return '{' + arr.join(', ') +'}';
 		}
 		
 		public static function quote(p_string:String):String {
@@ -94,6 +103,38 @@ package com.facebook.utils {
 					return '\\"';
 			}
 			return null;
+		}
+		
+		protected static function urlVarsToParams( urlVars:URLVariables, schema:Array, coreMethod:String):Array {
+			var cloneVars:URLVariables = new URLVariables();
+			var n:String;
+			for (n in urlVars) {
+				cloneVars[n] = urlVars[n];
+			}
+			var filter:Object = getFilter( coreMethod );
+			var params:Array = [];
+			var l:uint = schema ? schema.length : 0;
+			for (var i:uint=0;i<l;i++) {
+				n = schema[i];
+				if (filter[n]) { continue; }
+				if( cloneVars[n] )
+				{
+					params.push( cloneVars[n] );
+					delete cloneVars[n];
+				}
+			}
+			for (n in cloneVars) {
+				if (filter[n]) { continue; }
+				params.push( cloneVars[n] );
+			}
+			return params;
+		}
+		
+		protected static function getFilter( coreMethod:String ):Object
+		{
+			var filter:Object = {sig:true, api_key:true, call_id:true, v:true};
+			if( coreMethod && coreMethod != "api" ) filter.method = true;
+			return filter;
 		}
 	}
 }

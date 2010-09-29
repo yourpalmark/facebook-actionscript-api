@@ -120,7 +120,9 @@ package com.facebook.data {
 			fb_namespace = new Namespace("http://api.facebook.com/1.0/");
 		}
 		
-		public function parse(data:String, methodName:String):FacebookData {
+		public function parse(response:*, coreMethodName:String, methodName:String):FacebookData {
+			var data:String = response as String;
+			
 			var result:FacebookData;
 			var xml:XML = new XML(data);
 		
@@ -879,10 +881,10 @@ package com.facebook.data {
 				var resultString:String = results[i].toString();
 				var resultXML:XML = new XML(resultString);
 				
-				var error:FacebookError = validateFacebookResponce(resultString);
+				var error:FacebookError = validateFacebookResponse(resultString);
 				if (error === null) {
 					var methodName:String = responseNodeNameToMethodName(resultXML.localName().toString());
-					var data:FacebookData = parse(resultString, methodName);
+					var data:FacebookData = parse(resultString, null, methodName);
 					
 					parsedResults.push(data);
 				} else {
@@ -901,7 +903,9 @@ package com.facebook.data {
 			return peices.join('.');
 		}
 		
-		public function validateFacebookResponce(result:String):FacebookError {
+		public function validateFacebookResponse(response:*):FacebookError {
+			var result:String = response as String;
+			
 			var error:FacebookError = null;
 			var xml:XML;
 			var xmlError:Error;
