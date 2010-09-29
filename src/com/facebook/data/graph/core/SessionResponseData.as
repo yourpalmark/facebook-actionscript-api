@@ -8,5 +8,10 @@ package com.facebook.data.graph.core
 		public var session:SessionData;
 		public var perms:PermissionsData;
 		
+		public function SessionResponseData()
+		{
+			super();
+		}
+		
 	}
 }

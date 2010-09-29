@@ -29,16 +29,16 @@
   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package com.facebook.data {
-	
+package com.facebook.data
+{
 	import flash.events.EventDispatcher;
 	
-	public class FacebookData extends EventDispatcher {
+	public class FacebookData extends EventDispatcher
+	{
+		public var rawResult:*;
 		
-		public var rawResult:String;
-		
-		public function FacebookData() {
-			
+		public function FacebookData()
+		{
 		}
 		
 	}

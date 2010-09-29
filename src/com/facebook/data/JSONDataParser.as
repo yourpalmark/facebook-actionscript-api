@@ -40,8 +40,8 @@ package com.facebook.data
 					data = createSessionResponse( response, new UnsubscribeData() );
 					break;
 				default:
-					data = new JSONResultData();
-					JSONResultData( data ).result = response;
+					data = new FacebookData();
+					data.rawResult = response;
 					break;
 			}
 			
