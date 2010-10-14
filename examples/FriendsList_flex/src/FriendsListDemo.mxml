@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  Copyright (c) 2010, Adobe Systems Incorporated
+  All rights reserved.
+
+  Redistribution and use in source and binary forms, with or without 
+  modification, are permitted provided that the following conditions are
+  met:
+
+  * Redistributions of source code must retain the above copyright notice, 
+    this list of conditions and the following disclaimer.
+  
+  * Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the 
+    documentation and/or other materials provided with the distribution.
+  
+  * Neither the name of Adobe Systems Incorporated nor the names of its 
+    contributors may be used to endorse or promote products derived from 
+    this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+  IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+  THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
+  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+  PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" layout="{new VerticalLayout()}" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="400" minHeight="400"
+			   creationComplete="init()" 
+			   >
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import com.facebook.graph.FacebookDesktop;
+			import com.facebook.graph.controls.Distractor;
+			import com.facebook.graph.net.FacebookRequest;
+			import com.facebook.graph.utils.FacebookDataUtils;
+			
+			import mx.collections.ArrayList;
+			import mx.controls.Image;
+			import mx.core.UIComponent;
+			
+			import spark.components.TextArea;
+			import spark.components.Window;
+			import spark.layouts.VerticalLayout;
+			
+			protected var friendsModel:FriendsModel;
+			protected var win:Window;
+			
+			protected function init():void {
+				friendsList.itemRenderer = new FriendsListRenderer();
+				FacebookDesktop.init('YOUR_APPLICATION_ID', handleLogin);
+			}
+			
+			protected function login():void {
+				FacebookDesktop.login(handleLogin, []);
+			}
+			
+			protected function logOut():void {
+				FacebookDesktop.logout();
+				resetUI();
+			}
+			
+			protected function resetUI():void {
+				loginBtn.label = 'Login';
+				loginBtn.enabled = true;
+				showDetailsBtn.visible = false;
+				friendsList.dataProvider = new ArrayList();
+			}
+			
+			protected function loadFriends():void {
+				friendsModel = new FriendsModel();
+				friendsList.dataProvider = friendsModel.dataProvider;
+				
+				friendsModel.load();
+			}
+			
+			protected function handleLogin(response:Object, fail:Object):void {
+				if (!response) { return; }
+				loginBtn.label = 'You are logged in.';
+				loginBtn.enabled = false;
+				
+				loadFriends();
+			}
+			
+			protected function showDetails():void {
+				FacebookDesktop.api('/'+friendsList.selectedItem.id, handleDetailsLoad);
+			}
+			
+			protected function handleDetailsLoad(response:Object, fail:Object):void {
+				var ta:TextArea = new TextArea();
+				ta.percentHeight = 100;
+				ta.percentWidth = 100;
+				
+				var textToDisplay:Array = [];
+				var d:Object = response;
+				for (var n:String in d) {
+					var displayValue:Object = d[n];
+					switch (n) {
+						case 'updated_time':
+							displayValue = FacebookDataUtils.stringToDate(displayValue as String); break;
+						case 'work':
+						case 'hometown':
+						case 'location':
+							displayValue = objectToString(displayValue); break;
+						case 'education':
+							displayValue = arrayToString(displayValue as Array); break;
+					}
+					textToDisplay.push(n + ': ' + displayValue);
+				}
+				
+				ta.text = textToDisplay.join('\n');
+				
+				var img:Image = new Image();
+				img.addEventListener(Event.COMPLETE, onImageReady, false, 0, true);
+				img.source = FacebookDesktop.getImageUrl(d.id, 'large');
+				
+				var distractor:Distractor = new Distractor();
+				distractor.text = 'loading';
+				var distractorContainer:UIComponent = new UIComponent();
+				distractorContainer.addChild(distractor);
+				
+				var hGroup:HGroup = new HGroup();
+				hGroup.percentWidth = 100;
+				hGroup.percentHeight = 100;
+				hGroup.addElement(img);
+				hGroup.addElement(ta);
+				
+				win = new Window();
+				win.width = 600;
+				win.height = 350;
+				win.addElement(hGroup);
+				win.addElement(distractorContainer);
+				distractor.x = win.width - distractor.width >> 1;
+				distractor.y = win.height - distractor.height >> 1;
+				win.open();
+			}
+			
+			protected function onImageReady(event:Event):void {
+				win.removeElementAt(win.numChildren);
+			}
+			
+			protected function objectToString(value:Object):String {
+				var arr:Array = [];
+				for (var n:String in value) {
+					arr.push(n + ': ' + value[n]);
+				}
+				return '\n\t' + arr.join('\n\t');
+			}
+			
+			protected function arrayToString(value:Array):String {
+				var arr:Array = [];
+				var l:uint = value.length;
+				for (var i:uint=0;i<l;i++) {
+					arr.push(objectToString(value[i]));
+				}
+				
+				return arr.join('\n');
+			}
+			
+			protected function handleListChange():void {
+				showDetailsBtn.visible = true;
+				showDetailsBtn.label = "Show details for " + friendsList.selectedItem.name;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:HGroup width="100%">
+		<s:Button id="showDetailsBtn" visible="false" click="showDetails()" />
+		<mx:Spacer width="100%" />
+		<s:Button id="loginBtn" label="Login" click="login()" />
+		<s:Button id="loginOutBtn" label="Login Out" click="logOut()" />
+	</s:HGroup>
+	<s:List id="friendsList" width="100%" height="100%" change="handleListChange()" />
+	
+</s:WindowedApplication>

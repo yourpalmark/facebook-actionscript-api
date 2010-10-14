@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+Copyright (c) 2010, Adobe Systems Incorporated
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+* Redistributions of source code must retain the above copyright notice,
+this list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright
+notice, this list of conditions and the following disclaimer in the
+documentation and/or other materials provided with the distribution.
+
+* Neither the name of Adobe Systems Incorporated nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+         xmlns:s="library://ns.adobe.com/flex/spark"
+         xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="550" minHeight="600"
+         applicationComplete="init()"
+         >
+
+  <s:layout>
+    <s:VerticalLayout />
+  </s:layout>
+
+  <fx:Script>
+    <![CDATA[
+      import com.facebook.graph.Facebook;
+      import com.facebook.graph.data.FacebookSession;
+      import com.facebook.graph.net.FacebookRequest;
+
+      import mx.collections.ArrayCollection;
+      import mx.collections.ArrayList;
+      import mx.controls.Alert;
+      import mx.events.ListEvent;
+
+      import spark.events.IndexChangeEvent;
+
+      protected var selectedItem:Object;
+
+      protected function init():void {
+        //Initilize the Facebook library
+        Facebook.init('YOUR_APPLICATION_ID', handleLogin);
+
+      }
+
+      protected function handleLogin(response:Object, fail:Object):void {
+        if (response == null) {
+			resultTxt.text += 'Error login session';
+			ExternalInterface.call('redirect');
+			return;
+		}
+        changeToLoginState();
+      }
+
+      protected function handleLoginClick():void {
+        if (Facebook.getSession().uid == null) {
+          resultTxt.text += '\nLOGIN';
+          Facebook.login(handleLogin);
+        } else {
+          resultTxt.text += '\nLOG OUT:' + String(Facebook.getSession());
+          Facebook.logout(handleLogout);
+        }
+      }
+
+      protected function changeToLoginState():void {
+        resultTxt.text += 'Logged in';
+        loginLogoutBtn.label = 'Logout';
+        loadUIList();
+      }
+
+      protected function handleSessionChanged(success:Object, fail:Object):void {
+        changeToLoginState();
+      }
+
+      protected function handleLogout(success:Object, fail:Object):void {
+        resultTxt.text += "Logout";
+        loginLogoutBtn.label = 'Login';
+      }
+
+      protected function loadUIList():void {
+
+        var a:ArrayCollection = new ArrayCollection();
+        a.addItem({label:'friends.add', data:getUIType('friends.add')});
+        a.addItem({label:'stream.publish', data:getUIType('stream.publish')});
+        a.addItem({label:'stream.share', data:getUIType('stream.share')});
+        a.addItem({label:'bookmark.add', data:getUIType('bookmark.add')});
+
+        uiCmb.addEventListener(ListEvent.CHANGE, onUIClicked, false, 0, true);
+        uiCmb.dataProvider = a;
+        uiCmb.selectedIndex = 2;
+
+      }
+
+      protected function onUIClicked(event:IndexChangeEvent):void {
+        selectedItem = event.target.selectedItem;
+      }
+
+      protected function getUIType(type:String):Object {
+        var o:Object;
+        switch(type) {
+          case 'friends.add':
+            o = {
+                id:'1486776801'
+              };
+            break;
+          case 'fbml.dialog':
+            o = {
+              fbml:'<fb:header icon="false" decoration="add_border">Hello World!</fb:header><fb:profile-pic uid="'+Facebook.getSession().uid+'"></fb:profile-pic>',
+              size: {width:'800', height:'600'}
+            }
+            break;
+          case 'stream.publish':
+            o = {
+              message: 'getting educated about Facebook Connect',
+              attachment: {
+                name: 'Connect',
+                caption: 'The Facebook Connect JavaScript SDK',
+                description:
+                'A small JavaScript library that allows you to harness ' +
+                  'the power of Facebook, bringing the user\'s identity, ' +
+                  'social graph and distribution power to your site.' ,
+                  href: 'http://github.com/facebook/connect-js'
+              },
+              action_links: [
+                { text: 'Code', href: 'http://github.com/facebook/connect-js' }
+              ],
+              user_prompt_message: 'Share your thoughts about Connect'
+            };
+            break;
+          case 'stream.share':
+            o = {
+              u: 'http://www.google.com/'
+            };
+            break;
+          case 'bookmark.add':
+          o = {};
+            break;
+        }
+        return o;
+      }
+
+      protected function showUI():void {
+        //When in Facebook.com, you need to use the iFrame dialog
+        Facebook.ui(selectedItem.label, uiDialog.selected?'popup':null, selectedItem.data);
+      }
+
+      protected function callAPI():void {
+        Facebook.api(requestIdTxt.text + '/' +apiConnectionType.selectedItem.label, handleAPIComplete);
+      }
+
+      protected function handleAPIComplete(success:Object, fail:Object):void {
+        resultTxt.appendText('\n\nResult:\n' + success);
+      }
+
+      //File upload demo
+      protected var photoFileRef:FileReference;
+      protected function browseForPhoto():void {
+        photoFileRef = new FileReference();
+        photoFileRef.addEventListener(IOErrorEvent.IO_ERROR, handleUploadError);
+        photoFileRef.addEventListener(Event.SELECT, handlePhotoSelect, false, 0, true);
+        photoFileRef.browse([new FileFilter('png files', 'png'),new FileFilter('jpeg files', 'jpg'), new FileFilter('jpeg files', 'jpeg')]);
+      }
+
+      protected function handleUploadError(event:IOErrorEvent):void {
+        resultTxt.appendText('\nIOError: ' + event.text);
+      }
+
+      protected function handlePhotoSelect(event:Event):void {
+        uploadFileName.text = photoFileRef.name;
+        uploadPhotoBtn.enabled = true;
+      }
+
+      protected function upload():void {
+        var params:Object = {image:photoFileRef, message:'Test Photo', fileName:'FILE_NAME'};
+        Facebook.api('me/photos', handleImageUploadComplete, params);
+
+        resultTxt.text += 'Starting Upload';
+      }
+
+      protected function handleImageUploadComplete(success:Object, fail:Object):void {
+        resultTxt.appendText('\nImage uploaded');
+      }
+
+      protected function loadConnections():void {
+        Facebook.api(requestIdTxt.text, handleConnectionsLoad, {metadata:true});
+        resultTxt.text += 'Loading connections';
+      }
+
+      protected function handleConnectionsLoad(result:Object, fail:Object):void {
+        if (fail) {
+          resultTxt.appendText('\nError loading connections.');
+          return;
+        }
+
+        var dp:ArrayList = new ArrayList();
+
+        var connections:Object = result.metadata.connections;
+        for (var n:String in connections) {
+          dp.addItem({label:n, link:connections[n]});
+        }
+
+        apiConnectionType.dataProvider =  dp;
+        apiConnectionType.selectedIndex = 0;
+
+        resultTxt.appendText("\nData loaded, use drop down to select a new connection, then click 'callAPI', your results will show below as JSON text.");
+      }
+
+      protected function handleMobileLoginClick():void {
+        Facebook.mobileLogin("http://dev.gskinner.com/facebook/", "touch");
+      }
+
+      protected function setCanvasWidth():void {
+        Facebook.setCanvasSize(Number(widthTxt.text), Number(heightTxt.text));
+      }
+
+      protected function handleAutoSizeChange():void {
+        canvasWidthBtn.enabled = !autoSizeChk.selected;
+        Facebook.setCanvasAutoResize(autoSizeChk.selected, 250);
+      }
+
+      public function onClear(event:MouseEvent):void {
+        resultTxt.text = '';
+      }
+
+      protected function onLogOFF(event:MouseEvent):void {
+        Facebook.logout(handleLogout);
+      }
+
+      protected function onLogIN(event:MouseEvent):void {
+        Facebook.login(handleLogin);
+      }
+
+    ]]>
+  </fx:Script>
+
+  <s:Label text="Authentication" fontWeight="bold" />
+  <s:Button label="Login" id="loginLogoutBtn" click="handleLoginClick()" />
+  <s:Button label="MobileLogin" click="handleMobileLoginClick()" />
+
+  <s:Label text="File Upload" paddingTop="10" fontWeight="bold" />
+  <s:HGroup verticalAlign="middle">
+    <s:TextInput id="uploadFileName" />
+    <s:Button label="Browse" click="browseForPhoto()" />
+    <s:Button label="Upload" id="uploadPhotoBtn" enabled="false" click="upload()" />
+  </s:HGroup>
+
+  <s:Label text="Interacting with canvas" paddingTop="10" fontWeight="bold" />
+  <s:HGroup verticalAlign="middle">
+    <s:Label text="width: " />
+    <s:TextInput id="widthTxt" text="350" />
+
+    <s:Label text="height: " />
+    <s:TextInput id="heightTxt" text="350" />
+    <s:Button id="canvasWidthBtn" label="Set canvas size" click="setCanvasWidth()" />
+    <s:CheckBox id="autoSizeChk" label="autoSize" change="handleAutoSizeChange()" />
+  </s:HGroup>
+
+  <s:Label text="UI" paddingTop="10" fontWeight="bold" />
+  <s:HGroup verticalAlign="middle">
+    <s:Button label="showUI" click="showUI()" />
+    <s:CheckBox label="Popup" id="uiDialog" />
+    <s:ComboBox id="uiCmb" />
+  </s:HGroup>
+
+  <s:Label text="Graph Connections" paddingTop="10" fontWeight="bold" />
+  <s:HGroup verticalAlign="middle">
+    <s:Label text="id: " />
+    <s:TextInput id="requestIdTxt" width="75" text="me" />
+    <s:Button id="loadConnectons" label="Load Connections" click="loadConnections()" />
+    <s:DropDownList id="apiConnectionType" labelField="label" />
+    <s:Button label="callAPI" click="callAPI()" />
+  </s:HGroup>
+
+  <s:Label text="Trace output" paddingTop="10" fontWeight="bold" />
+  <s:TextArea id="resultTxt" text="Connecting" width="100%" height="75%" />
+  <s:Button id="clearBtn" label="Clear" click="onClear(event)"/>
+
+</s:Application>

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+Copyright (c) 2010, Adobe Systems Incorporated
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without 
+modification, are permitted provided that the following conditions are
+met:
+
+* Redistributions of source code must retain the above copyright notice, 
+this list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright
+notice, this list of conditions and the following disclaimer in the 
+documentation and/or other materials provided with the distribution.
+
+* Neither the name of Adobe Systems Incorporated nor the names of its 
+contributors may be used to endorse or promote products derived from 
+this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" 
+			   width="100%" height="100%"
+			   applicationComplete="init()"
+			   >
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:layout>
+		<s:VerticalLayout/>
+	</s:layout>
+	
+	<fx:Script>
+		<![CDATA[
+			import com.facebook.graph.Facebook;
+			import com.facebook.graph.controls.Distractor;
+			
+			import mx.controls.Alert;
+			
+			protected var fileRef:FileReference; 
+			protected var imgFilter:FileFilter;
+			protected var distractor:Distractor;
+			protected var bmd:BitmapData;
+			protected var isSnapshot:Boolean = false;
+			
+			protected function init():void {
+				vidDisplay.attachCamera(Camera.getCamera());
+				bmd = new BitmapData(vidDisplay.width, vidDisplay.height);
+				
+				fileRef = new FileReference();
+				fileRef.addEventListener(Event.SELECT, handleFileSelect, false, 0, true);
+				fileRef.addEventListener(Event.COMPLETE, handleFileLoadComplete, false, 0, true);
+				
+				imgFilter = new FileFilter('Images', '*.jpg; *.gif; *.png');
+				
+				distractor = new Distractor();
+				distractorWrapper.addChild(distractor);
+				distractor.text = 'Uploading';
+				distractor.x = width - distractor.width >> 1;
+				distractor.visible = false;
+				
+				browseBtn.enabled = false;
+				snapshotBtn.enabled = false;
+				uploadBtn.enabled = false;
+				logoutBtn.enabled = false;
+				
+				status.text = 'init'; //'Click "login" to start';
+				
+				Facebook.setCanvasAutoResize();
+				
+				Facebook.init('YOUR_APPLICATION_ID', handleLogin);
+			}
+			
+			protected function login():void {
+				var premissions:Array = ['publish_stream'];
+				Facebook.login(handleLogin, {perms:permissions.join(',')});
+			}
+			
+			protected function logout():void {
+				Facebook.logout(handleLogout);
+			}
+			
+			protected function browseForUpload():void {
+				fileRef.browse([imgFilter]);
+			}
+			
+			protected function getSnapshot():void {
+				bmd.draw(vidDisplay);
+				previewImage.source = new Bitmap(bmd); 
+				uploadBtn.enabled = true;
+				isSnapshot = true;
+			}
+			
+			protected function upload():void {
+				var img:* = (isSnapshot) ? bmd : fileRef ;
+				var values:Object = {message:'My Caption', fileName:'FILE_NAME', image:img};
+				
+				Facebook.api('/me/photos', handleUploadComplete, values, 'POST');
+				
+				distractor.visible = true;
+			}
+			
+			protected function handleLogin(response:Object, fail:Object):void {
+				if (response) {
+					browseBtn.enabled = true;
+					snapshotBtn.enabled = true;
+					loginBtn.enabled  = false;
+					logoutBtn.enabled = true;
+					
+					status.text = 'Click "browse" to select photo or "snapshot" to capture webcam image';
+				}
+			}
+			
+			protected function handleLogout(response:Object):void {
+				if (response) {
+					distractor.visible = false;
+					previewImage.source = null;
+					
+					browseBtn.enabled = false;
+					snapshotBtn.enabled = false;
+					uploadBtn.enabled = false;
+					loginBtn.enabled  = true;
+					logoutBtn.enabled = false;
+					
+					status.text = 'Click "login" to start';
+				}
+			}
+			
+			protected function handleFileSelect(event:Event):void {
+				fileRef.load();
+			}
+			
+			protected function handleFileLoadComplete(event:Event):void {
+				previewImage.source = fileRef.data;	
+				uploadBtn.enabled = true; 
+				isSnapshot = false;
+			}
+			
+			protected function handleUploadComplete(response:Object, fail:Object):void {
+				distractor.visible = false;				
+				previewImage.source = null;
+				status.text = (response!=null) ? 'Successfully uploaded' : 'Error uploading';	
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:HGroup width="100%" verticalAlign="middle">
+		<s:Button id="browseBtn" label="Browse" click="browseForUpload()" />
+		<s:Button id="snapshotBtn" label="Snapshot" click="getSnapshot()" />
+		<s:Button id="uploadBtn" label="Upload" click="upload()" />
+		<s:Button id="loginBtn" label="Login" click="login()" />
+		<s:Button id="logoutBtn" label="Logout" click="logout()" />
+	</s:HGroup>
+	
+	<s:HGroup width="100%" verticalAlign="top">
+		<mx:VideoDisplay id="vidDisplay" width="160" height="120" />
+		<mx:Image id="previewImage" width="400" height="300" maintainAspectRatio="true"/>
+	</s:HGroup>
+	
+	<mx:UIComponent id="distractorWrapper" width="100%"/>
+	
+	<s:Label id="status" width="100%" height="100%" />
+	
+</s:Application>

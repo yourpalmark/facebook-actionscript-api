@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  Copyright (c) 2010, Adobe Systems Incorporated
+  All rights reserved.
+
+  Redistribution and use in source and binary forms, with or without 
+  modification, are permitted provided that the following conditions are
+  met:
+
+  * Redistributions of source code must retain the above copyright notice, 
+    this list of conditions and the following disclaimer.
+
+  * Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the 
+    documentation and/or other materials provided with the distribution.
+
+  * Neither the name of Adobe Systems Incorporated nor the names of its 
+    contributors may be used to endorse or promote products derived from 
+    this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+  IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+  THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
+  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+  PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 implements="mx.core.IFactory"
+		 autoDrawBackground="false" 
+		 width="100%" >
+	<fx:Script>
+		<![CDATA[
+			import com.chewtinfoil.utils.DateUtils;
+			import com.facebook.graph.FacebookDesktop;
+			import com.facebook.graph.data.FacebookSession;
+			import com.facebook.graph.utils.FacebookDataUtils;
+				
+			override public function set data(value:Object):void {
+				if (value == null) { return; }
+				
+				super.data = value;
+				
+				deleteBtn.visible = false; 
+				
+				var date:Date = FacebookDataUtils.stringToDate(value.created_time);
+				
+				if (value != null) {					
+					fromSpan.text = value.from.name;
+					messageSpan.text = ' ' + value.message;										
+					
+					var daySpan:int = DateUtils.getDaySpan(date, new Date());
+					if (daySpan > 6) { //more than one week ago
+						dateText.text = DateUtils.toString(date, 'MMM d yyyy h:mm tt');
+					} else if (daySpan > 1) { //more than 2 days ago
+						dateText.text = DateUtils.getDayName(date) + ' at ' + DateUtils.toString(date, 'h:mm tt');
+					} else if (daySpan > 0) { //yesterday
+						dateText.text = DateUtils.getRelativeDate(date) + ' at ' + DateUtils.toString(date, 'h:mm tt');
+					} else { //today
+						dateText.text = DateUtils.getRelativeDate(date); 
+					}
+					
+					var session:FacebookSession = FacebookDesktop.getSession();
+					if (session != null) { deleteBtn.visible = value.from.id == session.uid; } 
+					
+				} else {
+					fromSpan.text = '';
+					messageSpan.text = '';
+					dateText.text = '';
+				}
+			}
+			
+			public function newInstance():* {
+				return new CommentRenderer();
+			}
+			
+			protected function handleDeleteClick():void {
+				dispatchEvent(new NewsEvent(NewsEvent.DELETE_COMMENT, null ,true));
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:Rect width="100%" height="100%">
+		<s:fill>
+			<s:SolidColor color="0xEFF2F7"/>
+		</s:fill>
+		<s:stroke>
+			<s:SolidColorStroke color="0xffffff"/>
+		</s:stroke>
+	</s:Rect>
+	
+	<s:HGroup width="100%" paddingBottom="5" paddingTop="5" paddingLeft="5" paddingRight="5" verticalAlign="middle">
+		<s:VGroup width="100%">
+			<s:RichText width="100%">
+				<s:span id="fromSpan" fontWeight="bold"/>	
+				<s:span id="messageSpan" />
+			</s:RichText>
+			<s:RichText id="dateText" width="100%" color="0x666666"/>
+		</s:VGroup>
+		
+		<s:Button id="deleteBtn" label="delete" click="handleDeleteClick()"/>
+	</s:HGroup>
+	
+</s:ItemRenderer>

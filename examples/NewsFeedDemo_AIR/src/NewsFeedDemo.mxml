@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  Copyright (c) 2010, Adobe Systems Incorporated
+  All rights reserved.
+
+  Redistribution and use in source and binary forms, with or without 
+  modification, are permitted provided that the following conditions are
+  met:
+
+  * Redistributions of source code must retain the above copyright notice, 
+    this list of conditions and the following disclaimer.
+  
+  * Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the 
+    documentation and/or other materials provided with the distribution.
+  
+  * Neither the name of Adobe Systems Incorporated nor the names of its 
+    contributors may be used to endorse or promote products derived from 
+    this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+  IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+  THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
+  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+  PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009"
+                    xmlns:s="library://ns.adobe.com/flex/spark"
+                    xmlns:mx="library://ns.adobe.com/flex/mx" width="720" height="450"
+                    creationComplete="init()"
+                    >
+
+    <s:layout>
+        <s:VerticalLayout />
+    </s:layout>
+
+    <fx:Script>
+        <![CDATA[
+            import com.chewtinfoil.utils.StringUtils;
+            import com.facebook.graph.FacebookDesktop;
+            import com.facebook.graph.controls.Distractor;
+            
+            import com.facebook.graph.net.FacebookRequest;
+            
+            import mx.collections.ArrayList;
+            import mx.managers.PopUpManager;
+            
+            import spark.layouts.VerticalLayout;
+
+            /**
+            * Used to display a Facebook style indeterminate animation.
+            *
+            */
+            protected var loading:Distractor;
+
+            protected var errorDialog:ErrorDialog;
+
+            protected function init():void {
+                loading = new Distractor();
+                loadingWrapper.addChild(loading);
+                loading.text = 'loading';
+                loading.x = -80;
+                loading.y = -10;
+                loading.visible = false;
+
+                searchBtn.enabled = false;
+                refreshBtn.enabled = false;
+                newsList.itemRenderer = new NewsFeedRow();
+				
+
+                searchSinceDate.selectedDate = new Date();
+
+                errorDialog = new ErrorDialog();
+
+                NewsModel.addEventListener(NewsEvent.HOME_LOADED, handleHomeLoaded, false, 0, true);
+                NewsModel.addEventListener(NewsEvent.LOAD_ERROR, handleLoadError, false, 0, true);
+				
+				
+                //DesktopAPITester Application ID
+                //Initialize the facebook API using the application ID from your facebook developers page.
+                FacebookDesktop.init('YOUR_APPLICATION_ID', handleLogin);
+            }
+
+            protected function toggleLogin():void {
+                if (FacebookDesktop.getSession() == null) {
+					var permissions:Array = ['publish_stream','create_event','rsvp_event','sms','offline_access','email','read_insights','read_stream','user_about_me',
+						'user_activities','user_birthday','user_education_history','user_events','user_groups','user_hometown',
+						'user_interests','user_likes','user_location','user_notes','user_online_presence',
+						'user_photo_video_tags','user_photos','user_relationships','user_religion_politics','user_status',
+						'user_videos','user_website','user_work_history','read_friendlists','read_requests','user_notes'];
+                    FacebookDesktop.login(handleLogin, permissions);
+                } else {
+                    FacebookDesktop.logout();
+                }
+            }
+
+            protected function searchNewsFeed():void {
+				searchBtn.enabled = false;
+                var query:String = StringUtils.trim(searchTxt.text);
+                if (StringUtils.isEmpty(query)) { return; }
+                if (StringUtils.isNumeric(query)) { query = '"' + query + '"';} //Facebook returns error for just numeral searches, wrap quotes to pass request as string literal
+
+                loading.visible = true;
+
+                NewsModel.searchNewsFeed(query, searchSinceDate.selectedDate);
+            }
+
+            /**
+            * By default after the users logs in, load their news feed.
+            *
+            */
+            protected function loadHomeFeed():void {
+                loading.visible = true;
+                NewsModel.loadHomeFeed();
+            }
+
+            protected function populateUI():void {
+                loading.visible = false;
+
+                newsList.dataProvider = NewsModel.newsFeedDp;
+
+                resultCount.text = NewsModel.newsFeedDp.length + ' results found.';
+            }
+
+            protected function handleLogin(response:Object, fail:Object):void {
+                trace('login', response)
+				if (!response) { return; }
+
+                searchBtn.enabled = true;
+                refreshBtn.enabled = true;
+                loginLogoutButton.label = 'Logout';
+
+                loadHomeFeed();
+            }
+
+            protected function handleLogout(response:Object, fail:Object):void {
+                searchBtn.enabled = false;
+                refreshBtn.enabled = false;
+                loginLogoutButton.label = 'Login';
+
+                newsList.dataProvider = null;
+            }
+
+            protected function handleHomeLoaded(event:NewsEvent):void {
+                populateUI();
+				searchBtn.enabled = true;
+            }
+
+            protected function handleLoadError(event:NewsEvent):void {
+                errorDialog.setError("Error", String(event.data));
+                PopUpManager.addPopUp(errorDialog, this, true);
+                PopUpManager.centerPopUp(errorDialog);
+            }
+
+        ]]>
+    </fx:Script>
+
+    <s:HGroup width="100%" paddingTop="5" paddingLeft="5" paddingRight="5" verticalAlign="middle">
+        <s:Label text="Search from " />
+        <mx:DateField id="searchSinceDate" yearNavigationEnabled="true" />
+        <s:TextInput id="searchTxt" enter="searchNewsFeed()" />
+        <s:Button id="searchBtn" label="Search" click="searchNewsFeed()" />
+        <s:Label id="resultCount" />
+        <mx:Spacer width="100%" />
+        <mx:UIComponent id="loadingWrapper" />
+        <s:Button id="refreshBtn" label="Refresh" click="loadHomeFeed()"/>
+        <s:Button id="loginLogoutButton" label="Login" click="toggleLogin()" />
+    </s:HGroup>
+
+    <s:List id="newsList" width="100%" height="100%" rollOverColor="0xffffff" selectionColor="0xffffff" borderVisible="false" useVirtualLayout="false"/>
+
+</s:WindowedApplication>

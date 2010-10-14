@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  Copyright (c) 2010, Adobe Systems Incorporated
+  All rights reserved.
+
+  Redistribution and use in source and binary forms, with or without 
+  modification, are permitted provided that the following conditions are
+  met:
+
+  * Redistributions of source code must retain the above copyright notice, 
+    this list of conditions and the following disclaimer.
+  
+  * Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the 
+    documentation and/or other materials provided with the distribution.
+  
+  * Neither the name of Adobe Systems Incorporated nor the names of its 
+    contributors may be used to endorse or promote products derived from 
+    this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+  IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+  THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
+  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+  PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:s="library://ns.adobe.com/flex/spark"
+				xmlns:mx="library://ns.adobe.com/flex/mx" implements="mx.core.IFactory"
+				autoDrawBackground="true" creationComplete="handleCreationComplete()" initialize="handleInit()"
+				width="100%"
+				>
+	<fx:Script>
+		<![CDATA[
+			import com.facebook.graph.FacebookDesktop;
+			import com.facebook.graph.controls.Distractor;
+			import com.facebook.graph.net.FacebookRequest;
+			
+			import mx.collections.ArrayList;
+			
+			import spark.layouts.HorizontalLayout;
+			import spark.layouts.VerticalAlign;
+			
+			protected var commentDp:ArrayList;
+			protected var selectedComment:Object;
+			protected var loading:Distractor;
+			
+			protected function handleInit():void {
+				commentDp = new ArrayList();
+				commentList.dataProvider = commentDp;
+				commentList.addEventListener(NewsEvent.DELETE_COMMENT, handleDeleteComment, false, 0, true);	
+				commentList.itemRenderer = new CommentRenderer();
+				
+				loading = new Distractor();
+				loadingWrapper.addChild(loading);
+				loading.text = 'loading';
+				loading.x = 0;
+				loading.y = 0;
+				loading.visible = false;
+			}
+			
+			protected function handleCreationComplete():void {
+				(layout as HorizontalLayout).verticalAlign = VerticalAlign.TOP;
+				
+				(layout as HorizontalLayout).paddingLeft = 5;
+				(layout as HorizontalLayout).paddingTop = 5;
+				(layout as HorizontalLayout).paddingBottom = 5;
+				(layout as HorizontalLayout).paddingRight = 5;
+			}
+			
+			public function newInstance():* {
+				return new NewsFeedRow();
+			}
+			
+			override public function set data(value:Object):void {
+				if (value == null || (data && data.id == value.id)) { return; }
+				
+				super.data = value;
+				
+				thumbnail.source = FacebookDesktop.getImageUrl(value.from.id.toString(), 'square');
+				content.text = value.message;
+				titleLabel.htmlText = '<b>' + value.from.name + '</b>' + (value.name != null?' '+value.name:'');
+				
+				contentImage.unloadAndStop();
+				if (data.picture != null) {
+					contentImage.source = unescape(data.picture);
+				}
+				
+				typeIcon.source = value.icon;
+				typeIcon.includeInLayout = value.icon != null;
+				populateLikeCount();
+				
+				if (value.comments != null) {
+					commentDp.source = (value.comments.data) ? value.comments.data : [];
+					commentCount.text = value.comments.count + ' Comments';
+					
+				} else {
+					commentCount.text = '';
+					commentDp.source = null;
+				}
+				commentList.visible = commentList.includeInLayout = commentDp.length > 0;
+				
+				commentFormContainer.visible = value.commentFormVisible === true;			
+				showCommentButton.label = commentFormContainer.visible?'Hide':'Comment';
+			}
+			
+			protected function populateLikeCount():void {
+				if (data.user_likes) {
+					likeBtn.label = 'Unlike';
+				} else {
+					likeBtn.label = 'Like';
+				}
+				
+				likesCount.text = data.likes == null?'':data.likes + ' likes.';
+				likeBtn.visible = (data.likes > 0);
+				
+			}
+			
+			protected function handleCommentClick():void {
+				if (!commentFormContainer.includeInLayout) {
+					showCommentButton.label = 'Hide';
+					commentFormContainer.includeInLayout = commentFormContainer.visible = true;
+					data.commentFormVisible = true;
+				} else {
+					showCommentButton.label = 'Comment';
+					data.commentFormVisible = false;
+					commentFormContainer.visible = false;
+				}
+			}
+			
+			protected function handleCommentFormHidden():void {
+				commentFormContainer.includeInLayout = commentFormContainer.visible;
+			}
+			
+			protected function submitComment():void {
+				submitBtn.enabled = false;
+				loading.visible = true;
+				var values:URLVariables = new URLVariables();
+				values.message = commentForm.text;
+				
+				FacebookDesktop.api('/'+data.id+'/comments', handleCommentPosted, values, 'POST');
+			}
+			
+			protected function handleLikeClick():void {
+				var req:FacebookRequest;
+				
+				if (data.user_likes) {
+					FacebookDesktop.api('/'+data.id+'/likes', handlePostUnliked);
+				} else {
+					FacebookDesktop.api('/'+data.id+'/likes', handlePostLiked);
+				}
+			}
+			
+			protected function handlePostUnliked(response:Object, fail:Object):void {
+				if (response) {
+					data.likes--;
+					data.user_likes = false;
+					populateLikeCount();
+				}
+			}
+			
+			protected function handlePostLiked(response:Object, fail:Object):void {
+				if (response) {
+					(data.likes == null)?data.likes = 1:data.likes++;
+					data.user_likes = true;
+					populateLikeCount();
+				}
+			}
+			
+			protected function handleCommentPosted(response:Object, fail:Object):void {
+				commentForm.text = '';
+				showCommentButton.label = 'Comment';
+				data.commentFormVisible = false;
+				commentFormContainer.visible = false;
+			
+				if (response) {
+					FacebookDesktop.api('/'+response.id, handleCommentSuccess);
+				}
+			}
+			
+			protected function handleCommentSuccess(response:Object, fail:Object):void {
+				if (response) {	
+					commentDp.addItem(response);
+					commentCount.text = commentDp.length + ' Comments';
+					commentList.visible = commentList.includeInLayout = commentDp.length > 0;
+					submitBtn.enabled = true;
+					loading.visible = false;
+				}
+			}
+			
+			protected function handleDeleteComment(event:NewsEvent):void {
+				event.stopImmediatePropagation(); //catch and stop the bubbling event from commentRenderer
+				selectedComment = event.target.data;
+				FacebookDesktop.deleteObject('/'+selectedComment.id,handleDeleteSuccess);
+			}
+			
+			protected function handleDeleteSuccess(response:Object, fail:Object):void {
+				if (response) {
+					commentDp.removeItem(selectedComment);
+					commentCount.text = commentDp.length + ' Comments';
+					commentList.visible = commentList.includeInLayout = commentDp.length > 0;
+					selectedComment = null;
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:HorizontalLayout />
+	</s:layout>
+	
+	<mx:Image id="thumbnail" width="50" height="50" />
+	
+	<s:VGroup width="100%" verticalAlign="top">
+		<mx:Text id="titleLabel" width="100%" minWidth="50" />
+		<s:HGroup width="100%" verticalAlign="top">
+			<mx:Image id="contentImage" />
+			<s:Label id="content" width="100%" minWidth="50" />
+		</s:HGroup>
+		
+		<s:HGroup id="footer" verticalAlign="middle">
+			<mx:Image id="typeIcon" />
+			<s:Button id="showCommentButton" label="Comment" click="handleCommentClick()" />
+			<s:Button id="likeBtn" label="Like" click="handleLikeClick()" />
+			<s:Label id="likesCount" />
+			<s:Label id="commentCount" />
+		</s:HGroup>
+		
+		<s:List id="commentList" width="100%" maxHeight="90" borderVisible="true"/>		
+		
+		<s:VGroup id="commentFormContainer" width="100%" horizontalAlign="right" height="65" includeInLayout="false" visible="false" effectEnd="handleCommentFormHidden()">
+			<s:hideEffect>
+				<mx:Fade />
+			</s:hideEffect>
+			<s:showEffect>
+				<mx:Fade />
+			</s:showEffect>
+			<s:TextArea id="commentForm" width="100%" height="100%" />
+			<s:HGroup width="100%">
+				<mx:UIComponent id="loadingWrapper" />
+				<mx:Spacer width="100%"/>
+				<s:Button id="submitBtn" label="Submit" enabled="{commentForm.text.length > 1}" click="submitComment()" />
+			</s:HGroup>
+		</s:VGroup>
+		
+		<s:Line width="100%">
+			<s:stroke>
+				<s:SolidColorStroke color="0xEFF2F7" />
+			</s:stroke>
+		</s:Line>
+	</s:VGroup>
+	
+	
+</s:ItemRenderer>
