@@ -3,6 +3,7 @@
 	<component id="com.facebook.graph.Facebook" class="com.facebook.graph.Facebook" />
 	<component id="com.facebook.graph.controls.Distractor" class="com.facebook.graph.controls.Distractor" />
 	<component id="com.facebook.graph.core.AbstractFacebook" class="com.facebook.graph.core.AbstractFacebook" />
+	<component id="com.facebook.graph.core.FacebookJSBridge" class="com.facebook.graph.core.FacebookJSBridge" />
 	<component id="com.facebook.graph.core.FacebookURLDefaults" class="com.facebook.graph.core.FacebookURLDefaults" />
 	<component id="com.facebook.graph.data.FacebookSession" class="com.facebook.graph.data.FacebookSession" />
 	<component id="com.facebook.graph.net.FacebookRequest" class="com.facebook.graph.net.FacebookRequest" />
