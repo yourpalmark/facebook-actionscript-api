@@ -58,7 +58,7 @@ package com.facebook.graph.core
 							login:
 								function( opts )
 								{
-									FB.login( FBAS.handleFacebookLogin, FB.JSON.parse( opts ) );
+									FB.login( FBAS.handleUserLogin, FB.JSON.parse( opts ) );
 								},
 								
 							addEventListener:
@@ -70,7 +70,7 @@ package com.facebook.graph.core
 									} );
 								},
 								
-							handleFacebookLogin:
+							handleUserLogin:
 								function( response )
 								{
 									if( response.session == null )
@@ -108,7 +108,8 @@ package com.facebook.graph.core
 								function( params )
 								{
 									obj = FB.JSON.parse( params );
-									FB.ui( obj );
+									cb = function( response ) { FBAS.getSwf().uiResponse( FB.JSON.stringify( response ), obj.method ); }
+									FB.ui( obj, cb );
 								},
 								
 							getSession:
