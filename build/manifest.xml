@@ -5,7 +5,68 @@
 	<component id="com.facebook.graph.core.AbstractFacebook" class="com.facebook.graph.core.AbstractFacebook" />
 	<component id="com.facebook.graph.core.FacebookJSBridge" class="com.facebook.graph.core.FacebookJSBridge" />
 	<component id="com.facebook.graph.core.FacebookURLDefaults" class="com.facebook.graph.core.FacebookURLDefaults" />
+	<component id="com.facebook.graph.data.ExtendedPermission" class="com.facebook.graph.data.ExtendedPermission" />
+	<component id="com.facebook.graph.data.FacebookJSEvent" class="com.facebook.graph.data.FacebookJSEvent" />
 	<component id="com.facebook.graph.data.FacebookSession" class="com.facebook.graph.data.FacebookSession" />
+	<component id="com.facebook.graph.data.api.album.FacebookAlbum" class="com.facebook.graph.data.api.album.FacebookAlbum" />
+	<component id="com.facebook.graph.data.api.album.FacebookAlbumConnection" class="com.facebook.graph.data.api.album.FacebookAlbumConnection" />
+	<component id="com.facebook.graph.data.api.album.FacebookAlbumField" class="com.facebook.graph.data.api.album.FacebookAlbumField" />
+	<component id="com.facebook.graph.data.api.application.FacebookApplication" class="com.facebook.graph.data.api.application.FacebookApplication" />
+	<component id="com.facebook.graph.data.api.application.FacebookApplicationConnection" class="com.facebook.graph.data.api.application.FacebookApplicationConnection" />
+	<component id="com.facebook.graph.data.api.application.FacebookApplicationField" class="com.facebook.graph.data.api.application.FacebookApplicationField" />
+	<component id="com.facebook.graph.data.api.checkin.FacebookCheckin" class="com.facebook.graph.data.api.checkin.FacebookCheckin" />
+	<component id="com.facebook.graph.data.api.checkin.FacebookCheckinField" class="com.facebook.graph.data.api.checkin.FacebookCheckinField" />
+	<component id="com.facebook.graph.data.api.event.FacebookEvent" class="com.facebook.graph.data.api.event.FacebookEvent" />
+	<component id="com.facebook.graph.data.api.event.FacebookEventConnection" class="com.facebook.graph.data.api.event.FacebookEventConnection" />
+	<component id="com.facebook.graph.data.api.event.FacebookEventField" class="com.facebook.graph.data.api.event.FacebookEventField" />
+	<component id="com.facebook.graph.data.api.group.FacebookGroup" class="com.facebook.graph.data.api.group.FacebookGroup" />
+	<component id="com.facebook.graph.data.api.group.FacebookGroupConnection" class="com.facebook.graph.data.api.group.FacebookGroupConnection" />
+	<component id="com.facebook.graph.data.api.group.FacebookGroupField" class="com.facebook.graph.data.api.group.FacebookGroupField" />
+	<component id="com.facebook.graph.data.api.link.FacebookLink" class="com.facebook.graph.data.api.link.FacebookLink" />
+	<component id="com.facebook.graph.data.api.link.FacebookLinkConnection" class="com.facebook.graph.data.api.link.FacebookLinkConnection" />
+	<component id="com.facebook.graph.data.api.link.FacebookLinkField" class="com.facebook.graph.data.api.link.FacebookLinkField" />
+	<component id="com.facebook.graph.data.api.note.FacebookNote" class="com.facebook.graph.data.api.note.FacebookNote" />
+	<component id="com.facebook.graph.data.api.note.FacebookNoteConnection" class="com.facebook.graph.data.api.note.FacebookNoteConnection" />
+	<component id="com.facebook.graph.data.api.note.FacebookNoteField" class="com.facebook.graph.data.api.note.FacebookNoteField" />
+	<component id="com.facebook.graph.data.api.page.FacebookPage" class="com.facebook.graph.data.api.page.FacebookPage" />
+	<component id="com.facebook.graph.data.api.page.FacebookPageConnection" class="com.facebook.graph.data.api.page.FacebookPageConnection" />
+	<component id="com.facebook.graph.data.api.page.FacebookPageField" class="com.facebook.graph.data.api.page.FacebookPageField" />
+	<component id="com.facebook.graph.data.api.photo.FacebookPhoto" class="com.facebook.graph.data.api.photo.FacebookPhoto" />
+	<component id="com.facebook.graph.data.api.photo.FacebookPhotoConnection" class="com.facebook.graph.data.api.photo.FacebookPhotoConnection" />
+	<component id="com.facebook.graph.data.api.photo.FacebookPhotoField" class="com.facebook.graph.data.api.photo.FacebookPhotoField" />
+	<component id="com.facebook.graph.data.api.post.FacebookPost" class="com.facebook.graph.data.api.post.FacebookPost" />
+	<component id="com.facebook.graph.data.api.post.FacebookPostConnection" class="com.facebook.graph.data.api.post.FacebookPostConnection" />
+	<component id="com.facebook.graph.data.api.post.FacebookPostField" class="com.facebook.graph.data.api.post.FacebookPostField" />
+	<component id="com.facebook.graph.data.api.post.FacebookPostPrivacy" class="com.facebook.graph.data.api.post.FacebookPostPrivacy" />
+	<component id="com.facebook.graph.data.api.post.FacebookPostPrivacyValue" class="com.facebook.graph.data.api.post.FacebookPostPrivacyValue" />
+	<component id="com.facebook.graph.data.api.status.FacebookStatusMessage" class="com.facebook.graph.data.api.status.FacebookStatusMessage" />
+	<component id="com.facebook.graph.data.api.status.FacebookStatusMessageConnection" class="com.facebook.graph.data.api.status.FacebookStatusMessageConnection" />
+	<component id="com.facebook.graph.data.api.status.FacebookStatusMessageField" class="com.facebook.graph.data.api.status.FacebookStatusMessageField" />
+	<component id="com.facebook.graph.data.api.subscription.FacebookSubscription" class="com.facebook.graph.data.api.subscription.FacebookSubscription" />
+	<component id="com.facebook.graph.data.api.subscription.FacebookSubscriptionField" class="com.facebook.graph.data.api.subscription.FacebookSubscriptionField" />
+	<component id="com.facebook.graph.data.api.user.FacebookUser" class="com.facebook.graph.data.api.user.FacebookUser" />
+	<component id="com.facebook.graph.data.api.user.FacebookUserConnection" class="com.facebook.graph.data.api.user.FacebookUserConnection" />
+	<component id="com.facebook.graph.data.api.user.FacebookUserField" class="com.facebook.graph.data.api.user.FacebookUserField" />
+	<component id="com.facebook.graph.data.api.video.FacebookVideo" class="com.facebook.graph.data.api.video.FacebookVideo" />
+	<component id="com.facebook.graph.data.api.video.FacebookVideoConnection" class="com.facebook.graph.data.api.video.FacebookVideoConnection" />
+	<component id="com.facebook.graph.data.api.video.FacebookVideoField" class="com.facebook.graph.data.api.video.FacebookVideoField" />
+	<component id="com.facebook.graph.data.fql.FQLTable" class="com.facebook.graph.data.fql.FQLTable" />
+	<component id="com.facebook.graph.data.fql.friend.FQLFriendField" class="com.facebook.graph.data.fql.friend.FQLFriendField" />
+	<component id="com.facebook.graph.data.fql.user.FQLUser" class="com.facebook.graph.data.fql.user.FQLUser" />
+	<component id="com.facebook.graph.data.fql.user.FQLUserField" class="com.facebook.graph.data.fql.user.FQLUserField" />
+	<component id="com.facebook.graph.data.fql.user.OnlinePresence" class="com.facebook.graph.data.fql.user.OnlinePresence" />
+	<component id="com.facebook.graph.data.ui.UIDisplay" class="com.facebook.graph.data.ui.UIDisplay" />
+	<component id="com.facebook.graph.data.ui.UIMethod" class="com.facebook.graph.data.ui.UIMethod" />
+	<component id="com.facebook.graph.data.ui.stream.Stream" class="com.facebook.graph.data.ui.stream.Stream" />
+	<component id="com.facebook.graph.data.ui.stream.StreamActionLink" class="com.facebook.graph.data.ui.stream.StreamActionLink" />
+	<component id="com.facebook.graph.data.ui.stream.StreamAttachment" class="com.facebook.graph.data.ui.stream.StreamAttachment" />
+	<component id="com.facebook.graph.data.ui.stream.StreamFlash" class="com.facebook.graph.data.ui.stream.StreamFlash" />
+	<component id="com.facebook.graph.data.ui.stream.StreamImage" class="com.facebook.graph.data.ui.stream.StreamImage" />
+	<component id="com.facebook.graph.data.ui.stream.StreamMP3" class="com.facebook.graph.data.ui.stream.StreamMP3" />
+	<component id="com.facebook.graph.data.ui.stream.StreamMedia" class="com.facebook.graph.data.ui.stream.StreamMedia" />
+	<component id="com.facebook.graph.data.ui.stream.StreamMediaType" class="com.facebook.graph.data.ui.stream.StreamMediaType" />
+	<component id="com.facebook.graph.data.ui.stream.StreamPrivacy" class="com.facebook.graph.data.ui.stream.StreamPrivacy" />
+	<component id="com.facebook.graph.data.ui.stream.StreamPrivacyValue" class="com.facebook.graph.data.ui.stream.StreamPrivacyValue" />
 	<component id="com.facebook.graph.net.FacebookRequest" class="com.facebook.graph.net.FacebookRequest" />
 	<component id="com.facebook.graph.utils.FacebookDataUtils" class="com.facebook.graph.utils.FacebookDataUtils" />
 	<component id="com.facebook.graph.utils.PostRequest" class="com.facebook.graph.utils.PostRequest" />

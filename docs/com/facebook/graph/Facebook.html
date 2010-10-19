@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../print.css" type="text/css" media="print">
-<meta content="Facebook,com.facebook.graph.Facebook,_canInit,_initCallback,_instance,_loginCallback,_logoutCallback,applicationId,jsBridge,jsCallbacks,addJSEventListener,api,callJS,callRestAPI,deleteObject,fqlQuery,getImageUrl,getInstance,getLoginStatus,getSession,handleJSEvent,handleLogout,handleSessionChange,hasJSEventListener,init,login,logout,mobileLogin,postData,removeJSEventListener,setCanvasAutoResize,setCanvasSize,ui" name="keywords">
+<meta content="Facebook,com.facebook.graph.Facebook,_canInit,_initCallback,_instance,_loginCallback,_logoutCallback,applicationId,jsBridge,jsCallbacks,openUICalls,addJSEventListener,api,callJS,callRestAPI,deleteObject,fqlQuery,getImageUrl,getInstance,getLoginStatus,getSession,handleJSEvent,handleLogout,handleSessionChange,handleUI,hasJSEventListener,init,login,logout,mobileLogin,postData,removeJSEventListener,setCanvasAutoResize,setCanvasSize,ui" name="keywords">
 <title>com.facebook.graph.Facebook</title>
 </head>
 <body>
@@ -103,6 +103,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="hideInheritedProtectedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="core/AbstractFacebook.html#openRequests">openRequests</a> : Dictionary<div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol"><a href="core/AbstractFacebook.html">AbstractFacebook</a></td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#openUICalls">openUICalls</a> : Dictionary<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">Facebook</td>
 </tr>
 <tr class="hideInheritedProtectedProperty">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="core/AbstractFacebook.html#session">session</a> : <a href="data/FacebookSession.html">FacebookSession</a>
@@ -277,7 +281,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#ui()">ui</a>(method:String, display:String, data:Object):void</div>
+<a class="signatureLink" href="#ui()">ui</a>(method:String, data:Object, callback:Function = null, display:String = null):void</div>
 <div class="summaryTableDescription">[static]
      Shows a Facebook sharing dialog.</div>
 </td><td class="summaryTableOwnerCol">Facebook</td>
@@ -332,6 +336,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
 <a class="signatureLink" href="#handleSessionChange()">handleSessionChange</a>(result:String, permissions:String = null):void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">Facebook</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#handleUI()">handleUI</a>(result:String, method:String):void</div>
 <div class="summaryTableDescription"></div>
 </td><td class="summaryTableOwnerCol">Facebook</td>
 </tr>
@@ -415,6 +426,15 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>protected var _logoutCallback:Function</code>
+</div>
+<a name="openUICalls"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">openUICalls</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var openUICalls:Dictionary</code>
 </div>
 <a name="constructorDetail"></a>
 <div class="detailSectionHeader">Constructor detail</div>
@@ -782,6 +802,26 @@ showHideInherited();
 </tr>
 </table>
 </div>
+<a name="handleUI()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">handleUI</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function handleUI(result:String, method:String):void</code><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">result</span>:String</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">method</span>:String</code></td>
+</tr>
+</table>
+</div>
 <a name="hasJSEventListener()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -1063,7 +1103,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public static function ui(method:String, display:String, data:Object):void</code><p>
+<code>public static function ui(method:String, data:Object, callback:Function = null, display:String = null):void</code><p>
      Shows a Facebook sharing dialog.
           </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
@@ -1076,15 +1116,21 @@ showHideInherited();
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">display</span>:String</code> &mdash; The type of dialog to show (iframe or popup).
+<td width="20px"></td><td><code><span class="label">data</span>:Object</code> &mdash; The type of dialog to show (iframe or popup).
      </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">data</span>:Object</code> &mdash; Data to pass to the dialog, date will be JSON encoded.
+<td width="20px"></td><td><code><span class="label">callback</span>:Function</code> (default = <code>null</code>)<code></code> &mdash; Data to pass to the dialog, date will be JSON encoded.
      </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">display</span>:String</code> (default = <code>null</code>)<code></code></td>
 </tr>
 </table>
 <p>
