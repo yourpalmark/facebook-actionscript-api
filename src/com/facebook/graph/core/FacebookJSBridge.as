@@ -145,7 +145,8 @@ package com.facebook.graph.core
 								function( params )
 								{
 									obj = FB.JSON.parse( params );
-									cb = function( response ) { FBAS.getSwf().uiResponse( FB.JSON.stringify( response ), obj.method ); }
+									method = obj.method;
+									cb = function( response ) { FBAS.getSwf().uiResponse( FB.JSON.stringify( response ), method ); }
 									FB.ui( obj, cb );
 								},
 								
