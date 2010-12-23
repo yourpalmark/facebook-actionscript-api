@@ -8,6 +8,7 @@ package com.facebook.graph.data.ui
 		public static const FBML_DIALOG:String = "fbml.dialog";
 		public static const BOOKMARK_ADD:String = "bookmark.add";
 		public static const PROFILE_ADDTAB:String = "profile.addtab";
+		public static const PAY_PROMPT:String = "pay.prompt";
 		
 	}
 }
