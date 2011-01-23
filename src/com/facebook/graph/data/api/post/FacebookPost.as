@@ -55,6 +55,11 @@ package com.facebook.graph.data.api.post
 		public var description:String;
 		
 		/**
+		 * The type of the link (status, photo, video or link) appears as part of a news feed connection.
+		 */
+		public var type:String;
+		
+		/**
 		 * If available, the source link attached to this post (for example, a flash or video file).
 		 */
 		public var source:String;
