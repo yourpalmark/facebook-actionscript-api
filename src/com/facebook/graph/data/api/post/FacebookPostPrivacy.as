@@ -54,22 +54,22 @@ package com.facebook.graph.data.api.post {
         /**
          * Populates the post from a decoded JSON object.
          */
-        public function fromJSON( result:Object ):void {
-            if ( result != null ) {
-                for ( var property:String in result ) {
-                    switch ( property ) {
+        public function fromJSON(result:Object):void {
+            if (result != null) {
+                for (var property:String in result) {
+                    switch (property) {
                         case "networks":
                         case "allow":
                         case "deny":
-                            if ( typeof( result[ property ]) == "array" ) {
-                                this[ property ] = result[ property ];
+                            if (typeof(result[property]) == "array") {
+                                this[property] = result[property];
                             } else {
-                                this[ property ] = new Array( result[ property ]);
+                                this[property] = new Array(result[property]);
                             }
                             break;
                         default:
-                            if ( hasOwnProperty( property ))
-                                this[ property ] = result[ property ];
+                            if (hasOwnProperty(property))
+                                this[property] = result[property];
                             break;
                     }
                 }
