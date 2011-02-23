@@ -23,7 +23,7 @@ package com.facebook.graph.data.api.photo
 		 * An array containing the users and their positions in this photo.
 		 * The x and y coordinates are percentages from the left and top edges of the photo, respectively.
 		 */
-		public var tags:Object;
+		public var tags:Array;
 		
 		/**
 		 * The caption given to this photo.
