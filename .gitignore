@@ -1,0 +1,10 @@
+#Flash Builder
+.actionScriptProperties
+.flexProperties
+.flexLibProperties
+.project
+.settings
+bin/*
+bin-debug/*
+bin-release/*
+bin-test/*
