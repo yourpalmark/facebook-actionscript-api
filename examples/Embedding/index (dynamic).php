@@ -13,8 +13,8 @@
 		</div>  
 		<script type="text/javascript">
 			//This example uses dynamic publishing with swfObject. Login is handled in the swf
-			
-			//requires a name attribute passed in to support Chrome/Mozilla browsers
+						
+			//A 'name' attribute with the same value as the 'id' is REQUIRED for Chrome/Mozilla browsers
 			swfobject.embedSWF("YOUR_SWF.swf?<? echo(time()) ?>", "flashContent", "650", "700", "9.0", null, null, null, {name:"flashContent"}); 			
 		</script>
 	</body>

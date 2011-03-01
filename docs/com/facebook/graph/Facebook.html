@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../print.css" type="text/css" media="print">
-<meta content="Facebook,com.facebook.graph.Facebook,addJSEventListener,api,callJS,callRestAPI,deleteObject,fqlQuery,getImageUrl,getLoginStatus,getSession,hasJSEventListener,init,login,logout,mobileLogin,mobileLogout,postData,removeJSEventListener,setCanvasAutoResize,setCanvasSize,ui" name="keywords">
+<meta content="Facebook,com.facebook.graph.Facebook,locale,addJSEventListener,api,callJS,callRestAPI,deleteObject,fqlMultiQuery,fqlQuery,getImageUrl,getLoginStatus,getRawResult,getSession,hasJSEventListener,hasNext,hasPrevious,init,login,logout,mobileLogin,mobileLogout,nextPage,postData,previousPage,removeJSEventListener,setCanvasAutoResize,setCanvasSize,ui" name="keywords">
 <title>com.facebook.graph.Facebook</title>
 </head>
 <body>
@@ -19,7 +19,7 @@
 <td align="left" class="titleTableTitle">ActionScript 3.0 Client Library for Facebook Graph API</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../index-list.html')" href="../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../index.html?com/facebook/graph/Facebook.html&amp;com/facebook/graph/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../images/logo.jpg"></td>
 </tr>
 <tr class="titleTableRow2">
-<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;Facebook</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#methodSummary">Methods</a></td>
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;Facebook</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
 </tr>
 <tr class="titleTableRow3">
 <td colspan="2">&nbsp;</td>
@@ -27,7 +27,7 @@
 </table>
 <script type="text/javascript" language="javascript">
 <!--
-if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class Facebook"); titleBar_setSubNav(false,false,false,false,false,false,true,false,false,false,false,false,false,false);}
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class Facebook"); titleBar_setSubNav(false,true,false,false,false,false,true,false,false,false,false,false,false,false);}
 --></script>
 <div class="MainContent">
 <table cellspacing="0" cellpadding="0" class="classHeaderTable">
@@ -50,6 +50,19 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
       <p></p>
 <br>
 <hr>
+</div>
+<a name="propertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Properties</div>
+<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#locale">locale</a> : String<div class="summaryTableDescription">[static][write-only]</div>
+</td><td class="summaryTableOwnerCol">Facebook</td>
+</tr>
+</table>
 </div>
 <a name="methodSummary"></a>
 <div class="summarySection">
@@ -109,9 +122,17 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#fqlQuery()">fqlQuery</a>(query:String, callback:Function):void</div>
+<a class="signatureLink" href="#fqlMultiQuery()">fqlMultiQuery</a>(queries:<a href="data/FQLMultiQuery.html">FQLMultiQuery</a>, callback:Function = null, parser:<a href="utils/IResultParser.html">IResultParser</a> = null):void</div>
 <div class="summaryTableDescription">[static]
-     Executes an FQL query on api.facebook.com.</div>
+  Executes an FQL multiquery on api.facebook.com.</div>
+</td><td class="summaryTableOwnerCol">Facebook</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#fqlQuery()">fqlQuery</a>(query:String, callback:Function = null, values:Object = null):void</div>
+<div class="summaryTableDescription">[static]
+  Executes an FQL query on api.facebook.com.</div>
 </td><td class="summaryTableOwnerCol">Facebook</td>
 </tr>
 <tr class="">
@@ -134,6 +155,15 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
+<a class="signatureLink" href="#getRawResult()">getRawResult</a>(data:Object):Object</div>
+<div class="summaryTableDescription">[static]
+     Returns a reference to the entire raw object
+  Facebook returns (including paging, etc.).</div>
+</td><td class="summaryTableOwnerCol">Facebook</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
 <a class="signatureLink" href="#getSession()">getSession</a>():<a href="data/FacebookSession.html">FacebookSession</a>
 </div>
 <div class="summaryTableDescription">[static]
@@ -146,6 +176,24 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a class="signatureLink" href="#hasJSEventListener()">hasJSEventListener</a>(event:String, listener:Function):Boolean</div>
 <div class="summaryTableDescription">[static]
      Checks to see if a specified event listener exists.</div>
+</td><td class="summaryTableOwnerCol">Facebook</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#hasNext()">hasNext</a>(data:Object):Boolean</div>
+<div class="summaryTableDescription">[static]
+     Asks if another page exists
+  after this result object.</div>
+</td><td class="summaryTableOwnerCol">Facebook</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#hasPrevious()">hasPrevious</a>(data:Object):Boolean</div>
+<div class="summaryTableDescription">[static]
+     Asks if a page exists
+  before this result object.</div>
 </td><td class="summaryTableOwnerCol">Facebook</td>
 </tr>
 <tr class="">
@@ -191,9 +239,25 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
+<a class="signatureLink" href="#nextPage()">nextPage</a>(data:Object, callback:Function):void</div>
+<div class="summaryTableDescription">[static]
+     Retrieves the next page that is associated with result object passed in.</div>
+</td><td class="summaryTableOwnerCol">Facebook</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
 <a class="signatureLink" href="#postData()">postData</a>(method:String, callback:Function = null, params:Object = null):void</div>
 <div class="summaryTableDescription">[static]
      Shortcut method to post data to Facebook.</div>
+</td><td class="summaryTableOwnerCol">Facebook</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#previousPage()">previousPage</a>(data:Object, callback:Function):void</div>
+<div class="summaryTableDescription">[static]
+     Retrieves the previous page that is associated with result object passed in.</div>
 </td><td class="summaryTableOwnerCol">Facebook</td>
 </tr>
 <tr class="">
@@ -237,6 +301,20 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 showHideInherited();
 --></script>
 <div class="MainContent">
+<a name="propertyDetail"></a>
+<div class="detailSectionHeader">Property detail</div>
+<a name="locale"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">locale</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>locale:String</code>&nbsp;&nbsp;[write-only]<span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set locale(value:String):void</code>
+<br>
+</div>
 <a name="constructorDetail"></a>
 <div class="detailSectionHeader">Constructor detail</div>
 <a name="Facebook()"></a>
@@ -433,6 +511,43 @@ showHideInherited();
 <a href="http://developers.facebook.com/docs/api#deleting" target="mm_external">http://developers.facebook.com/docs/api#deleting</a>
 <br>com.facebook.graph.net.FacebookDesktop.api()</div>
 </div>
+<a name="fqlMultiQuery()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">fqlMultiQuery</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function fqlMultiQuery(queries:<a href="data/FQLMultiQuery.html">FQLMultiQuery</a>, callback:Function = null, parser:<a href="utils/IResultParser.html">IResultParser</a> = null):void</code><p>
+  Executes an FQL multiquery on api.facebook.com.
+  
+  </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">queries</span>:<a href="data/FQLMultiQuery.html">FQLMultiQuery</a></code> &mdash; FQLMultiQuery The FQL queries to execute.
+  </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">callback</span>:Function</code> (default = <code>null</code>)<code></code> &mdash; IResultParser The parser used to parse result into object of name/value pairs. 
+  </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">parser</span>:<a href="utils/IResultParser.html">IResultParser</a></code> (default = <code>null</code>)<code></code></td>
+</tr>
+</table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="http://developers.facebook.com/docs/reference/fql/" target="mm_external">http://developers.facebook.com/docs/reference/fql/</a>
+<br>com.facebook.graph.net.Facebook.callRestAPI()</div>
+</div>
 <a name="fqlQuery()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -440,19 +555,28 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public static function fqlQuery(query:String, callback:Function):void</code><p>
-     Executes an FQL query on api.facebook.com.
-          </p><span class="label">Parameters</span>
+<code>public static function fqlQuery(query:String, callback:Function = null, values:Object = null):void</code><p>
+  Executes an FQL query on api.facebook.com.
+  
+  </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td width="20px"></td><td><code><span class="label">query</span>:String</code> &mdash; The FQL query string to execute.
-     </td>
+  </td>
 </tr>
 <tr>
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">callback</span>:Function</code></td>
+<td width="20px"></td><td><code><span class="label">callback</span>:Function</code> (default = <code>null</code>)<code></code> &mdash; Replaces string values in the in the query. 
+  ie. Replaces {digit} or {id} with the corresponding key-value in the values object 
+  </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">values</span>:Object</code> (default = <code>null</code>)<code></code></td>
 </tr>
 </table>
 <p>
@@ -521,6 +645,37 @@ showHideInherited();
 <a href="http://developers.facebook.com/docs/reference/javascript/FB.getLoginStatus" target="mm_external">http://developers.facebook.com/docs/reference/javascript/FB.getLoginStatus</a>
 </div>
 </div>
+<a name="getRawResult()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">getRawResult</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function getRawResult(data:Object):Object</code><p>
+     Returns a reference to the entire raw object
+  Facebook returns (including paging, etc.).
+          </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">data</span>:Object</code> &mdash; The result object.
+          </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Object</code></td>
+</tr>
+</table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="http://developers.facebook.com/docs/api#reading" target="mm_external">http://developers.facebook.com/docs/api#reading</a>
+</div>
+</div>
 <a name="getSession()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -566,6 +721,68 @@ showHideInherited();
 <td width="20"></td><td><code>Boolean</code></td>
 </tr>
 </table>
+</div>
+<a name="hasNext()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">hasNext</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function hasNext(data:Object):Boolean</code><p>
+     Asks if another page exists
+  after this result object.
+          </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">data</span>:Object</code> &mdash; The result object.
+          </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code></td>
+</tr>
+</table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="http://developers.facebook.com/docs/api#reading" target="mm_external">http://developers.facebook.com/docs/api#reading</a>
+</div>
+</div>
+<a name="hasPrevious()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">hasPrevious</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function hasPrevious(data:Object):Boolean</code><p>
+     Asks if a page exists
+  before this result object.
+          </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">data</span>:Object</code> &mdash; The result object.
+          </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code></td>
+</tr>
+</table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">
+<a href="http://developers.facebook.com/docs/api#reading" target="mm_external">http://developers.facebook.com/docs/api#reading</a>
+</div>
 </div>
 <a name="init()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -732,6 +949,40 @@ showHideInherited();
 </tr>
 </table>
 </div>
+<a name="nextPage()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">nextPage</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function nextPage(data:Object, callback:Function):void</code><p>
+     Retrieves the next page that is associated with result object passed in.
+          </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">data</span>:Object</code> &mdash; The result object.
+  </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">callback</span>:Function</code> &mdash; Method that will be called when this request is complete
+     The handler must have the signature of callback(result:Object, fail:Object);
+     On success, result will be the object data returned from Facebook.
+     On fail, result will be null and fail will contain information about the error.
+  
+  </td>
+</tr>
+</table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">com.facebook.graph.net.FacebookDesktop.request()<br>
+<a href="http://developers.facebook.com/docs/api#reading" target="mm_external">http://developers.facebook.com/docs/api#reading</a>
+</div>
+</div>
 <a name="postData()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -765,6 +1016,39 @@ showHideInherited();
 <span class="label">See also</span>
 </p>
 <div class="seeAlso">com.facebook.graph.net.Facebook.api()</div>
+</div>
+<a name="previousPage()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">previousPage</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function previousPage(data:Object, callback:Function):void</code><p>
+     Retrieves the previous page that is associated with result object passed in.
+          </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">data</span>:Object</code> &mdash; The result object.
+  </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">callback</span>:Function</code> &mdash; Method that will be called when this request is complete
+     The handler must have the signature of callback(result:Object, fail:Object);
+     On success, result will be the object data returned from Facebook.
+     On fail, result will be null and fail will contain information about the error.
+       </td>
+</tr>
+</table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">com.facebook.graph.net.FacebookDesktop.request()<br>
+<a href="http://developers.facebook.com/docs/api#reading" target="mm_external">http://developers.facebook.com/docs/api#reading</a>
+</div>
 </div>
 <a name="removeJSEventListener()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">

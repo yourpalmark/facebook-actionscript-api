@@ -11,7 +11,9 @@
 			<p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
 		</div>  
 		<script type="text/javascript">
-			//Dynamic publishing with swfObject requires a name attribute passed in to support Chrome/Mozilla browsers
+			//Dynamic publishing with swfObject 
+			
+			//A 'name' attribute with the same value as the 'id' is REQUIRED for Chrome/Mozilla browsers
 			swfobject.embedSWF("FlashWebExample.swf?<? echo(time()) ?>", "flashContent", "650", "700", "9.0", null, null, null, {name:"flashContent"}); 			
 		</script>
 	</body>

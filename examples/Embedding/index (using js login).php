@@ -20,8 +20,8 @@
 			
 			function handleLoginStatus(response) {
 				if (response.session) { //Show the SWF										
-					
-					//requires a name attribute passed in to support Chrome/Mozilla browsers
+										
+					//A 'name' attribute with the same value as the 'id' is REQUIRED for Chrome/Mozilla browsers
 					swfobject.embedSWF("YOUR_SWF.swf?<? echo(time()) ?>", "flashContent", "650", "700", "9.0", null, null, null, {name:"flashContent"});
 					
 				} else { //ask the user to login					

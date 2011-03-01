@@ -22,6 +22,8 @@
 				if (response.session) { //Show the SWF
 				
 					$('#ConnectDemo').append('<h1>You need at least Flash Player 9.0 to view this page.</h1><p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>');					
+					
+					//A 'name' attribute with the same value as the 'id' is REQUIRED for Chrome/Mozilla browsers
 					swfobject.embedSWF("IFrameDemo.swf?<? echo(time()) ?>", "ConnectDemo", "550", "600", "9.0", null, null, null, {name:"ConnectDemo"});
 					
 				 } else { //ask the user to login

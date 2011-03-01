@@ -9,7 +9,7 @@
 			//This example uses static publishing with swfObject. Login is handled in the swf.
 						
 			//Note that the inner object tag requires an id and name attribute with the same value, and that its different from the outer object tag id. 
-			//This is required for support in Chrome/Mozilla browsers. 
+			//This 'name' attribute is REQUIRED for Chrome/Mozilla browsers. 
 			
 			swfobject.registerObject("myId", "9.0.115");			
 		</script>

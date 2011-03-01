@@ -6,6 +6,7 @@
 	<component id="com.facebook.graph.core.FacebookJSBridge" class="com.facebook.graph.core.FacebookJSBridge" />
 	<component id="com.facebook.graph.core.FacebookURLDefaults" class="com.facebook.graph.core.FacebookURLDefaults" />
 	<component id="com.facebook.graph.data.ExtendedPermission" class="com.facebook.graph.data.ExtendedPermission" />
+	<component id="com.facebook.graph.data.FQLMultiQuery" class="com.facebook.graph.data.FQLMultiQuery" />
 	<component id="com.facebook.graph.data.FacebookJSEvent" class="com.facebook.graph.data.FacebookJSEvent" />
 	<component id="com.facebook.graph.data.FacebookSession" class="com.facebook.graph.data.FacebookSession" />
 	<component id="com.facebook.graph.data.api.album.FacebookAlbum" class="com.facebook.graph.data.api.album.FacebookAlbum" />
@@ -71,6 +72,8 @@
 	<component id="com.facebook.graph.data.ui.stream.StreamPrivacy" class="com.facebook.graph.data.ui.stream.StreamPrivacy" />
 	<component id="com.facebook.graph.data.ui.stream.StreamPrivacyValue" class="com.facebook.graph.data.ui.stream.StreamPrivacyValue" />
 	<component id="com.facebook.graph.net.FacebookRequest" class="com.facebook.graph.net.FacebookRequest" />
+	<component id="com.facebook.graph.utils.FQLMultiQueryParser" class="com.facebook.graph.utils.FQLMultiQueryParser" />
 	<component id="com.facebook.graph.utils.FacebookDataUtils" class="com.facebook.graph.utils.FacebookDataUtils" />
+	<component id="com.facebook.graph.utils.IResultParser" class="com.facebook.graph.utils.IResultParser" />
 	<component id="com.facebook.graph.utils.PostRequest" class="com.facebook.graph.utils.PostRequest" />
 </componentPackage>
