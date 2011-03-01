@@ -2,6 +2,7 @@
 <project name="facebook-actionscript-api" basedir="../" default="release">
 	
 	<!-- Define variables/paths used in this build script -->
+	<property environment="env" />
 	<property file="build/build.properties" />
 	<property name="nl" value="&#13;&#10;" />
 	<property name="tab" value="&#x0009;" />
@@ -12,13 +13,11 @@
 	<!-- Define Ant-Contrib Tasks -->
 	<taskdef resource="net/sf/antcontrib/antlib.xml" classpath="${ant.contrib.tasks}" />
 	
-	<!-- Display warning -->
-	<target name="properties">
-		<echo message="Have you edited the properties file to make sure the paths are right on your system?" />
-	</target>
+	<!-- Fail if FLEX_HOME is not defined -->
+	<fail unless="env.FLEX_HOME" message="FLEX_HOME not defined${line.separator}FLEX_HOME needs to be defined as an environment variable." />
 	
 	<!-- Update the manifest file. -->
-	<target name="manifest" depends="properties">
+	<target name="manifest">
 		<echo message="Updating the manifest file." />
 		<echo file="${manifest}">&lt;?xml version="1.0"?&gt;${nl}&lt;componentPackage&gt;</echo>
 		<for param="file">

@@ -57,6 +57,9 @@
 	<component id="com.facebook.graph.data.fql.user.OnlinePresence" class="com.facebook.graph.data.fql.user.OnlinePresence" />
 	<component id="com.facebook.graph.data.ui.UIDisplay" class="com.facebook.graph.data.ui.UIDisplay" />
 	<component id="com.facebook.graph.data.ui.UIMethod" class="com.facebook.graph.data.ui.UIMethod" />
+	<component id="com.facebook.graph.data.ui.apprequest.AppRequest" class="com.facebook.graph.data.ui.apprequest.AppRequest" />
+	<component id="com.facebook.graph.data.ui.credits.Credits" class="com.facebook.graph.data.ui.credits.Credits" />
+	<component id="com.facebook.graph.data.ui.credits.CreditsErrorCode" class="com.facebook.graph.data.ui.credits.CreditsErrorCode" />
 	<component id="com.facebook.graph.data.ui.stream.Stream" class="com.facebook.graph.data.ui.stream.Stream" />
 	<component id="com.facebook.graph.data.ui.stream.StreamActionLink" class="com.facebook.graph.data.ui.stream.StreamActionLink" />
 	<component id="com.facebook.graph.data.ui.stream.StreamAttachment" class="com.facebook.graph.data.ui.stream.StreamAttachment" />
