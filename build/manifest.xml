@@ -17,6 +17,7 @@
 	<component id="com.facebook.graph.data.api.application.FacebookApplicationField" class="com.facebook.graph.data.api.application.FacebookApplicationField" />
 	<component id="com.facebook.graph.data.api.checkin.FacebookCheckin" class="com.facebook.graph.data.api.checkin.FacebookCheckin" />
 	<component id="com.facebook.graph.data.api.checkin.FacebookCheckinField" class="com.facebook.graph.data.api.checkin.FacebookCheckinField" />
+	<component id="com.facebook.graph.data.api.checkin.FacebookCheckinTag" class="com.facebook.graph.data.api.checkin.FacebookCheckinTag" />
 	<component id="com.facebook.graph.data.api.event.FacebookEvent" class="com.facebook.graph.data.api.event.FacebookEvent" />
 	<component id="com.facebook.graph.data.api.event.FacebookEventConnection" class="com.facebook.graph.data.api.event.FacebookEventConnection" />
 	<component id="com.facebook.graph.data.api.event.FacebookEventField" class="com.facebook.graph.data.api.event.FacebookEventField" />
@@ -35,6 +36,7 @@
 	<component id="com.facebook.graph.data.api.photo.FacebookPhoto" class="com.facebook.graph.data.api.photo.FacebookPhoto" />
 	<component id="com.facebook.graph.data.api.photo.FacebookPhotoConnection" class="com.facebook.graph.data.api.photo.FacebookPhotoConnection" />
 	<component id="com.facebook.graph.data.api.photo.FacebookPhotoField" class="com.facebook.graph.data.api.photo.FacebookPhotoField" />
+	<component id="com.facebook.graph.data.api.photo.FacebookPhotoTag" class="com.facebook.graph.data.api.photo.FacebookPhotoTag" />
 	<component id="com.facebook.graph.data.api.post.FacebookPost" class="com.facebook.graph.data.api.post.FacebookPost" />
 	<component id="com.facebook.graph.data.api.post.FacebookPostConnection" class="com.facebook.graph.data.api.post.FacebookPostConnection" />
 	<component id="com.facebook.graph.data.api.post.FacebookPostField" class="com.facebook.graph.data.api.post.FacebookPostField" />
@@ -51,6 +53,7 @@
 	<component id="com.facebook.graph.data.api.video.FacebookVideo" class="com.facebook.graph.data.api.video.FacebookVideo" />
 	<component id="com.facebook.graph.data.api.video.FacebookVideoConnection" class="com.facebook.graph.data.api.video.FacebookVideoConnection" />
 	<component id="com.facebook.graph.data.api.video.FacebookVideoField" class="com.facebook.graph.data.api.video.FacebookVideoField" />
+	<component id="com.facebook.graph.data.api.video.FacebookVideoTag" class="com.facebook.graph.data.api.video.FacebookVideoTag" />
 	<component id="com.facebook.graph.data.fql.FQLTable" class="com.facebook.graph.data.fql.FQLTable" />
 	<component id="com.facebook.graph.data.fql.friend.FQLFriendField" class="com.facebook.graph.data.fql.friend.FQLFriendField" />
 	<component id="com.facebook.graph.data.fql.user.FQLUser" class="com.facebook.graph.data.fql.user.FQLUser" />

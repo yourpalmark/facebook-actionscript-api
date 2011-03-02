@@ -23,7 +23,7 @@ package com.facebook.graph.data.api.checkin
 		/**
 		 * The users the author tagged in the check-in.
 		 */
-		public var tags:Object;
+		public var tags:Array; //Array of FacebookCheckinTag
 		
 		/**
 		 * The ID, name, and location of the Facebook Page that represents the location of the check-in.
@@ -71,6 +71,20 @@ package com.facebook.graph.data.api.checkin
 						case "from":
 							from = new FacebookUser();
 							from.fromJSON( result[ property ] );
+							break;
+						
+						case "tags":
+							tags = [];
+							if( result[ property ].hasOwnProperty( "data" ) )
+							{
+								var tagsData:Array = result[ property ].data;
+								for each( var tagData:Object in tagsData )
+								{
+									var tag:FacebookCheckinTag = new FacebookCheckinTag();
+									tag.fromJSON( tagData );
+									tags.push( tag );
+								}
+							}
 							break;
 						
 						case "application":

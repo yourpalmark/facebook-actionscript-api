@@ -23,7 +23,7 @@ package com.facebook.graph.data.api.video
 		 * An array of users who are tagged in this video.
 		 * Each user object contains their ID and name.
 		 */
-		public var tags:Object;
+		public var tags:Array; //Array of FacebookVideoTag
 		
 		/**
 		 * The video title / caption.
@@ -78,6 +78,20 @@ package com.facebook.graph.data.api.video
 				{
 					switch( property )
 					{
+						case "tags":
+							tags = [];
+							if( result[ property ].hasOwnProperty( "data" ) )
+							{
+								var tagsData:Array = result[ property ].data;
+								for each( var tagData:Object in tagsData )
+								{
+									var tag:FacebookVideoTag = new FacebookVideoTag();
+									tag.fromJSON( tagData );
+									tags.push( tag );
+								}
+							}
+							break;
+						
 						case "created_time":
 							created_time = DateUtil.parseW3CDTF( result[ property ] );
 							break;

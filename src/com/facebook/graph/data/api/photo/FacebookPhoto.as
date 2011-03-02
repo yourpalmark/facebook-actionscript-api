@@ -23,7 +23,7 @@ package com.facebook.graph.data.api.photo
 		 * An array containing the users and their positions in this photo.
 		 * The x and y coordinates are percentages from the left and top edges of the photo, respectively.
 		 */
-		public var tags:Object;
+		public var tags:Array; //Array of FacebookPhotoTag
 		
 		/**
 		 * The caption given to this photo.
@@ -88,6 +88,20 @@ package com.facebook.graph.data.api.photo
 				{
 					switch( property )
 					{
+						case "tags":
+							tags = [];
+							if( result[ property ].hasOwnProperty( "data" ) )
+							{
+								var tagsData:Array = result[ property ].data;
+								for each( var tagData:Object in tagsData )
+								{
+									var tag:FacebookPhotoTag = new FacebookPhotoTag();
+									tag.fromJSON( tagData );
+									tags.push( tag );
+								}
+							}
+							break;
+						
 						case "created_time":
 							created_time = DateUtil.parseW3CDTF( result[ property ] );
 							break;
