@@ -1,17 +1,20 @@
 package com.facebook.graph.data.api.user
 {
-	import com.adobe.utils.DateUtil;
+	import com.facebook.graph.core.facebook_internal;
+	import com.facebook.graph.data.api.core.AbstractFacebookGraphObject;
+	
+	use namespace facebook_internal;
 	
 	/**
 	 * A user profile.
 	 * @see http://developers.facebook.com/docs/reference/api/user
 	 */
-	public class FacebookUser
+	public class FacebookUser extends AbstractFacebookGraphObject
 	{
 		/**
-		 * The user's ID.
+		 * The user's full name.
 		 */
-		public var id:String;
+		public var name:String;
 		
 		/**
 		 * The user's first name.
@@ -24,14 +27,14 @@ package com.facebook.graph.data.api.user
 		public var last_name:String;
 		
 		/**
-		 * The user's full name.
+		 * The user's gender.
 		 */
-		public var name:String;
+		public var gender:String;
 		
 		/**
-		 * The user's profile picture.
+		 * The user's locale.
 		 */
-		public var picture:String;
+		public var locale:String;
 		
 		/**
 		 * A link to the user's profile.
@@ -39,9 +42,34 @@ package com.facebook.graph.data.api.user
 		public var link:String;
 		
 		/**
-		 * The user's blurb that appears under their profile picture.
+		 * An anonymous, but unique identifier for the user.
+		 */
+		public var third_party_id:String;
+		
+		/**
+		 * The user's timezone offset from UTC.
+		 */
+		public var timezone:Number;
+		
+		/**
+		 * The last time the user's profile was updated.
+		 */
+		public var updated_time:Date;
+		
+		/**
+		 * The user's account verification status.
+		 */
+		public var verified:Boolean;
+		
+		/**
+		 * The blurb that appears under the user's profile picture.
 		 */
 		public var about:String;
+		
+		/**
+		 * The user's biography.
+		 */
+		public var bio:String;
 		
 		/**
 		 * The user's birthday.
@@ -49,12 +77,7 @@ package com.facebook.graph.data.api.user
 		public var birthday:String;
 		
 		/**
-		 * A list of the work history from the user's profile.
-		 */
-		public var work:Array;
-		
-		/**
-		 * A list of the education history from the user's profile.
+		 * A list of the user's education history.
 		 */
 		public var education:Array;
 		
@@ -64,14 +87,14 @@ package com.facebook.graph.data.api.user
 		public var email:String;
 		
 		/**
-		 * A link to the user's personal website.
-		 */
-		public var website:String;
-		
-		/**
 		 * The user's hometown.
 		 */
 		public var hometown:Object;
+		
+		/**
+		 * The genders the user is interested in.
+		 */
+		public var interested_in:String;
 		
 		/**
 		 * The user's current location.
@@ -79,29 +102,19 @@ package com.facebook.graph.data.api.user
 		public var location:Object;
 		
 		/**
-		 * The user's bio.
+		 * The types of relationships the user is seeking.
 		 */
-		public var bio:String;
+		public var meeting_for:String;
+		
+		/**
+		 * The user's political view.
+		 */
+		public var political:String;
 		
 		/**
 		 * The user's favorite quotes.
 		 */
 		public var quotes:String;
-		
-		/**
-		 * The user's gender.
-		 */
-		public var gender:String;
-		
-		/**
-		 * Genders the user is interested in.
-		 */
-		public var interested_in:String;
-		
-		/**
-		 * Types of relationships the user is seeking.
-		 */
-		public var meeting_for:String;
 		
 		/**
 		 * The user's relationship status.
@@ -114,34 +127,24 @@ package com.facebook.graph.data.api.user
 		public var religion:String;
 		
 		/**
-		 * The user's political view.
-		 */
-		public var political:String;
-		
-		/**
-		 * The user's account verification status.
-		 */
-		public var verified:Boolean;
-		
-		/**
 		 * The user's significant other.
 		 */
 		public var significant_other:FacebookUser;
 		
 		/**
-		 * The user's timezone.
+		 * The URL of the user's personal website.
 		 */
-		public var timezone:int;
+		public var website:String;
 		
 		/**
-		 * The user's locale.
+		 * A list of the user's work history.
 		 */
-		public var locale:String;
+		public var work:Array;
 		
 		/**
-		 * The time the user was most recently updated.
+		 * The user's profile picture.
 		 */
-		public var updated_time:Date;
+		public var picture:String;
 		
 		/**
 		 * Creates a new FacebookUser.
@@ -151,39 +154,25 @@ package com.facebook.graph.data.api.user
 		}
 		
 		/**
-		 * Populates the user from a decoded JSON object.
+		 * Populates and returns a new FacebookUser from a decoded JSON object.
+		 * 
+		 * @param result A decoded JSON object.
+		 * 
+		 * @return A new FacebookUser.
 		 */
-		public function fromJSON( result:Object ):void
+		public static function fromJSON( result:Object ):FacebookUser
 		{
-			if( result != null )
-			{
-				for( var property:String in result )
-				{
-					switch( property )
-					{
-						case "significant_other":
-							significant_other = new FacebookUser();
-							significant_other.fromJSON( result[ property ] );
-							break;
-						
-						case "updated_time":
-							updated_time = DateUtil.parseW3CDTF( result[ property ] );
-							break;
-						
-						default:
-							if( hasOwnProperty( property ) ) this[ property ] = result[ property ];
-							break;
-					}
-				}
-			}
+			var user:FacebookUser = new FacebookUser();
+			user.fromJSON( result );
+			return user;
 		}
 		
 		/**
-		 * Provides the string value of the user.
+		 * @inheritDoc
 		 */
-		public function toString():String
+		override public function toString():String
 		{
-			return '[ id: ' + id + ', name: ' + name + ' ]';
+			return facebook_internal::toString( [ FacebookUserField.ID, FacebookUserField.NAME ] );
 		}
 		
 	}

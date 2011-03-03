@@ -6,6 +6,7 @@ package com.facebook.graph.data.api.post
 	 */
 	public class FacebookPostField
 	{
+		public static const LIKES:String = "likes";
 		public static const ID:String = "id";
 		public static const FROM:String = "from";
 		public static const TO:String = "to";
@@ -20,9 +21,9 @@ package com.facebook.graph.data.api.post
 		public static const ATTRIBUTION:String = "attribution";
 		public static const ACTIONS:String = "actions";
 		public static const PRIVACY:String = "privacy";
-		public static const LIKES:String = "likes";
 		public static const CREATED_TIME:String = "created_time";
 		public static const UPDATED_TIME:String = "updated_time";
+		public static const TARGETING:String = "targeting";
 		
 	}
 }

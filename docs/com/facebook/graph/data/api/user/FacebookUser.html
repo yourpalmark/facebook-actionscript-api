@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../../../print.css" type="text/css" media="print">
-<meta content="FacebookUser,com.facebook.graph.data.api.user.FacebookUser,about,bio,birthday,education,email,first_name,gender,hometown,id,interested_in,last_name,link,locale,location,meeting_for,name,picture,political,quotes,relationship_status,religion,significant_other,timezone,updated_time,verified,website,work,fromJSON,toString" name="keywords">
+<meta content="FacebookUser,com.facebook.graph.data.api.user.FacebookUser,about,bio,birthday,education,email,first_name,gender,hometown,interested_in,last_name,link,locale,location,meeting_for,name,picture,political,quotes,relationship_status,religion,significant_other,third_party_id,timezone,updated_time,verified,website,work,fromJSON,toString" name="keywords">
 <title>com.facebook.graph.data.api.user.FacebookUser</title>
 </head>
 <body>
@@ -37,6 +37,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr>
 <td class="classHeaderTableLabel">Class</td><td class="classSignature">public class FacebookUser</td>
 </tr>
+<tr>
+<td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">FacebookUser <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../../../../images/inherit-arrow.gif"> <a href="../core/AbstractFacebookGraphObject.html">AbstractFacebookGraphObject</a></td>
+</tr>
 </table>
 <p></p>
   A user profile.
@@ -53,18 +56,26 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a name="propertySummary"></a>
 <div class="summarySection">
 <div class="summaryTableTitle">Public Properties</div>
+<div class="showHideLinks">
+<div class="hideInheritedProperty" id="hideInheritedProperty">
+<a onclick="javascript:setInheritedVisible(false,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Public Properties</a>
+</div>
+<div class="showInheritedProperty" id="showInheritedProperty">
+<a onclick="javascript:setInheritedVisible(true,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Public Properties</a>
+</div>
+</div>
 <table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
 <tr>
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#about">about</a> : String<div class="summaryTableDescription">
-   The user's blurb that appears under their profile picture.</div>
+   The blurb that appears under the user's profile picture.</div>
 </td><td class="summaryTableOwnerCol">FacebookUser</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#bio">bio</a> : String<div class="summaryTableDescription">
-   The user's bio.</div>
+   The user's biography.</div>
 </td><td class="summaryTableOwnerCol">FacebookUser</td>
 </tr>
 <tr class="">
@@ -74,7 +85,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#education">education</a> : Array<div class="summaryTableDescription">
-   A list of the education history from the user's profile.</div>
+   A list of the user's education history.</div>
 </td><td class="summaryTableOwnerCol">FacebookUser</td>
 </tr>
 <tr class="">
@@ -97,14 +108,14 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
    The user's hometown.</div>
 </td><td class="summaryTableOwnerCol">FacebookUser</td>
 </tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#id">id</a> : String<div class="summaryTableDescription">
-   The user's ID.</div>
-</td><td class="summaryTableOwnerCol">FacebookUser</td>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../core/AbstractFacebookGraphObject.html#id">id</a> : String<div class="summaryTableDescription">
+   The unique ID for the graph object.</div>
+</td><td class="summaryTableOwnerCol"><a href="../core/AbstractFacebookGraphObject.html">AbstractFacebookGraphObject</a></td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#interested_in">interested_in</a> : String<div class="summaryTableDescription">
-   Genders the user is interested in.</div>
+   The genders the user is interested in.</div>
 </td><td class="summaryTableOwnerCol">FacebookUser</td>
 </tr>
 <tr class="">
@@ -129,7 +140,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#meeting_for">meeting_for</a> : String<div class="summaryTableDescription">
-   Types of relationships the user is seeking.</div>
+   The types of relationships the user is seeking.</div>
 </td><td class="summaryTableOwnerCol">FacebookUser</td>
 </tr>
 <tr class="">
@@ -152,6 +163,11 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
    The user's favorite quotes.</div>
 </td><td class="summaryTableOwnerCol">FacebookUser</td>
 </tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../core/AbstractFacebookGraphObject.html#rawResult">rawResult</a> : Object<div class="summaryTableDescription">
+   The raw decoded JSON result data for the graph object.</div>
+</td><td class="summaryTableOwnerCol"><a href="../core/AbstractFacebookGraphObject.html">AbstractFacebookGraphObject</a></td>
+</tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#relationship_status">relationship_status</a> : String<div class="summaryTableDescription">
    The user's relationship status.</div>
@@ -169,13 +185,18 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">FacebookUser</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#timezone">timezone</a> : int<div class="summaryTableDescription">
-   The user's timezone.</div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#third_party_id">third_party_id</a> : String<div class="summaryTableDescription">
+   An anonymous, but unique identifier for the user.</div>
+</td><td class="summaryTableOwnerCol">FacebookUser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#timezone">timezone</a> : Number<div class="summaryTableDescription">
+   The user's timezone offset from UTC.</div>
 </td><td class="summaryTableOwnerCol">FacebookUser</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#updated_time">updated_time</a> : Date<div class="summaryTableDescription">
-   The time the user was most recently updated.</div>
+   The last time the user's profile was updated.</div>
 </td><td class="summaryTableOwnerCol">FacebookUser</td>
 </tr>
 <tr class="">
@@ -185,12 +206,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#website">website</a> : String<div class="summaryTableDescription">
-   A link to the user's personal website.</div>
+   The URL of the user's personal website.</div>
 </td><td class="summaryTableOwnerCol">FacebookUser</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#work">work</a> : Array<div class="summaryTableDescription">
-   A list of the work history from the user's profile.</div>
+   A list of the user's work history.</div>
 </td><td class="summaryTableOwnerCol">FacebookUser</td>
 </tr>
 </table>
@@ -213,9 +234,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#fromJSON()">fromJSON</a>(result:Object):void</div>
-<div class="summaryTableDescription">
-   Populates the user from a decoded JSON object.</div>
+<a class="signatureLink" href="#fromJSON()">fromJSON</a>(result:Object):<a href="../user/FacebookUser.html">FacebookUser</a>
+</div>
+<div class="summaryTableDescription">[static]
+   Populates and returns a new FacebookUser from a decoded JSON object.</div>
 </td><td class="summaryTableOwnerCol">FacebookUser</td>
 </tr>
 <tr class="">
@@ -223,7 +245,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#toString()">toString</a>():String</div>
 <div class="summaryTableDescription">
-   Provides the string value of the user.</div>
+   
+   
+   Provides the string value of the graph object.</div>
 </td><td class="summaryTableOwnerCol">FacebookUser</td>
 </tr>
 </table>
@@ -243,7 +267,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var about:String</code><p>
-   The user's blurb that appears under their profile picture.
+   The blurb that appears under the user's profile picture.
    </p></div>
 <a name="bio"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -253,7 +277,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var bio:String</code><p>
-   The user's bio.
+   The user's biography.
    </p></div>
 <a name="birthday"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -273,7 +297,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var education:Array</code><p>
-   A list of the education history from the user's profile.
+   A list of the user's education history.
    </p></div>
 <a name="email"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -315,16 +339,6 @@ showHideInherited();
 <code>public var hometown:Object</code><p>
    The user's hometown.
    </p></div>
-<a name="id"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">id</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public var id:String</code><p>
-   The user's ID.
-   </p></div>
 <a name="interested_in"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -333,7 +347,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var interested_in:String</code><p>
-   Genders the user is interested in.
+   The genders the user is interested in.
    </p></div>
 <a name="last_name"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -383,7 +397,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var meeting_for:String</code><p>
-   Types of relationships the user is seeking.
+   The types of relationships the user is seeking.
    </p></div>
 <a name="name"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -455,6 +469,16 @@ showHideInherited();
 <code>public var significant_other:<a href="../user/FacebookUser.html">FacebookUser</a></code><p>
    The user's significant other.
    </p></div>
+<a name="third_party_id"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">third_party_id</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var third_party_id:String</code><p>
+   An anonymous, but unique identifier for the user.
+   </p></div>
 <a name="timezone"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -462,8 +486,8 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public var timezone:int</code><p>
-   The user's timezone.
+<code>public var timezone:Number</code><p>
+   The user's timezone offset from UTC.
    </p></div>
 <a name="updated_time"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -473,7 +497,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var updated_time:Date</code><p>
-   The time the user was most recently updated.
+   The last time the user's profile was updated.
    </p></div>
 <a name="verified"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -493,7 +517,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var website:String</code><p>
-   A link to the user's personal website.
+   The URL of the user's personal website.
    </p></div>
 <a name="work"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -503,7 +527,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var work:Array</code><p>
-   A list of the work history from the user's profile.
+   A list of the user's work history.
    </p></div>
 <a name="constructorDetail"></a>
 <div class="detailSectionHeader">Constructor detail</div>
@@ -526,12 +550,26 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function fromJSON(result:Object):void</code><p>
-   Populates the user from a decoded JSON object.
+<code>public static function fromJSON(result:Object):<a href="../user/FacebookUser.html">FacebookUser</a></code><p>
+   Populates and returns a new FacebookUser from a decoded JSON object.
+   
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">result</span>:Object</code></td>
+<td width="20px"></td><td><code><span class="label">result</span>:Object</code> &mdash; A decoded JSON object.
+   
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../user/FacebookUser.html">FacebookUser</a></code> &mdash; 
+                        A new FacebookUser.
+   
+                        
+                     </td>
 </tr>
 </table>
 </div>
@@ -542,13 +580,17 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function toString():String</code><p>
-   Provides the string value of the user.
+<code>public override function toString():String</code><p>
+   
+   
+   Provides the string value of the graph object.
+   
    </p><p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>String</code></td>
+<td width="20"></td><td><code>String</code> &mdash; The string value of the graph object.
+   </td>
 </tr>
 </table>
 </div>

@@ -1,23 +1,16 @@
 package com.facebook.graph.data.api.video
 {
-	import com.adobe.utils.DateUtil;
+	import com.facebook.graph.core.facebook_internal;
+	import com.facebook.graph.data.api.core.FacebookTag;
+	
+	use namespace facebook_internal;
 	
 	/**
 	 * An object that defines a user in a video.
 	 * @see http://developers.facebook.com/docs/reference/api/video
 	 */
-	public class FacebookVideoTag
+	public class FacebookVideoTag extends FacebookTag
 	{
-		/**
-		 * The tagged user's ID.
-		 */
-		public var id:String;
-		
-		/**
-		 * The tagged user's full name.
-		 */
-		public var name:String;
-		
 		/**
 		 * The time the tag was initially created.
 		 */
@@ -31,34 +24,25 @@ package com.facebook.graph.data.api.video
 		}
 		
 		/**
-		 * Populates the tag from a decoded JSON object.
+		 * Populates and returns a new FacebookVideoTag from a decoded JSON object.
+		 * 
+		 * @param result A decoded JSON object.
+		 * 
+		 * @return A new FacebookVideoTag.
 		 */
-		public function fromJSON( result:Object ):void
+		public static function fromJSON( result:Object ):FacebookVideoTag
 		{
-			if( result != null )
-			{
-				for( var property:String in result )
-				{
-					switch( property )
-					{
-						case "created_time":
-							created_time = DateUtil.parseW3CDTF( result[ property ] );
-							break;
-						
-						default:
-							if( hasOwnProperty( property ) ) this[ property ] = result[ property ];
-							break;
-					}
-				}
-			}
+			var tag:FacebookVideoTag = new FacebookVideoTag();
+			tag.fromJSON( result );
+			return tag;
 		}
 		
 		/**
-		 * Provides the string value of the tag.
+		 * @inheritDoc
 		 */
-		public function toString():String
+		override public function toString():String
 		{
-			return '[ id: ' + id + ', name: ' + name + ' ]';
+			return facebook_internal::toString( [ "id", "name" ] );
 		}
 		
 	}

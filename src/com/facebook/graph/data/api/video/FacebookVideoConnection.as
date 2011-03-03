@@ -7,6 +7,7 @@ package com.facebook.graph.data.api.video
 	public class FacebookVideoConnection
 	{
 		public static const COMMENTS:String = "comments";
+		public static const PICTURE:String = "picture";
 		
 	}
 }

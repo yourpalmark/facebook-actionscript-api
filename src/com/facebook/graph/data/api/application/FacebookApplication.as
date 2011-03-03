@@ -1,16 +1,16 @@
 package com.facebook.graph.data.api.application
 {
+	import com.facebook.graph.core.facebook_internal;
+	import com.facebook.graph.data.api.core.AbstractFacebookGraphObject;
+	
+	use namespace facebook_internal;
+	
 	/**
-	 * An individual application registered on the Facebook Platform.
+	 * An application registered on Facebook Platform.
 	 * @see http://developers.facebook.com/docs/reference/api/application
 	 */
-	public class FacebookApplication
+	public class FacebookApplication extends AbstractFacebookGraphObject
 	{
-		/**
-		 * The application ID.
-		 */
-		public var id:String;
-		
 		/**
 		 * The title of the application.
 		 */
@@ -39,30 +39,25 @@ package com.facebook.graph.data.api.application
 		}
 		
 		/**
-		 * Populates the application from a decoded JSON object.
+		 * Populates and returns a new FacebookApplication from a decoded JSON object.
+		 * 
+		 * @param result A decoded JSON object.
+		 * 
+		 * @return A new FacebookApplication.
 		 */
-		public function fromJSON( result:Object ):void
+		public static function fromJSON( result:Object ):FacebookApplication
 		{
-			if( result != null )
-			{
-				for( var property:String in result )
-				{
-					switch( property )
-					{
-						default:
-							if( hasOwnProperty( property ) ) this[ property ] = result[ property ];
-							break;
-					}
-				}
-			}
+			var application:FacebookApplication = new FacebookApplication();
+			application.fromJSON( result );
+			return application;
 		}
 		
 		/**
-		 * Provides the string value of the application.
+		 * @inheritDoc
 		 */
-		public function toString():String
+		override public function toString():String
 		{
-			return '[ id: ' + id + ', name: ' + name + ' ]';
+			return facebook_internal::toString( [ FacebookApplicationField.ID, FacebookApplicationField.NAME ] );
 		}
 		
 	}

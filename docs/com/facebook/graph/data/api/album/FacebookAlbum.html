@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../../../print.css" type="text/css" media="print">
-<meta content="FacebookAlbum,com.facebook.graph.data.api.album.FacebookAlbum,comments,count,created_time,description,from,id,link,location,name,privacy,type,updated_time,fromJSON,toString" name="keywords">
+<meta content="FacebookAlbum,com.facebook.graph.data.api.album.FacebookAlbum,count,created_time,description,from,link,location,name,privacy,type,updated_time,fromJSON,toString" name="keywords">
 <title>com.facebook.graph.data.api.album.FacebookAlbum</title>
 </head>
 <body>
@@ -37,6 +37,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr>
 <td class="classHeaderTableLabel">Class</td><td class="classSignature">public class FacebookAlbum</td>
 </tr>
+<tr>
+<td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">FacebookAlbum <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../../../../images/inherit-arrow.gif"> <a href="../core/AbstractFacebookGraphObject.html">AbstractFacebookGraphObject</a></td>
+</tr>
 </table>
 <p></p>
   A photo album.
@@ -53,14 +56,17 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a name="propertySummary"></a>
 <div class="summarySection">
 <div class="summaryTableTitle">Public Properties</div>
+<div class="showHideLinks">
+<div class="hideInheritedProperty" id="hideInheritedProperty">
+<a onclick="javascript:setInheritedVisible(false,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Public Properties</a>
+</div>
+<div class="showInheritedProperty" id="showInheritedProperty">
+<a onclick="javascript:setInheritedVisible(true,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Public Properties</a>
+</div>
+</div>
 <table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
 <tr>
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#comments">comments</a> : Object<div class="summaryTableDescription">
-   Comments on the album.</div>
-</td><td class="summaryTableOwnerCol">FacebookAlbum</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#count">count</a> : int<div class="summaryTableDescription">
@@ -80,13 +86,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#from">from</a> : <a href="../user/FacebookUser.html">FacebookUser</a>
 <div class="summaryTableDescription">
-   An object containing the ID and name of the profile who posted this album.</div>
+   The profile that created this album.</div>
 </td><td class="summaryTableOwnerCol">FacebookAlbum</td>
 </tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#id">id</a> : String<div class="summaryTableDescription">
-   The photo album ID.</div>
-</td><td class="summaryTableOwnerCol">FacebookAlbum</td>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../core/AbstractFacebookGraphObject.html#id">id</a> : String<div class="summaryTableDescription">
+   The unique ID for the graph object.</div>
+</td><td class="summaryTableOwnerCol"><a href="../core/AbstractFacebookGraphObject.html">AbstractFacebookGraphObject</a></td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#link">link</a> : String<div class="summaryTableDescription">
@@ -107,6 +113,11 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#privacy">privacy</a> : String<div class="summaryTableDescription">
    The privacy settings for the album.</div>
 </td><td class="summaryTableOwnerCol">FacebookAlbum</td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../core/AbstractFacebookGraphObject.html#rawResult">rawResult</a> : Object<div class="summaryTableDescription">
+   The raw decoded JSON result data for the graph object.</div>
+</td><td class="summaryTableOwnerCol"><a href="../core/AbstractFacebookGraphObject.html">AbstractFacebookGraphObject</a></td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#type">type</a> : String<div class="summaryTableDescription">
@@ -138,9 +149,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#fromJSON()">fromJSON</a>(result:Object):void</div>
-<div class="summaryTableDescription">
-   Populates the album from a decoded JSON object.</div>
+<a class="signatureLink" href="#fromJSON()">fromJSON</a>(result:Object):<a href="../album/FacebookAlbum.html">FacebookAlbum</a>
+</div>
+<div class="summaryTableDescription">[static]
+   Populates and returns a new FacebookAlbum from a decoded JSON object.</div>
 </td><td class="summaryTableOwnerCol">FacebookAlbum</td>
 </tr>
 <tr class="">
@@ -148,7 +160,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#toString()">toString</a>():String</div>
 <div class="summaryTableDescription">
-   Provides the string value of the album.</div>
+   
+   
+   Provides the string value of the graph object.</div>
 </td><td class="summaryTableOwnerCol">FacebookAlbum</td>
 </tr>
 </table>
@@ -160,20 +174,10 @@ showHideInherited();
 <div class="MainContent">
 <a name="propertyDetail"></a>
 <div class="detailSectionHeader">Property detail</div>
-<a name="comments"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">comments</td><td class="detailHeaderType">property</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public var comments:Object</code><p>
-   Comments on the album.
-   </p></div>
 <a name="count"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">count</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+<td class="detailHeaderName">count</td><td class="detailHeaderType">property</td>
 </tr>
 </table>
 <div class="detailBody">
@@ -208,17 +212,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var from:<a href="../user/FacebookUser.html">FacebookUser</a></code><p>
-   An object containing the ID and name of the profile who posted this album.
-   </p></div>
-<a name="id"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">id</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public var id:String</code><p>
-   The photo album ID.
+   The profile that created this album.
    </p></div>
 <a name="link"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -301,12 +295,26 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function fromJSON(result:Object):void</code><p>
-   Populates the album from a decoded JSON object.
+<code>public static function fromJSON(result:Object):<a href="../album/FacebookAlbum.html">FacebookAlbum</a></code><p>
+   Populates and returns a new FacebookAlbum from a decoded JSON object.
+   
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">result</span>:Object</code></td>
+<td width="20px"></td><td><code><span class="label">result</span>:Object</code> &mdash; A decoded JSON object.
+   
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../album/FacebookAlbum.html">FacebookAlbum</a></code> &mdash; 
+                        A new FacebookAlbum.
+   
+                        
+                     </td>
 </tr>
 </table>
 </div>
@@ -317,13 +325,17 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function toString():String</code><p>
-   Provides the string value of the album.
+<code>public override function toString():String</code><p>
+   
+   
+   Provides the string value of the graph object.
+   
    </p><p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>String</code></td>
+<td width="20"></td><td><code>String</code> &mdash; The string value of the graph object.
+   </td>
 </tr>
 </table>
 </div>

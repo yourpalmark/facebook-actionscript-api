@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../../../print.css" type="text/css" media="print">
-<meta content="FacebookPost,com.facebook.graph.data.api.post.FacebookPost,actions,attribution,caption,created_time,description,from,icon,id,likes,link,message,name,picture,privacy,source,to,updated_time,fromJSON,toString" name="keywords">
+<meta content="FacebookPost,com.facebook.graph.data.api.post.FacebookPost,actions,attribution,caption,created_time,description,from,icon,likes,link,message,name,picture,privacy,source,targeting,to,updated_time,fromJSON,setPropertyValue,toString" name="keywords">
 <title>com.facebook.graph.data.api.post.FacebookPost</title>
 </head>
 <body>
@@ -37,6 +37,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr>
 <td class="classHeaderTableLabel">Class</td><td class="classSignature">public class FacebookPost</td>
 </tr>
+<tr>
+<td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">FacebookPost <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../../../../images/inherit-arrow.gif"> <a href="../core/AbstractFacebookGraphObject.html">AbstractFacebookGraphObject</a></td>
+</tr>
 </table>
 <p></p>
   An individual entry in a profile's feed.
@@ -53,13 +56,21 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a name="propertySummary"></a>
 <div class="summarySection">
 <div class="summaryTableTitle">Public Properties</div>
+<div class="showHideLinks">
+<div class="hideInheritedProperty" id="hideInheritedProperty">
+<a onclick="javascript:setInheritedVisible(false,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Public Properties</a>
+</div>
+<div class="showInheritedProperty" id="showInheritedProperty">
+<a onclick="javascript:setInheritedVisible(true,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Public Properties</a>
+</div>
+</div>
 <table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
 <tr>
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#actions">actions</a> : Array<div class="summaryTableDescription">
-   A list of available actions on the post (including commenting, liking, and an optional app-specified action), encoded as objects with keys for the 'name' and 'link'.</div>
+   A list of available actions on the post (including commenting, liking, and an optional app-specified action).</div>
 </td><td class="summaryTableOwnerCol">FacebookPost</td>
 </tr>
 <tr class="">
@@ -85,7 +96,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#from">from</a> : <a href="../user/FacebookUser.html">FacebookUser</a>
 <div class="summaryTableDescription">
-   An object containing the ID and name of the user who posted the message.</div>
+   Information about the user who posted the message.</div>
 </td><td class="summaryTableOwnerCol">FacebookPost</td>
 </tr>
 <tr class="">
@@ -93,13 +104,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
    A link to an icon representing the type of this post.</div>
 </td><td class="summaryTableOwnerCol">FacebookPost</td>
 </tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#id">id</a> : String<div class="summaryTableDescription">
-   The post ID.</div>
-</td><td class="summaryTableOwnerCol">FacebookPost</td>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../core/AbstractFacebookGraphObject.html#id">id</a> : String<div class="summaryTableDescription">
+   The unique ID for the graph object.</div>
+</td><td class="summaryTableOwnerCol"><a href="../core/AbstractFacebookGraphObject.html">AbstractFacebookGraphObject</a></td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#likes">likes</a> : int<div class="summaryTableDescription">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#likes">likes</a> : Number<div class="summaryTableDescription">
    The number of likes on this post.</div>
 </td><td class="summaryTableOwnerCol">FacebookPost</td>
 </tr>
@@ -126,17 +137,27 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#privacy">privacy</a> : <a href="../post/FacebookPostPrivacy.html">FacebookPostPrivacy</a>
 <div class="summaryTableDescription">
-   An object that defines the privacy setting for a post, video, or album.</div>
+   The privacy settings of the Post.</div>
 </td><td class="summaryTableOwnerCol">FacebookPost</td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../core/AbstractFacebookGraphObject.html#rawResult">rawResult</a> : Object<div class="summaryTableDescription">
+   The raw decoded JSON result data for the graph object.</div>
+</td><td class="summaryTableOwnerCol"><a href="../core/AbstractFacebookGraphObject.html">AbstractFacebookGraphObject</a></td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#source">source</a> : String<div class="summaryTableDescription">
-   If available, the source link attached to this post (for example, a flash or video file).</div>
+   A URL to a Flash movie or video file to be embedded within the post.</div>
+</td><td class="summaryTableOwnerCol">FacebookPost</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#targeting">targeting</a> : Object<div class="summaryTableDescription">
+   Location and language restrictions for Page posts only.</div>
 </td><td class="summaryTableOwnerCol">FacebookPost</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#to">to</a> : Object<div class="summaryTableDescription">
-   A list of the profiles mentioned or targeted in this post.</div>
+   Profiles mentioned or targeted in this post.</div>
 </td><td class="summaryTableOwnerCol">FacebookPost</td>
 </tr>
 <tr class="">
@@ -164,9 +185,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#fromJSON()">fromJSON</a>(result:Object):void</div>
-<div class="summaryTableDescription">
-   Populates the post from a decoded JSON object.</div>
+<a class="signatureLink" href="#fromJSON()">fromJSON</a>(result:Object):<a href="../post/FacebookPost.html">FacebookPost</a>
+</div>
+<div class="summaryTableDescription">[static]
+   Populates and returns a new FacebookPost from a decoded JSON object.</div>
 </td><td class="summaryTableOwnerCol">FacebookPost</td>
 </tr>
 <tr class="">
@@ -174,7 +196,27 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#toString()">toString</a>():String</div>
 <div class="summaryTableDescription">
-   Provides the string value of the post.</div>
+   
+   
+   Provides the string value of the graph object.</div>
+</td><td class="summaryTableOwnerCol">FacebookPost</td>
+</tr>
+</table>
+</div>
+<a name="protectedMethodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Methods</div>
+<table id="summaryTableProtectedMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#setPropertyValue()">setPropertyValue</a>(property:String, value:*):void</div>
+<div class="summaryTableDescription">
+   
+   </div>
 </td><td class="summaryTableOwnerCol">FacebookPost</td>
 </tr>
 </table>
@@ -194,7 +236,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var actions:Array</code><p>
-   A list of available actions on the post (including commenting, liking, and an optional app-specified action), encoded as objects with keys for the 'name' and 'link'.
+   A list of available actions on the post (including commenting, liking, and an optional app-specified action).
    </p></div>
 <a name="attribution"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -244,7 +286,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var from:<a href="../user/FacebookUser.html">FacebookUser</a></code><p>
-   An object containing the ID and name of the user who posted the message.
+   Information about the user who posted the message.
    </p></div>
 <a name="icon"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -256,16 +298,6 @@ showHideInherited();
 <code>public var icon:String</code><p>
    A link to an icon representing the type of this post.
    </p></div>
-<a name="id"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">id</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public var id:String</code><p>
-   The post ID.
-   </p></div>
 <a name="likes"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -273,7 +305,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public var likes:int</code><p>
+<code>public var likes:Number</code><p>
    The number of likes on this post.
    </p></div>
 <a name="link"></a>
@@ -324,8 +356,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var privacy:<a href="../post/FacebookPostPrivacy.html">FacebookPostPrivacy</a></code><p>
-   An object that defines the privacy setting for a post, video, or album.
-   Only the user can specify the privacy settings for the post.
+   The privacy settings of the Post.
    </p></div>
 <a name="source"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -335,7 +366,17 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var source:String</code><p>
-   If available, the source link attached to this post (for example, a flash or video file).
+   A URL to a Flash movie or video file to be embedded within the post.
+   </p></div>
+<a name="targeting"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">targeting</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var targeting:Object</code><p>
+   Location and language restrictions for Page posts only.
    </p></div>
 <a name="to"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -345,7 +386,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var to:Object</code><p>
-   A list of the profiles mentioned or targeted in this post.
+   Profiles mentioned or targeted in this post.
    </p></div>
 <a name="updated_time"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -378,12 +419,48 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function fromJSON(result:Object):void</code><p>
-   Populates the post from a decoded JSON object.
+<code>public static function fromJSON(result:Object):<a href="../post/FacebookPost.html">FacebookPost</a></code><p>
+   Populates and returns a new FacebookPost from a decoded JSON object.
+   
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">result</span>:Object</code></td>
+<td width="20px"></td><td><code><span class="label">result</span>:Object</code> &mdash; A decoded JSON object.
+   
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../post/FacebookPost.html">FacebookPost</a></code> &mdash; 
+                        A new FacebookPost.
+   
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="setPropertyValue()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">setPropertyValue</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected override function setPropertyValue(property:String, value:*):void</code><p>
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">property</span>:String</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">value</span>:*</code></td>
 </tr>
 </table>
 </div>
@@ -394,13 +471,17 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function toString():String</code><p>
-   Provides the string value of the post.
+<code>public override function toString():String</code><p>
+   
+   
+   Provides the string value of the graph object.
+   
    </p><p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>String</code></td>
+<td width="20"></td><td><code>String</code> &mdash; The string value of the graph object.
+   </td>
 </tr>
 </table>
 </div>

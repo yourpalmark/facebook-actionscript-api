@@ -5,6 +5,7 @@
 	<component id="com.facebook.graph.core.AbstractFacebook" class="com.facebook.graph.core.AbstractFacebook" />
 	<component id="com.facebook.graph.core.FacebookJSBridge" class="com.facebook.graph.core.FacebookJSBridge" />
 	<component id="com.facebook.graph.core.FacebookURLDefaults" class="com.facebook.graph.core.FacebookURLDefaults" />
+	<component id="com.facebook.graph.core.facebook_internal" class="com.facebook.graph.core.facebook_internal" />
 	<component id="com.facebook.graph.data.ExtendedPermission" class="com.facebook.graph.data.ExtendedPermission" />
 	<component id="com.facebook.graph.data.FQLMultiQuery" class="com.facebook.graph.data.FQLMultiQuery" />
 	<component id="com.facebook.graph.data.FacebookJSEvent" class="com.facebook.graph.data.FacebookJSEvent" />
@@ -17,16 +18,31 @@
 	<component id="com.facebook.graph.data.api.application.FacebookApplicationField" class="com.facebook.graph.data.api.application.FacebookApplicationField" />
 	<component id="com.facebook.graph.data.api.checkin.FacebookCheckin" class="com.facebook.graph.data.api.checkin.FacebookCheckin" />
 	<component id="com.facebook.graph.data.api.checkin.FacebookCheckinField" class="com.facebook.graph.data.api.checkin.FacebookCheckinField" />
-	<component id="com.facebook.graph.data.api.checkin.FacebookCheckinTag" class="com.facebook.graph.data.api.checkin.FacebookCheckinTag" />
+	<component id="com.facebook.graph.data.api.comment.FacebookComment" class="com.facebook.graph.data.api.comment.FacebookComment" />
+	<component id="com.facebook.graph.data.api.comment.FacebookCommentConnection" class="com.facebook.graph.data.api.comment.FacebookCommentConnection" />
+	<component id="com.facebook.graph.data.api.comment.FacebookCommentField" class="com.facebook.graph.data.api.comment.FacebookCommentField" />
+	<component id="com.facebook.graph.data.api.core.AbstractFacebookGraphObject" class="com.facebook.graph.data.api.core.AbstractFacebookGraphObject" />
+	<component id="com.facebook.graph.data.api.core.FacebookLocation" class="com.facebook.graph.data.api.core.FacebookLocation" />
+	<component id="com.facebook.graph.data.api.core.FacebookTag" class="com.facebook.graph.data.api.core.FacebookTag" />
+	<component id="com.facebook.graph.data.api.core.IFacebookGraphObject" class="com.facebook.graph.data.api.core.IFacebookGraphObject" />
 	<component id="com.facebook.graph.data.api.event.FacebookEvent" class="com.facebook.graph.data.api.event.FacebookEvent" />
 	<component id="com.facebook.graph.data.api.event.FacebookEventConnection" class="com.facebook.graph.data.api.event.FacebookEventConnection" />
 	<component id="com.facebook.graph.data.api.event.FacebookEventField" class="com.facebook.graph.data.api.event.FacebookEventField" />
+	<component id="com.facebook.graph.data.api.friendlist.FacebookFriendList" class="com.facebook.graph.data.api.friendlist.FacebookFriendList" />
+	<component id="com.facebook.graph.data.api.friendlist.FacebookFriendListConnection" class="com.facebook.graph.data.api.friendlist.FacebookFriendListConnection" />
+	<component id="com.facebook.graph.data.api.friendlist.FacebookFriendListField" class="com.facebook.graph.data.api.friendlist.FacebookFriendListField" />
 	<component id="com.facebook.graph.data.api.group.FacebookGroup" class="com.facebook.graph.data.api.group.FacebookGroup" />
 	<component id="com.facebook.graph.data.api.group.FacebookGroupConnection" class="com.facebook.graph.data.api.group.FacebookGroupConnection" />
 	<component id="com.facebook.graph.data.api.group.FacebookGroupField" class="com.facebook.graph.data.api.group.FacebookGroupField" />
+	<component id="com.facebook.graph.data.api.insights.FacebookInsights" class="com.facebook.graph.data.api.insights.FacebookInsights" />
+	<component id="com.facebook.graph.data.api.insights.FacebookInsightsField" class="com.facebook.graph.data.api.insights.FacebookInsightsField" />
+	<component id="com.facebook.graph.data.api.insights.FacebookInsightsValue" class="com.facebook.graph.data.api.insights.FacebookInsightsValue" />
 	<component id="com.facebook.graph.data.api.link.FacebookLink" class="com.facebook.graph.data.api.link.FacebookLink" />
 	<component id="com.facebook.graph.data.api.link.FacebookLinkConnection" class="com.facebook.graph.data.api.link.FacebookLinkConnection" />
 	<component id="com.facebook.graph.data.api.link.FacebookLinkField" class="com.facebook.graph.data.api.link.FacebookLinkField" />
+	<component id="com.facebook.graph.data.api.message.FacebookMessage" class="com.facebook.graph.data.api.message.FacebookMessage" />
+	<component id="com.facebook.graph.data.api.message.FacebookMessageConnection" class="com.facebook.graph.data.api.message.FacebookMessageConnection" />
+	<component id="com.facebook.graph.data.api.message.FacebookMessageField" class="com.facebook.graph.data.api.message.FacebookMessageField" />
 	<component id="com.facebook.graph.data.api.note.FacebookNote" class="com.facebook.graph.data.api.note.FacebookNote" />
 	<component id="com.facebook.graph.data.api.note.FacebookNoteConnection" class="com.facebook.graph.data.api.note.FacebookNoteConnection" />
 	<component id="com.facebook.graph.data.api.note.FacebookNoteField" class="com.facebook.graph.data.api.note.FacebookNoteField" />
@@ -47,6 +63,9 @@
 	<component id="com.facebook.graph.data.api.status.FacebookStatusMessageField" class="com.facebook.graph.data.api.status.FacebookStatusMessageField" />
 	<component id="com.facebook.graph.data.api.subscription.FacebookSubscription" class="com.facebook.graph.data.api.subscription.FacebookSubscription" />
 	<component id="com.facebook.graph.data.api.subscription.FacebookSubscriptionField" class="com.facebook.graph.data.api.subscription.FacebookSubscriptionField" />
+	<component id="com.facebook.graph.data.api.thread.FacebookThread" class="com.facebook.graph.data.api.thread.FacebookThread" />
+	<component id="com.facebook.graph.data.api.thread.FacebookThreadConnection" class="com.facebook.graph.data.api.thread.FacebookThreadConnection" />
+	<component id="com.facebook.graph.data.api.thread.FacebookThreadField" class="com.facebook.graph.data.api.thread.FacebookThreadField" />
 	<component id="com.facebook.graph.data.api.user.FacebookUser" class="com.facebook.graph.data.api.user.FacebookUser" />
 	<component id="com.facebook.graph.data.api.user.FacebookUserConnection" class="com.facebook.graph.data.api.user.FacebookUserConnection" />
 	<component id="com.facebook.graph.data.api.user.FacebookUserField" class="com.facebook.graph.data.api.user.FacebookUserField" />

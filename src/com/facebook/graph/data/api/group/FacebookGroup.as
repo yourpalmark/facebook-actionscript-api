@@ -1,31 +1,34 @@
 package com.facebook.graph.data.api.group
 {
-	import com.adobe.utils.DateUtil;
+	import com.facebook.graph.core.facebook_internal;
+	import com.facebook.graph.data.api.core.AbstractFacebookGraphObject;
 	import com.facebook.graph.data.api.user.FacebookUser;
+	
+	use namespace facebook_internal;
 	
 	/**
 	 * A Facebook group.
 	 * @see http://developers.facebook.com/docs/reference/api/group
 	 */
-	public class FacebookGroup
+	public class FacebookGroup extends AbstractFacebookGraphObject
 	{
 		/**
-		 * The group ID.
+		 * The URL for the group's icon.
 		 */
-		public var id:String;
+		public var icon:String;
 		
 		/**
-		 * An object containing the name and ID of the user who owns the group.
+		 * The profile that created this group.
 		 */
 		public var owner:FacebookUser;
 		
 		/**
-		 * The group title.
+		 * The name of the group.
 		 */
 		public var name:String;
 		
 		/**
-		 * The group description.
+		 * A brief description of the group.
 		 */
 		public var description:String;
 		
@@ -35,12 +38,7 @@ package com.facebook.graph.data.api.group
 		public var link:String;
 		
 		/**
-		 * The location of this group, a structured address object with the properties street, city, state, zip, country, latitude, and longitude.
-		 */
-		public var venue:Object;
-		
-		/**
-		 * The privacy setting of the group, either 'OPEN', 'CLOSED', or 'SECRET'.
+		 * The privacy setting of the group.
 		 */
 		public var privacy:String;
 		
@@ -57,39 +55,25 @@ package com.facebook.graph.data.api.group
 		}
 		
 		/**
-		 * Populates the group from a decoded JSON object.
+		 * Populates and returns a new FacebookGroup from a decoded JSON object.
+		 * 
+		 * @param result A decoded JSON object.
+		 * 
+		 * @return A new FacebookGroup.
 		 */
-		public function fromJSON( result:Object ):void
+		public static function fromJSON( result:Object ):FacebookGroup
 		{
-			if( result != null )
-			{
-				for( var property:String in result )
-				{
-					switch( property )
-					{
-						case "owner":
-							owner = new FacebookUser();
-							owner.fromJSON( result[ property ] );
-							break;
-						
-						case "updated_time":
-							updated_time = DateUtil.parseW3CDTF( result[ property ] );
-							break;
-						
-						default:
-							if( hasOwnProperty( property ) ) this[ property ] = result[ property ];
-							break;
-					}
-				}
-			}
+			var group:FacebookGroup = new FacebookGroup();
+			group.fromJSON( result );
+			return group;
 		}
 		
 		/**
-		 * Provides the string value of the group.
+		 * @inheritDoc
 		 */
-		public function toString():String
+		override public function toString():String
 		{
-			return '[ id: ' + id + ', name: ' + name + ' ]';
+			return facebook_internal::toString( [ FacebookGroupField.ID, FacebookGroupField.NAME ] );
 		}
 		
 	}

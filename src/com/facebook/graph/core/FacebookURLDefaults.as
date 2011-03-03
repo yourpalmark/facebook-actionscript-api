@@ -44,14 +44,14 @@ package com.facebook.graph.core {
      * URL for calling all Graph API methods.
      *
      */
-    public static var GRAPH_URL:String
+    public static const GRAPH_URL:String
       = 'https://graph.facebook.com';
 
     /**
      * URL for calling old-style RESTful API methods.
      *
      */
-    public static var API_URL:String
+    public static const API_URL:String
       = 'https://api.facebook.com';
 
     /**
@@ -59,7 +59,7 @@ package com.facebook.graph.core {
      * used in Facebook.as to authenicate users.
      *
      */
-    public static var AUTH_URL:String
+    public static const AUTH_URL:String
       = 'https://graph.facebook.com/oauth/authorize';
 
 
@@ -71,19 +71,19 @@ package com.facebook.graph.core {
      * @see http://developers.facebook.com/docs/authentication/desktop
      *
      */
-    public static var DESKTOP_REDIRECT_URL:String
+    public static const DESKTOP_REDIRECT_URL:String
       = 'http://www.facebook.com/connect/login_success.html';
 
-	public static var MOBILE_REDIRECT_URL:String
+	public static const MOBILE_REDIRECT_URL:String
 	  = 'http://www.facebook.com/connect/login_success.html';
 
-	public static var LOGIN_FAIL_URL:String
+	public static const LOGIN_FAIL_URL:String
 	  = 'http://www.facebook.com/connect/login_success.html?error_reason';
 
-	public static var LOGIN_URL:String
+	public static const LOGIN_URL:String
 	  = 'https://login.facebook.com/login.php';
 
-	public static var AUTHORIZE_CANCEL:String
+	public static const AUTHORIZE_CANCEL:String
 	  = 'https://graph.facebook.com/oauth/authorize_cancel';
   }
 }

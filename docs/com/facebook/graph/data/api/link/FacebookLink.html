@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../../../print.css" type="text/css" media="print">
-<meta content="FacebookLink,com.facebook.graph.data.api.link.FacebookLink,caption,created_time,description,from,icon,id,link,message,name,picture,fromJSON,toString" name="keywords">
+<meta content="FacebookLink,com.facebook.graph.data.api.link.FacebookLink,caption,created_time,description,from,icon,link,message,name,picture,fromJSON,toString" name="keywords">
 <title>com.facebook.graph.data.api.link.FacebookLink</title>
 </head>
 <body>
@@ -37,6 +37,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr>
 <td class="classHeaderTableLabel">Class</td><td class="classSignature">public class FacebookLink</td>
 </tr>
+<tr>
+<td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">FacebookLink <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../../../../images/inherit-arrow.gif"> <a href="../core/AbstractFacebookGraphObject.html">AbstractFacebookGraphObject</a></td>
+</tr>
 </table>
 <p></p>
   A link shared on a user's wall.
@@ -53,6 +56,14 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a name="propertySummary"></a>
 <div class="summarySection">
 <div class="summaryTableTitle">Public Properties</div>
+<div class="showHideLinks">
+<div class="hideInheritedProperty" id="hideInheritedProperty">
+<a onclick="javascript:setInheritedVisible(false,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Public Properties</a>
+</div>
+<div class="showInheritedProperty" id="showInheritedProperty">
+<a onclick="javascript:setInheritedVisible(true,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Public Properties</a>
+</div>
+</div>
 <table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
 <tr>
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
@@ -75,22 +86,22 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#from">from</a> : <a href="../user/FacebookUser.html">FacebookUser</a>
 <div class="summaryTableDescription">
-   An object containing the name and ID of the user who posted the link.</div>
+   The user that created the link.</div>
 </td><td class="summaryTableOwnerCol">FacebookLink</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#icon">icon</a> : String<div class="summaryTableDescription">
-   The link icon that Facebook displays.</div>
+   A URL to the link icon that Facebook displays in the news feed.</div>
 </td><td class="summaryTableOwnerCol">FacebookLink</td>
 </tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#id">id</a> : String<div class="summaryTableDescription">
-   The link ID.</div>
-</td><td class="summaryTableOwnerCol">FacebookLink</td>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../core/AbstractFacebookGraphObject.html#id">id</a> : String<div class="summaryTableDescription">
+   The unique ID for the graph object.</div>
+</td><td class="summaryTableOwnerCol"><a href="../core/AbstractFacebookGraphObject.html">AbstractFacebookGraphObject</a></td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#link">link</a> : String<div class="summaryTableDescription">
-   The actual URL that was shared.</div>
+   The URL that was shared.</div>
 </td><td class="summaryTableOwnerCol">FacebookLink</td>
 </tr>
 <tr class="">
@@ -105,8 +116,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#picture">picture</a> : String<div class="summaryTableDescription">
-   A picture to use as the thumbnail in the link post.</div>
+   A URL to the thumbnail image used in the link post.</div>
 </td><td class="summaryTableOwnerCol">FacebookLink</td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../core/AbstractFacebookGraphObject.html#rawResult">rawResult</a> : Object<div class="summaryTableDescription">
+   The raw decoded JSON result data for the graph object.</div>
+</td><td class="summaryTableOwnerCol"><a href="../core/AbstractFacebookGraphObject.html">AbstractFacebookGraphObject</a></td>
 </tr>
 </table>
 </div>
@@ -128,9 +144,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#fromJSON()">fromJSON</a>(result:Object):void</div>
-<div class="summaryTableDescription">
-   Populates the link from a decoded JSON object.</div>
+<a class="signatureLink" href="#fromJSON()">fromJSON</a>(result:Object):<a href="../link/FacebookLink.html">FacebookLink</a>
+</div>
+<div class="summaryTableDescription">[static]
+   Populates and returns a new FacebookLink from a decoded JSON object.</div>
 </td><td class="summaryTableOwnerCol">FacebookLink</td>
 </tr>
 <tr class="">
@@ -138,7 +155,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#toString()">toString</a>():String</div>
 <div class="summaryTableDescription">
-   Provides the string value of the link.</div>
+   
+   
+   Provides the string value of the graph object.</div>
 </td><td class="summaryTableOwnerCol">FacebookLink</td>
 </tr>
 </table>
@@ -188,7 +207,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var from:<a href="../user/FacebookUser.html">FacebookUser</a></code><p>
-   An object containing the name and ID of the user who posted the link.
+   The user that created the link.
    </p></div>
 <a name="icon"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -198,17 +217,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var icon:String</code><p>
-   The link icon that Facebook displays.
-   </p></div>
-<a name="id"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">id</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public var id:String</code><p>
-   The link ID.
+   A URL to the link icon that Facebook displays in the news feed.
    </p></div>
 <a name="link"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -218,7 +227,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var link:String</code><p>
-   The actual URL that was shared.
+   The URL that was shared.
    </p></div>
 <a name="message"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -248,7 +257,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var picture:String</code><p>
-   A picture to use as the thumbnail in the link post.
+   A URL to the thumbnail image used in the link post.
    </p></div>
 <a name="constructorDetail"></a>
 <div class="detailSectionHeader">Constructor detail</div>
@@ -271,12 +280,26 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function fromJSON(result:Object):void</code><p>
-   Populates the link from a decoded JSON object.
+<code>public static function fromJSON(result:Object):<a href="../link/FacebookLink.html">FacebookLink</a></code><p>
+   Populates and returns a new FacebookLink from a decoded JSON object.
+   
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">result</span>:Object</code></td>
+<td width="20px"></td><td><code><span class="label">result</span>:Object</code> &mdash; A decoded JSON object.
+   
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../link/FacebookLink.html">FacebookLink</a></code> &mdash; 
+                        A new FacebookLink.
+   
+                        
+                     </td>
 </tr>
 </table>
 </div>
@@ -287,13 +310,17 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function toString():String</code><p>
-   Provides the string value of the link.
+<code>public override function toString():String</code><p>
+   
+   
+   Provides the string value of the graph object.
+   
    </p><p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>String</code></td>
+<td width="20"></td><td><code>String</code> &mdash; The string value of the graph object.
+   </td>
 </tr>
 </table>
 </div>

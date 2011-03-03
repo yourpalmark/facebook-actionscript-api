@@ -19,6 +19,7 @@ package com.facebook.graph.data.api.application
 		public static const EVENTS:String = "events";
 		public static const SUBSCRIPTIONS:String = "subscriptions";
 		public static const INSIGHTS:String = "insights";
+		public static const ACCOUNTS:String = "accounts";
 		
 	}
 }

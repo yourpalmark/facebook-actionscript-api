@@ -17,7 +17,6 @@ package com.facebook.graph.data.api.page
 		public static const VIDEOS:String = "videos";
 		public static const NOTES:String = "notes";
 		public static const POSTS:String = "posts";
-		public static const MEMBERS:String = "members";
 		public static const EVENTS:String = "events";
 		public static const CHECKINS:String = "checkins";
 		

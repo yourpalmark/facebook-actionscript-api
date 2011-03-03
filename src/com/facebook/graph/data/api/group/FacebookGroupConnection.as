@@ -9,6 +9,7 @@ package com.facebook.graph.data.api.group
 		public static const FEED:String = "feed";
 		public static const MEMBERS:String = "members";
 		public static const PICTURE:String = "picture";
+		public static const DOCS:String = "docs";
 		
 	}
 }

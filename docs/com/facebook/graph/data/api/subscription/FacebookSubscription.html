@@ -37,9 +37,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr>
 <td class="classHeaderTableLabel">Class</td><td class="classSignature">public class FacebookSubscription</td>
 </tr>
+<tr>
+<td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">FacebookSubscription <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../../../../images/inherit-arrow.gif"> <a href="../core/AbstractFacebookGraphObject.html">AbstractFacebookGraphObject</a></td>
+</tr>
 </table>
 <p></p>
-  An individual subscription from an application to get real-time updates for an object type.
+  A subscription to an application to get real-time updates for an Graph object type.
   <p></p>
 <p>
 <span class="classHeaderTableLabel">See also</span>
@@ -53,6 +56,14 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a name="propertySummary"></a>
 <div class="summarySection">
 <div class="summaryTableTitle">Public Properties</div>
+<div class="showHideLinks">
+<div class="hideInheritedProperty" id="hideInheritedProperty">
+<a onclick="javascript:setInheritedVisible(false,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Public Properties</a>
+</div>
+<div class="showInheritedProperty" id="showInheritedProperty">
+<a onclick="javascript:setInheritedVisible(true,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Public Properties</a>
+</div>
+</div>
 <table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
 <tr>
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
@@ -72,10 +83,20 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
    The list of fields for the object type.</div>
 </td><td class="summaryTableOwnerCol">FacebookSubscription</td>
 </tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../core/AbstractFacebookGraphObject.html#id">id</a> : String<div class="summaryTableDescription">
+   The unique ID for the graph object.</div>
+</td><td class="summaryTableOwnerCol"><a href="../core/AbstractFacebookGraphObject.html">AbstractFacebookGraphObject</a></td>
+</tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#object">object</a> : String<div class="summaryTableDescription">
-   The object type.</div>
+   The object type to subscribe to.</div>
 </td><td class="summaryTableOwnerCol">FacebookSubscription</td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../core/AbstractFacebookGraphObject.html#rawResult">rawResult</a> : Object<div class="summaryTableDescription">
+   The raw decoded JSON result data for the graph object.</div>
+</td><td class="summaryTableOwnerCol"><a href="../core/AbstractFacebookGraphObject.html">AbstractFacebookGraphObject</a></td>
 </tr>
 </table>
 </div>
@@ -97,9 +118,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#fromJSON()">fromJSON</a>(result:Object):void</div>
-<div class="summaryTableDescription">
-   Populates the subscription from a decoded JSON object.</div>
+<a class="signatureLink" href="#fromJSON()">fromJSON</a>(result:Object):<a href="../subscription/FacebookSubscription.html">FacebookSubscription</a>
+</div>
+<div class="summaryTableDescription">[static]
+   Populates and returns a new FacebookSubscription from a decoded JSON object.</div>
 </td><td class="summaryTableOwnerCol">FacebookSubscription</td>
 </tr>
 <tr class="">
@@ -107,7 +129,9 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#toString()">toString</a>():String</div>
 <div class="summaryTableDescription">
-   Provides the string value of the subscription.</div>
+   
+   
+   Provides the string value of the graph object.</div>
 </td><td class="summaryTableOwnerCol">FacebookSubscription</td>
 </tr>
 </table>
@@ -157,8 +181,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var object:String</code><p>
-   The object type.
-   Currently user and permissions are supported.
+   The object type to subscribe to.
    </p></div>
 <a name="constructorDetail"></a>
 <div class="detailSectionHeader">Constructor detail</div>
@@ -181,12 +204,26 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function fromJSON(result:Object):void</code><p>
-   Populates the subscription from a decoded JSON object.
+<code>public static function fromJSON(result:Object):<a href="../subscription/FacebookSubscription.html">FacebookSubscription</a></code><p>
+   Populates and returns a new FacebookSubscription from a decoded JSON object.
+   
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">result</span>:Object</code></td>
+<td width="20px"></td><td><code><span class="label">result</span>:Object</code> &mdash; A decoded JSON object.
+   
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../subscription/FacebookSubscription.html">FacebookSubscription</a></code> &mdash; 
+                        A new FacebookSubscription.
+   
+                        
+                     </td>
 </tr>
 </table>
 </div>
@@ -197,13 +234,17 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function toString():String</code><p>
-   Provides the string value of the subscription.
+<code>public override function toString():String</code><p>
+   
+   
+   Provides the string value of the graph object.
+   
    </p><p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>String</code></td>
+<td width="20"></td><td><code>String</code> &mdash; The string value of the graph object.
+   </td>
 </tr>
 </table>
 </div>

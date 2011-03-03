@@ -8,6 +8,7 @@ package com.facebook.graph.data.api.album
 	{
 		public static const PHOTOS:String = "photos";
 		public static const COMMENTS:String = "comments";
+		public static const PICTURE:String = "picture";
 		
 	}
 }

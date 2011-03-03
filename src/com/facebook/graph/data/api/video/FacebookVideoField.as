@@ -10,7 +10,6 @@ package com.facebook.graph.data.api.video
 		public static const FROM:String = "from";
 		public static const TAGS:String = "tags";
 		public static const NAME:String = "name";
-		public static const PICTURE:String = "picture";
 		public static const EMBED_HTML:String = "embed_html";
 		public static const ICON:String = "icon";
 		public static const SOURCE:String = "source";

@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../../../print.css" type="text/css" media="print">
-<meta content="FacebookCheckin,com.facebook.graph.data.api.checkin.FacebookCheckin,application,coordinates,created_time,from,id,message,place,tags,fromJSON,toString" name="keywords">
+<meta content="FacebookCheckin,com.facebook.graph.data.api.checkin.FacebookCheckin,application,created_time,from,message,place,tags,fromJSON,setPropertyValue,toString" name="keywords">
 <title>com.facebook.graph.data.api.checkin.FacebookCheckin</title>
 </head>
 <body>
@@ -37,9 +37,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr>
 <td class="classHeaderTableLabel">Class</td><td class="classSignature">public class FacebookCheckin</td>
 </tr>
+<tr>
+<td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">FacebookCheckin <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../../../../images/inherit-arrow.gif"> <a href="../core/AbstractFacebookGraphObject.html">AbstractFacebookGraphObject</a></td>
+</tr>
 </table>
 <p></p>
-  A check-in that was made through Facebook Places.
+  A checkin.
   <p></p>
 <p>
 <span class="classHeaderTableLabel">See also</span>
@@ -53,6 +56,14 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a name="propertySummary"></a>
 <div class="summarySection">
 <div class="summaryTableTitle">Public Properties</div>
+<div class="showHideLinks">
+<div class="hideInheritedProperty" id="hideInheritedProperty">
+<a onclick="javascript:setInheritedVisible(false,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Public Properties</a>
+</div>
+<div class="showInheritedProperty" id="showInheritedProperty">
+<a onclick="javascript:setInheritedVisible(true,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Public Properties</a>
+</div>
+</div>
 <table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
 <tr>
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
@@ -60,43 +71,44 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#application">application</a> : <a href="../application/FacebookApplication.html">FacebookApplication</a>
 <div class="summaryTableDescription">
-   The ID and name of the application that made the check-in.</div>
-</td><td class="summaryTableOwnerCol">FacebookCheckin</td>
-</tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#coordinates">coordinates</a> : String<div class="summaryTableDescription">
-   The latitude and longitude of the check-in location.</div>
+   Information about the application that made the checkin.</div>
 </td><td class="summaryTableOwnerCol">FacebookCheckin</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#created_time">created_time</a> : Date<div class="summaryTableDescription">
-   The time the check-in was created.</div>
+   The time the checkin was created.</div>
 </td><td class="summaryTableOwnerCol">FacebookCheckin</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#from">from</a> : <a href="../user/FacebookUser.html">FacebookUser</a>
 <div class="summaryTableDescription">
-   The ID and name of the user who made the check-in.</div>
+   The ID and name of the user who made the checkin.</div>
 </td><td class="summaryTableOwnerCol">FacebookCheckin</td>
 </tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#id">id</a> : String<div class="summaryTableDescription">
-   The check-in ID.</div>
-</td><td class="summaryTableOwnerCol">FacebookCheckin</td>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../core/AbstractFacebookGraphObject.html#id">id</a> : String<div class="summaryTableDescription">
+   The unique ID for the graph object.</div>
+</td><td class="summaryTableOwnerCol"><a href="../core/AbstractFacebookGraphObject.html">AbstractFacebookGraphObject</a></td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#message">message</a> : String<div class="summaryTableDescription">
-   The message the user added to the check-in.</div>
+   The message the user added to the checkin.</div>
 </td><td class="summaryTableOwnerCol">FacebookCheckin</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#place">place</a> : Object<div class="summaryTableDescription">
-   The ID, name, and location of the Facebook Page that represents the location of the check-in.</div>
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#place">place</a> : <a href="../page/FacebookPage.html">FacebookPage</a>
+<div class="summaryTableDescription">
+   Information about the Facebook Page that represents the location of the checkin.</div>
 </td><td class="summaryTableOwnerCol">FacebookCheckin</td>
+</tr>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../core/AbstractFacebookGraphObject.html#rawResult">rawResult</a> : Object<div class="summaryTableDescription">
+   The raw decoded JSON result data for the graph object.</div>
+</td><td class="summaryTableOwnerCol"><a href="../core/AbstractFacebookGraphObject.html">AbstractFacebookGraphObject</a></td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#tags">tags</a> : Array<div class="summaryTableDescription">
-   The users the author tagged in the check-in.</div>
+   The users the author tagged in the checkin.</div>
 </td><td class="summaryTableOwnerCol">FacebookCheckin</td>
 </tr>
 </table>
@@ -119,9 +131,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#fromJSON()">fromJSON</a>(result:Object):void</div>
-<div class="summaryTableDescription">
-   Populates the checkin from a decoded JSON object.</div>
+<a class="signatureLink" href="#fromJSON()">fromJSON</a>(result:Object):<a href="../checkin/FacebookCheckin.html">FacebookCheckin</a>
+</div>
+<div class="summaryTableDescription">[static]
+   Populates and returns a new FacebookCheckin from a decoded JSON object.</div>
 </td><td class="summaryTableOwnerCol">FacebookCheckin</td>
 </tr>
 <tr class="">
@@ -129,7 +142,27 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#toString()">toString</a>():String</div>
 <div class="summaryTableDescription">
-   Provides the string value of the checkin.</div>
+   
+   
+   Provides the string value of the graph object.</div>
+</td><td class="summaryTableOwnerCol">FacebookCheckin</td>
+</tr>
+</table>
+</div>
+<a name="protectedMethodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Methods</div>
+<table id="summaryTableProtectedMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#setPropertyValue()">setPropertyValue</a>(property:String, value:*):void</div>
+<div class="summaryTableDescription">
+   
+   </div>
 </td><td class="summaryTableOwnerCol">FacebookCheckin</td>
 </tr>
 </table>
@@ -149,17 +182,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var application:<a href="../application/FacebookApplication.html">FacebookApplication</a></code><p>
-   The ID and name of the application that made the check-in.
-   </p></div>
-<a name="coordinates"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">coordinates</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public var coordinates:String</code><p>
-   The latitude and longitude of the check-in location.
+   Information about the application that made the checkin.
    </p></div>
 <a name="created_time"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -169,7 +192,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var created_time:Date</code><p>
-   The time the check-in was created.
+   The time the checkin was created.
    </p></div>
 <a name="from"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -179,17 +202,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var from:<a href="../user/FacebookUser.html">FacebookUser</a></code><p>
-   The ID and name of the user who made the check-in.
-   </p></div>
-<a name="id"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">id</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public var id:String</code><p>
-   The check-in ID.
+   The ID and name of the user who made the checkin.
    </p></div>
 <a name="message"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -199,7 +212,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var message:String</code><p>
-   The message the user added to the check-in.
+   The message the user added to the checkin.
    </p></div>
 <a name="place"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -208,8 +221,8 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public var place:Object</code><p>
-   The ID, name, and location of the Facebook Page that represents the location of the check-in.
+<code>public var place:<a href="../page/FacebookPage.html">FacebookPage</a></code><p>
+   Information about the Facebook Page that represents the location of the checkin.
    </p></div>
 <a name="tags"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -219,7 +232,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var tags:Array</code><p>
-   The users the author tagged in the check-in.
+   The users the author tagged in the checkin.
    </p></div>
 <a name="constructorDetail"></a>
 <div class="detailSectionHeader">Constructor detail</div>
@@ -242,12 +255,48 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function fromJSON(result:Object):void</code><p>
-   Populates the checkin from a decoded JSON object.
+<code>public static function fromJSON(result:Object):<a href="../checkin/FacebookCheckin.html">FacebookCheckin</a></code><p>
+   Populates and returns a new FacebookCheckin from a decoded JSON object.
+   
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">result</span>:Object</code></td>
+<td width="20px"></td><td><code><span class="label">result</span>:Object</code> &mdash; A decoded JSON object.
+   
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../checkin/FacebookCheckin.html">FacebookCheckin</a></code> &mdash; 
+                        A new FacebookCheckin.
+   
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="setPropertyValue()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">setPropertyValue</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected override function setPropertyValue(property:String, value:*):void</code><p>
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">property</span>:String</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">value</span>:*</code></td>
 </tr>
 </table>
 </div>
@@ -258,13 +307,17 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function toString():String</code><p>
-   Provides the string value of the checkin.
+<code>public override function toString():String</code><p>
+   
+   
+   Provides the string value of the graph object.
+   
    </p><p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>String</code></td>
+<td width="20"></td><td><code>String</code> &mdash; The string value of the graph object.
+   </td>
 </tr>
 </table>
 </div>

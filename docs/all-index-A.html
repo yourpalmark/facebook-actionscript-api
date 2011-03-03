@@ -39,7 +39,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
 </tr>
 <tr>
 <td width="20"></td><td>
-   The user's blurb that appears under their profile picture.</td>
+   The blurb that appears under the user's profile picture.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/facebook/graph/data/api/user/class-list.html');" href="com/facebook/graph/data/api/user/FacebookUserField.html#ABOUT">ABOUT</a> &mdash; Constant static property in class com.facebook.graph.data.api.user.<a onclick="javascript:loadClassListFrame('com/facebook/graph/data/api/user/class-list.html');" href="com/facebook/graph/data/api/user/FacebookUserField.html">FacebookUserField</a></td>
@@ -74,11 +74,31 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
 <td width="20"></td><td></td>
 </tr>
 <tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/facebook/graph/data/api/core/class-list.html');" href="com/facebook/graph/data/api/core/AbstractFacebookGraphObject.html">AbstractFacebookGraphObject</a> &mdash; Class in package <a onclick="javascript:loadClassListFrame('com/facebook/graph/data/api/core/class-list.html');" href="com/facebook/graph/data/api/core/package-detail.html">com.facebook.graph.data.api.core</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+  Base class for all graph objects.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/facebook/graph/data/api/core/class-list.html');" href="com/facebook/graph/data/api/core/AbstractFacebookGraphObject.html#AbstractFacebookGraphObject()">AbstractFacebookGraphObject</a>() &mdash; Constructor in class com.facebook.graph.data.api.core.<a onclick="javascript:loadClassListFrame('com/facebook/graph/data/api/core/class-list.html');" href="com/facebook/graph/data/api/core/AbstractFacebookGraphObject.html">AbstractFacebookGraphObject</a></td>
+</tr>
+<tr>
+<td width="20"></td><td>
+   Creates a new AbstractFacebookGraphObject.</td>
+</tr>
+<tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/facebook/graph/data/class-list.html');" href="com/facebook/graph/data/FacebookSession.html#accessToken">accessToken</a> &mdash; Property in class com.facebook.graph.data.<a onclick="javascript:loadClassListFrame('com/facebook/graph/data/class-list.html');" href="com/facebook/graph/data/FacebookSession.html">FacebookSession</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
         Oauth access token for Facebook graph services.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/facebook/graph/data/api/application/class-list.html');" href="com/facebook/graph/data/api/application/FacebookApplicationConnection.html#ACCOUNTS">ACCOUNTS</a> &mdash; Constant static property in class com.facebook.graph.data.api.application.<a onclick="javascript:loadClassListFrame('com/facebook/graph/data/api/application/class-list.html');" href="com/facebook/graph/data/api/application/FacebookApplicationConnection.html">FacebookApplicationConnection</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/facebook/graph/data/api/user/class-list.html');" href="com/facebook/graph/data/api/user/FacebookUserConnection.html#ACCOUNTS">ACCOUNTS</a> &mdash; Constant static property in class com.facebook.graph.data.api.user.<a onclick="javascript:loadClassListFrame('com/facebook/graph/data/api/user/class-list.html');" href="com/facebook/graph/data/api/user/FacebookUserConnection.html">FacebookUserConnection</a></td>
@@ -98,7 +118,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
 </tr>
 <tr>
 <td width="20"></td><td>
-   A list of available actions on the post (including commenting, liking, and an optional app-specified action), encoded as objects with keys for the 'name' and 'link'.</td>
+   A list of available actions on the post (including commenting, liking, and an optional app-specified action).</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/facebook/graph/data/api/post/class-list.html');" href="com/facebook/graph/data/api/post/FacebookPostField.html#ACTIONS">ACTIONS</a> &mdash; Constant static property in class com.facebook.graph.data.api.post.<a onclick="javascript:loadClassListFrame('com/facebook/graph/data/api/post/class-list.html');" href="com/facebook/graph/data/api/post/FacebookPostField.html">FacebookPostField</a></td>
@@ -226,7 +246,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
 </tr>
 <tr>
 <td width="20"></td><td>
-   When friends is set to SOME_FRIENDS, specify a comma-separated list of user IDs and friend list IDs that "can" see the post.</td>
+   The allow field must be specified when the friends value is set to SOME_FRIENDS and must specify a comma-separated list of user IDs and friend list IDs that 'can' see the post.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/facebook/graph/data/ui/stream/class-list.html');" href="com/facebook/graph/data/ui/stream/StreamPrivacy.html#allow">allow</a> &mdash; Property in class com.facebook.graph.data.ui.stream.<a onclick="javascript:loadClassListFrame('com/facebook/graph/data/ui/stream/class-list.html');" href="com/facebook/graph/data/ui/stream/StreamPrivacy.html">StreamPrivacy</a></td>
@@ -256,7 +276,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
      Makes a new request on the Facebook Graph API.</td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/facebook/graph/core/class-list.html');" href="com/facebook/graph/core/FacebookURLDefaults.html#API_URL">API_URL</a> &mdash; Static property in class com.facebook.graph.core.<a onclick="javascript:loadClassListFrame('com/facebook/graph/core/class-list.html');" href="com/facebook/graph/core/FacebookURLDefaults.html">FacebookURLDefaults</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/facebook/graph/core/class-list.html');" href="com/facebook/graph/core/FacebookURLDefaults.html#API_URL">API_URL</a> &mdash; Constant static property in class com.facebook.graph.core.<a onclick="javascript:loadClassListFrame('com/facebook/graph/core/class-list.html');" href="com/facebook/graph/core/FacebookURLDefaults.html">FacebookURLDefaults</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>
@@ -281,7 +301,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
 </tr>
 <tr>
 <td width="20"></td><td>
-   The ID and name of the application that made the check-in.</td>
+   Information about the application that made the checkin.</td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/facebook/graph/data/api/checkin/class-list.html');" href="com/facebook/graph/data/api/checkin/FacebookCheckinField.html#APPLICATION">APPLICATION</a> &mdash; Constant static property in class com.facebook.graph.data.api.checkin.<a onclick="javascript:loadClassListFrame('com/facebook/graph/data/api/checkin/class-list.html');" href="com/facebook/graph/data/api/checkin/FacebookCheckinField.html">FacebookCheckinField</a></td>
@@ -315,6 +335,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
 <td width="20"></td><td></td>
 </tr>
 <tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/facebook/graph/data/api/user/class-list.html');" href="com/facebook/graph/data/api/user/FacebookUserConnection.html#APPREQUESTS">APPREQUESTS</a> &mdash; Constant static property in class com.facebook.graph.data.api.user.<a onclick="javascript:loadClassListFrame('com/facebook/graph/data/api/user/class-list.html');" href="com/facebook/graph/data/api/user/FacebookUserConnection.html">FacebookUserConnection</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
+</tr>
+<tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/facebook/graph/data/ui/class-list.html');" href="com/facebook/graph/data/ui/UIMethod.html#APPREQUESTS">APPREQUESTS</a> &mdash; Constant static property in class com.facebook.graph.data.ui.<a onclick="javascript:loadClassListFrame('com/facebook/graph/data/ui/class-list.html');" href="com/facebook/graph/data/ui/UIMethod.html">UIMethod</a></td>
 </tr>
 <tr>
@@ -333,6 +359,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
 <tr>
 <td width="20"></td><td>
    A JSON-encoded object containing the text of the post, relevant links, a media type (image, mp3, flash), as well as any other key/value pairs you may want to add.</td>
+</tr>
+<tr>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/facebook/graph/data/api/message/class-list.html');" href="com/facebook/graph/data/api/message/FacebookMessageConnection.html#ATTACHMENTS">ATTACHMENTS</a> &mdash; Constant static property in class com.facebook.graph.data.api.message.<a onclick="javascript:loadClassListFrame('com/facebook/graph/data/api/message/class-list.html');" href="com/facebook/graph/data/api/message/FacebookMessageConnection.html">FacebookMessageConnection</a></td>
+</tr>
+<tr>
+<td width="20"></td><td></td>
 </tr>
 <tr>
 <td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/facebook/graph/data/api/event/class-list.html');" href="com/facebook/graph/data/api/event/FacebookEventConnection.html#ATTENDING">ATTENDING</a> &mdash; Constant static property in class com.facebook.graph.data.api.event.<a onclick="javascript:loadClassListFrame('com/facebook/graph/data/api/event/class-list.html');" href="com/facebook/graph/data/api/event/FacebookEventConnection.html">FacebookEventConnection</a></td>
@@ -366,7 +398,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
 <td width="20"></td><td></td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/facebook/graph/core/class-list.html');" href="com/facebook/graph/core/FacebookURLDefaults.html#AUTHORIZE_CANCEL">AUTHORIZE_CANCEL</a> &mdash; Static property in class com.facebook.graph.core.<a onclick="javascript:loadClassListFrame('com/facebook/graph/core/class-list.html');" href="com/facebook/graph/core/FacebookURLDefaults.html">FacebookURLDefaults</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/facebook/graph/core/class-list.html');" href="com/facebook/graph/core/FacebookURLDefaults.html#AUTHORIZE_CANCEL">AUTHORIZE_CANCEL</a> &mdash; Constant static property in class com.facebook.graph.core.<a onclick="javascript:loadClassListFrame('com/facebook/graph/core/class-list.html');" href="com/facebook/graph/core/FacebookURLDefaults.html">FacebookURLDefaults</a></td>
 </tr>
 <tr>
 <td width="20"></td><td></td>
@@ -384,7 +416,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("AÂ
 <td width="20"></td><td></td>
 </tr>
 <tr>
-<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/facebook/graph/core/class-list.html');" href="com/facebook/graph/core/FacebookURLDefaults.html#AUTH_URL">AUTH_URL</a> &mdash; Static property in class com.facebook.graph.core.<a onclick="javascript:loadClassListFrame('com/facebook/graph/core/class-list.html');" href="com/facebook/graph/core/FacebookURLDefaults.html">FacebookURLDefaults</a></td>
+<td colspan="2" class="idxrow"><a onclick="javascript:loadClassListFrame('com/facebook/graph/core/class-list.html');" href="com/facebook/graph/core/FacebookURLDefaults.html#AUTH_URL">AUTH_URL</a> &mdash; Constant static property in class com.facebook.graph.core.<a onclick="javascript:loadClassListFrame('com/facebook/graph/core/class-list.html');" href="com/facebook/graph/core/FacebookURLDefaults.html">FacebookURLDefaults</a></td>
 </tr>
 <tr>
 <td width="20"></td><td>

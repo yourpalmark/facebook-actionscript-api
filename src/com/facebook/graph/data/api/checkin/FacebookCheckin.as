@@ -1,52 +1,47 @@
 package com.facebook.graph.data.api.checkin
 {
-	import com.adobe.utils.DateUtil;
+	import com.facebook.graph.core.facebook_internal;
 	import com.facebook.graph.data.api.application.FacebookApplication;
+	import com.facebook.graph.data.api.core.AbstractFacebookGraphObject;
+	import com.facebook.graph.data.api.core.FacebookTag;
+	import com.facebook.graph.data.api.page.FacebookPage;
 	import com.facebook.graph.data.api.user.FacebookUser;
 	
+	use namespace facebook_internal;
+	
 	/**
-	 * A check-in that was made through Facebook Places.
+	 * A checkin.
 	 * @see http://developers.facebook.com/docs/reference/api/checkin
 	 */
-	public class FacebookCheckin
+	public class FacebookCheckin extends AbstractFacebookGraphObject
 	{
 		/**
-		 * The check-in ID.
-		 */
-		public var id:String;
-		
-		/**
-		 * The ID and name of the user who made the check-in.
+		 * The ID and name of the user who made the checkin.
 		 */
 		public var from:FacebookUser;
 		
 		/**
-		 * The users the author tagged in the check-in.
+		 * The users the author tagged in the checkin.
 		 */
-		public var tags:Array; //Array of FacebookCheckinTag
+		public var tags:Array;
 		
 		/**
-		 * The ID, name, and location of the Facebook Page that represents the location of the check-in.
+		 * Information about the Facebook Page that represents the location of the checkin.
 		 */
-		public var place:Object;
+		public var place:FacebookPage;
 		
 		/**
-		 * The message the user added to the check-in.
+		 * The message the user added to the checkin.
 		 */
 		public var message:String;
 		
 		/**
-		 * The latitude and longitude of the check-in location.
-		 */
-		public var coordinates:String;
-		
-		/**
-		 * The ID and name of the application that made the check-in.
+		 * Information about the application that made the checkin.
 		 */
 		public var application:FacebookApplication;
 		
 		/**
-		 * The time the check-in was created.
+		 * The time the checkin was created.
 		 */
 		public var created_time:Date;
 		
@@ -58,58 +53,55 @@ package com.facebook.graph.data.api.checkin
 		}
 		
 		/**
-		 * Populates the checkin from a decoded JSON object.
+		 * Populates and returns a new FacebookCheckin from a decoded JSON object.
+		 * 
+		 * @param result A decoded JSON object.
+		 * 
+		 * @return A new FacebookCheckin.
 		 */
-		public function fromJSON( result:Object ):void
+		public static function fromJSON( result:Object ):FacebookCheckin
 		{
-			if( result != null )
+			var checkin:FacebookCheckin = new FacebookCheckin();
+			checkin.fromJSON( result );
+			return checkin;
+		}
+		
+		/**
+		 * @inheritDoc
+		 */
+		override protected function setPropertyValue( property:String, value:* ):void
+		{
+			switch( property )
 			{
-				for( var property:String in result )
-				{
-					switch( property )
+				case FacebookCheckinField.TAGS:
+					tags = [];
+					var tagsData:Array = value is Array ? value : Object( value ).hasOwnProperty( "data" ) && value.data is Array ? value.data : [];
+					for each( var tagData:Object in tagsData )
 					{
-						case "from":
-							from = new FacebookUser();
-							from.fromJSON( result[ property ] );
-							break;
-						
-						case "tags":
-							tags = [];
-							if( result[ property ].hasOwnProperty( "data" ) )
-							{
-								var tagsData:Array = result[ property ].data;
-								for each( var tagData:Object in tagsData )
-								{
-									var tag:FacebookCheckinTag = new FacebookCheckinTag();
-									tag.fromJSON( tagData );
-									tags.push( tag );
-								}
-							}
-							break;
-						
-						case "application":
-							application = new FacebookApplication();
-							application.fromJSON( result[ property ] );
-							break;
-						
-						case "created_time":
-							created_time = DateUtil.parseW3CDTF( result[ property ] );
-							break;
-						
-						default:
-							if( hasOwnProperty( property ) ) this[ property ] = result[ property ];
-							break;
+						tags.push( FacebookTag.fromJSON( tagData ) );
 					}
-				}
+					break;
+				
+				case FacebookCheckinField.APPLICATION:
+					application = FacebookApplication.fromJSON( value );
+					break;
+				
+				case FacebookCheckinField.PLACE:
+					place = FacebookPage.fromJSON( value );
+					break;
+				
+				default:
+					super.setPropertyValue( property, value );
+					break;
 			}
 		}
 		
 		/**
-		 * Provides the string value of the checkin.
+		 * @inheritDoc
 		 */
-		public function toString():String
+		override public function toString():String
 		{
-			return '[ id: ' + id + ' ]';
+			return facebook_internal::toString( [ FacebookCheckinField.ID ] );
 		}
 		
 	}

@@ -1,26 +1,24 @@
 package com.facebook.graph.data.api.link
 {
-	import com.adobe.utils.DateUtil;
+	import com.facebook.graph.core.facebook_internal;
+	import com.facebook.graph.data.api.core.AbstractFacebookGraphObject;
 	import com.facebook.graph.data.api.user.FacebookUser;
+	
+	use namespace facebook_internal;
 	
 	/**
 	 * A link shared on a user's wall.
 	 * @see http://developers.facebook.com/docs/reference/api/link
 	 */
-	public class FacebookLink
+	public class FacebookLink extends AbstractFacebookGraphObject
 	{
 		/**
-		 * The link ID.
-		 */
-		public var id:String;
-		
-		/**
-		 * An object containing the name and ID of the user who posted the link.
+		 * The user that created the link.
 		 */
 		public var from:FacebookUser;
 		
 		/**
-		 * The actual URL that was shared.
+		 * The URL that was shared.
 		 */
 		public var link:String;
 		
@@ -40,12 +38,12 @@ package com.facebook.graph.data.api.link
 		public var description:String;
 		
 		/**
-		 * The link icon that Facebook displays.
+		 * A URL to the link icon that Facebook displays in the news feed.
 		 */
 		public var icon:String;
 		
 		/**
-		 * A picture to use as the thumbnail in the link post.
+		 * A URL to the thumbnail image used in the link post.
 		 */
 		public var picture:String;
 		
@@ -67,39 +65,25 @@ package com.facebook.graph.data.api.link
 		}
 		
 		/**
-		 * Populates the link from a decoded JSON object.
+		 * Populates and returns a new FacebookLink from a decoded JSON object.
+		 * 
+		 * @param result A decoded JSON object.
+		 * 
+		 * @return A new FacebookLink.
 		 */
-		public function fromJSON( result:Object ):void
+		public static function fromJSON( result:Object ):FacebookLink
 		{
-			if( result != null )
-			{
-				for( var property:String in result )
-				{
-					switch( property )
-					{
-						case "from":
-							from = new FacebookUser();
-							from.fromJSON( result[ property ] );
-							break;
-						
-						case "created_time":
-							created_time = DateUtil.parseW3CDTF( result[ property ] );
-							break;
-						
-						default:
-							if( hasOwnProperty( property ) ) this[ property ] = result[ property ];
-							break;
-					}
-				}
-			}
+			var link:FacebookLink = new FacebookLink();
+			link.fromJSON( result );
+			return link;
 		}
 		
 		/**
-		 * Provides the string value of the link.
+		 * @inheritDoc
 		 */
-		public function toString():String
+		override public function toString():String
 		{
-			return '[ id: ' + id + ', name: ' + name + ' ]';
+			return facebook_internal::toString( [ FacebookLinkField.ID, FacebookLinkField.NAME ] );
 		}
 		
 	}

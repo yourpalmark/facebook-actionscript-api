@@ -1,7 +1,7 @@
 package com.facebook.graph.data.fql.user
 {
-	import com.adobe.utils.DateUtil;
 	import com.facebook.graph.data.api.user.FacebookUser;
+	import com.facebook.graph.utils.FacebookDataUtils;
 	
 	/**
 	 * VO to hold information about a queried user.
@@ -362,7 +362,7 @@ package com.facebook.graph.data.fql.user
 					{
 						case "profile_update_time":
 						case "birthday_date":
-							if( hasOwnProperty( property ) ) this[ property ] = DateUtil.parseW3CDTF( result[ property ] );
+							if( hasOwnProperty( property ) ) this[ property ] = FacebookDataUtils.stringToDate( result[ property ] );
 							break;
 						
 						default:

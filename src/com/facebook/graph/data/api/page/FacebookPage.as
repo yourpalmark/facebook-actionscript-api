@@ -1,38 +1,36 @@
 package com.facebook.graph.data.api.page
 {
-	import com.adobe.utils.DateUtil;
-	import com.facebook.graph.data.api.user.FacebookUser;
+	import com.facebook.graph.core.facebook_internal;
+	import com.facebook.graph.data.api.core.AbstractFacebookGraphObject;
+	import com.facebook.graph.data.api.core.FacebookLocation;
+	
+	use namespace facebook_internal;
 	
 	/**
-	 * A Facebook page.
+	 * A Facebook Page.
 	 * @see http://developers.facebook.com/docs/reference/api/page
 	 */
-	public class FacebookPage
+	public class FacebookPage extends AbstractFacebookGraphObject
 	{
 		/**
-		 * The page's ID.
-		 */
-		public var id:String;
-		
-		/**
-		 * The page's name.
+		 * The Page's name.
 		 */
 		public var name:String;
 		
 		/**
-		 * The pages profile picture.
-		 */
-		public var picture:String;
-		
-		/**
-		 * The page's category.
+		 * The Page's category.
 		 */
 		public var category:String;
 		
 		/**
-		 * The number of fans the page has.
+		 * The number of users who like the Page.
 		 */
-		public var fan_count:int;
+		public var likes:Number;
+		
+		/**
+		 * The Page's location.
+		 */
+		public var location:FacebookLocation;
 		
 		/**
 		 * Creates a new FacebookPage.
@@ -42,30 +40,46 @@ package com.facebook.graph.data.api.page
 		}
 		
 		/**
-		 * Populates the page from a decoded JSON object.
+		 * Populates and returns a new FacebookPage from a decoded JSON object.
+		 * 
+		 * @param result A decoded JSON object.
+		 * 
+		 * @return A new FacebookPage.
 		 */
-		public function fromJSON( result:Object ):void
+		public static function fromJSON( result:Object ):FacebookPage
 		{
-			if( result != null )
+			var page:FacebookPage = new FacebookPage();
+			page.fromJSON( result );
+			return page;
+		}
+		
+		/**
+		 * @inheritDoc
+		 */
+		override protected function setPropertyValue( property:String, value:* ):void
+		{
+			switch( property )
 			{
-				for( var property:String in result )
-				{
-					switch( property )
-					{
-						default:
-							if( hasOwnProperty( property ) ) this[ property ] = result[ property ];
-							break;
-					}
-				}
+				case "fan_count":
+					likes = value;
+					break;
+				
+				case "location":
+					location = FacebookLocation.fromJSON( value );
+					break;
+				
+				default:
+					super.setPropertyValue( property, value );
+					break;
 			}
 		}
 		
 		/**
-		 * Provides the string value of the page.
+		 * @inheritDoc
 		 */
-		public function toString():String
+		override public function toString():String
 		{
-			return '[ id: ' + id + ', name: ' + name + ' ]';
+			return facebook_internal::toString( [ FacebookPageField.ID, FacebookPageField.NAME ] );
 		}
 		
 	}

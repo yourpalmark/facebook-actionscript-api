@@ -1,21 +1,20 @@
 package com.facebook.graph.data.api.event
 {
-	import com.adobe.utils.DateUtil;
+	import com.facebook.graph.core.facebook_internal;
+	import com.facebook.graph.data.api.core.AbstractFacebookGraphObject;
+	import com.facebook.graph.data.api.core.FacebookLocation;
 	import com.facebook.graph.data.api.user.FacebookUser;
+	
+	use namespace facebook_internal;
 	
 	/**
 	 * Specifies information about an event, including the location, event name, and which invitees plan to attend.
 	 * @see http://developers.facebook.com/docs/reference/api/event
 	 */
-	public class FacebookEvent
+	public class FacebookEvent extends AbstractFacebookGraphObject
 	{
 		/**
-		 * The event ID.
-		 */
-		public var id:String;
-		
-		/**
-		 * An object containing the name and ID of the user who owns the event.
+		 * The profile that created the event.
 		 */
 		public var owner:FacebookUser;
 		
@@ -25,33 +24,32 @@ package com.facebook.graph.data.api.event
 		public var name:String;
 		
 		/**
-		 * The long-form HTML description of the event.
+		 * The long-form description of the event.
 		 */
 		public var description:String;
 		
 		/**
-		 * The start time of the event, an ISO-8601 formatted date/time.
+		 * The start time of the event, as you want it to be displayed on facebook.
 		 */
 		public var start_time:Date;
 		
 		/**
-		 * The end time of the event, an ISO-8601 formatted date/time.
+		 * The end time of the event, as you want it to be displayed on facebook.
 		 */
 		public var end_time:Date;
 		
 		/**
-		 * The location for this event, a string name.
+		 * The location for this event.
 		 */
 		public var location:String;
 		
 		/**
-		 * The location of this event, a structured address object with the properties street, city, state, zip, country, latitude, and longitude.
+		 * The location of this event.
 		 */
-		public var venue:Object;
+		public var venue:FacebookLocation;
 		
 		/**
 		 * The visibility of this event.
-		 * Can be 'OPEN', 'CLOSED', or 'SECRET'.
 		 */
 		public var privacy:String;
 		
@@ -68,47 +66,42 @@ package com.facebook.graph.data.api.event
 		}
 		
 		/**
-		 * Populates the event from a decoded JSON object.
+		 * Populates and returns a new FacebookEvent from a decoded JSON object.
+		 * 
+		 * @param result A decoded JSON object.
+		 * 
+		 * @return A new FacebookEvent.
 		 */
-		public function fromJSON( result:Object ):void
+		public static function fromJSON( result:Object ):FacebookEvent
 		{
-			if( result != null )
+			var event:FacebookEvent = new FacebookEvent();
+			event.fromJSON( result );
+			return event;
+		}
+		
+		/**
+		 * @inheritDoc
+		 */
+		override protected function setPropertyValue( property:String, value:* ):void
+		{
+			switch( property )
 			{
-				for( var property:String in result )
-				{
-					switch( property )
-					{
-						case "owner":
-							owner = new FacebookUser();
-							owner.fromJSON( result[ property ] );
-							break;
-						
-						case "start_time":
-							start_time = DateUtil.parseW3CDTF( result[ property ] );
-							break;
-						
-						case "end_time":
-							end_time = DateUtil.parseW3CDTF( result[ property ] );
-							break;
-						
-						case "updated_time":
-							updated_time = DateUtil.parseW3CDTF( result[ property ] );
-							break;
-						
-						default:
-							if( hasOwnProperty( property ) ) this[ property ] = result[ property ];
-							break;
-					}
-				}
+				case FacebookEventField.VENUE:
+					venue = FacebookLocation.fromJSON( value );
+					break;
+				
+				default:
+					super.setPropertyValue( property, value );
+					break;
 			}
 		}
 		
 		/**
-		 * Provides the string value of the event.
+		 * @inheritDoc
 		 */
-		public function toString():String
+		override public function toString():String
 		{
-			return '[ id: ' + id + ', name: ' + name + ' ]';
+			return facebook_internal::toString( [ FacebookEventField.ID, FacebookEventField.NAME ] );
 		}
 		
 	}

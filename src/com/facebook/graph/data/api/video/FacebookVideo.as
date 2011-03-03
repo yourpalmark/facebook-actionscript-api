@@ -1,47 +1,38 @@
 package com.facebook.graph.data.api.video
 {
-	import com.adobe.utils.DateUtil;
+	import com.facebook.graph.core.facebook_internal;
+	import com.facebook.graph.data.api.core.AbstractFacebookGraphObject;
+	
+	use namespace facebook_internal;
 	
 	/**
 	 * An individual video.
 	 * @see http://developers.facebook.com/docs/reference/api/video
 	 */
-	public class FacebookVideo
+	public class FacebookVideo extends AbstractFacebookGraphObject
 	{
 		/**
-		 * The video ID.
-		 */
-		public var id:String;
-		
-		/**
-		 * An object containing the name and ID of the entity who posted the video.
-		 * This may be a user or a Page.
+		 * The profile (user or page) that created the video.
 		 */
 		public var from:Object;
 		
 		/**
-		 * An array of users who are tagged in this video.
-		 * Each user object contains their ID and name.
+		 * The users who are tagged in this video.
 		 */
-		public var tags:Array; //Array of FacebookVideoTag
+		public var tags:Array;
 		
 		/**
-		 * The video title / caption.
+		 * The video title or caption.
 		 */
 		public var name:String;
 		
 		/**
-		 * The URL of a still image which represents the content of the video.
-		 */
-		public var picture:String;
-		
-		/**
-		 * An HTML string which can be embedded in an HTML page which will render a playable version of the video in Facebook's flash player.
+		 * The html element that may be embedded in a web page to play the video.
 		 */
 		public var embed_html:String;
 		
 		/**
-		 * The URL of the icon that Facebook displays when video are published to the Feed.
+		 * The icon that Facebook displays when the video is published to the Feed.
 		 */
 		public var icon:String;
 		
@@ -68,52 +59,51 @@ package com.facebook.graph.data.api.video
 		}
 		
 		/**
-		 * Populates the video from a decoded JSON object.
+		 * Populates and returns a new FacebookVideo from a decoded JSON object.
+		 * 
+		 * @param result A decoded JSON object.
+		 * 
+		 * @return A new FacebookVideo.
 		 */
-		public function fromJSON( result:Object ):void
+		public static function fromJSON( result:Object ):FacebookVideo
 		{
-			if( result != null )
+			var video:FacebookVideo = new FacebookVideo();
+			video.fromJSON( result );
+			return video;
+		}
+		
+		/**
+		 * @inheritDoc
+		 */
+		override protected function setPropertyValue( property:String, value:* ):void
+		{
+			switch( property )
 			{
-				for( var property:String in result )
-				{
-					switch( property )
+				case FacebookVideoField.FROM:
+					from = value;
+					break;
+				
+				case FacebookVideoField.TAGS:
+					tags = [];
+					var tagsData:Array = value is Array ? value : Object( value ).hasOwnProperty( "data" ) && value.data is Array ? value.data : [];
+					for each( var tagData:Object in tagsData )
 					{
-						case "tags":
-							tags = [];
-							if( result[ property ].hasOwnProperty( "data" ) )
-							{
-								var tagsData:Array = result[ property ].data;
-								for each( var tagData:Object in tagsData )
-								{
-									var tag:FacebookVideoTag = new FacebookVideoTag();
-									tag.fromJSON( tagData );
-									tags.push( tag );
-								}
-							}
-							break;
-						
-						case "created_time":
-							created_time = DateUtil.parseW3CDTF( result[ property ] );
-							break;
-						
-						case "updated_time":
-							updated_time = DateUtil.parseW3CDTF( result[ property ] );
-							break;
-						
-						default:
-							if( hasOwnProperty( property ) ) this[ property ] = result[ property ];
-							break;
+						tags.push( FacebookVideoTag.fromJSON( tagData ) );
 					}
-				}
+					break;
+				
+				default:
+					super.setPropertyValue( property, value );
+					break;
 			}
 		}
 		
 		/**
-		 * Provides the string value of the video.
+		 * @inheritDoc
 		 */
-		public function toString():String
+		override public function toString():String
 		{
-			return '[ id: ' + id + ', name: ' + name + ' ]';
+			return facebook_internal::toString( [ FacebookVideoField.ID, FacebookVideoField.NAME ] );
 		}
 		
 	}

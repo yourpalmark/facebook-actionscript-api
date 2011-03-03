@@ -1,24 +1,17 @@
 package com.facebook.graph.data.api.photo
 {
-	import com.adobe.utils.DateUtil;
+	import com.facebook.graph.core.facebook_internal;
+	import com.facebook.graph.data.api.core.FacebookTag;
+	
+	use namespace facebook_internal;
 	
 	/**
 	 * An object that defines a user and their position in a photo.
 	 * The x and y coordinates are percentages from the left and top edges of the photo, respectively.
 	 * @see http://developers.facebook.com/docs/reference/api/photo
 	 */
-	public class FacebookPhotoTag
+	public class FacebookPhotoTag extends FacebookTag
 	{
-		/**
-		 * The tagged user's ID.
-		 */
-		public var id:String;
-		
-		/**
-		 * The tagged user's full name.
-		 */
-		public var name:String;
-		
 		/**
 		 * The x position of the tag.
 		 */
@@ -42,34 +35,25 @@ package com.facebook.graph.data.api.photo
 		}
 		
 		/**
-		 * Populates the tag from a decoded JSON object.
+		 * Populates and returns a new FacebookPhotoTag from a decoded JSON object.
+		 * 
+		 * @param result A decoded JSON object.
+		 * 
+		 * @return A new FacebookPhotoTag.
 		 */
-		public function fromJSON( result:Object ):void
+		public static function fromJSON( result:Object ):FacebookPhotoTag
 		{
-			if( result != null )
-			{
-				for( var property:String in result )
-				{
-					switch( property )
-					{
-						case "created_time":
-							created_time = DateUtil.parseW3CDTF( result[ property ] );
-							break;
-						
-						default:
-							if( hasOwnProperty( property ) ) this[ property ] = result[ property ];
-							break;
-					}
-				}
-			}
+			var tag:FacebookPhotoTag = new FacebookPhotoTag();
+			tag.fromJSON( result );
+			return tag;
 		}
 		
 		/**
-		 * Provides the string value of the tag.
+		 * @inheritDoc
 		 */
-		public function toString():String
+		override public function toString():String
 		{
-			return '[ id: ' + id + ', name: ' + name + ', x: ' + x + ', y: ' + y + ' ]';
+			return facebook_internal::toString( [ "id", "name", "x", "y" ] );
 		}
 		
 	}

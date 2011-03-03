@@ -7,6 +7,7 @@ package com.facebook.graph.data.api.status
 	public class FacebookStatusMessageConnection
 	{
 		public static const COMMENTS:String = "comments";
+		public static const LIKES:String = "likes";
 		
 	}
 }

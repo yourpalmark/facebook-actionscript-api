@@ -1,21 +1,19 @@
 package com.facebook.graph.data.api.album
 {
-	import com.adobe.utils.DateUtil;
+	import com.facebook.graph.core.facebook_internal;
+	import com.facebook.graph.data.api.core.AbstractFacebookGraphObject;
 	import com.facebook.graph.data.api.user.FacebookUser;
+	
+	use namespace facebook_internal;
 	
 	/**
 	 * A photo album.
 	 * @see http://developers.facebook.com/docs/reference/api/album
 	 */
-	public class FacebookAlbum
+	public class FacebookAlbum extends AbstractFacebookGraphObject
 	{
 		/**
-		 * The photo album ID.
-		 */
-		public var id:String;
-		
-		/**
-		 * An object containing the ID and name of the profile who posted this album.
+		 * The profile that created this album.
 		 */
 		public var from:FacebookUser;
 		
@@ -60,11 +58,6 @@ package com.facebook.graph.data.api.album
 		public var updated_time:Date;
 		
 		/**
-		 * Comments on the album.
-		 */
-		public var comments:Object;
-		
-		/**
 		 * The type of photo album.
 		 */
 		public var type:String;
@@ -77,43 +70,25 @@ package com.facebook.graph.data.api.album
 		}
 		
 		/**
-		 * Populates the album from a decoded JSON object.
+		 * Populates and returns a new FacebookAlbum from a decoded JSON object.
+		 * 
+		 * @param result A decoded JSON object.
+		 * 
+		 * @return A new FacebookAlbum.
 		 */
-		public function fromJSON( result:Object ):void
+		public static function fromJSON( result:Object ):FacebookAlbum
 		{
-			if( result != null )
-			{
-				for( var property:String in result )
-				{
-					switch( property )
-					{
-						case "from":
-							from = new FacebookUser();
-							from.fromJSON( result[ property ] );
-							break;
-						
-						case "created_time":
-							created_time = DateUtil.parseW3CDTF( result[ property ] );
-							break;
-						
-						case "updated_time":
-							updated_time = DateUtil.parseW3CDTF( result[ property ] );
-							break;
-						
-						default:
-							if( hasOwnProperty( property ) ) this[ property ] = result[ property ];
-							break;
-					}
-				}
-			}
+			var album:FacebookAlbum = new FacebookAlbum();
+			album.fromJSON( result );
+			return album;
 		}
 		
 		/**
-		 * Provides the string value of the album.
+		 * @inheritDoc
 		 */
-		public function toString():String
+		override public function toString():String
 		{
-			return '[ id: ' + id + ', name: ' + name + ' ]';
+			return facebook_internal::toString( [ FacebookAlbumField.ID, FacebookAlbumField.NAME ] );
 		}
 		
 	}

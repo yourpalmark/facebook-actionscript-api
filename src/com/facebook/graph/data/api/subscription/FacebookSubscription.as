@@ -1,17 +1,18 @@
 package com.facebook.graph.data.api.subscription
 {
-	import com.adobe.utils.DateUtil;
-	import com.facebook.graph.data.api.user.FacebookUser;
+	import com.facebook.graph.core.facebook_internal;
+	import com.facebook.graph.data.api.core.AbstractFacebookGraphObject;
+	
+	use namespace facebook_internal;
 	
 	/**
-	 * An individual subscription from an application to get real-time updates for an object type.
+	 * A subscription to an application to get real-time updates for an Graph object type.
 	 * @see http://developers.facebook.com/docs/reference/api/subscription
 	 */
-	public class FacebookSubscription
+	public class FacebookSubscription extends AbstractFacebookGraphObject
 	{
 		/**
-		 * The object type.
-		 * Currently user and permissions are supported.
+		 * The object type to subscribe to.
 		 */
 		public var object:String;
 		
@@ -38,30 +39,25 @@ package com.facebook.graph.data.api.subscription
 		}
 		
 		/**
-		 * Populates the subscription from a decoded JSON object.
+		 * Populates and returns a new FacebookSubscription from a decoded JSON object.
+		 * 
+		 * @param result A decoded JSON object.
+		 * 
+		 * @return A new FacebookSubscription.
 		 */
-		public function fromJSON( result:Object ):void
+		public static function fromJSON( result:Object ):FacebookSubscription
 		{
-			if( result != null )
-			{
-				for( var property:String in result )
-				{
-					switch( property )
-					{
-						default:
-							if( hasOwnProperty( property ) ) this[ property ] = result[ property ];
-							break;
-					}
-				}
-			}
+			var subscription:FacebookSubscription = new FacebookSubscription();
+			subscription.fromJSON( result );
+			return subscription;
 		}
 		
 		/**
-		 * Provides the string value of the subscription.
+		 * @inheritDoc
 		 */
-		public function toString():String
+		override public function toString():String
 		{
-			return '[ object: ' + object + ' ]';
+			return facebook_internal::toString( [ FacebookSubscriptionField.OBJECT ] );
 		}
 		
 	}

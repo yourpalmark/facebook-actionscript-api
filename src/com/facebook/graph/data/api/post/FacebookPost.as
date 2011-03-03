@@ -1,26 +1,29 @@
 package com.facebook.graph.data.api.post
 {
-	import com.adobe.utils.DateUtil;
+	import com.facebook.graph.core.facebook_internal;
+	import com.facebook.graph.data.api.core.AbstractFacebookGraphObject;
 	import com.facebook.graph.data.api.user.FacebookUser;
+	
+	use namespace facebook_internal;
 	
 	/**
 	 * An individual entry in a profile's feed.
 	 * @see http://developers.facebook.com/docs/reference/api/post
 	 */
-	public class FacebookPost
+	public class FacebookPost extends AbstractFacebookGraphObject
 	{
 		/**
-		 * The post ID.
+		 * The number of likes on this post.
 		 */
-		public var id:String;
+		public var likes:Number;
 		
 		/**
-		 * An object containing the ID and name of the user who posted the message.
+		 * Information about the user who posted the message.
 		 */
 		public var from:FacebookUser;
 		
 		/**
-		 * A list of the profiles mentioned or targeted in this post.
+		 * Profiles mentioned or targeted in this post.
 		 */
 		public var to:Object;
 		
@@ -55,7 +58,7 @@ package com.facebook.graph.data.api.post
 		public var description:String;
 		
 		/**
-		 * If available, the source link attached to this post (for example, a flash or video file).
+		 * A URL to a Flash movie or video file to be embedded within the post.
 		 */
 		public var source:String;
 		
@@ -70,20 +73,14 @@ package com.facebook.graph.data.api.post
 		public var attribution:String;
 		
 		/**
-		 * A list of available actions on the post (including commenting, liking, and an optional app-specified action), encoded as objects with keys for the 'name' and 'link'.
+		 * A list of available actions on the post (including commenting, liking, and an optional app-specified action).
 		 */
 		public var actions:Array;
 		
 		/**
-		 * An object that defines the privacy setting for a post, video, or album.
-		 * Only the user can specify the privacy settings for the post.
+		 * The privacy settings of the Post.
 		 */
 		public var privacy:FacebookPostPrivacy;
-		
-		/**
-		 * The number of likes on this post.
-		 */
-		public var likes:int;
 		
 		/**
 		 * The time the post was initially published.
@@ -96,6 +93,11 @@ package com.facebook.graph.data.api.post
 		public var updated_time:Date;
 		
 		/**
+		 * Location and language restrictions for Page posts only.
+		 */
+		public var targeting:Object;
+		
+		/**
 		 * Creates a new FacebookPost.
 		 */
 		public function FacebookPost()
@@ -103,48 +105,42 @@ package com.facebook.graph.data.api.post
 		}
 		
 		/**
-		 * Populates the post from a decoded JSON object.
+		 * Populates and returns a new FacebookPost from a decoded JSON object.
+		 * 
+		 * @param result A decoded JSON object.
+		 * 
+		 * @return A new FacebookPost.
 		 */
-		public function fromJSON( result:Object ):void
+		public static function fromJSON( result:Object ):FacebookPost
 		{
-			if( result != null )
+			var post:FacebookPost = new FacebookPost();
+			post.fromJSON( result );
+			return post;
+		}
+		
+		/**
+		 * @inheritDoc
+		 */
+		override protected function setPropertyValue( property:String, value:* ):void
+		{
+			switch( property )
 			{
-				for( var property:String in result )
-				{
-					switch( property )
-					{
-						case "from":
-							from = new FacebookUser();
-							from.fromJSON( result[ property ] );
-							break;
-						
-						case "privacy":
-							privacy = new FacebookPostPrivacy();
-							privacy.fromJSON( result[ property ] );
-							break;
-						
-						case "created_time":
-							created_time = DateUtil.parseW3CDTF( result[ property ] );
-							break;
-						
-						case "updated_time":
-							updated_time = DateUtil.parseW3CDTF( result[ property ] );
-							break;
-						
-						default:
-							if( hasOwnProperty( property ) ) this[ property ] = result[ property ];
-							break;
-					}
-				}
+				case FacebookPostField.PRIVACY:
+					privacy = FacebookPostPrivacy.fromJSON( value );
+					break;
+				
+				default:
+					super.setPropertyValue( property, value );
+					break;
 			}
 		}
 		
 		/**
-		 * Provides the string value of the post.
+		 * @inheritDoc
 		 */
-		public function toString():String
+		override public function toString():String
 		{
-			return '[ id: ' + id + ', name: ' + name + ' ]';
+			return facebook_internal::toString( [ FacebookPostField.ID, FacebookPostField.NAME ] );
 		}
 		
 	}

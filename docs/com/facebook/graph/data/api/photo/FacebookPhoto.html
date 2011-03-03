@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../../../print.css" type="text/css" media="print">
-<meta content="FacebookPhoto,com.facebook.graph.data.api.photo.FacebookPhoto,created_time,from,height,icon,id,link,name,picture,source,tags,updated_time,width,fromJSON,toString" name="keywords">
+<meta content="FacebookPhoto,com.facebook.graph.data.api.photo.FacebookPhoto,created_time,from,height,icon,link,name,source,tags,updated_time,width,fromJSON,setPropertyValue,toString" name="keywords">
 <title>com.facebook.graph.data.api.photo.FacebookPhoto</title>
 </head>
 <body>
@@ -37,9 +37,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr>
 <td class="classHeaderTableLabel">Class</td><td class="classSignature">public class FacebookPhoto</td>
 </tr>
+<tr>
+<td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">FacebookPhoto <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../../../../images/inherit-arrow.gif"> <a href="../core/AbstractFacebookGraphObject.html">AbstractFacebookGraphObject</a></td>
+</tr>
 </table>
 <p></p>
-  An individual photo.
+  An individual photo within an album.
   <p></p>
 <p>
 <span class="classHeaderTableLabel">See also</span>
@@ -53,6 +56,14 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <a name="propertySummary"></a>
 <div class="summarySection">
 <div class="summaryTableTitle">Public Properties</div>
+<div class="showHideLinks">
+<div class="hideInheritedProperty" id="hideInheritedProperty">
+<a onclick="javascript:setInheritedVisible(false,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../../../../images/expanded.gif" class="showHideLinkImage"> Hide Inherited Public Properties</a>
+</div>
+<div class="showInheritedProperty" id="showInheritedProperty">
+<a onclick="javascript:setInheritedVisible(true,'Property');" href="#propertySummary" class="showHideLink"><img src="../../../../../../images/collapsed.gif" class="showHideLinkImage"> Show Inherited Public Properties</a>
+</div>
+</div>
 <table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
 <tr>
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
@@ -64,12 +75,12 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#from">from</a> : Object<div class="summaryTableDescription">
-   An object containing the name and ID of the user who posted the photo.</div>
+   The profile (user or page) that posted this photo.</div>
 </td><td class="summaryTableOwnerCol">FacebookPhoto</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#height">height</a> : int<div class="summaryTableDescription">
-   The height of the photo, in pixels.</div>
+   The height of the photo in pixels.</div>
 </td><td class="summaryTableOwnerCol">FacebookPhoto</td>
 </tr>
 <tr class="">
@@ -77,10 +88,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
    The icon that Facebook displays when photos are published to the Feed.</div>
 </td><td class="summaryTableOwnerCol">FacebookPhoto</td>
 </tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#id">id</a> : String<div class="summaryTableDescription">
-   The photo ID.</div>
-</td><td class="summaryTableOwnerCol">FacebookPhoto</td>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../core/AbstractFacebookGraphObject.html#id">id</a> : String<div class="summaryTableDescription">
+   The unique ID for the graph object.</div>
+</td><td class="summaryTableOwnerCol"><a href="../core/AbstractFacebookGraphObject.html">AbstractFacebookGraphObject</a></td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#link">link</a> : String<div class="summaryTableDescription">
@@ -92,10 +103,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
    The caption given to this photo.</div>
 </td><td class="summaryTableOwnerCol">FacebookPhoto</td>
 </tr>
-<tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#picture">picture</a> : String<div class="summaryTableDescription">
-   The album-sized view of the photo.</div>
-</td><td class="summaryTableOwnerCol">FacebookPhoto</td>
+<tr class="hideInheritedProperty">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol"><img class="inheritedSummaryImage" title="Inherited" alt="Inherited" src="../../../../../../images/inheritedSummary.gif"></td><td class="summaryTableSignatureCol"><a class="signatureLink" href="../core/AbstractFacebookGraphObject.html#rawResult">rawResult</a> : Object<div class="summaryTableDescription">
+   The raw decoded JSON result data for the graph object.</div>
+</td><td class="summaryTableOwnerCol"><a href="../core/AbstractFacebookGraphObject.html">AbstractFacebookGraphObject</a></td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#source">source</a> : String<div class="summaryTableDescription">
@@ -104,17 +115,17 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#tags">tags</a> : Array<div class="summaryTableDescription">
-   An array containing the users and their positions in this photo.</div>
+   The tagged users and their positions in this photo.</div>
 </td><td class="summaryTableOwnerCol">FacebookPhoto</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#updated_time">updated_time</a> : Date<div class="summaryTableDescription">
-   The last time the photo or its caption were updated.</div>
+   The last time the photo or its caption was updated.</div>
 </td><td class="summaryTableOwnerCol">FacebookPhoto</td>
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#width">width</a> : int<div class="summaryTableDescription">
-   The width of the photo, in pixels.</div>
+   The width of the photo in pixels.</div>
 </td><td class="summaryTableOwnerCol">FacebookPhoto</td>
 </tr>
 </table>
@@ -137,9 +148,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#fromJSON()">fromJSON</a>(result:Object):void</div>
-<div class="summaryTableDescription">
-   Populates the photo from a decoded JSON object.</div>
+<a class="signatureLink" href="#fromJSON()">fromJSON</a>(result:Object):<a href="../photo/FacebookPhoto.html">FacebookPhoto</a>
+</div>
+<div class="summaryTableDescription">[static]
+   Populates and returns a new FacebookPhoto from a decoded JSON object.</div>
 </td><td class="summaryTableOwnerCol">FacebookPhoto</td>
 </tr>
 <tr class="">
@@ -147,7 +159,27 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#toString()">toString</a>():String</div>
 <div class="summaryTableDescription">
-   Provides the string value of the photo.</div>
+   
+   
+   Provides the string value of the graph object.</div>
+</td><td class="summaryTableOwnerCol">FacebookPhoto</td>
+</tr>
+</table>
+</div>
+<a name="protectedMethodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Methods</div>
+<table id="summaryTableProtectedMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#setPropertyValue()">setPropertyValue</a>(property:String, value:*):void</div>
+<div class="summaryTableDescription">
+   
+   </div>
 </td><td class="summaryTableOwnerCol">FacebookPhoto</td>
 </tr>
 </table>
@@ -177,8 +209,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var from:Object</code><p>
-   An object containing the name and ID of the user who posted the photo.
-   This may be a user or a Page.
+   The profile (user or page) that posted this photo.
    </p></div>
 <a name="height"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -188,7 +219,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var height:int</code><p>
-   The height of the photo, in pixels.
+   The height of the photo in pixels.
    </p></div>
 <a name="icon"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -199,16 +230,6 @@ showHideInherited();
 <div class="detailBody">
 <code>public var icon:String</code><p>
    The icon that Facebook displays when photos are published to the Feed.
-   </p></div>
-<a name="id"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">id</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public var id:String</code><p>
-   The photo ID.
    </p></div>
 <a name="link"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -230,16 +251,6 @@ showHideInherited();
 <code>public var name:String</code><p>
    The caption given to this photo.
    </p></div>
-<a name="picture"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">picture</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public var picture:String</code><p>
-   The album-sized view of the photo.
-   </p></div>
 <a name="source"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -258,8 +269,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var tags:Array</code><p>
-   An array containing the users and their positions in this photo.
-   The x and y coordinates are percentages from the left and top edges of the photo, respectively.
+   The tagged users and their positions in this photo.
    </p></div>
 <a name="updated_time"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -269,7 +279,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var updated_time:Date</code><p>
-   The last time the photo or its caption were updated.
+   The last time the photo or its caption was updated.
    </p></div>
 <a name="width"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -279,7 +289,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public var width:int</code><p>
-   The width of the photo, in pixels.
+   The width of the photo in pixels.
    </p></div>
 <a name="constructorDetail"></a>
 <div class="detailSectionHeader">Constructor detail</div>
@@ -302,12 +312,48 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function fromJSON(result:Object):void</code><p>
-   Populates the photo from a decoded JSON object.
+<code>public static function fromJSON(result:Object):<a href="../photo/FacebookPhoto.html">FacebookPhoto</a></code><p>
+   Populates and returns a new FacebookPhoto from a decoded JSON object.
+   
    </p><span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">result</span>:Object</code></td>
+<td width="20px"></td><td><code><span class="label">result</span>:Object</code> &mdash; A decoded JSON object.
+   
+   </td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../photo/FacebookPhoto.html">FacebookPhoto</a></code> &mdash; 
+                        A new FacebookPhoto.
+   
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="setPropertyValue()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">setPropertyValue</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected override function setPropertyValue(property:String, value:*):void</code><p>
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">property</span>:String</code></td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">value</span>:*</code></td>
 </tr>
 </table>
 </div>
@@ -318,13 +364,17 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>public function toString():String</code><p>
-   Provides the string value of the photo.
+<code>public override function toString():String</code><p>
+   
+   
+   Provides the string value of the graph object.
+   
    </p><p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>String</code></td>
+<td width="20"></td><td><code>String</code> &mdash; The string value of the graph object.
+   </td>
 </tr>
 </table>
 </div>

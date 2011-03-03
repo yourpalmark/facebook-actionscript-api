@@ -8,6 +8,7 @@ package com.facebook.graph.data.api.photo
 	{
 		public static const COMMENTS:String = "comments";
 		public static const LIKES:String = "likes";
+		public static const PICTURE:String = "picture";
 		
 	}
 }

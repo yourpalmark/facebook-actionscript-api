@@ -16,7 +16,6 @@ package com.facebook.graph.data.api.album
 		public static const COUNT:String = "count";
 		public static const CREATED_TIME:String = "created_time";
 		public static const UPDATED_TIME:String = "updated_time";
-		public static const COMMENTS:String = "comments";
 		
 	}
 }

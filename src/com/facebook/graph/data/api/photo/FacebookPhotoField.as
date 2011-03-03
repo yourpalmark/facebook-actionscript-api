@@ -10,7 +10,6 @@ package com.facebook.graph.data.api.photo
 		public static const FROM:String = "from";
 		public static const TAGS:String = "tags";
 		public static const NAME:String = "name";
-		public static const PICTURE:String = "picture";
 		public static const ICON:String = "icon";
 		public static const SOURCE:String = "source";
 		public static const HEIGHT:String = "height";

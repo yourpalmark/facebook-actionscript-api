@@ -1,21 +1,19 @@
 package com.facebook.graph.data.api.status
 {
-	import com.adobe.utils.DateUtil;
+	import com.facebook.graph.core.facebook_internal;
+	import com.facebook.graph.data.api.core.AbstractFacebookGraphObject;
 	import com.facebook.graph.data.api.user.FacebookUser;
+	
+	use namespace facebook_internal;
 	
 	/**
 	 * A status message on a user's wall.
 	 * @see http://developers.facebook.com/docs/reference/api/status
 	 */
-	public class FacebookStatusMessage
+	public class FacebookStatusMessage extends AbstractFacebookGraphObject
 	{
 		/**
-		 * The status message ID.
-		 */
-		public var id:String;
-		
-		/**
-		 * An object containing the name and ID of the user who posted the message.
+		 * The user who posted the message.
 		 */
 		public var from:FacebookUser;
 		
@@ -37,39 +35,25 @@ package com.facebook.graph.data.api.status
 		}
 		
 		/**
-		 * Populates the status from a decoded JSON object.
+		 * Populates and returns a new FacebookStatusMessage from a decoded JSON object.
+		 * 
+		 * @param result A decoded JSON object.
+		 * 
+		 * @return A new FacebookStatusMessage.
 		 */
-		public function fromJSON( result:Object ):void
+		public static function fromJSON( result:Object ):FacebookStatusMessage
 		{
-			if( result != null )
-			{
-				for( var property:String in result )
-				{
-					switch( property )
-					{
-						case "from":
-							from = new FacebookUser();
-							from.fromJSON( result[ property ] );
-							break;
-						
-						case "updated_time":
-							updated_time = DateUtil.parseW3CDTF( result[ property ] );
-							break;
-						
-						default:
-							if( hasOwnProperty( property ) ) this[ property ] = result[ property ];
-							break;
-					}
-				}
-			}
+			var status:FacebookStatusMessage = new FacebookStatusMessage();
+			status.fromJSON( result );
+			return status;
 		}
 		
 		/**
-		 * Provides the string value of the status.
+		 * @inheritDoc
 		 */
-		public function toString():String
+		override public function toString():String
 		{
-			return '[ id: ' + id + ', message: ' + message + ' ]';
+			return facebook_internal::toString( [ FacebookStatusMessageField.ID, FacebookStatusMessageField.MESSAGE ] );
 		}
 		
 	}
