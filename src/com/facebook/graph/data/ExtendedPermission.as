@@ -6,35 +6,6 @@ package com.facebook.graph.data
 	 */
 	public class ExtendedPermission
 	{
-		//PUBLISHING PERMISSIONS
-		/**
-		 * Enables your application to post content, comments, and likes to a user's stream and to the streams of the user's friends.
-		 * Read these best practices about publishing.
-		 */
-		public static const PUBLISH_STREAM:String = "publish_stream";
-		
-		/**
-		 * Enables your application to create and modify events on the user's behalf.
-		 */
-		public static const CREATE_EVENT:String = "create_event";
-		
-		/**
-		 * Enables your application to RSVP to events on the user's behalf.
-		 */
-		public static const RSVP_EVENT:String = "rsvp_event";
-		
-		/**
-		 * Enables your application to send messages to the user and respond to messages from the user via text message.
-		 */
-		public static const SMS:String = "sms";
-		
-		/**
-		 * Enables your application to perform authorized requests on behalf of the user at any time.
-		 * By default, most access tokens expire after a short time period to ensure applications only make requests on behalf of the user when the are actively using the application.
-		 * This permission makes the access token returned by our OAuth endpoint long-lived.
-		 */
-		public static const OFFLINE_ACCESS:String = "offline_access";
-		
 		//DATA PERMISSIONS
 		/**
 		 * Provides access to the "About Me" section of the profile in the about property.
@@ -127,6 +98,12 @@ package com.facebook.graph.data
 		public static const FRIENDS_RELATIONSHIPS:String = "friends_relationships";
 		
 		/**
+		 * Provides access to the user's relationship preferences.
+		 */
+		public static const USER_RELATIONSHIP_DETAILS:String = "user_relationship_details";
+		public static const FRIENDS_RELATIONSHIP_DETAILS:String = "friends_relationship_details";
+		
+		/**
 		 * Provides access to the user's religious and political affiliations.
 		 */
 		public static const USER_RELIGION_POLITICS:String = "user_religion_politics";
@@ -164,10 +141,11 @@ package com.facebook.graph.data
 		public static const EMAIL:String = "email";
 		
 		/**
-		 * Provides read access to any friend lists the user created.
-		 * A user's friends are provided as part of basic data.
+		 * Provides access to any friend lists the user created.
+		 * All user's friends are provided as part of basic data, this extended permission grants access to the lists of friends a user has created, and should only be requested if your application utilizes lists of friends.
 		 */
 		public static const READ_FRIENDLISTS:String = "read_friendlists";
+		public static const MANAGE_FRIENDLISTS:String = "manage_friendlists";
 		
 		/**
 		 * Provides read access to the Insights data for pages, applications, and domains the user owns.
@@ -205,6 +183,40 @@ package com.facebook.graph.data
 		 */
 		public static const USER_CHECKINS:String = "user_checkins";
 		public static const FRIENDS_CHECKINS:String = "friends_checkins";
+		
+		//PUBLISHING PERMISSIONS
+		/**
+		 * Enables your application to post content, comments, and likes to a user's stream and to the streams of the user's friends.
+		 * Read these best practices about publishing.
+		 */
+		public static const PUBLISH_STREAM:String = "publish_stream";
+		
+		/**
+		 * Enables your application to create and modify events on the user's behalf.
+		 */
+		public static const CREATE_EVENT:String = "create_event";
+		
+		/**
+		 * Enables your application to RSVP to events on the user's behalf.
+		 */
+		public static const RSVP_EVENT:String = "rsvp_event";
+		
+		/**
+		 * Enables your application to send messages to the user and respond to messages from the user via text message.
+		 */
+		public static const SMS:String = "sms";
+		
+		/**
+		 * Enables your application to perform authorized requests on behalf of the user at any time.
+		 * By default, most access tokens expire after a short time period to ensure applications only make requests on behalf of the user when the are actively using the application.
+		 * This permission makes the access token returned by our OAuth endpoint long-lived.
+		 */
+		public static const OFFLINE_ACCESS:String = "offline_access";
+		
+		/**
+		 * Enables your application to perform checkins on behalf of the user.
+		 */
+		public static const PUBLISH_CHECKINS:String = "publish_checkins";
 		
 		//PAGE PERMISSIONS
 		/**

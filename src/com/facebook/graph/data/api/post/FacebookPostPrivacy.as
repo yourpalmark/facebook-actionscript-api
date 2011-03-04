@@ -38,6 +38,11 @@ package com.facebook.graph.data.api.post
 		public var deny:Array;
 		
 		/**
+		 * The privacy value description.
+		 */
+		public var description:String;
+		
+		/**
 		 * Creates a new FacebookPostPrivacy.
 		 */
 		public function FacebookPostPrivacy()
@@ -56,6 +61,25 @@ package com.facebook.graph.data.api.post
 			var privacy:FacebookPostPrivacy = new FacebookPostPrivacy();
 			privacy.fromJSON( result );
 			return privacy;
+		}
+		
+		/**
+		 * @inheritDoc
+		 */
+		override protected function setPropertyValue( property:String, value:* ):void
+		{
+			switch( property )
+			{
+				case "networks":
+				case "allow":
+				case "deny":
+					this[ property ] = value is Array ? value : value is String ? String( value ).split( "," ) : [ value ];
+					break;
+				
+				default:
+					super.setPropertyValue( property, value );
+					break;
+			}
 		}
 		
 		/**
