@@ -79,10 +79,6 @@ package com.facebook.graph.data.api.video
 		{
 			switch( property )
 			{
-				case FacebookVideoField.FROM:
-					from = value;
-					break;
-				
 				case FacebookVideoField.TAGS:
 					tags = [];
 					var tagsData:Array = value is Array ? value : Object( value ).hasOwnProperty( "data" ) && value.data is Array ? value.data : [];

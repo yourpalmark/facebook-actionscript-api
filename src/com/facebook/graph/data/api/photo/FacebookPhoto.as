@@ -89,10 +89,6 @@ package com.facebook.graph.data.api.photo
 		{
 			switch( property )
 			{
-				case FacebookPhotoField.FROM:
-					from = value;
-					break;
-				
 				case FacebookPhotoField.TAGS:
 					tags = [];
 					var tagsData:Array = value is Array ? value : Object( value ).hasOwnProperty( "data" ) && value.data is Array ? value.data : [];

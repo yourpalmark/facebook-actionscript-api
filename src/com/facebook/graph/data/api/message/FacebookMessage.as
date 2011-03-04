@@ -60,6 +60,10 @@ package com.facebook.graph.data.api.message
 		{
 			switch( property )
 			{
+				case FacebookMessageField.FROM:
+					from = FacebookUser.fromJSON( value );
+					break;
+				
 				case FacebookMessageField.TO:
 					to = [];
 					var recipients:Array = value is Array ? value : Object( value ).hasOwnProperty( "data" ) && value.data is Array ? value.data : [];

@@ -2,7 +2,6 @@ package com.facebook.graph.data.api.group
 {
 	import com.facebook.graph.core.facebook_internal;
 	import com.facebook.graph.data.api.core.AbstractFacebookGraphObject;
-	import com.facebook.graph.data.api.user.FacebookUser;
 	
 	use namespace facebook_internal;
 	
@@ -20,7 +19,7 @@ package com.facebook.graph.data.api.group
 		/**
 		 * The profile that created this group.
 		 */
-		public var owner:FacebookUser;
+		public var owner:Object;
 		
 		/**
 		 * The name of the group.

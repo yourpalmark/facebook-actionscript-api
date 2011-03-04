@@ -73,6 +73,10 @@ package com.facebook.graph.data.api.checkin
 		{
 			switch( property )
 			{
+				case FacebookCheckinField.FROM:
+					from = FacebookUser.fromJSON( value );
+					break;
+				
 				case FacebookCheckinField.TAGS:
 					tags = [];
 					var tagsData:Array = value is Array ? value : Object( value ).hasOwnProperty( "data" ) && value.data is Array ? value.data : [];

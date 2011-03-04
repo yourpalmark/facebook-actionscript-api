@@ -2,7 +2,6 @@ package com.facebook.graph.data.api.note
 {
 	import com.facebook.graph.core.facebook_internal;
 	import com.facebook.graph.data.api.core.AbstractFacebookGraphObject;
-	import com.facebook.graph.data.api.user.FacebookUser;
 	
 	use namespace facebook_internal;
 	
@@ -15,7 +14,7 @@ package com.facebook.graph.data.api.note
 		/**
 		 * The profile that created the note.
 		 */
-		public var from:FacebookUser;
+		public var from:Object;
 		
 		/**
 		 * The title of the note.

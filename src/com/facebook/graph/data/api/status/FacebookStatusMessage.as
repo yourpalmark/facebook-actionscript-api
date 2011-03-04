@@ -51,6 +51,23 @@ package com.facebook.graph.data.api.status
 		/**
 		 * @inheritDoc
 		 */
+		override protected function setPropertyValue( property:String, value:* ):void
+		{
+			switch( property )
+			{
+				case FacebookStatusMessageField.FROM:
+					from = FacebookUser.fromJSON( value );
+					break;
+				
+				default:
+					super.setPropertyValue( property, value );
+					break;
+			}
+		}
+		
+		/**
+		 * @inheritDoc
+		 */
 		override public function toString():String
 		{
 			return facebook_internal::toString( [ FacebookStatusMessageField.ID, FacebookStatusMessageField.MESSAGE ] );

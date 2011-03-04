@@ -81,6 +81,23 @@ package com.facebook.graph.data.api.link
 		/**
 		 * @inheritDoc
 		 */
+		override protected function setPropertyValue( property:String, value:* ):void
+		{
+			switch( property )
+			{
+				case FacebookLinkField.FROM:
+					from = FacebookUser.fromJSON( value );
+					break;
+				
+				default:
+					super.setPropertyValue( property, value );
+					break;
+			}
+		}
+		
+		/**
+		 * @inheritDoc
+		 */
 		override public function toString():String
 		{
 			return facebook_internal::toString( [ FacebookLinkField.ID, FacebookLinkField.NAME ] );

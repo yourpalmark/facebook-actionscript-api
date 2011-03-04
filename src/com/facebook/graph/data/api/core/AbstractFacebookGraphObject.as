@@ -1,7 +1,6 @@
 package com.facebook.graph.data.api.core
 {
 	import com.facebook.graph.core.facebook_internal;
-	import com.facebook.graph.data.api.user.FacebookUser;
 	import com.facebook.graph.utils.FacebookDataUtils;
 	
 	use namespace facebook_internal;
@@ -60,12 +59,6 @@ package com.facebook.graph.data.api.core
 		{
 			switch( property )
 			{
-				case "from":
-				case "owner":
-				case "significant_other":
-					this[ property ] = FacebookUser.fromJSON( value );
-					break;
-				
 				case "created_time":
 				case "end_time":
 				case "start_time":

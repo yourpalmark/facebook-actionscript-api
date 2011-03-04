@@ -125,6 +125,10 @@ package com.facebook.graph.data.api.post
 		{
 			switch( property )
 			{
+				case FacebookPostField.FROM:
+					from = FacebookUser.fromJSON( value );
+					break;
+				
 				case FacebookPostField.PRIVACY:
 					privacy = FacebookPostPrivacy.fromJSON( value );
 					break;

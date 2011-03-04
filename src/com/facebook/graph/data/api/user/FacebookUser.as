@@ -170,6 +170,23 @@ package com.facebook.graph.data.api.user
 		/**
 		 * @inheritDoc
 		 */
+		override protected function setPropertyValue( property:String, value:* ):void
+		{
+			switch( property )
+			{
+				case FacebookUserField.SIGNIFICANT_OTHER:
+					significant_other = FacebookUser.fromJSON( value );
+					break;
+				
+				default:
+					super.setPropertyValue( property, value );
+					break;
+			}
+		}
+		
+		/**
+		 * @inheritDoc
+		 */
 		override public function toString():String
 		{
 			return facebook_internal::toString( [ FacebookUserField.ID, FacebookUserField.NAME ] );

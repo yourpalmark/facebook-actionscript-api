@@ -3,7 +3,6 @@ package com.facebook.graph.data.api.event
 	import com.facebook.graph.core.facebook_internal;
 	import com.facebook.graph.data.api.core.AbstractFacebookGraphObject;
 	import com.facebook.graph.data.api.core.FacebookLocation;
-	import com.facebook.graph.data.api.user.FacebookUser;
 	
 	use namespace facebook_internal;
 	
@@ -16,7 +15,7 @@ package com.facebook.graph.data.api.event
 		/**
 		 * The profile that created the event.
 		 */
-		public var owner:FacebookUser;
+		public var owner:Object;
 		
 		/**
 		 * The event title.
