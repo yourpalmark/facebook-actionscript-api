@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../../print.css" type="text/css" media="print">
-<meta content="FQLTable,com.facebook.graph.data.fql.FQLTable,ALBUM,APPLICATION,COMMENT,COMMENTS_INFO,CONNECTION,COOKIES,DEVELOPER,DOMAIN,DOMAIN_ADMIN,EVENT,EVENT_MEMBER,FAMILY,FRIEND,FRIENDLIST,FRIENDLIST_MEMBER,FRIEND_REQUEST,GROUP,GROUP_MEMBER,INSIGHTS,LIKE,LINK,LINK_STAT,MAILBOX_FOLDER,MESSAGE,METRICS,NOTE,NOTIFICATION,OBJECT_URL,PAGE,PAGE_ADMIN,PAGE_FAN,PERMISSIONS,PERMISSIONS_INFO,PHOTO,PHOTO_TAG,PRIVACY,PROFILE,STANDARD_FRIEND_INFO,STANDARD_USER_INFO,STATUS,STREAM,STREAM_FILTER,STREAM_TAG,THREAD,TRANSLATION,USER,VIDEO,VIDEO_TAG" name="keywords">
+<meta content="FQLTable,com.facebook.graph.data.fql.FQLTable,ALBUM,APPLICATION,CHECKIN,COMMENT,COMMENTS_INFO,CONNECTION,COOKIES,DEVELOPER,DOMAIN,DOMAIN_ADMIN,EVENT,EVENT_MEMBER,FAMILY,FRIEND,FRIENDLIST,FRIENDLIST_MEMBER,FRIEND_REQUEST,GROUP,GROUP_MEMBER,INSIGHTS,LIKE,LINK,LINK_STAT,MAILBOX_FOLDER,MESSAGE,NOTE,NOTIFICATION,OBJECT_URL,PAGE,PAGE_ADMIN,PAGE_FAN,PERMISSIONS,PERMISSIONS_INFO,PHOTO,PHOTO_TAG,PLACE,PRIVACY,PROFILE,STANDARD_FRIEND_INFO,STANDARD_USER_INFO,STATUS,STREAM,STREAM_FILTER,STREAM_TAG,THREAD,TRANSLATION,UNIFIED_MESSAGE,UNIFIED_THREAD,UNIFIED_THREAD_ACTION,UNIFIED_THREAD_COUNT,USER,VIDEO,VIDEO_TAG" name="keywords">
 <title>com.facebook.graph.data.fql.FQLTable</title>
 </head>
 <body>
@@ -56,6 +56,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#APPLICATION">APPLICATION</a> : String = "application"<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">FQLTable</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#CHECKIN">CHECKIN</a> : String = "checkin"<div class="summaryTableDescription">[static]</div>
 </td><td class="summaryTableOwnerCol">FQLTable</td>
 </tr>
 <tr class="">
@@ -147,10 +151,6 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">FQLTable</td>
 </tr>
 <tr class="">
-<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#METRICS">METRICS</a> : String = "metrics"<div class="summaryTableDescription">[static]</div>
-</td><td class="summaryTableOwnerCol">FQLTable</td>
-</tr>
-<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#NOTE">NOTE</a> : String = "note"<div class="summaryTableDescription">[static]</div>
 </td><td class="summaryTableOwnerCol">FQLTable</td>
 </tr>
@@ -188,6 +188,10 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#PHOTO_TAG">PHOTO_TAG</a> : String = "photo_tag"<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">FQLTable</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#PLACE">PLACE</a> : String = "place"<div class="summaryTableDescription">[static]</div>
 </td><td class="summaryTableOwnerCol">FQLTable</td>
 </tr>
 <tr class="">
@@ -231,6 +235,22 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </td><td class="summaryTableOwnerCol">FQLTable</td>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#UNIFIED_MESSAGE">UNIFIED_MESSAGE</a> : String = "unified_message"<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">FQLTable</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#UNIFIED_THREAD">UNIFIED_THREAD</a> : String = "unified_thread"<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">FQLTable</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#UNIFIED_THREAD_ACTION">UNIFIED_THREAD_ACTION</a> : String = "unified_thread_action"<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">FQLTable</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#UNIFIED_THREAD_COUNT">UNIFIED_THREAD_COUNT</a> : String = "unified_thread_count"<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">FQLTable</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#USER">USER</a> : String = "user"<div class="summaryTableDescription">[static]</div>
 </td><td class="summaryTableOwnerCol">FQLTable</td>
 </tr>
@@ -268,6 +288,15 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public static const APPLICATION:String = "application"</code>
+</div>
+<a name="CHECKIN"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">CHECKIN</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const CHECKIN:String = "checkin"</code>
 </div>
 <a name="COMMENT"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
@@ -467,15 +496,6 @@ showHideInherited();
 <div class="detailBody">
 <code>public static const MESSAGE:String = "message"</code>
 </div>
-<a name="METRICS"></a>
-<table cellspacing="0" cellpadding="0" class="detailHeader">
-<tr>
-<td class="detailHeaderName">METRICS</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
-</tr>
-</table>
-<div class="detailBody">
-<code>public static const METRICS:String = "metrics"</code>
-</div>
 <a name="NOTE"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -566,6 +586,15 @@ showHideInherited();
 <div class="detailBody">
 <code>public static const PHOTO_TAG:String = "photo_tag"</code>
 </div>
+<a name="PLACE"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">PLACE</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const PLACE:String = "place"</code>
+</div>
 <a name="PRIVACY"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -655,6 +684,42 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public static const TRANSLATION:String = "translation"</code>
+</div>
+<a name="UNIFIED_MESSAGE"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">UNIFIED_MESSAGE</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const UNIFIED_MESSAGE:String = "unified_message"</code>
+</div>
+<a name="UNIFIED_THREAD"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">UNIFIED_THREAD</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const UNIFIED_THREAD:String = "unified_thread"</code>
+</div>
+<a name="UNIFIED_THREAD_ACTION"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">UNIFIED_THREAD_ACTION</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const UNIFIED_THREAD_ACTION:String = "unified_thread_action"</code>
+</div>
+<a name="UNIFIED_THREAD_COUNT"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">UNIFIED_THREAD_COUNT</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const UNIFIED_THREAD_COUNT:String = "unified_thread_count"</code>
 </div>
 <a name="USER"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">

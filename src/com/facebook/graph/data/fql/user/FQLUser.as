@@ -343,6 +343,12 @@ package com.facebook.graph.data.fql.user
 		public var email:String;
 		
 		/**
+		 * A string containing an anonymous, but unique identifier for the user.
+		 * You can use this identifier with third-parties..
+		 */
+		public var third_party_id:String;
+		
+		/**
 		 * Creates a new FQLUser.
 		 */
 		public function FQLUser()

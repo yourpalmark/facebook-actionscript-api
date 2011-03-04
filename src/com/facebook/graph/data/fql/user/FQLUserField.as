@@ -59,6 +59,7 @@ package com.facebook.graph.data.fql.user
 		public static const IS_BLOCKED:String = "is_blocked";
 		public static const CONTACT_EMAIL:String = "contact_email";
 		public static const EMAIL:String = "email";
+		public static const THIRD_PARTY_ID:String = "third_party_id";
 		
 	}
 }

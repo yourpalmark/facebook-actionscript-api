@@ -4,7 +4,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../../../../print.css" type="text/css" media="print">
-<meta content="FQLUser,com.facebook.graph.data.fql.user.FQLUser,about_me,activities,affiliations,allowed_restrictions,birthday,birthday_date,books,contact_email,current_location,education_history,email,email_hashes,family,first_name,has_added_app,hometown_location,hs_info,interests,is_app_user,is_blocked,last_name,locale,meeting_for,meeting_sex,middle_name,movies,music,name,notes_count,online_presence,pic,pic_big,pic_big_with_logo,pic_small,pic_small_with_logo,pic_square,pic_square_with_logo,pic_with_logo,political,profile_blurb,profile_update_time,profile_url,proxied_email,quotes,relationship_status,religion,sex,significant_other_id,status,timezone,tv,uid,username,verified,wall_count,website,work_history,fromJSON,toFacebookUser,toString" name="keywords">
+<meta content="FQLUser,com.facebook.graph.data.fql.user.FQLUser,about_me,activities,affiliations,allowed_restrictions,birthday,birthday_date,books,contact_email,current_location,education_history,email,email_hashes,family,first_name,has_added_app,hometown_location,hs_info,interests,is_app_user,is_blocked,last_name,locale,meeting_for,meeting_sex,middle_name,movies,music,name,notes_count,online_presence,pic,pic_big,pic_big_with_logo,pic_small,pic_small_with_logo,pic_square,pic_square_with_logo,pic_with_logo,political,profile_blurb,profile_update_time,profile_url,proxied_email,quotes,relationship_status,religion,sex,significant_other_id,status,third_party_id,timezone,tv,uid,username,verified,wall_count,website,work_history,fromJSON,toFacebookUser,toString" name="keywords">
 <title>com.facebook.graph.data.fql.user.FQLUser</title>
 </head>
 <body>
@@ -294,6 +294,11 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#status">status</a> : String<div class="summaryTableDescription">
    The current status of the user being queried.</div>
+</td><td class="summaryTableOwnerCol">FQLUser</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#third_party_id">third_party_id</a> : String<div class="summaryTableDescription">
+   A string containing an anonymous, but unique identifier for the user.</div>
 </td><td class="summaryTableOwnerCol">FQLUser</td>
 </tr>
 <tr class="">
@@ -925,6 +930,17 @@ showHideInherited();
 <div class="detailBody">
 <code>public var status:String</code><p>
    The current status of the user being queried.
+   </p></div>
+<a name="third_party_id"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">third_party_id</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public var third_party_id:String</code><p>
+   A string containing an anonymous, but unique identifier for the user.
+   You can use this identifier with third-parties..
    </p></div>
 <a name="timezone"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
