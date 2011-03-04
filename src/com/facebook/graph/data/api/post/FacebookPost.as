@@ -98,6 +98,11 @@ package com.facebook.graph.data.api.post
 		public var targeting:Object;
 		
 		/**
+		 * The type of this post.
+		 */
+		public var type:String;
+		
+		/**
 		 * Creates a new FacebookPost.
 		 */
 		public function FacebookPost()
