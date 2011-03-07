@@ -54,7 +54,7 @@
 	</target>
 	
 	<!-- Clean and re-generate the documentation -->
-	<target name="docs" depends="clean-docs,compile-docs" />
+	<target name="docs" depends="clean-docs,compile-docs,copy-docs" />
 	
 	<!-- Clean the documentation -->
 	<target name="clean-docs">
@@ -80,6 +80,20 @@
 			<arg line="-package com.facebook.graph.net ${docs.package.com.facebook.graph.net}" />
 			<arg line="-package com.facebook.graph.utils ${docs.package.com.facebook.graph.utils}" />
 		</exec>
+	</target>
+	
+	<!-- Copy the documentation to the pages directory if it exists -->
+	<target name="copy-docs">
+		<if>
+			<available file="${pages.dir}" type="dir" />
+			<then>
+				<delete dir="${pages.docs.dir}" includeemptydirs="true" failonerror="true" />
+				<mkdir dir="${pages.docs.dir}" />
+				<copy todir="${pages.docs.dir}">
+					<fileset dir="${docs.dir}"/>
+				</copy>
+			</then>
+		</if>
 	</target>
 	
 	<!-- Package project for distribution -->
