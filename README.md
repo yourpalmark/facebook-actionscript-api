@@ -1,5 +1,7 @@
 ![](http://www.danieldura.com/post_images/flash_facebook.jpg)
 
+Be sure to read the [docs](http://yourpalmark.github.com/facebook-actionscript-api/docs/), updated with each commit.
+
 The new Adobe ActionScript 3 SDK for Facebook Platform API, fully supported by Facebook and Adobe, makes it easy to build applications that combine the strengths of the Flash Platform. Developed by gskinner.com, this class library facilitates the development of Flash Platform applications that communicate with Facebook using the OpenGraph API.
 
 The Adobe Flash Platform and Facebook Platform provide the ideal solution for building rich, social experiences on the web. Flash is available on more than 98% of Internet-connected PCs, so people can immediately access the applications, content, and video that enable social interactions. The Facebook Platform is used by millions of people everyday to connect and share with the people in their lives. Together, both platforms allow you to:
