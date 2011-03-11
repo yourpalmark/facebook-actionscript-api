@@ -40,6 +40,7 @@ package com.facebook.graph.data.fql
 		public static const PLACE:String = "place";
 		public static const PRIVACY:String = "privacy";
 		public static const PROFILE:String = "profile";
+		public static const REVIEW:String = "review";
 		public static const STANDARD_FRIEND_INFO:String = "standard_friend_info";
 		public static const STANDARD_USER_INFO:String = "standard_user_info";
 		public static const STATUS:String = "status";

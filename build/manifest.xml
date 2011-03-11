@@ -58,6 +58,8 @@
 	<component id="com.facebook.graph.data.api.post.FacebookPostField" class="com.facebook.graph.data.api.post.FacebookPostField" />
 	<component id="com.facebook.graph.data.api.post.FacebookPostPrivacy" class="com.facebook.graph.data.api.post.FacebookPostPrivacy" />
 	<component id="com.facebook.graph.data.api.post.FacebookPostPrivacyValue" class="com.facebook.graph.data.api.post.FacebookPostPrivacyValue" />
+	<component id="com.facebook.graph.data.api.review.FacebookReview" class="com.facebook.graph.data.api.review.FacebookReview" />
+	<component id="com.facebook.graph.data.api.review.FacebookReviewField" class="com.facebook.graph.data.api.review.FacebookReviewField" />
 	<component id="com.facebook.graph.data.api.status.FacebookStatusMessage" class="com.facebook.graph.data.api.status.FacebookStatusMessage" />
 	<component id="com.facebook.graph.data.api.status.FacebookStatusMessageConnection" class="com.facebook.graph.data.api.status.FacebookStatusMessageConnection" />
 	<component id="com.facebook.graph.data.api.status.FacebookStatusMessageField" class="com.facebook.graph.data.api.status.FacebookStatusMessageField" />
