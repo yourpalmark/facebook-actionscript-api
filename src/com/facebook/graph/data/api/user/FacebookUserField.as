@@ -13,6 +13,7 @@ package com.facebook.graph.data.api.user
 		public static const GENDER:String = "gender";
 		public static const LOCALE:String = "locale";
 		public static const LINK:String = "link";
+		public static const USERNAME:String = "username";
 		public static const THIRD_PARTY_ID:String = "third_party_id";
 		public static const TIMEZONE:String = "timezone";
 		public static const UPDATED_TIME:String = "updated_time";
