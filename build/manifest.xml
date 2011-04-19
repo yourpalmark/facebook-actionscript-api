@@ -25,6 +25,8 @@
 	<component id="com.facebook.graph.data.api.core.FacebookLocation" class="com.facebook.graph.data.api.core.FacebookLocation" />
 	<component id="com.facebook.graph.data.api.core.FacebookTag" class="com.facebook.graph.data.api.core.FacebookTag" />
 	<component id="com.facebook.graph.data.api.core.IFacebookGraphObject" class="com.facebook.graph.data.api.core.IFacebookGraphObject" />
+	<component id="com.facebook.graph.data.api.domain.FacebookDomain" class="com.facebook.graph.data.api.domain.FacebookDomain" />
+	<component id="com.facebook.graph.data.api.domain.FacebookDomainField" class="com.facebook.graph.data.api.domain.FacebookDomainField" />
 	<component id="com.facebook.graph.data.api.event.FacebookEvent" class="com.facebook.graph.data.api.event.FacebookEvent" />
 	<component id="com.facebook.graph.data.api.event.FacebookEventConnection" class="com.facebook.graph.data.api.event.FacebookEventConnection" />
 	<component id="com.facebook.graph.data.api.event.FacebookEventField" class="com.facebook.graph.data.api.event.FacebookEventField" />
