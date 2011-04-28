@@ -42,6 +42,11 @@ package com.facebook.graph.data.api.user
 		public var link:String;
 		
 		/**
+		 * The user's Facebook username.
+		 */
+		public var username:String;
+		
+		/**
 		 * An anonymous, but unique identifier for the user.
 		 */
 		public var third_party_id:String;

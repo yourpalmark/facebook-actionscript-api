@@ -25,6 +25,8 @@
 	<component id="com.facebook.graph.data.api.core.FacebookLocation" class="com.facebook.graph.data.api.core.FacebookLocation" />
 	<component id="com.facebook.graph.data.api.core.FacebookTag" class="com.facebook.graph.data.api.core.FacebookTag" />
 	<component id="com.facebook.graph.data.api.core.IFacebookGraphObject" class="com.facebook.graph.data.api.core.IFacebookGraphObject" />
+	<component id="com.facebook.graph.data.api.domain.FacebookDomain" class="com.facebook.graph.data.api.domain.FacebookDomain" />
+	<component id="com.facebook.graph.data.api.domain.FacebookDomainField" class="com.facebook.graph.data.api.domain.FacebookDomainField" />
 	<component id="com.facebook.graph.data.api.event.FacebookEvent" class="com.facebook.graph.data.api.event.FacebookEvent" />
 	<component id="com.facebook.graph.data.api.event.FacebookEventConnection" class="com.facebook.graph.data.api.event.FacebookEventConnection" />
 	<component id="com.facebook.graph.data.api.event.FacebookEventField" class="com.facebook.graph.data.api.event.FacebookEventField" />
@@ -58,6 +60,8 @@
 	<component id="com.facebook.graph.data.api.post.FacebookPostField" class="com.facebook.graph.data.api.post.FacebookPostField" />
 	<component id="com.facebook.graph.data.api.post.FacebookPostPrivacy" class="com.facebook.graph.data.api.post.FacebookPostPrivacy" />
 	<component id="com.facebook.graph.data.api.post.FacebookPostPrivacyValue" class="com.facebook.graph.data.api.post.FacebookPostPrivacyValue" />
+	<component id="com.facebook.graph.data.api.review.FacebookReview" class="com.facebook.graph.data.api.review.FacebookReview" />
+	<component id="com.facebook.graph.data.api.review.FacebookReviewField" class="com.facebook.graph.data.api.review.FacebookReviewField" />
 	<component id="com.facebook.graph.data.api.status.FacebookStatusMessage" class="com.facebook.graph.data.api.status.FacebookStatusMessage" />
 	<component id="com.facebook.graph.data.api.status.FacebookStatusMessageConnection" class="com.facebook.graph.data.api.status.FacebookStatusMessageConnection" />
 	<component id="com.facebook.graph.data.api.status.FacebookStatusMessageField" class="com.facebook.graph.data.api.status.FacebookStatusMessageField" />
