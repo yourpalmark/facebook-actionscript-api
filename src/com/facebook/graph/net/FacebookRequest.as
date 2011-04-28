@@ -41,7 +41,6 @@ package com.facebook.graph.net {
     import flash.events.DataEvent;
     import flash.events.ErrorEvent;
     import flash.events.Event;
-    import flash.events.HTTPStatusEvent;
     import flash.events.IOErrorEvent;
     import flash.events.SecurityErrorEvent;
     import flash.net.FileReference;

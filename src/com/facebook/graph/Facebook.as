@@ -39,7 +39,6 @@ package com.facebook.graph {
   import com.facebook.graph.core.FacebookURLDefaults;
   import com.facebook.graph.data.FQLMultiQuery;
   import com.facebook.graph.data.FacebookSession;
-  import com.facebook.graph.net.FacebookRequest;
   import com.facebook.graph.utils.IResultParser;
   
   import flash.external.ExternalInterface;
@@ -310,7 +309,7 @@ package com.facebook.graph {
                      requestMethod:String = 'GET'
     ):void {
 
-      return getInstance().api(method,
+      getInstance().api(method,
         callback,
         params,
         requestMethod
@@ -455,7 +454,7 @@ package com.facebook.graph {
                        requestMethod:String = 'GET'
     ):void {
 
-      return getInstance().callRestAPI(methodName, callback, values, requestMethod);
+      getInstance().callRestAPI(methodName, callback, values, requestMethod);
     }
 
     /**

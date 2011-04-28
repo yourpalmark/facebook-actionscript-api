@@ -32,7 +32,6 @@
 
 package com.facebook.graph.core {
 
-    import com.adobe.serialization.json.JSON;
     import com.facebook.graph.data.FQLMultiQuery;
     import com.facebook.graph.data.FacebookSession;
     import com.facebook.graph.net.FacebookRequest;
